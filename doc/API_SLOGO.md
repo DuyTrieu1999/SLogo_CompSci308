@@ -36,3 +36,6 @@ Yunhao Qing (yq50@duke.edu)
     * Commands know this information after a user presses the ENTER key and the information is communicated via the Parser
 * How is the GUI updated after a command has completed execution?
     * The UI manager gets an updated actor location from the SLogoModel class and updates its position and direction. The Marker class also updates the path drawn by the actor.
+    
+### Image
+![Design Image](SlogoDesignArchitecture.png "Design Architecture Schematic")
