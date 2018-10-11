@@ -23,6 +23,9 @@ Yunhao Qing (yq50@duke.edu)
     * Parser would act as a communicator between the CommandWindow class and the SlogoModel class. It would interpret commands, check for erros, and send the correct information to the UIManager or SLogoModel class
 * SLogoModel class
     * The SLogoModel class is the main backed that processes inputs from the parser and updates positions and sends it to the UI manager
+    
+* Some changes bla bla
+    * Some other changes bla bla
 
 ### Questions
 * What is the result of parsing and who receives it?
