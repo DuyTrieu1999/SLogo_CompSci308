@@ -15,7 +15,6 @@ public class Main extends Application{
         stage.setTitle("SLogo");
         stage.setScene(ui.sceneInit());
         stage.show();
-        oops i typed a comment not in comment notation!!!
     }
 
     public static void main (String[] args) {
