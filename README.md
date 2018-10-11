@@ -13,7 +13,7 @@ Names:
 
 ### Timeline
 
-Start Date:
+Start Date: October 1, 2018
 
 Finish Date: 
 
