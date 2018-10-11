@@ -1,6 +1,8 @@
 package view;
 
-public class ScriptView {
+import javafx.scene.layout.HBox;
+
+public class ScriptView extends HBox{
     public ScriptView () {
 
     }
