@@ -3,7 +3,7 @@ SLogo Team 8
 
 ### Introduction
 
-For this project, we would like to implement a program that provides an IDE for the Logo programming language. The IDE should be able to move a turtle on a grid graphically on a per-expression basis. This turtle should also be able to leave a trail on the grid indicating where it has and has not gone. The IDE should be flexible enough to handle errors, customize the visual aspect, interpret different SLogo commands in different languages, and provide a comprehensive programming environment for the SLogo language.
+For this project, we would like to implement a program that provides an IDE for the Logo programming language. The IDE should be able to move and direct a turtle on a grid graphically on a per-expression basis. This turtle should also be able to leave a trail on the grid indicating where it has and has not gone. The IDE should be flexible enough to handle errors, customize the visual aspect, and interpret different SLogo commands in different languages. Additionally, the IDE should be able to save the user's command history, keep a bank of the user's saved commands, and provide a comprehensive programming environment for the SLogo language.
 
 ### Design Overview
 The four APIs we plan to have:
@@ -11,34 +11,32 @@ The four APIs we plan to have:
     - Front end
         - The front end external API should allow for commands in SLogo to customize the view of the turtle. For example, changing the size of the turtle, the color of the turtle, the width of the marker, the color of the marker, and other methods that will support the parser when it modifies the front end.
     - Back end
-        - The back end external API contains instance variables of the backend classes that we need. The front end will interact directly with this class. The front end can retrieve information such as turtle information and history user inputs by interating with this class.
+        - The back end external API contains instance variables of the backend classes that we need. The front end will interact directly with these interfaces as it requires access to specific data. The front end should be able to retrieve information about the turtle and the history user inputs by interacting with these interfaces.
 - Internal 
     - Front end:
-        - The internal API for the front end should deal strictly with visual elements of the GUI, such as the language of the GUI, placement of the different panes for the GUI, or formatting/spacing.
+        - The internal API for the front end should deal strictly with visual elements of the GUI that we would not want an external contributor to change, such as the handling of the language of the GUI, placement of the different panes for the GUI, or formatting/spacing.
     - Back end:
         - The internal API for the back end should be able to take in and process commands entered by the user that require no front-end interactions. This involves parsing and making sense of the instructions inputted.
 
 
 ### User Interface
 
-There will be four components on our program's interface. The first component is the canvas in the middle displaying the grid, the turtles, the movements of the turtles and the marks as a result of their movements. 
+There will be four components on our program's interface. The first component is the canvas in the middle displaying the grid, the turtle or sprite, the movements of the turtle and the marks as a result of its movements. 
 
-The second component is control panel that shows the different settings we can have on the turtles and the script editor. The control panel will be located at the left, next to the canvas.
+The second component is control panel that shows the different settings we can have for the turtle, the canvas, the script editor, and the IDE in general. The control panel will be located at the left, next to the canvas.
 
-The third component is the commend -line interface where the user can put in commends like 'clear'. The commend -line interface component will be located at the right top corner.
+The third component is the command-line interface and code editor where the user can put in commands like 'forward', 'turn', or 'clear' and run them line by line or compile multiple lines of code. This command-line interface component will be located in the bottom right corner.
 
-The fourth component is the code editor where the user can put in some lines of code that can be compiled and run. The code editor component will be located at the right bottom corner.
-
-
+The fourth component is the command history where the user can view their most recent commands. The history panel will be located in the top right corner, above the command-line interface and code editor.
 
 
-
+![Plan Image](slogoViewPlan.png "IDE initial plan")
 
 ### API Details 
 
 1.SLogoInternalFrontend
   - TurtleView
-  - CommendView
+  - CommandView
   - ScriptView
   - ControlView
 
@@ -52,7 +50,7 @@ The fourth component is the code editor where the user can put in some lines of 
 
 4.SLogoInternalBackend
 
- - CommendParser
+ - CommandParser
  - ScriptParser
  - Executer
 
@@ -139,8 +137,6 @@ To accomplish this, we need the following steps to occur:
         - The middle should contain the visualization of the turtle
         - The right side show be the input area for commands and should show the history of commands put
         - Buttons should be at the bottom such as play, pause, step, save, load, etc.
-- Interfaces
-    - 
 
 ### Team Responsibilities
 - Allen
