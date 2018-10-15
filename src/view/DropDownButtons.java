@@ -1,50 +1,44 @@
 package view;
 
-import javafx.geometry.VPos;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
-public class DropDownButtons extends HBox {
-    private GridPane gridPane;
+public class DropDownButtons extends VBox {
+    private ChoiceBox<String> langCB;
+
     public DropDownButtons() {
-        addButtonGrid();
-
+        this.setStyle("-fx-border-style: solid inside;" +
+                "-fx-border-width: 2;" +
+                "-fx-border-insets: 5;" +
+                "-fx-border-radius: 5;" +
+                "-fx-border-color: black;");
+        this.getChildren().add(addControls());
+        this.getChildren().add(addLanguage());
     }
-    public void addButtonGrid () {
-        gridPane = new GridPane();
-        gridPane.add(createTitledPane("Controls"), 0, 0);
-        gridPane.add(createTitledPane("Display"), 0, 2);
-        RowConstraints top = new RowConstraints();
-        top.setValignment(VPos.TOP);
-        top.setPercentHeight(100.0 / 3.0);
-
-        RowConstraints middle = new RowConstraints();
-        middle.setValignment(VPos.CENTER);
-        middle.setPercentHeight(100.0 / 3.0);
-
-        RowConstraints bottom = new RowConstraints();
-        bottom.setValignment(VPos.BOTTOM);
-        bottom.setPercentHeight(100.0 / 3.0);
-
-        gridPane.getRowConstraints().addAll(top, middle, bottom);
-
+    private ChoiceBox addLanguage () {
+        langCB = new ChoiceBox<>();
+        langCB.setPrefWidth(SceneENUM.DROPDOWN_WIDTH.getVal());
+        langCB.getItems().add("English");
+        langCB.getItems().add("French");
+        langCB.getItems().add("Spanish");
+        langCB.setValue("English");
+        langCB.setOnAction(e -> getChoice(langCB));
+        return langCB;
     }
-    private TitledPane createTitledPane(String title) {
-        TitledPane expandable = new TitledPane();
-        expandable.setText(title);
-        VBox content = new VBox(5);
-        for (int i=1; i<=4; i++) {
-            content.getChildren().add(new Label("Item "+i));
-        }
-        ScrollPane scroller = new ScrollPane();
-        scroller.setContent(content);
-        expandable.setContent(scroller);
-        expandable.setExpanded(false);
-        return expandable ;
+    private void getChoice(ChoiceBox<String> cb) {
+        String name = cb.getValue();
+    }
+    private TitledPane addControls () {
+        TitledPane tp = new TitledPane();
+        VBox controlBox = new VBox();
+        controlBox.getChildren().add(new Button("bla"));
+        controlBox.getChildren().add(new Button("bla"));
+        tp.setText("Controls");
+        tp.setContent(controlBox);
+        tp.setExpanded(false);
+        return tp;
     }
 }

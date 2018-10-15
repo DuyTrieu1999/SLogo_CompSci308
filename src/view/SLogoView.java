@@ -2,6 +2,7 @@ package view;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,6 +25,8 @@ public class SLogoView {
     private Timeline animation = new Timeline();
     private KeyFrame frame;
     private BorderPane myBP;
+    private LogoScreen logoScreen;
+    private DropDownButtons dropDownButtons;
 
     public Scene sceneInit () {
         initVariable();
@@ -32,7 +35,6 @@ public class SLogoView {
         myBP.setRight(addScriptView());
         myBP.setCenter(addLogoView());
         myRoot.getChildren().add(myBP);
-        System.out.println(myBP.getLeft());
         return myScene;
     }
     public void initVariable () {
@@ -47,20 +49,34 @@ public class SLogoView {
 
     }
     public VBox addButton () {
+        dropDownButtons = new DropDownButtons();
         VBox buttonPane = new VBox();
-        buttonPane.getChildren().add(new LogoButton("sthg", event -> testing()));
-        buttonPane.getChildren().add(new DropDownButtons());
+        buttonPane.getChildren().add(dropDownButtons);
         return buttonPane;
     }
-    public HBox addScriptView () {
+    public VBox addScriptView () {
         return null;
     }
-    public HBox addLogoView () {
-        HBox viewBox = new HBox();
-
-        return null;
+    public VBox addLogoView () {
+        VBox logoBox = new VBox();
+        HBox buttonBox = new HBox();
+        logoScreen = new LogoScreen();
+        buttonBox.getChildren().add(new LogoButton("Play", event -> startButtonHandler()));
+        buttonBox.getChildren().add(new LogoButton("Stop", event -> stopButtonHandler()));
+        buttonBox.getChildren().add(new LogoButton("Step", event -> stepButtonHandler()));
+        logoBox.getChildren().add(logoScreen);
+        logoBox.getChildren().add(buttonBox);
+        buttonBox.setAlignment(Pos.CENTER);
+        return logoBox;
     }
-    public void testing () {
+    public void startButtonHandler () {
+        animation.setCycleCount(Timeline.INDEFINITE);
+        animation.playFromStart();
+    }
+    public void stopButtonHandler () {
+        animation.pause();;
+    }
+    public void stepButtonHandler () {
         return;
     }
 }
