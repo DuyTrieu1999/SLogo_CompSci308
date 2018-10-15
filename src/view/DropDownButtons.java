@@ -10,11 +10,7 @@ public class DropDownButtons extends VBox {
     private ChoiceBox<String> langCB;
 
     public DropDownButtons() {
-        this.setStyle("-fx-border-style: solid inside;" +
-                "-fx-border-width: 2;" +
-                "-fx-border-insets: 5;" +
-                "-fx-border-radius: 5;" +
-                "-fx-border-color: black;");
+        this.setId("dropdown-menu");
         this.getChildren().add(addControls());
         this.getChildren().add(addLanguage());
     }

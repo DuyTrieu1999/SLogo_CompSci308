@@ -5,20 +5,22 @@ import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
+
+import java.util.ResourceBundle;
 
 public class SLogoView {
     private double FRAMES_PER_SECOND = 1;
     private double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private double SECOND_DELAY = 100.0/ FRAMES_PER_SECOND;
     private static final Paint BACKGROUND = Color.AZURE;
+    public static final String RESOURCE_PACKAGE = "resources/text/view";
+    public static final String STYLESHEET = "default.css";
 
     private Scene myScene;
     private Group myRoot;
@@ -27,8 +29,10 @@ public class SLogoView {
     private BorderPane myBP;
     private LogoScreen logoScreen;
     private DropDownButtons dropDownButtons;
+    private ResourceBundle myResources;
 
     public Scene sceneInit () {
+        myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         initVariable();
         myBP = new BorderPane();
         myBP.setLeft(addButton());
@@ -44,6 +48,7 @@ public class SLogoView {
         animation.getKeyFrames().add(frame);
         myRoot = new Group();
         myScene = new Scene(myRoot, SceneENUM.SCENE_WIDTH.getVal(), SceneENUM.SCENE_HEIGHT.getVal(), BACKGROUND);
+        myScene.getStylesheets().add(STYLESHEET);
     }
     public void step (double elapsedTime) {
 
@@ -61,9 +66,9 @@ public class SLogoView {
         VBox logoBox = new VBox();
         HBox buttonBox = new HBox();
         logoScreen = new LogoScreen();
-        buttonBox.getChildren().add(new LogoButton("Play", event -> startButtonHandler()));
-        buttonBox.getChildren().add(new LogoButton("Stop", event -> stopButtonHandler()));
-        buttonBox.getChildren().add(new LogoButton("Step", event -> stepButtonHandler()));
+        buttonBox.getChildren().add(new LogoButton(myResources.getString("Play"), event -> startButtonHandler()));
+        buttonBox.getChildren().add(new LogoButton(myResources.getString("Stop"), event -> stopButtonHandler()));
+        buttonBox.getChildren().add(new LogoButton(myResources.getString("Step"), event -> stepButtonHandler()));
         logoBox.getChildren().add(logoScreen);
         logoBox.getChildren().add(buttonBox);
         buttonBox.setAlignment(Pos.CENTER);
