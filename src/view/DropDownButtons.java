@@ -9,11 +9,7 @@ public class DropDownButtons extends VBox {
     private ChoiceBox<String> langCB;
 
     public DropDownButtons() {
-        this.setStyle("-fx-border-style: solid inside;" +
-                "-fx-border-width: 2;" +
-                "-fx-border-insets: 5;" +
-                "-fx-border-radius: 5;" +
-                "-fx-border-color: black;");
+        this.setId("dropdown-menu");
         this.getChildren().add(addControls());
         this.getChildren().add(addDisplay());
         this.getChildren().add(addTurtleSetting());
@@ -55,7 +51,7 @@ public class DropDownButtons extends VBox {
     private TitledPane addTurtleSetting () {
         TitledPane turtleSetting = new TitledPane();
         VBox turtleBox = new VBox();
-        turtleSetting.setText("Display");
+        turtleSetting.setText("Turtle Setting");
         turtleSetting.setContent(turtleBox);
         turtleSetting.setExpanded(false);
         return turtleSetting;
@@ -63,7 +59,7 @@ public class DropDownButtons extends VBox {
     private TitledPane addVariables () {
         TitledPane variable = new TitledPane();
         VBox varBox = new VBox();
-        variable.setText("Display");
+        variable.setText("Variables");
         variable.setContent(varBox);
         variable.setExpanded(false);
         return variable;
@@ -71,7 +67,7 @@ public class DropDownButtons extends VBox {
     private TitledPane addUserCommand () {
         TitledPane userCommand = new TitledPane();
         VBox userBox = new VBox();
-        userCommand.setText("Display");
+        userCommand.setText("User Commands");
         userCommand.setContent(userBox);
         userCommand.setExpanded(false);
         return userCommand;

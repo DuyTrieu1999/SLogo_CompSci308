@@ -11,6 +11,7 @@ public enum SceneENUM {
     DROPDOWN_WIDTH(200),
     BUTTON_GRID(70);
 
+
     double sceneVal;
     SceneENUM(double sceneVal) {
         this.sceneVal = sceneVal;
