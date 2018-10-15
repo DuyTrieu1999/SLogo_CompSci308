@@ -1,7 +1,7 @@
 package view;
 
 public enum SceneENUM {
-    SCENE_WIDTH(1300),
+    SCENE_WIDTH(1000),
     SCENE_HEIGHT(600),
     BUTTON_GRID(240);
 

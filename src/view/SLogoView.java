@@ -4,9 +4,11 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
@@ -25,10 +27,12 @@ public class SLogoView {
 
     public Scene sceneInit () {
         initVariable();
+        myBP = new BorderPane();
         myBP.setLeft(addButton());
         myBP.setRight(addScriptView());
         myBP.setCenter(addLogoView());
         myRoot.getChildren().add(myBP);
+        System.out.println(myBP.getLeft());
         return myScene;
     }
     public void initVariable () {
@@ -37,15 +41,15 @@ public class SLogoView {
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(frame);
         myRoot = new Group();
-        myBP = new BorderPane();
         myScene = new Scene(myRoot, SceneENUM.SCENE_WIDTH.getVal(), SceneENUM.SCENE_HEIGHT.getVal(), BACKGROUND);
     }
     public void step (double elapsedTime) {
 
     }
-    public HBox addButton () {
-        HBox buttonPane = new HBox();
-        buttonPane.getChildren().add(new DropDownButton());
+    public VBox addButton () {
+        VBox buttonPane = new VBox();
+        buttonPane.getChildren().add(new LogoButton("sthg", event -> testing()));
+        buttonPane.getChildren().add(new DropDownButtons());
         return buttonPane;
     }
     public HBox addScriptView () {
@@ -53,8 +57,10 @@ public class SLogoView {
     }
     public HBox addLogoView () {
         HBox viewBox = new HBox();
-        StackPane sp = new StackPane();
 
         return null;
+    }
+    public void testing () {
+        return;
     }
 }
