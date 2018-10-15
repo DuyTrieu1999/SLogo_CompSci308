@@ -16,7 +16,7 @@ public class SLogoView {
     private double FRAMES_PER_SECOND = 1;
     private double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private double SECOND_DELAY = 100.0/ FRAMES_PER_SECOND;
-    private static final Paint BACKGROUND = Color.AZURE;
+    private static final Paint BACKGROUND = Color.BLACK;
 
     private Scene myScene;
     private Group myRoot;
