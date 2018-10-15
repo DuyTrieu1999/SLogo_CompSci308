@@ -2,7 +2,7 @@ package model;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import view.MainUI;
+import view.SLogoView;
 
 /**
  *
@@ -11,7 +11,7 @@ import view.MainUI;
 public class Main extends Application{
     @Override
     public void start (Stage stage) {
-        MainUI ui = new MainUI();
+        SLogoView ui = new SLogoView();
         stage.setTitle("SLogo");
         stage.setScene(ui.sceneInit());
         stage.show();
@@ -21,4 +21,3 @@ public class Main extends Application{
         launch(args);
     }
 }
-
