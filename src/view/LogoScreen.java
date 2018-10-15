@@ -23,3 +23,4 @@ public class LogoScreen extends VBox {
         gc.setStroke(Color.BLACK);
     }
 }
+
