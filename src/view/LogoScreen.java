@@ -14,8 +14,6 @@ public class LogoScreen extends Canvas {
     }
     public void drawShapes(GraphicsContext gc) {
         gc.setStroke(Color.BLACK);
-        gc.moveTo(0, 0);
-        gc.lineTo(SceneENUM.LOGO_SCREEN_WIDTH.getVal(), SceneENUM.LOGO_SCREEN_HEIGHT.getVal());
         gc.stroke();
     }
 }

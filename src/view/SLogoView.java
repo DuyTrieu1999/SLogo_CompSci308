@@ -5,10 +5,8 @@ import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -27,6 +25,8 @@ public class SLogoView {
     private BorderPane myBP;
     private LogoScreen logoScreen;
     private DropDownButtons dropDownButtons;
+    private ScriptEditor scriptView;
+    private Console consoleView;
 
     public Scene sceneInit () {
         initVariable();
@@ -55,7 +55,19 @@ public class SLogoView {
         return buttonPane;
     }
     public VBox addScriptView () {
-        return null;
+        VBox scriptViewBox = new VBox();
+        HBox buttonBox = new HBox();
+        scriptView = new ScriptEditor();
+        consoleView = new Console();
+        buttonBox.getChildren().add(new LogoButton("Run", event -> runScript(scriptView)));
+        buttonBox.getChildren().add(new LogoButton("Clear", event -> clearScript(scriptView)));
+        buttonBox.getChildren().add(new LogoButton("Load", event -> loadScript()));
+        buttonBox.getChildren().add(new LogoButton("Save", event -> saveScript(scriptView)));
+        scriptViewBox.getChildren().add(scriptView);
+        scriptViewBox.getChildren().add(buttonBox);
+        scriptViewBox.getChildren().add(consoleView);
+        buttonBox.setAlignment(Pos.BOTTOM_CENTER);
+        return scriptViewBox;
     }
     public VBox addLogoView () {
         VBox logoBox = new VBox();
@@ -77,6 +89,18 @@ public class SLogoView {
         animation.pause();;
     }
     public void stepButtonHandler () {
+        return;
+    }
+    public void runScript (ScriptEditor textArea) {
+        return;
+    }
+    public void clearScript (ScriptEditor textArea) {
+        return;
+    }
+    public void loadScript () {
+        return;
+    }
+    public void saveScript (ScriptEditor textArea) {
         return;
     }
 }
