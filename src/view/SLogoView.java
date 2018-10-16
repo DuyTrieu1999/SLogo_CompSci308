@@ -2,6 +2,7 @@ package view;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -36,10 +37,14 @@ public class SLogoView {
     public Scene sceneInit () {
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         initVariable();
+        VBox scriptView = addScriptView();
+        VBox logoView = addLogoView();
         myBP = new BorderPane();
         myBP.setLeft(addButton());
-        myBP.setRight(addScriptView());
-        myBP.setCenter(addLogoView());
+        myBP.setRight(scriptView);
+        myBP.setCenter(logoView);
+        BorderPane.setMargin(logoView, new Insets(SceneENUM.BUTTON_PADDING.getVal()));
+        BorderPane.setMargin(scriptView, new Insets(SceneENUM.BUTTON_PADDING.getVal()));
         myRoot.getChildren().add(myBP);
         return myScene;
     }

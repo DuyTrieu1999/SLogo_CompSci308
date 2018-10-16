@@ -1,16 +1,14 @@
 package view;
 
-import javafx.geometry.Insets;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
 
-public class ScriptEditor extends TextArea {
+public class ScriptEditor extends VBox {
+    private TextArea myScriptEditor;
     public ScriptEditor() {
-        this.setStyle("-fx-border-style: solid inside;" +
-                "-fx-border-width: 2;" +
-                "-fx-border-insets: 5;" +
-                "-fx-border-radius: 5;" +
-                "-fx-border-color: black;");
-        this.setPrefSize(SceneENUM.TEXT_EDITOR_WIDTH.getVal(), SceneENUM.TEXT_EDITOR_HEIGHT.getVal());
-        this.setPadding(new Insets(SceneENUM.BUTTON_PADDING.getVal()));
+        myScriptEditor = new TextArea();
+        this.setId("script-editor");
+        myScriptEditor.setPrefSize(SceneENUM.TEXT_EDITOR_WIDTH.getVal(), SceneENUM.TEXT_EDITOR_HEIGHT.getVal());
+        this.getChildren().add(myScriptEditor);
     }
 }
