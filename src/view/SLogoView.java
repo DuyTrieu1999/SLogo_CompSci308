@@ -19,6 +19,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * SLogoView
+ *
+ * main UI class that connects all elements
+ *
+ * @author duytrieu
+ * @author brookekeene
+ */
 public class SLogoView {
     private static final double FRAMES_PER_SECOND = 1;
     private static final double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
@@ -74,10 +82,10 @@ public class SLogoView {
         HBox buttonBox = new HBox();
         scriptView = new ScriptEditor();
         consoleView = new Console();
-        buttonBox.getChildren().add(new LogoButton("Run", event -> runScript(scriptView)));
-        buttonBox.getChildren().add(new LogoButton("Clear", event -> clearScript(scriptView)));
+        buttonBox.getChildren().add(new LogoButton("Run", event -> runScript()));
+        buttonBox.getChildren().add(new LogoButton("Clear", event -> clearScript()));
         buttonBox.getChildren().add(new LogoButton("Load", event -> loadScript()));
-        buttonBox.getChildren().add(new LogoButton("Save", event -> saveScript(scriptView)));
+        buttonBox.getChildren().add(new LogoButton("Save", event -> saveScript()));
         scriptViewBox.getChildren().add(scriptView);
         scriptViewBox.getChildren().add(buttonBox);
         scriptViewBox.getChildren().add(consoleView);
@@ -106,16 +114,26 @@ public class SLogoView {
     public void stepButtonHandler () {
         return;
     }
-    public void runScript (ScriptEditor textArea) {
+
+    /**
+     * processes the user input
+     */
+    public void runScript () {
+        String command = scriptView.getUserInput();
+        System.out.println(command);
         return;
     }
-    public void clearScript (ScriptEditor textArea) {
-        return;
+
+    /**
+     * clears the user input
+     */
+    public void clearScript () {
+        scriptView.clearEditor();
     }
     public void loadScript () {
         return;
     }
-    public void saveScript (ScriptEditor textArea) {
+    public void saveScript () {
         return;
     }
 }
