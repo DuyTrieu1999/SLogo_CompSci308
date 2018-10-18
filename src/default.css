@@ -1,14 +1,35 @@
 #dropdown-menu {
     -fx-border-style: solid inside;
     -fx-border-width: 2;
-    -fx-border-insets: 5;
+    -fx-border-insets: 0 5 5 5;
     -fx-border-radius: 5;
     -fx-border-color: black;
 }
 
 #main-screen {
-    fx-padding-top: 10;
     -fx-border-style: solid inside;
     -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-border-insets: 0 5 5 5;
+    -fx-border-color: black;
+}
+
+#console-screen {
+    -fx-pref-width: 250;
+    -fx-pref-height: 300;
+    -fx-border-insets: 5;
+    -fx-border-style: solid inside;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-border-color: black;
+}
+
+#script-editor {
+    -fx-pref-width: 250;
+    -fx-pref-height: 250;
+    -fx-border-style: solid inside;
+    -fx-border-width: 2;
+    -fx-border-insets: 0 5 5 5;
+    -fx-border-radius: 5;
     -fx-border-color: black;
 }

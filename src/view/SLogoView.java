@@ -2,6 +2,7 @@ package view;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -11,16 +12,26 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
+import view.TurtleView.TurtleDriver;
+import view.view_component.*;
 
 import java.util.ResourceBundle;
 
-public class SLogoView {
-    private double FRAMES_PER_SECOND = 1;
-    private double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-    private double SECOND_DELAY = 100.0/ FRAMES_PER_SECOND;
-    private static final Paint BACKGROUND = Color.AZURE;
-    public static final String RESOURCE_PACKAGE = "resources/text/view";
-    public static final String STYLESHEET = "default.css";
+/**
+ * SLogoView
+ *
+ * main UI class that connects all elements
+ *
+ * @author duytrieu
+ * @author brookekeene
+ */
+public class SLogoView implements SLogoViewAPI {
+    private static final double FRAMES_PER_SECOND = 1;
+    private static final double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+    private static final double SECOND_DELAY = 100.0/ FRAMES_PER_SECOND;
+    private static final Paint BACKGROUND = Color.WHITE;
+    private static final String RESOURCE_PACKAGE = "resources/text/view";
+    private static final String STYLESHEET = "default.css";
 
     private Scene myScene;
     private Group myRoot;
@@ -36,50 +47,53 @@ public class SLogoView {
     public Scene sceneInit () {
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         initVariable();
+        VBox scriptView = addScriptView();
+        VBox logoView = addLogoView();
         myBP = new BorderPane();
+        myBP.setPadding(new Insets(Integer.parseInt(myResources.getString("Padding"))));
         myBP.setLeft(addButton());
-        myBP.setRight(addScriptView());
-        myBP.setCenter(addLogoView());
+        myBP.setRight(scriptView);
+        myBP.setCenter(logoView);
         myRoot.getChildren().add(myBP);
         return myScene;
     }
-    public void initVariable () {
+    private void initVariable () {
         frame  = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> this.step(SECOND_DELAY));
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(frame);
         myRoot = new Group();
-        myScene = new Scene(myRoot, SceneENUM.SCENE_WIDTH.getVal(), SceneENUM.SCENE_HEIGHT.getVal(), BACKGROUND);
+        myScene = new Scene(myRoot, Integer.parseInt(myResources.getString("Scene_Width")), Integer.parseInt(myResources.getString("Scene_Height")), BACKGROUND);
         myScene.getStylesheets().add(STYLESHEET);
     }
-    public void step (double elapsedTime) {
-
+    private void step (double elapsedTime) {
+        logoScreen.updateTurtle();
     }
-    public VBox addButton () {
+    private VBox addButton () {
         dropDownButtons = new DropDownButtons();
         VBox buttonPane = new VBox();
         buttonPane.getChildren().add(dropDownButtons);
         return buttonPane;
     }
-    public VBox addScriptView () {
+    private VBox addScriptView () {
         VBox scriptViewBox = new VBox();
         HBox buttonBox = new HBox();
         scriptView = new ScriptEditor();
         consoleView = new Console();
-        buttonBox.getChildren().add(new LogoButton("Run", event -> runScript(scriptView)));
-        buttonBox.getChildren().add(new LogoButton("Clear", event -> clearScript(scriptView)));
+        buttonBox.getChildren().add(new LogoButton("Run", event -> runScript()));
+        buttonBox.getChildren().add(new LogoButton("Clear", event -> clearScript()));
         buttonBox.getChildren().add(new LogoButton("Load", event -> loadScript()));
-        buttonBox.getChildren().add(new LogoButton("Save", event -> saveScript(scriptView)));
+        buttonBox.getChildren().add(new LogoButton("Save", event -> saveScript()));
         scriptViewBox.getChildren().add(scriptView);
         scriptViewBox.getChildren().add(buttonBox);
         scriptViewBox.getChildren().add(consoleView);
         buttonBox.setAlignment(Pos.BOTTOM_CENTER);
         return scriptViewBox;
     }
-    public VBox addLogoView () {
+    private VBox addLogoView () {
         VBox logoBox = new VBox();
         HBox buttonBox = new HBox();
-        logoScreen = new LogoScreen();
+        logoScreen = new LogoScreen(Color.BLUE);
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Play"), event -> startButtonHandler()));
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Stop"), event -> stopButtonHandler()));
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Step"), event -> stepButtonHandler()));
@@ -88,26 +102,65 @@ public class SLogoView {
         buttonBox.setAlignment(Pos.CENTER);
         return logoBox;
     }
-    public void startButtonHandler () {
+    private void startButtonHandler () {
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.playFromStart();
     }
-    public void stopButtonHandler () {
+
+    public void clearConsole() {
+        this.clearScript();
+    }
+
+    public void clearDisplay() {
+        logoScreen.clear();
+    }
+
+    public void resetSetting() {
+
+    }
+
+    public void resetTurtle() {
+
+    }
+
+    public void clearHistory() {
+
+    }
+
+    public void showMessage(String text) {
+
+    }
+
+    public TurtleDriver getTurtle() {
+        return null;
+    }
+
+    private void stopButtonHandler () {
         animation.pause();;
     }
-    public void stepButtonHandler () {
+    private void stepButtonHandler () {
         return;
     }
-    public void runScript (ScriptEditor textArea) {
+
+    /**
+     * processes the user input
+     */
+    public void runScript () {
+        String command = scriptView.getUserInput();
+        System.out.println(command);
         return;
     }
-    public void clearScript (ScriptEditor textArea) {
+
+    /**
+     * clears the user input
+     */
+    public void clearScript () {
+        scriptView.clearEditor();
+    }
+    private void loadScript () {
         return;
     }
-    public void loadScript () {
-        return;
-    }
-    public void saveScript (ScriptEditor textArea) {
+    private void saveScript () {
         return;
     }
 }
