@@ -1,6 +1,5 @@
-package view;
+package view.view_component;
 
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
@@ -11,10 +10,12 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
-import java.util.ResourceBundle;
+import java.io.File;
+import java.util.*;
 
 public class DropDownButtons extends VBox {
     public static final String RESOURCE_PACKAGE = "resources/text/view";
+    private static final String PATH_TO_LANGUAGES = "resources/languages/";
     private ResourceBundle myResources;
     private ChoiceBox<String> langCB;
     private TextFlow historyTab;
@@ -33,7 +34,7 @@ public class DropDownButtons extends VBox {
     private ChoiceBox addLanguage () {
         langCB = new ChoiceBox<>();
         langCB.setPrefWidth(Integer.parseInt(myResources.getString("Dropdown_Width")));
-        langCB.getItems().add(myResources.getString("Chinese")); //TODO: find better way to list all choices rather than just hardcoding
+        langCB.getItems().add(myResources.getString("Chinese"));
         langCB.getItems().add(myResources.getString("English"));
         langCB.getItems().add(myResources.getString("French"));
         langCB.getItems().add(myResources.getString("German"));
@@ -41,12 +42,21 @@ public class DropDownButtons extends VBox {
         langCB.getItems().add(myResources.getString("Portuguese"));
         langCB.getItems().add(myResources.getString("Russian"));
         langCB.getItems().add(myResources.getString("Spanish"));
+//        List<String> result = new ArrayList<>();
+//        List<File> options = Arrays.asList(new File(PATH_TO_LANGUAGES).listFiles());
+//        System.out.println(options);
+//        Collections.sort(options);
+//        for (File file : options) {
+//            result.add(file.getName().split("\\.")[0]);
+//            langCB.getItems().add(file.getName().split("\\.")[0]);
+//        }
         langCB.setValue("English");
         langCB.setOnAction(e -> getChoice(langCB));
         return langCB;
     }
     private void getChoice(ChoiceBox<String> cb) {
         String name = cb.getValue();
+        String filePath = PATH_TO_LANGUAGES + name;
     }
     private TitledPane addControls () {
         TitledPane control = new TitledPane();

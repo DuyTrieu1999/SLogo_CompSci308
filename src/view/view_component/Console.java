@@ -1,6 +1,5 @@
-package view;
+package view.view_component;
 
-import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;

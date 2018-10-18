@@ -1,4 +1,4 @@
-package view;
+package view.view_component;
 
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;

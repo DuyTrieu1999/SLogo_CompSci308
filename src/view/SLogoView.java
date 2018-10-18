@@ -12,7 +12,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
+import view.view_component.*;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class SLogoView {
@@ -40,7 +44,7 @@ public class SLogoView {
         VBox scriptView = addScriptView();
         VBox logoView = addLogoView();
         myBP = new BorderPane();
-        myBP.setPadding(new Insets(Integer.parseInt(myResources.getString("Padding")))); //TODO: put magic values in resource file
+        myBP.setPadding(new Insets(Integer.parseInt(myResources.getString("Padding"))));
         myBP.setLeft(addButton());
         myBP.setRight(scriptView);
         myBP.setCenter(logoView);
