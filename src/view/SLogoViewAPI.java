@@ -1,6 +1,6 @@
 package view;
 
-import view.TurtleView.TurtleDriver;
+import view.turtleView.TurtleDriver;
 
 public interface SLogoViewAPI {
     public void clearConsole();

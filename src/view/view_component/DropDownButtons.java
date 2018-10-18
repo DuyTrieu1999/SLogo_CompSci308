@@ -137,9 +137,13 @@ public class DropDownButtons extends VBox {
         historyTab = new TextFlow();
         historyTab.setTextAlignment(TextAlignment.JUSTIFY);
         historyTab.setLineSpacing(5.0);
-        Text text = new Text("Now this is a text node");
-        history.getChildren().add(text);
         history.getChildren().add(historyTab);
         return history;
+    }
+    public void editHistoryTab(Text text) {
+        historyTab.getChildren().add(text);
+    }
+    public TextFlow getHistoryTab () {
+        return historyTab;
     }
 }

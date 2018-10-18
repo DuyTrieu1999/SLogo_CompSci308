@@ -12,8 +12,12 @@ public class Console extends VBox {
         myConsole = new TextFlow();
         myConsole.setTextAlignment(TextAlignment.JUSTIFY);
         myConsole.setLineSpacing(5.0);
-        Text text = new Text("Now this is a text node");
-        myConsole.getChildren().add(text);
         this.getChildren().add(myConsole);
+    }
+    public void addText(Text text) {
+        myConsole.getChildren().add(text);
+    }
+    public TextFlow getConsole() {
+        return myConsole;
     }
 }

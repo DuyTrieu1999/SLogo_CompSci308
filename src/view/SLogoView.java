@@ -11,8 +11,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
-import view.TurtleView.TurtleDriver;
+import view.turtleView.TurtleDriver;
 import view.view_component.*;
 
 import java.util.ResourceBundle;
@@ -147,14 +148,15 @@ public class SLogoView implements SLogoViewAPI {
      */
     public void runScript () {
         String command = scriptView.getUserInput();
-        System.out.println(command);
-        return;
+        consoleView.addText(new Text(command));
+        dropDownButtons.editHistoryTab(new Text(command));
     }
 
     /**
      * clears the user input
      */
     public void clearScript () {
+        consoleView.getConsole().getChildren().clear();
         scriptView.clearEditor();
     }
     private void loadScript () {

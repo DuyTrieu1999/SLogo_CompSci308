@@ -1,4 +1,4 @@
-package view.TurtleView;
+package view.turtleView;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
