@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class CommandInitializer {
 
-    private Map<String, Command> commandMap = new HashMap<>();
+    private static Map<String, Command> commandMap = new HashMap<>();
 
-    public Map<String, Command> createCommandMap(Scanner s){
+    public static Map<String, Command> createCommandMap(){
 
         commandMap.put("forward", new Forward());
         commandMap.put("fd", new Forward());

@@ -6,7 +6,7 @@ public class Forward implements Command {
 
     @Override
     public void run(Scanner args){
-        System.out.println("Forward");
+        System.out.println("Forward by amount " + args.next());
     }
 
 }

@@ -1,5 +1,10 @@
 package model;
 
+import commands.Command;
+
+import java.util.Map;
+import java.util.Scanner;
+
 public class CommandParser {
 
     private CommandList myCommandList;
@@ -19,7 +24,9 @@ public class CommandParser {
             parse(command);
     }
 
-    public void parse(String oneCommand){
-
+    public static void parse(String oneCommand){
+        Map<String, Command> commandMap = commands.CommandInitializer.createCommandMap();
+        Scanner commandScanner = new Scanner(oneCommand);
+        commandMap.get(commandScanner.next()).run(commandScanner);
     }
 }
