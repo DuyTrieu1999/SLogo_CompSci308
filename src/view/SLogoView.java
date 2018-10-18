@@ -12,14 +12,20 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
+import view.TurtleView.TurtleDriver;
 import view.view_component.*;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
-public class SLogoView implements SLogoViewAPI{
+/**
+ * SLogoView
+ *
+ * main UI class that connects all elements
+ *
+ * @author duytrieu
+ * @author brookekeene
+ */
+public class SLogoView implements SLogoViewAPI {
     private static final double FRAMES_PER_SECOND = 1;
     private static final double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private static final double SECOND_DELAY = 100.0/ FRAMES_PER_SECOND;
@@ -135,11 +141,21 @@ public class SLogoView implements SLogoViewAPI{
     private void stepButtonHandler () {
         return;
     }
-    private void runScript () {
+
+    /**
+     * processes the user input
+     */
+    public void runScript () {
+        String command = scriptView.getUserInput();
+        System.out.println(command);
         return;
     }
-    private void clearScript () {
-        return;
+
+    /**
+     * clears the user input
+     */
+    public void clearScript () {
+        scriptView.clearEditor();
     }
     private void loadScript () {
         return;

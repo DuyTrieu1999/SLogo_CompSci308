@@ -4,7 +4,7 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Insets;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import view.TurtleDriver;
+import view.TurtleView.TurtleDriver;
 
 import java.util.ResourceBundle;
 
