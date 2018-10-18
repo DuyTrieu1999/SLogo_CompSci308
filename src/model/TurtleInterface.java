@@ -2,19 +2,15 @@ package model;
 
 import javafx.scene.paint.Color;
 
+/**
+ * @Author Yunhao Qing
+ */
+
 public interface TurtleInterface {
         double getX();
         double getY();
-        void move(double distance);
-        void moveTo(double x, double y);
-
         double getOrientation();
-        void turn(double degree);
-
         boolean getVisibility();
-        void setVisibility(boolean visibility);
-
         Color getPenColor();
-        void setPenColor(Color color);
-
+        boolean getPenVisibility();
 }
