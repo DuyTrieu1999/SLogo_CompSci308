@@ -6,14 +6,12 @@ import javafx.scene.shape.Line;
 import view.view_component.LogoScreen;
 
 public class Pen {
-    private TurtleDriver myTurtle;
     private LogoScreen myScreen;
     private Color myColor;
     private double myThickness;
     private int penIndex;
 
-    public Pen (TurtleDriver turtle, LogoScreen screen, Color color, double thickness, int index) {
-        myTurtle = turtle;
+    public Pen (LogoScreen screen, Color color, double thickness, int index) {
         myScreen = screen;
         myColor = color;
         myThickness = thickness;
