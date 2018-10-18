@@ -11,11 +11,16 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
+import java.util.ResourceBundle;
+
 public class DropDownButtons extends VBox {
+    public static final String RESOURCE_PACKAGE = "resources/text/view";
+    private ResourceBundle myResources;
     private ChoiceBox<String> langCB;
     private TextFlow historyTab;
 
     public DropDownButtons() {
+        myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         this.setId("dropdown-menu");
         this.getChildren().add(addControls());
         this.getChildren().add(addDisplay());
@@ -27,10 +32,15 @@ public class DropDownButtons extends VBox {
     }
     private ChoiceBox addLanguage () {
         langCB = new ChoiceBox<>();
-        langCB.setPrefWidth(SceneENUM.DROPDOWN_WIDTH.getVal());
-        langCB.getItems().add("English");
-        langCB.getItems().add("French");
-        langCB.getItems().add("Spanish");
+        langCB.setPrefWidth(Integer.parseInt(myResources.getString("Dropdown_Width")));
+        langCB.getItems().add(myResources.getString("Chinese")); //TODO: find better way to list all choices rather than just hardcoding
+        langCB.getItems().add(myResources.getString("English"));
+        langCB.getItems().add(myResources.getString("French"));
+        langCB.getItems().add(myResources.getString("German"));
+        langCB.getItems().add(myResources.getString("Italian"));
+        langCB.getItems().add(myResources.getString("Portuguese"));
+        langCB.getItems().add(myResources.getString("Russian"));
+        langCB.getItems().add(myResources.getString("Spanish"));
         langCB.setValue("English");
         langCB.setOnAction(e -> getChoice(langCB));
         return langCB;
@@ -116,8 +126,6 @@ public class DropDownButtons extends VBox {
         VBox history = new VBox();
         historyTab = new TextFlow();
         historyTab.setTextAlignment(TextAlignment.JUSTIFY);
-        historyTab.setPrefWidth(SceneENUM.DROPDOWN_WIDTH.getVal());
-        historyTab.setPadding(new Insets(SceneENUM.BUTTON_PADDING.getVal()));
         historyTab.setLineSpacing(5.0);
         Text text = new Text("Now this is a text node");
         history.getChildren().add(text);

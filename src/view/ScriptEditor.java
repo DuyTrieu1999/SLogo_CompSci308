@@ -8,7 +8,6 @@ public class ScriptEditor extends VBox {
     public ScriptEditor() {
         myScriptEditor = new TextArea();
         this.setId("script-editor");
-        myScriptEditor.setPrefSize(SceneENUM.TEXT_EDITOR_WIDTH.getVal(), SceneENUM.TEXT_EDITOR_HEIGHT.getVal());
         this.getChildren().add(myScriptEditor);
     }
 }

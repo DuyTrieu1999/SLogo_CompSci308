@@ -16,10 +16,10 @@ import javafx.util.Duration;
 import java.util.ResourceBundle;
 
 public class SLogoView {
-    private double FRAMES_PER_SECOND = 1;
-    private double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-    private double SECOND_DELAY = 100.0/ FRAMES_PER_SECOND;
-    private static final Paint BACKGROUND = Color.AZURE;
+    private static final double FRAMES_PER_SECOND = 1;
+    private static final double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+    private static final double SECOND_DELAY = 100.0/ FRAMES_PER_SECOND;
+    private static final Paint BACKGROUND = Color.WHITE;
     public static final String RESOURCE_PACKAGE = "resources/text/view";
     public static final String STYLESHEET = "default.css";
 
@@ -40,11 +40,10 @@ public class SLogoView {
         VBox scriptView = addScriptView();
         VBox logoView = addLogoView();
         myBP = new BorderPane();
+        myBP.setPadding(new Insets(Integer.parseInt(myResources.getString("Padding")))); //TODO: put magic values in resource file
         myBP.setLeft(addButton());
         myBP.setRight(scriptView);
         myBP.setCenter(logoView);
-        BorderPane.setMargin(logoView, new Insets(SceneENUM.BUTTON_PADDING.getVal()));
-        BorderPane.setMargin(scriptView, new Insets(SceneENUM.BUTTON_PADDING.getVal()));
         myRoot.getChildren().add(myBP);
         return myScene;
     }
@@ -54,7 +53,7 @@ public class SLogoView {
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(frame);
         myRoot = new Group();
-        myScene = new Scene(myRoot, SceneENUM.SCENE_WIDTH.getVal(), SceneENUM.SCENE_HEIGHT.getVal(), BACKGROUND);
+        myScene = new Scene(myRoot, Integer.parseInt(myResources.getString("Scene_Width")), Integer.parseInt(myResources.getString("Scene_Height")), BACKGROUND);
         myScene.getStylesheets().add(STYLESHEET);
     }
     public void step (double elapsedTime) {
