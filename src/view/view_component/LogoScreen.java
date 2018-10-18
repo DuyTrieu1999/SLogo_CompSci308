@@ -59,5 +59,8 @@ public class LogoScreen extends VBox {
     public void clear () {
         this.getChildren().clear();
     }
+    public StackPane getMyPane () {
+        return myPane;
+    }
 }
 
