@@ -44,11 +44,17 @@ public class CommandInitializer {
         commandMap.put("showingp", new Showing());
 
         commandMap.put("sum", new Sum());
+        commandMap.put("+", new Sum());
         commandMap.put("difference", new Difference());
+        commandMap.put("-", new Difference());
         commandMap.put("product", new Product());
+        commandMap.put("*", new Product());
         commandMap.put("quotient", new Quotient());
+        commandMap.put("/", new Quotient());
         commandMap.put("remainder", new Remainder());
+        commandMap.put("%", new Remainder());
         commandMap.put("minus", new Minus());
+        commandMap.put("~", new Minus());
         commandMap.put("random", new Random());
         commandMap.put("sin", new Sin());
         commandMap.put("cos", new Cos());
