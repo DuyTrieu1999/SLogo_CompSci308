@@ -64,7 +64,8 @@ public class SLogoView implements SLogoViewAPI {
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(frame);
         myRoot = new Group();
-        myScene = new Scene(myRoot, Integer.parseInt(myResources.getString("Scene_Width")), Integer.parseInt(myResources.getString("Scene_Height")), BACKGROUND);
+        myScene = new Scene(myRoot, Integer.parseInt(myResources.getString("Scene_Width")),
+                Integer.parseInt(myResources.getString("Scene_Height")), BACKGROUND);
         myScene.getStylesheets().add(STYLESHEET);
     }
     private void step (double elapsedTime) {
@@ -140,7 +141,8 @@ public class SLogoView implements SLogoViewAPI {
         animation.pause();;
     }
     private void stepButtonHandler () {
-        return;
+        stopButtonHandler();
+        logoScreen.updateTurtle();
     }
 
     /**
