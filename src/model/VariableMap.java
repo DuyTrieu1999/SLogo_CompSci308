@@ -10,7 +10,7 @@ public class VariableMap {
         varMap = new HashMap<String, Integer>();
     }
 
-    public void addVarible(String str, int i){
+    public void addVariable(String str, int i){
         varMap.put(str,i);
     }
 
