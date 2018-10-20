@@ -11,7 +11,6 @@ public class CommandParser {
 
     private CommandList myCommandList;
     private VariableMap myVarMap;
-    private Turtle myTurtle;
 
     public CommandParser(Turtle t, CommandList cl, VariableMap vm){
         myCommandList = cl;
