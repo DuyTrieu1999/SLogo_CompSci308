@@ -8,7 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import view.turtleView.TurtleDriver;
 
-import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 public class LogoScreen extends VBox {
@@ -47,11 +46,7 @@ public class LogoScreen extends VBox {
     }
 
     public void updateTurtle () {
-        LinkedList<Point2D> destinations = myTurtle.getMyDestination().getMyFutureDestination();
-        //myTurtle.setLocation(myTurtle.getLocation(), destinations.getFirst());
-        for (int i = 0; i<destinations.size() - 1; i++) {
-            myTurtle.setLocation(destinations.get(i), destinations.get(i+1));
-        }
+        myTurtle.updateMove();
     }
 
     public void updateMovement(Point2D destination) {

@@ -7,6 +7,8 @@ import javafx.scene.paint.Color;
 import model.Turtle;
 import view.view_component.LogoScreen;
 
+import java.util.LinkedList;
+
 /**
  * TurtleDriver
  *
@@ -46,7 +48,7 @@ public class TurtleDriver {
         return myImage;
     }
 
-    public Point2D getLocation () { return myLocation; }
+    public Point2D getLocation () { return new Point2D(myImage.getX(), myImage.getX()); }
 
     public void setTurtleImage(Image im) {
         myImage = new ImageView(im);
@@ -57,6 +59,15 @@ public class TurtleDriver {
         myImage.setY(next.getY());
         setCenter(next);
         myPen.drawLine(curr, next);
+    }
+    public void updateMove() {
+        LinkedList<Point2D> destinations = myDestination.getMyFutureDestination();
+        int stepsToDestination = destinations.size();
+        int i = 0;
+        if (i < stepsToDestination) {
+            this.setLocation(destinations.get(i), destinations.get(i+1));
+            i++;
+        }
     }
     public void setPoint (Point2D point) {
         myLocation = point;

@@ -272,14 +272,7 @@ public class DropDownButtons extends VBox {
         langCB.getItems().add(myResources.getString("Portuguese"));
         langCB.getItems().add(myResources.getString("Russian"));
         langCB.getItems().add(myResources.getString("Spanish"));
-//        List<String> result = new ArrayList<>();
-//        List<File> options = Arrays.asList(new File(PATH_TO_LANGUAGES).listFiles());
-//        System.out.println(options);
-//        Collections.sort(options);
-//        for (File file : options) {
-//            result.add(file.getName().split("\\.")[0]);
-//            langCB.getItems().add(file.getName().split("\\.")[0]);
-//        }
+
         langCB.setValue("English");
         langCB.setOnAction(e -> getChoice(langCB));
 
