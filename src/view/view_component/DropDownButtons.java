@@ -63,8 +63,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds heading to the control panel dropdown menu
+     * @return HBox containing Label for header
      */
     private HBox addControls() {
         HBox controlHeader = new HBox();
@@ -77,8 +77,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds background tab containing controls for background settings
+     * @return TitledPane containing background controls
      */
     private TitledPane addBackgroundTab() {
         TitledPane backgroundTab = new TitledPane();
@@ -101,8 +101,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds pen tab containing controls for pen settings
+     * @return TitledPane containing pen controls
      */
     private TitledPane addPenTab() {
         TitledPane penTab = new TitledPane();
@@ -125,8 +125,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds turtle tab containing controls for turtle settings
+     * @return TitledPane containing turtle controls
      */
     private TitledPane addTurtleTab() {
         TitledPane turtleSetting = new TitledPane();
@@ -149,8 +149,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds history tab containing the user's input command history
+     * @return TitledPane containing the command history
      */
     private TitledPane addHistoryTab() {
         TitledPane history = new TitledPane();
@@ -191,8 +191,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds variables tab containing the variables available to the user
+     * @return TitledPane containing available variables
      */
     private TitledPane addVariablesTab() {
         TitledPane variables = new TitledPane();
@@ -217,8 +217,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds user-defined commands tab containing the user's pre-defined commands
+     * @return TitledPane containing the user-defined commands
      */
     private TitledPane addUserCommandTab() {
         TitledPane userCommands = new TitledPane();
@@ -242,8 +242,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds languages tab containing controls for the languages understood for commands
+     * @return TitledPane containing language controls
      */
     private TitledPane addLanguageTab() {
         TitledPane languageTab = new TitledPane();
@@ -298,8 +298,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds help tab containing a link that directs the user to a command reference page
+     * @return TitledPane containing reference link
      */
     private TitledPane addHelpTab() {
         TitledPane helpTab = new TitledPane();
@@ -311,8 +311,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * creates a widget that allows user to select a color
+     * @return VBox containing a ChoiceBox of colors
      */
     private VBox colorBox() {
         VBox controls = new VBox();
