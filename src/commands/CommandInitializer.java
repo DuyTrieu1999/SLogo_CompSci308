@@ -28,8 +28,8 @@ public class CommandInitializer {
         commandMap.put(resources.getString("SetHeading").split("\\|")[0], new SetHeading());
         commandMap.put(resources.getString("SetHeading").split("\\|")[1], new SetHeading());
         commandMap.put(resources.getString("SetTowards"), new Towards());
-        commandMap.put(resources.getString("SetPosition"), new GoTo());
-        //commandMap.put("goto", new GoTo());
+        commandMap.put(resources.getString("SetPosition").split("\\|")[0], new GoTo());
+        commandMap.put(resources.getString("SetPosition").split("\\|")[1], new GoTo());
         commandMap.put(resources.getString("PenDown").split("\\|")[0], new PenDown());
         commandMap.put(resources.getString("PenDown").split("\\|")[1], new PenDown());
         commandMap.put(resources.getString("PenUp").split("\\|")[0], new PenUp());

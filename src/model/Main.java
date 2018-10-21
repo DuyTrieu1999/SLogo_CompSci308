@@ -24,7 +24,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage){
-        CommandParser test = new CommandParser("home clearscreen cs");
+        CommandParser test = new CommandParser("pendown?");
     }
 
     public static void main (String[] args) {
