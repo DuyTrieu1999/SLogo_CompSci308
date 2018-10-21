@@ -36,21 +36,11 @@ public class LogoScreen extends VBox {
     public void setUpTurtle (TurtleDriver turtle) {
         turtle.getTurtleImage().setLayoutX(200);
         turtle.getTurtleImage().setLayoutY(200);
-//        myBackGround.widthProperty().addListener(e -> {
-//            turtle.getTurtleImage().setX(myBackGround.getPrefWidth() / 2.0);
-//        });
-//        myBackGround.heightProperty().addListener(e -> {
-//            turtle.getTurtleImage().setY(myBackGround.getPrefHeight() / 2.0);
-//        });
         myBackGround.getChildren().add(myTurtle.getTurtleImage());
     }
 
     public void updateTurtle () {
         myTurtle.updateMove();
-    }
-
-    public void updateMovement(Point2D destination) {
-        myTurtle.getMyDestination().addFutureDestination(destination);
     }
 
     public void setMyBackGround (int width, int height) {

@@ -69,6 +69,9 @@ public class TurtleDriver {
             i++;
         }
     }
+    public void updateMovement(Point2D destination) {
+        myDestination.addFutureDestination(destination);
+    }
     public void setPoint (Point2D point) {
         myLocation = point;
     }

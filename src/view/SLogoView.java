@@ -72,10 +72,10 @@ public class SLogoView implements SLogoViewAPI {
     }
     private void testing() {
         TurtleDriver turtle = logoScreen.getMyTurtle();
-        logoScreen.updateMovement(new Point2D(turtle.getTurtleImage().getX(), turtle.getTurtleImage().getY()));
-        logoScreen.updateMovement(new Point2D(turtle.getTurtleImage().getX() + 100, turtle.getTurtleImage().getY()));
-        logoScreen.updateMovement(new Point2D(turtle.getX() + 100, turtle.getY() + 100));
-        logoScreen.updateMovement(new Point2D(turtle.getTurtleImage().getX(), turtle.getTurtleImage().getY() + 100));
+        turtle.updateMovement(new Point2D(turtle.getTurtleImage().getX(), turtle.getTurtleImage().getY()));
+        turtle.updateMovement(new Point2D(turtle.getTurtleImage().getX() + 100, turtle.getTurtleImage().getY()));
+        turtle.updateMovement(new Point2D(turtle.getX() + 100, turtle.getY() + 100));
+        turtle.updateMovement(new Point2D(turtle.getTurtleImage().getX(), turtle.getTurtleImage().getY() + 100));
         System.out.println(turtle.getMyDestination().getMyFutureDestination());
         System.out.println(turtle.getLocation());
         System.out.println("width: " + logoScreen.getMyPane().getPrefWidth());
@@ -129,14 +129,6 @@ public class SLogoView implements SLogoViewAPI {
 
     public void clearDisplay() {
         logoScreen.clear();
-    }
-
-    public void resetSetting() {
-
-    }
-
-    public void resetTurtle() {
-
     }
 
     public void clearHistory() {
