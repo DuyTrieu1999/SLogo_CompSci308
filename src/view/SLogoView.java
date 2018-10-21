@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
@@ -12,7 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 import view.turtleView.TurtleDriver;
 import view.view_component.*;
@@ -45,8 +45,10 @@ public class SLogoView implements SLogoViewAPI {
     private ScriptEditor scriptView;
     private Console consoleView;
     private ResourceBundle myResources;
+    private Controller myController;
 
     public Scene sceneInit () {
+        myController = new Controller(this);
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         initVariable();
         VBox scriptView = addScriptView();
@@ -132,7 +134,7 @@ public class SLogoView implements SLogoViewAPI {
     }
 
     public void clearHistory() {
-
+        scriptView.clearEditor();
     }
 
     public void showMessage(String text) {
@@ -156,8 +158,7 @@ public class SLogoView implements SLogoViewAPI {
      */
     public void runScript () {
         String command = scriptView.getUserInput();
-        consoleView.addText(new Text(command));
-        dropDownButtons.editHistoryTab(new Text(command));
+        myController.parse(command);
     }
 
     /**
@@ -168,9 +169,9 @@ public class SLogoView implements SLogoViewAPI {
         scriptView.clearEditor();
     }
     private void loadScript () {
-        return;
+
     }
     private void saveScript () {
-        return;
+
     }
 }

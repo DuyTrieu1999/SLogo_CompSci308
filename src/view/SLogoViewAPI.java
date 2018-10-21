@@ -2,6 +2,10 @@ package view;
 
 import view.turtleView.TurtleDriver;
 
+/**
+ *
+ * @Author Duy Trieu
+ */
 public interface SLogoViewAPI {
     public void clearConsole();
     public void clearDisplay();

@@ -1,10 +1,7 @@
 package controller;
 
-import javafx.scene.paint.Color;
 import model.CommandList;
 import model.CommandListInterface;
-import model.CommandParser;
-import model.TurtleInterface;
 import view.SLogoView;
 import view.SLogoViewAPI;
 import view.turtleView.TurtleDriver;
@@ -19,8 +16,8 @@ import java.util.List;
  * @author duytrieu
  */
 public class Controller implements SLogoViewAPI, CommandListInterface {
-    SLogoView myView;
-    CommandList myCommand;
+    private SLogoView myView;
+    private CommandList myCommand;
 
     public Controller (SLogoView view) {
         myView = view;
@@ -30,7 +27,7 @@ public class Controller implements SLogoViewAPI, CommandListInterface {
         return myView;
     }
     /**
-     * Controller
+     * clearConsole
      *
      * from SLogoAPI
      */
@@ -38,7 +35,7 @@ public class Controller implements SLogoViewAPI, CommandListInterface {
         myView.clearConsole();
     }
     /**
-     * Controller
+     * clearDisplay
      *
      * from SLogoAPI
      */
@@ -46,7 +43,7 @@ public class Controller implements SLogoViewAPI, CommandListInterface {
         myView.clearDisplay();
     }
     /**
-     * Controller
+     * showMessage
      *
      * from SLogoAPI
      */
@@ -54,7 +51,7 @@ public class Controller implements SLogoViewAPI, CommandListInterface {
         myView.showMessage(text);
     }
     /**
-     * Controller
+     * clearHistory
      *
      * from SLogoAPI
      */
@@ -62,28 +59,42 @@ public class Controller implements SLogoViewAPI, CommandListInterface {
         myView.clearHistory();
     }
     /**
-     * Controller
+     * getTurtle
      *
      * from SLogoAPI
      */
     public TurtleDriver getTurtle() {
         return myView.getTurtle();
     }
-    public String getCommand() {
-        return myCommand.getCommand();
+    /**
+     * getCommands
+     *
+     * from CommandListInterface
+     */
+    public void parse(String text) {
+        myCommand.parse(text);
     }
-    public List<String> getCommands() {
-        return myCommand.getCommands();
-    }
-
+    /**
+     * setLanguage
+     *
+     * from CommandListInterface
+     */
     public void setLanguage (String language) {
         myCommand.setLanguage(language);
     }
-
+    /**
+     * getLanguage
+     *
+     * from CommandListInterface
+     */
     public String getLanguage() {
         return myCommand.getLanguage();
     }
-
+    /**
+     * setMessage
+     *
+     * from CommandListInterface
+     */
     public void setMessage (String message) {
         myCommand.setMessage(message);
     }

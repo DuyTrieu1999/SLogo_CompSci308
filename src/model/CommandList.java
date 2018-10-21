@@ -4,23 +4,18 @@ import java.util.*;
 
 /**
  * @Author Yunhao Qing
+ * @Author Duy Trieu
  */
 
 public class CommandList implements CommandListInterface{
-    private List<String> commands;
     private CommandParser myParser;
 
     public CommandList() {
-        myParser = new CommandParser(getCommand());
-        commands = new ArrayList<>();
+        myParser = new CommandParser();
     }
 
-    public List<String> getCommands(){
-        return commands;
-    }
-
-    public String getCommand () {
-        return commands.get(commands.size()-1);
+    public void parse(String text) {
+        myParser.parse(text);
     }
 
     public void setLanguage (String language) {
