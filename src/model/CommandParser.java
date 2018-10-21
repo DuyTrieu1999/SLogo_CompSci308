@@ -1,15 +1,16 @@
 package model;
 
 import commands.Command;
+import commands.CommandInitializer;
 
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class CommandParser {
 
     private CommandList myCommandList;
     private VariableMap myVarMap;
-    private Turtle myTurtle;
 
     public CommandParser(Turtle t, CommandList cl, VariableMap vm){
         myCommandList = cl;
@@ -25,7 +26,8 @@ public class CommandParser {
     }
 
     public static void parse(String oneCommand){
-        Map<String, Command> commandMap = commands.CommandInitializer.createCommandMap();
+        CommandInitializer myCommands = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
+        Map<String, Command> commandMap = myCommands.createCommandMap();
         Scanner commandScanner = new Scanner(oneCommand);
         commandMap.get(commandScanner.next()).run(commandScanner);
     }

@@ -97,10 +97,10 @@ public class SLogoView implements SLogoViewAPI {
         HBox buttonBox = new HBox();
         scriptView = new ScriptEditor();
         consoleView = new Console();
-        buttonBox.getChildren().add(new LogoButton("Run", event -> runScript()));
-        buttonBox.getChildren().add(new LogoButton("Clear", event -> clearScript()));
-        buttonBox.getChildren().add(new LogoButton("Load", event -> loadScript()));
-        buttonBox.getChildren().add(new LogoButton("Save", event -> saveScript()));
+        buttonBox.getChildren().add(new LogoButton(myResources.getString("Run"), event -> runScript()));
+        buttonBox.getChildren().add(new LogoButton(myResources.getString("Clear"), event -> clearScript()));
+        buttonBox.getChildren().add(new LogoButton(myResources.getString("Load"), event -> loadScript()));
+        buttonBox.getChildren().add(new LogoButton(myResources.getString("Save"), event -> saveScript()));
         scriptViewBox.getChildren().add(scriptView);
         scriptViewBox.getChildren().add(buttonBox);
         scriptViewBox.getChildren().add(consoleView);
