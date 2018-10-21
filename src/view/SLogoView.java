@@ -72,14 +72,14 @@ public class SLogoView implements SLogoViewAPI {
     }
     private void testing() {
         TurtleDriver turtle = logoScreen.getMyTurtle();
-        logoScreen.updateMovement(new Point2D(100, 100));
-        logoScreen.updateMovement(new Point2D(200, 100));
-        logoScreen.updateMovement(new Point2D(200, 200));
-        logoScreen.updateMovement(new Point2D(100, 200));
-        logoScreen.updateMovement(new Point2D(100, 100));
+        logoScreen.updateMovement(new Point2D(turtle.getTurtleImage().getX(), turtle.getTurtleImage().getY()));
+        logoScreen.updateMovement(new Point2D(turtle.getTurtleImage().getX() + 100, turtle.getTurtleImage().getY()));
+        logoScreen.updateMovement(new Point2D(turtle.getX() + 100, turtle.getY() + 100));
+        logoScreen.updateMovement(new Point2D(turtle.getTurtleImage().getX(), turtle.getTurtleImage().getY() + 100));
+        //logoScreen.updateMovement(new Point2D(100, 100));
         System.out.println(turtle.getMyDestination().getMyFutureDestination());
         System.out.println(turtle.getLocation());
-        System.out.println("width: " + logoScreen.getMyPane().getWidth());
+        System.out.println("width: " + logoScreen.getMyPane().getPrefWidth());
     }
     private void step (double elapsedTime) {
         logoScreen.updateTurtle();

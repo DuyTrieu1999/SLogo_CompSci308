@@ -35,20 +35,20 @@ public class LogoScreen extends VBox {
         this.getChildren().add(myPane);
     }
     public void setUpTurtle (TurtleDriver turtle) {
-//        turtle.getTurtleImage().setLayoutX(myPane.getWidth() / 2);
-//        turtle.getTurtleImage().setLayoutY(myPane.getHeight() / 2);
+        turtle.getTurtleImage().setLayoutX(200);
+        turtle.getTurtleImage().setLayoutY(200);
 //        myBackGround.widthProperty().addListener(e -> {
-//            turtle.getTurtleImage().setLayoutX(myBackGround.getWidth() / 2.0);
+//            turtle.getTurtleImage().setX(myBackGround.getPrefWidth() / 2.0);
 //        });
 //        myBackGround.heightProperty().addListener(e -> {
-//            turtle.getTurtleImage().setLayoutY(myBackGround.getHeight() / 2.0);
+//            turtle.getTurtleImage().setY(myBackGround.getPrefHeight() / 2.0);
 //        });
         myBackGround.getChildren().add(myTurtle.getTurtleImage());
     }
 
     public void updateTurtle () {
         LinkedList<Point2D> destinations = myTurtle.getMyDestination().getMyFutureDestination();
-        myTurtle.setLocation(myTurtle.getLocation(), destinations.getFirst());
+        //myTurtle.setLocation(myTurtle.getLocation(), destinations.getFirst());
         for (int i = 0; i<destinations.size() - 1; i++) {
             myTurtle.setLocation(destinations.get(i), destinations.get(i+1));
         }
@@ -60,8 +60,7 @@ public class LogoScreen extends VBox {
 
     public void setMyBackGround (int width, int height) {
         myBackGround = new Pane();
-        myBackGround.setMaxHeight(width);
-        myBackGround.setMaxHeight(height);
+        myBackGround.setPrefSize(width, height);
         Rectangle clipBoundaries = new Rectangle();
         clipBoundaries.widthProperty().bind(myBackGround.widthProperty());
         clipBoundaries.heightProperty().bind(myBackGround.heightProperty());

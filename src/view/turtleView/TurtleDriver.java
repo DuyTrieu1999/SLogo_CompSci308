@@ -20,7 +20,7 @@ public class TurtleDriver {
     private Pen myPen;
     private Destination myDestination;
     private int turtleID; // when multiple turtles arise
-    private Point2D myLocation = new Point2D(200, 200);
+    private Point2D myLocation;
     private double orientation;
 
 
@@ -31,11 +31,12 @@ public class TurtleDriver {
     public TurtleDriver(LogoScreen screen, int id, Image image) {
         myScreen = screen;
         turtleID = id;
+       // myLocation = new Point2D(myScreen.getMyPane().getPrefWidth()/2, myScreen.getMyPane().getPrefHeight()/2);
         myPen = new Pen(myScreen, Color.BLACK, 1, 1);
         myDestination = new Destination();
         myImage = new ImageView(image);
-        myImage.setX(myLocation.getX());
-        myImage.setY(myLocation.getY());
+//        myImage.setX(myLocation.getX());
+//        myImage.setY(myLocation.getY());
         myImage.setFitWidth(100);
         myImage.setFitHeight(100);
 //        orientation = myTurtle.getOrientation();
