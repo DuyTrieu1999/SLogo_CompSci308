@@ -36,8 +36,8 @@ public class TurtleDriver {
         myPen = new Pen(myScreen, Color.BLACK, 1, 1);
         myDestination = new Destination();
         myImage = new ImageView(image);
-        myImage.setX(screen.getMyPane().getLayoutX() / 2);
-        myImage.setY(screen.getMyPane().getLayoutY() / 2);
+        myImage.setX(initX);
+        myImage.setY(initY);
         location = new Point2D(myImage.getX(), myImage.getY());
         myImage.setFitWidth(100);
         myImage.setFitHeight(100);
