@@ -26,17 +26,6 @@ public class DropDownButtons extends VBox {
     public static final int DROPDOWN_WIDTH = 200;
     public static final String RESOURCE_PACKAGE = "text/view";
     public static final String PATH_TO_LANGUAGES = "languages/";
-    public static final ArrayList<String> COLORS = new ArrayList<>(List.of(
-            "White",
-            "Red",
-            "Orange",
-            "Yellow",
-            "Green",
-            "Blue",
-            "Purple",
-            "Pink",
-            "Brown",
-            "Black"));
     private ResourceBundle myResources;
     private ResourceBundle myLanguages;
     private ChoiceBox<String> langCB;
@@ -91,11 +80,16 @@ public class DropDownButtons extends VBox {
 
     /**
      * creates a VBox containing the background controls (color)
-     * @return VBox containing pre-defined colorBox
+     * @return VBox containing pre-defined ColorBox
      */
     private VBox backgroundSettings() {
         VBox backgroundControls = new VBox();
-        VBox colorChoices = colorBox();
+        ColorBox colorChoices = new ColorBox();
+        colorChoices.makeBox();
+        colorChoices.setOnAction(e -> {
+            String newBackColor = colorChoices.getColor();
+            System.out.println("Background: " + newBackColor);
+        });
         backgroundControls.getChildren().add(colorChoices);
         return backgroundControls;
     }
@@ -115,11 +109,16 @@ public class DropDownButtons extends VBox {
 
     /**
      * creates a VBox containing the pen controls (color)
-     * @return VBox containing pre-defined colorBox
+     * @return VBox containing pre-defined ColorBox
      */
     private VBox penSettings() {
         VBox penControls = new VBox();
-        VBox colorChoices = colorBox();
+        ColorBox colorChoices = new ColorBox();
+        colorChoices.makeBox();
+        colorChoices.setOnAction(e -> {
+            String newPenColor = colorChoices.getColor();
+            System.out.println("Pen: " + newPenColor);
+        });
         penControls.getChildren().add(colorChoices);
         return penControls;
     }
@@ -308,19 +307,6 @@ public class DropDownButtons extends VBox {
         helpTab.setContent(helpBox);
         helpTab.setExpanded(false);
         return helpTab;
-    }
-
-    /**
-     * creates a widget that allows user to select a color
-     * @return VBox containing a ChoiceBox of colors
-     */
-    private VBox colorBox() {
-        VBox controls = new VBox();
-        Label colors = new Label(myResources.getString("Color"));
-        ChoiceBox<String> colorChoices = new ChoiceBox<>();
-        colorChoices.getItems().addAll(COLORS);
-        controls.getChildren().addAll(colors, colorChoices);
-        return controls;
     }
 
     /**
