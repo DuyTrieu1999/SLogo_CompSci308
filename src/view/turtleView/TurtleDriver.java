@@ -79,6 +79,10 @@ public class TurtleDriver {
 
     public void setHeading(double degree) { orientation = degree; }
 
+    public void setMyPenColor(Color c) {
+        myPen.setColor(c);
+    }
+
     public void turn(double degree) { myImage.setRotate(degree); }
 
     public Destination getMyDestination () { return myDestination; }

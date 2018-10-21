@@ -2,7 +2,6 @@ package view.view_component;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -13,8 +12,6 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -32,11 +29,13 @@ public class DropDownButtons extends VBox {
     private TextFlow historyTab;
     private TextFlow variablesTab;
     private TextFlow userTab;
+    private LogoScreen myDisplay;
 
     /**
      * Constructors
      */
-    public DropDownButtons() {
+    public DropDownButtons(LogoScreen ls) {
+        myDisplay = ls;
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         this.setId("dropdown-menu");
 
@@ -84,13 +83,14 @@ public class DropDownButtons extends VBox {
      */
     private VBox backgroundSettings() {
         VBox backgroundControls = new VBox();
+        Label color = new Label(myResources.getString("Color"));
         ColorBox colorChoices = new ColorBox();
         colorChoices.makeBox();
         colorChoices.setOnAction(e -> {
             String newBackColor = colorChoices.getColor();
-            System.out.println("Background: " + newBackColor);
+            myDisplay.setBackGroundColor(Color.valueOf(newBackColor));
         });
-        backgroundControls.getChildren().add(colorChoices);
+        backgroundControls.getChildren().addAll(color, colorChoices);
         return backgroundControls;
     }
 
@@ -113,13 +113,15 @@ public class DropDownButtons extends VBox {
      */
     private VBox penSettings() {
         VBox penControls = new VBox();
+        Label color = new Label(myResources.getString("Color"));
         ColorBox colorChoices = new ColorBox();
         colorChoices.makeBox();
         colorChoices.setOnAction(e -> {
             String newPenColor = colorChoices.getColor();
+            myDisplay.getMyTurtle().setMyPenColor(Color.valueOf(newPenColor));
             System.out.println("Pen: " + newPenColor);
         });
-        penControls.getChildren().add(colorChoices);
+        penControls.getChildren().addAll(color, colorChoices);
         return penControls;
     }
 
