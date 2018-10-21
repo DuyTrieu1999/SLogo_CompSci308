@@ -9,9 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
-import javafx.stage.FileChooser;
 
-import java.io.File;
 import java.util.ResourceBundle;
 
 /**
@@ -140,11 +138,12 @@ public class DropDownButtons extends VBox {
 
     /**
      * creates a VBox containing the turtle controls (image)
-     * @return VBox containing pre-defined imageChooser
+     * @return VBox containing pre-defined ImageChooser
      */
     private VBox turtleSettings() {
         VBox turtleControls = new VBox();
-        VBox imageBox = imageChooser();
+        ImageChooser imageBox = new ImageChooser(myDisplay);
+        imageBox.makeChooser();
         turtleControls.getChildren().add(imageBox);
         return turtleControls;
     }
@@ -309,31 +308,5 @@ public class DropDownButtons extends VBox {
         helpTab.setContent(helpBox);
         helpTab.setExpanded(false);
         return helpTab;
-    }
-
-    /**
-     * creates FileChooser and button associated with it
-     */
-    private VBox imageChooser() {
-        VBox imageControls = new VBox();
-        Label files = new Label(myResources.getString("ImageChoice"));
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(myResources.getString("File"));
-
-        Button fileBtn = new Button(myResources.getString("File"));
-        Label fileName = new Label("File Path");
-//        fileName.setId("fileName");
-
-        fileBtn.setOnAction(value -> {
-            File file = fileChooser.showOpenDialog(getScene().getWindow());
-            //TODO: error check
-            // saves File if no exceptions and File is not null
-            if(file.toString().contains(".png") || file.toString().contains(".jpeg")) { //When got the input as XML file.
-                File myFile = file;
-            }
-        });
-
-        imageControls.getChildren().addAll(files, fileName, fileBtn);
-        return imageControls;
     }
 }

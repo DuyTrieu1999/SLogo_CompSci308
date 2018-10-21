@@ -11,8 +11,7 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 public class LogoScreen extends VBox {
-    private static final String DEFAULT_IMAGE = "turtle.png";
-    private static final String IMAGE_PATH = "slogo_team08/resources/images/";
+    private static final String DEFAULT_IMAGE = "blackturtle.png";
     private static final String RESOURCE_PACKAGE = "text/view";
     private ResourceBundle myResources;
     private StackPane myPane;
