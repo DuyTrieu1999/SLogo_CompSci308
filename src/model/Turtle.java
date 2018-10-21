@@ -32,8 +32,6 @@ public class Turtle implements TurtleInterface {
         penWidth = 1.0;
 
         lines = new ArrayList<>();
-
-        System.out.println("Initializing turtle at (" + xPos + ", " + yPos + ")!");
     }
 
     public double getX(){
@@ -44,16 +42,14 @@ public class Turtle implements TurtleInterface {
     }
     public void move(double distance){
         double newX = xPos + distance * Math.cos(Math.toRadians(orientation));
-        double newY = xPos + distance * Math.sin(Math.toRadians(orientation));
+        double newY = yPos + distance * Math.sin(Math.toRadians(orientation));
         moveTo(newX,newY);
-        System.out.println("The turtle is now at (" + newX + ", " + newY + ")!");
     }
 
     public void moveTo(double newX, double newY){
         addLine(new Line(xPos, yPos, newX, newY));
         xPos = newX;
         yPos = newY;
-        System.out.println("Updated x and y in the turtle object!");
     }
 
     public double getOrientation(){
@@ -65,7 +61,7 @@ public class Turtle implements TurtleInterface {
             orientation -= 360.0;
         }
     }
-    public void setOrientation(double newOrientation){ orientation = newOrientation;}
+    public void setOrientation(double newOrientation){ orientation = newOrientation; }
 
     public boolean getVisibility(){
         return visibility;

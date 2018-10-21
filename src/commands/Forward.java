@@ -10,7 +10,6 @@ public class Forward extends CommandNode {
     @Override
     public double run(List<String> parameters, Turtle turtle){
         double distance = Double.parseDouble(parameters.get(0));
-        System.out.println("Moving the turtle distance " + distance);
         turtle.move(distance);
         return distance;
     }
