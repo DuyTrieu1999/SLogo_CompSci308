@@ -86,7 +86,7 @@ public class SLogoView implements SLogoViewAPI {
         System.out.println("Location: " + turtle.getLocation());
     }
     private VBox addButton () {
-        dropDownButtons = new DropDownButtons();
+        dropDownButtons = new DropDownButtons(logoScreen); //TODO: Pass in elements to change (Pen, TurtleDriver)?
         VBox buttonPane = new VBox();
         buttonPane.getChildren().add(dropDownButtons);
         return buttonPane;
