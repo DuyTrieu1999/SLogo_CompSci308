@@ -90,8 +90,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * creates a VBox containing the background controls (color)
+     * @return VBox containing pre-defined colorBox
      */
     private VBox backgroundSettings() {
         VBox backgroundControls = new VBox();
@@ -114,8 +114,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * creates a VBox containing the pen controls (color)
+     * @return VBox containing pre-defined colorBox
      */
     private VBox penSettings() {
         VBox penControls = new VBox();
@@ -138,8 +138,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * creates a VBox containing the turtle controls (image)
+     * @return VBox containing pre-defined imageChooser
      */
     private VBox turtleSettings() {
         VBox turtleControls = new VBox();
@@ -255,8 +255,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * creates a VBox containing the language controls (command language)
+     * @return VBox containing ChoiceBox
      */
     private VBox languageSettings() {
         VBox langControls = new VBox();
