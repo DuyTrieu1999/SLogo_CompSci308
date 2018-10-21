@@ -13,6 +13,10 @@ public abstract class CommandNode {
     private List<String> extraParameters;
     private Turtle turtle;
 
+    public CommandNode(){
+
+    }
+
     public CommandNode(Turtle t){
         numChildren = 0;
         children = new ArrayList<>();
@@ -20,13 +24,11 @@ public abstract class CommandNode {
         turtle = t;
     }
     
-    public int getNumParameters(){
-        return numParameters;
-    }
+    public abstract int getNumParameters();
 
     public void setExtraParameters(List<String> list){
         extraParameters = list;
     }
 
-    abstract double run(Scanner args, Turtle turtle);
+    public abstract double run(List<String> parameters, Turtle turtle);
 }

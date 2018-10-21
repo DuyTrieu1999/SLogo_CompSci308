@@ -24,7 +24,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage){
-
+        CommandParser test = new CommandParser("fd sum sum sum 10 fd 30 20 30 fd 40");
     }
 
     public static void main (String[] args) {
