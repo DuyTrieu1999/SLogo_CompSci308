@@ -106,7 +106,7 @@ public class SLogoView implements SLogoViewAPI {
     private VBox addLogoView () {
         VBox logoBox = new VBox();
         HBox buttonBox = new HBox();
-        logoScreen = new LogoScreen(Color.AQUA);
+        logoScreen = new LogoScreen(Color.WHITE);
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Play"), event -> startButtonHandler()));
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Stop"), event -> stopButtonHandler()));
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Step"), event -> stepButtonHandler()));
