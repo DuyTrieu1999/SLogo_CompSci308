@@ -1,12 +1,21 @@
 package commands;
 
-import java.util.Scanner;
+import model.Turtle;
 
-public class Home implements Command {
+import java.util.List;
+
+public class Home extends CommandNode {
+    public int numParameters = 0;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Home");
+    public double run(List<String> parameters, Turtle turtle){
+        double oldX = turtle.getX();
+        double oldY = turtle.getY();
+        turtle.moveTo(0, 0);
+        return Math.sqrt(Math.pow((oldY), 2)+Math.pow(oldX, 2));
     }
 
+    public int getNumParameters(){
+        return numParameters;
+    }
 }

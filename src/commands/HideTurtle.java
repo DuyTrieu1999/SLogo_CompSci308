@@ -1,12 +1,20 @@
 package commands;
 
-import java.util.Scanner;
+import model.Turtle;
 
-public class HideTurtle implements Command {
+import java.util.List;
+
+public class HideTurtle extends CommandNode {
+    public int numParameters = 0;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Hide turtle");
+    public double run(List<String> parameters, Turtle turtle){
+        turtle.setVisibility(false);
+        return 0;
+    }
+
+    public int getNumParameters(){
+        return numParameters;
     }
 
 }

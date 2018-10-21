@@ -1,19 +1,23 @@
 package commands;
 
+import model.Turtle;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 public class CommandInitializer {
 
-    private Map<String, Command> commandMap = new HashMap<>();
+    private Map<String, CommandNode> commandMap = new HashMap<>();
     private ResourceBundle resources;
+    private static final String RESOURCE_PACKAGE = "/languages/";
 
-    public CommandInitializer(ResourceBundle myResources){
-        resources = myResources;
+    public CommandInitializer(String language){
+        resources = ResourceBundle.getBundle(RESOURCE_PACKAGE + language);
+
     }
 
-    public Map<String, Command> createCommandMap(){
+    public Map<String, CommandNode> createCommandMap(Turtle t){
 
         commandMap.put(resources.getString("Forward").split("\\|")[0], new Forward());
         commandMap.put(resources.getString("Forward").split("\\|")[1], new Forward());
@@ -26,8 +30,8 @@ public class CommandInitializer {
         commandMap.put(resources.getString("SetHeading").split("\\|")[0], new SetHeading());
         commandMap.put(resources.getString("SetHeading").split("\\|")[1], new SetHeading());
         commandMap.put(resources.getString("SetTowards"), new Towards());
-        commandMap.put(resources.getString("SetPosition"), new GoTo());
-        //commandMap.put("goto", new GoTo());
+        commandMap.put(resources.getString("SetPosition").split("\\|")[0], new GoTo());
+        commandMap.put(resources.getString("SetPosition").split("\\|")[1], new GoTo());
         commandMap.put(resources.getString("PenDown").split("\\|")[0], new PenDown());
         commandMap.put(resources.getString("PenDown").split("\\|")[1], new PenDown());
         commandMap.put(resources.getString("PenUp").split("\\|")[0], new PenUp());
@@ -79,7 +83,7 @@ public class CommandInitializer {
         commandMap.put(resources.getString("NotEqual").split("\\|")[1], new NotEqual());
         commandMap.put(resources.getString("And"), new And());
         commandMap.put(resources.getString("Or"), new Or());
-        commandMap.put(resources.getString("Not"), new NotEqual());
+        commandMap.put(resources.getString("Not"), new Not());
 
         commandMap.put(resources.getString("MakeVariable").split("\\|")[0], new Make());
         commandMap.put(resources.getString("MakeVariable").split("\\|")[1], new Make());

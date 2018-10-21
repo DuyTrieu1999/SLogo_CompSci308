@@ -8,13 +8,11 @@ import java.util.*;
 
 public class CommandList implements CommandListInterface{
     private List<String> commands;
+    private CommandParser myParser;
 
-    public CommandList(){
+    public CommandList() {
+        myParser = new CommandParser(getCommand());
         commands = new ArrayList<>();
-    }
-
-    public void addCommand(String str){
-        commands.add(str);
     }
 
     public List<String> getCommands(){
@@ -25,8 +23,18 @@ public class CommandList implements CommandListInterface{
         return commands.get(commands.size()-1);
     }
 
-    public void clearCommands(){
-        commands = new ArrayList<>();
+    public void setLanguage (String language) {
+        myParser.setLanguage(language);
     }
+
+    public String getLanguage() {
+        return myParser.getLanguage();
+    }
+
+    public void setMessage (String message) {
+
+    }
+
+
 }
 

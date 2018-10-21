@@ -1,12 +1,21 @@
 package commands;
 
-import java.util.Scanner;
+import model.Turtle;
 
-public class Forward implements Command {
+import java.util.List;
+
+public class Forward extends CommandNode {
+    public int numParameters = 1;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Forward by amount " + args.next());
+    public double run(List<String> parameters, Turtle turtle){
+        double distance = Double.parseDouble(parameters.get(0));
+        turtle.move(distance);
+        return distance;
+    }
+
+    public int getNumParameters(){
+        return numParameters;
     }
 
 }

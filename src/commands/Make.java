@@ -1,12 +1,24 @@
 package commands;
 
-import java.util.Scanner;
+import model.Turtle;
 
-public class Make implements Command {
+import java.util.List;
+
+public class Make extends CommandNode {
+    public int numParameters = 2;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Make");
+    public double run(List<String> parameters, Turtle turtle){
+        double num1 = Double.parseDouble(parameters.get(0));
+        double num2 = Double.parseDouble(parameters.get(1));
+        if(num1 == num2){
+            return 1;
+        }
+        return 0;
+    }
+
+    public int getNumParameters(){
+        return numParameters;
     }
 
 }

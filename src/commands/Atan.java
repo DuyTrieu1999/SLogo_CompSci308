@@ -1,12 +1,20 @@
 package commands;
 
-import java.util.Scanner;
+import model.Turtle;
 
-public class Atan implements Command {
+import java.util.List;
+
+public class Atan extends CommandNode {
+    public int numParameters = 1;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Atan");
+    public double run(List<String> parameters, Turtle turtle){
+        double degrees = Double.parseDouble(parameters.get(0));
+        return Math.atan(Math.toRadians(degrees));
+    }
+
+    public int getNumParameters(){
+        return numParameters;
     }
 
 }

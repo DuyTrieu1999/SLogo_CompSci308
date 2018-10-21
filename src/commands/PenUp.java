@@ -1,12 +1,20 @@
 package commands;
 
-import java.util.Scanner;
+import model.Turtle;
 
-public class PenUp implements Command {
+import java.util.List;
+
+public class PenUp extends CommandNode {
+    public int numParameters = 0;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Pen up");
+    public double run(List<String> parameters, Turtle turtle){
+        turtle.setPenVisibility(false);
+        return 0;
+    }
+
+    public int getNumParameters(){
+        return numParameters;
     }
 
 }

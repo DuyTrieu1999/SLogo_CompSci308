@@ -1,12 +1,19 @@
 package commands;
 
-import java.util.Scanner;
+import model.Turtle;
 
-public class Heading implements Command {
+import java.util.List;
+
+public class Heading extends CommandNode {
+    public int numParameters = 0;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Heading");
+    public double run(List<String> parameters, Turtle turtle){
+        return turtle.getOrientation();
+    }
+
+    public int getNumParameters(){
+        return numParameters;
     }
 
 }
