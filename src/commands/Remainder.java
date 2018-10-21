@@ -1,12 +1,17 @@
 package commands;
 
+import model.Turtle;
+
 import java.util.Scanner;
 
-public class Remainder implements Command {
+public class Remainder extends CommandNode {
+    public int numParameters = 2;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Remainder");
+    public double run(Scanner args, Turtle turtle){
+        double x = Double.parseDouble(args.next());
+        double y = Double.parseDouble(args.next());
+        return x%y;
     }
 
 }

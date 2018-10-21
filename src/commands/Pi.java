@@ -1,12 +1,15 @@
 package commands;
 
+import model.Turtle;
+
 import java.util.Scanner;
 
-public class Pi implements Command {
+public class Pi extends CommandNode {
+    public int numParameters = 0;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Pi");
+    public double run(Scanner args, Turtle turtle){
+        return Math.PI;
     }
 
 }

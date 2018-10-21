@@ -1,12 +1,17 @@
 package commands;
 
+import model.Turtle;
+
 import java.util.Scanner;
 
-public class Back implements Command {
+public class Back extends CommandNode {
+    public int numParameters = 1;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Back");
+    public double run(Scanner args, Turtle turtle){
+        double distance = Double.parseDouble(args.next());
+        turtle.move(distance*-1);
+        return distance;
     }
 
 }

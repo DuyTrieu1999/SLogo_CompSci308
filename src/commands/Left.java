@@ -1,12 +1,17 @@
 package commands;
 
+import model.Turtle;
+
 import java.util.Scanner;
 
-public class Left implements Command {
+public class Left extends CommandNode {
+    public int numParameters = 1;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Left");
+    public double run(Scanner args, Turtle turtle){
+        double degrees = Double.parseDouble(args.next());
+        turtle.turn(degrees);
+        return degrees;
     }
 
 }
