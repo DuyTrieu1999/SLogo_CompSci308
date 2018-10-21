@@ -336,14 +336,14 @@ public class DropDownButtons extends VBox {
         Label fileName = new Label("File Path");
 //        fileName.setId("fileName");
 
-//        fileBtn.setOnAction(value -> {
-//            File file = fileChooser.showOpenDialog(myStage);
-//            //TODO: error check
-//            // saves File if no exceptions and File is not null
-//            if(file.toString().contains(".png") || file.toString().contains(".jpeg")) { //When got the input as XML file.
-//                File myFile = file;
-//            }
-//        });
+        fileBtn.setOnAction(value -> {
+            File file = fileChooser.showOpenDialog(getScene().getWindow());
+            //TODO: error check
+            // saves File if no exceptions and File is not null
+            if(file.toString().contains(".png") || file.toString().contains(".jpeg")) { //When got the input as XML file.
+                File myFile = file;
+            }
+        });
 
         imageControls.getChildren().addAll(files, fileName, fileBtn);
         return imageControls;
