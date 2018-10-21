@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SLogo Team 8 Command Reference</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h1>SLogo Team 8 Command Reference</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4>Basic Syntax</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Token</th>
+                            <th scope="col">Syntax</th>
+                            <th scope="col">Details</th>
+                            <th scope="col">Examples</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Constant</td>
+                            <td>-?[0-9]+\.?[0-9]*</td>
+                            <td>Real valued numbers only</td>
+                            <td>36, -4.5</td>
+                        </tr>
+                        <tr>
+                            <td>Variable</td>
+                            <td>:[a-zA-Z_]+</td>
+                            <td>Any worded preceded by a colon</td>
+                            <td>:length, :side</td>
+                        </tr>
+                        <tr>
+                            <td>Command</td>
+                            <td>[a-zA-Z_]+(\?)?</td>
+                            <td>Any word, given they are not a built-in command</td>
+                            <td>spin, diag</td>
+                        </tr>
+                        <tr>
+                            <td>List</td>
+                            <td>[ ]</td>
+                            <td>Any succession of zero or more commands or variables, always separated by spaces</td>
+                            <td>[ 36, 56, 24, 109]</td>
+                        </tr>
+                        <tr>
+                            <td>Comment</td>
+                            <td>^#.*</td>
+                            <td>Lines that start with # or are empty</td>
+                            <td>#this is a comment</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Turtle Commands</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>forward <i>pixels</i>, fd <i>pixels</i></td>
+                            <td>Moves the turtle in the current direction of distance <i>pixels</i>, returns <i>pixels</i></td>
+                        </tr>
+                        <tr>
+                            <td>back <i>pixels</i>, bk <i>pixels</i></td>
+                            <td>Moves the turtle in the reverse of the current direction of distance <i>pixels</i>, returns <i>pixels</i></td>
+                        </tr>
+                        <tr>
+                            <td>left <i>degrees</i>, lt <i>degrees</i></td>
+                            <td>Turns the turtle counter-clockwise by <i>degrees</i>, returns <i>degrees</i></td>
+                        </tr>
+                        <tr>
+                            <td>right <i>degrees</i>, right <i>degrees</i></td>
+                            <td>Turns the turtle clockwise by <i>degrees</i>, returns <i>degrees</i></td>
+                        </tr>
+                        <tr>
+                            <td>setheading <i>degrees</i>, seth <i>degrees</i></td>
+                            <td>Turns the turtle to <i>degrees</i>, returns <i>degrees</i></td>
+                        </tr>
+                        <tr>
+                            <td>towards <i>x y</i></td>
+                            <td>Turns the turtle so that it faces <i>(x, y)</i>, where <i>(0, 0)</i> is the center of the screen, returns degrees turned</td>
+                        </tr>
+                        <tr>
+                            <td>setxy <i>x y</i></td>
+                            <td>Sets the turtle at position <i>(x, y)</i>, where <i>(0, 0)</i> is the center of the screen, returns distance moved</td>
+                        </tr>
+                        <tr>
+                            <td>pendown, pd</td>
+                            <td>Sets the pen to start marking a trail, returns 1</td>
+                        </tr>
+                        <tr>
+                            <td>penup, pu</td>
+                            <td>Sets the pen to not leave a trail, returns 0</td>
+                        </tr>
+                        <tr>
+                            <td>showturtle, st</td>
+                            <td>Makes the turtle visible, returns 1</td>
+                        </tr>
+                        <tr>
+                            <td>hideturtle, ht</td>
+                            <td>Makes the turtle invisible, returns 0</td>
+                        </tr>
+                        <tr>
+                            <td>home</td>
+                            <td>Moves the turtle to <i>(0, 0)</i>, returns distance moved</td>
+                        </tr>
+                        <tr>
+                            <td>clearscreen, cs</td>
+                            <td>Removes all trails on screen and moves turtle to <i>(0, 0)</i>, returns distance moved</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Turtle Queries</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>xcor</td>
+                            <td>Returns turtle's x-coordinate</td>
+                        </tr>
+                        <tr>
+                            <td>ycor</td>
+                            <td>Returns turtle's y-coordinate</td>
+                        </tr>
+                        <tr>
+                            <td>heading</td>
+                            <td>Returns turtle's heading in degrees</td>
+                        </tr>
+                        <tr>
+                            <td>pendown?, pendownp</td>
+                            <td>Returns 1 if pen is down, 0 if it is up</td>
+                        </tr>
+                        <tr>
+                            <td>showing?, showingp</td>
+                            <td>Returns 1 if turtle is visible, 0 if it is invisible</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Math Operations</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>sum <i>x y</i>, + <i>x y</i></td>
+                            <td>Returns the sum of <i>x</i> and <i>y</i></td>
+                        </tr>
+                        <tr>
+                            <td>difference <i>x y</i>, - <i>x y</i></td>
+                            <td>Returns the difference of <i>x</i> and <i>y</i></td>
+                        </tr>
+                        <tr>
+                            <td>product <i>x y</i>, * <i>x y</i></td>
+                            <td>Returns the product of <i>x</i> and <i>y</i></td>
+                        </tr>
+                        <tr>
+                            <td>quotient <i>x y</i>, / <i>x y</i></td>
+                            <td>Returns the quotient of <i>x</i> and <i>y</i></td>
+                        </tr>
+                        <tr>
+                            <td>remainder <i>x y</i>, % <i>x y</i></td>
+                            <td>Returns the remainder of dividing <i>x</i> by <i>y</i></td>
+                        </tr>
+                        <tr>
+                            <td>minus <i>x</i>, ~ <i>x</i></td>
+                            <td>Returns the negative of <i>x</i></td>
+                        </tr>
+                        <tr>
+                            <td>random <i>max</i></td>
+                            <td>Returns a random, non-negative number that is less than <i>max</i></td>
+                        </tr>
+                        <tr>
+                            <td>sin <i>degrees</i></td>
+                            <td>Returns the sin of <i>degrees</i></td>
+                        </tr>
+                        <tr>
+                            <td>cos <i>degrees</i></td>
+                            <td>Returns the cos of <i>degrees</i></td>
+                        </tr>
+                        <tr>
+                            <td>tan <i>degrees</i></td>
+                            <td>Returns the tan of <i>degrees</i></td>
+                        </tr>
+                        <tr>
+                            <td>atan <i>degrees</i></td>
+                            <td>Returns the arctan of <i>degrees</i></td>
+                        </tr>
+                        <tr>
+                            <td>log <i>x</i></td>
+                            <td>Returns the log of <i>x</i></td>
+                        </tr>
+                        <tr>
+                            <td>pow <i>x y</i></td>
+                            <td>Returns <i>x</i> raised to the power of <i>y</i></td>
+                        </tr>
+                        <tr>
+                            <td>pi</td>
+                            <td>Returns the value of pi</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Boolean Operations</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>less? <i>x y</i>, lessp <i>x y</i></td>
+                            <td>Returns 1 if <i>x</i> is less than <i>y</i>, otherwise 0</td>
+                        </tr>
+                        <tr>
+                            <td>greater? <i>x y</i>, greaterp <i>x y</i></td>
+                            <td>Returns 1 if <i>x</i> is greater than <i>y</i>, otherwise 0</td>
+                        </tr>
+                        <tr>
+                            <tr>
+                                <td>equal? <i>x y</i>, equalp <i>x y</i></td>
+                                <td>Returns 1 if <i>x</i> is equal to <i>y</i>, otherwise 0</td>
+                            </tr>
+                        </tr>
+                        <tr>
+                            <td>notequal? <i>x y</i>, notequalp <i>x y</i></td>
+                            <td>Returns 1 if <i>x</i> is not equal to <i>y</i>, otherwise 0</td>
+                        </tr>
+                        <tr>
+                            <td>and <i>x y</i></td>
+                            <td>Returns 1 if <i>x</i> and <i>y</i> are both non-zero, otherwise 0</td>
+                        </tr>
+                        <tr>
+                            <td>or <i>x y</i></td>
+                            <td>Returns 1 if <i>x</i> or <i>y</i> are non-zero, otherwise 0</td>
+                        </tr>
+                        <tr>
+                            <td>not <i>x</i></td>
+                            <td>Returns 1 if <i>x</i> is zero, otherwise 0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Variables, Control Structures, and User-Defined Commands</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>make <i>variable expression</i>, set <i>variable expression</i></td>
+                            <td>Assigns the value of <i>expression</i> to <i>variable</i>, returns <i>expression</i></td>
+                        </tr>
+                        <tr>
+                            <td>repeat <i>expression</i> [ <i>command(s)</i> ]</td>
+                            <td>Runs the <i>command(s)</i> <i>expression</i> number of times, returns value of final command executed or 0 if no command executed</td>
+                        </tr>
+                        <tr>
+                            <td>dotimes [ <i>variable limit(s)</i> ] [ <i>command(s)</i> ]</td>
+                            <td>Runs the <i>command(s)</i> for each value specified in the range, returns value of final command executed or 0 if no command executed</td>
+                        </tr>
+                        <tr>
+                            <td>for [ variable start end increment ] [ command(s) ]</td>
+                            <td>Runs the <i>command(s)</i> for each value specified in the range going by increment, returns value of final command executed or 0 if no command executed</td>
+                        </tr>
+                        <tr>
+                            <td>if <i>expression</i> [ <i>command(s)</i> ]</td>
+                            <td>Runs <i>command(s)</i> if <i>expression</i> is not zero, returns value of final command executed or 0 if no command executed</td>
+                        </tr>
+                        <tr>
+                            <td>ifelse <i>expression</i> [ <i>true command(s)</i> ] [ <i>false command(s)</i> ]</td>
+                            <td>Runs <i>true command(s)</i> if <i>expression</i> is not zero, else run <i>false command(s)</i>, returns value of final command executed or 0 if no command executed</td>
+                        </tr>
+                        <tr>
+                            <td>to <i>command name</i> [ <i>variable(s)</i> ] [ <i>command(s)</i> ]</td>
+                            <td>Assigns the <i>command(s)</i> to <i>command name</i> using <i>variable(s)</i> as parameters, returns 1 if <i>command name</i> is successfully define, 0 otherwise</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Visual Commands</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>setbackground, setbg</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>setpencolor, setpc</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>pencolor, pc</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+
+</html>

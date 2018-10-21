@@ -1,4 +1,4 @@
-package view;
+package view.TurtleView;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,10 +11,10 @@ import model.Turtle;
  * @author brookekeene
  */
 public class TurtleDriver {
-    public static final String DEFAULT_IMAGE = "turtle.png";
-    public static final String IMAGE_PATH = "resources/images/";
+
     private ImageView myImage;
     private Turtle myTurtle;
+    private Pen myPen;
     private int turtleID; // when multiple turtles arise
     public static double initX = 250;
     public static double initY = 275;
@@ -22,13 +22,17 @@ public class TurtleDriver {
     private double yPos;
     private double orientation;
 
+
     /**
      * Constructor
      */
-    public TurtleDriver() {
+
+    public TurtleDriver(int id, Image image) {
         myTurtle = new Turtle(initX, initY, Color.BLACK);
-        Image image = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
+        turtleID = id;
         myImage = new ImageView(image);
+        myImage.setFitWidth(100);
+        myImage.setFitHeight(100);
         xPos = myTurtle.getX();
         yPos = myTurtle.getY();
         orientation = myTurtle.getOrientation();
@@ -62,6 +66,7 @@ public class TurtleDriver {
      *
      * @return y-coordinate of the turtle ImageView
      */
+
     public double getY() {
         return yPos;
     }
@@ -70,6 +75,7 @@ public class TurtleDriver {
      * changes the x-coordinate of the turtle ImageView
      * @param newX
      */
+
     public void updateX(double newX) {
         xPos = newX;
     }
@@ -78,6 +84,7 @@ public class TurtleDriver {
      * changes the y-coordinate of the turtle ImageView
      * @param newY
      */
+
     public void updateY(double newY) {
         yPos = newY;
     }

@@ -4,6 +4,10 @@ import java.util.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
+/**
+ * @Author Yunhao Qing
+ */
+
 public class Turtle implements TurtleInterface {
 
     private double xPos;
@@ -29,7 +33,6 @@ public class Turtle implements TurtleInterface {
 
         lines = new ArrayList<>();
     }
-
 
     public double getX(){
         return xPos;

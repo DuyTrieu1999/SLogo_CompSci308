@@ -10,8 +10,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
-import java.io.File;
-import java.util.*;
+import java.util.ResourceBundle;
+
 
 public class DropDownButtons extends VBox {
     public static final String RESOURCE_PACKAGE = "resources/text/view";
