@@ -2,6 +2,9 @@ package model;
 
 import commands.Command;
 import commands.CommandInitializer;
+import model.CommandList;
+import model.Turtle;
+import model.VariableMap;
 
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -32,3 +35,4 @@ public class CommandParser {
         commandMap.get(commandScanner.next()).run(commandScanner);
     }
 }
+

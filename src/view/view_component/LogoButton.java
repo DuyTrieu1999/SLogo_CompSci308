@@ -7,15 +7,13 @@ import javafx.scene.control.Button;
 import java.util.ResourceBundle;
 
 public class LogoButton extends Button {
-    public static final String RESOURCE_PACKAGE = "/text/view";
-    private ResourceBundle myResources;
+
+    public static final int BUTTON_GRID = 60;
 
     public LogoButton (String buttonName, EventHandler<ActionEvent> event) {
-        myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
-
         this.setText(buttonName);
-        this.setMinWidth(Integer.parseInt(myResources.getString("Button_Grid")));
-        this.setMaxWidth(Integer.parseInt(myResources.getString("Button_Grid")));
+        this.setMinWidth(BUTTON_GRID);
+        this.setMaxWidth(BUTTON_GRID);
         this.setOnAction(event);
     }
 }
