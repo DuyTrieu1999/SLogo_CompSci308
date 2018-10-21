@@ -34,6 +34,8 @@ public class CommandParser {
 
         }
 
+        //make a variablemap
+        VariableMap varMap = new VariableMap();
         //make a turtle for testing purposes
         Turtle t = new Turtle(0, 0, Color.WHITE);
         t.setOrientation(90);
@@ -82,7 +84,7 @@ public class CommandParser {
                         //if we can parse the command
                         if(canParseCommand){
                             //get the return value from the commandnode
-                            double returnValue = thisCommandNode.run(parameters, t);
+                            double returnValue = thisCommandNode.run(parameters, t, varMap);
                             //replace the current item in the list with the return value (this will be the command)
                             thisLine.set(j, Double.toString(returnValue));
                             //delete the parameters

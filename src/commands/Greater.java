@@ -1,6 +1,7 @@
 package commands;
 
 import model.Turtle;
+import model.VariableMap;
 
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +10,7 @@ public class Greater extends CommandNode {
     public int numParameters = 2;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
         double num1 = Double.parseDouble(parameters.get(0));
         double num2 = Double.parseDouble(parameters.get(1));
         if(num1 > num2){

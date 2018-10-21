@@ -1,6 +1,7 @@
 package commands;
 
 import model.Turtle;
+import model.VariableMap;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ public class ClearScreen extends CommandNode {
     public int numParameters = 0;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
         turtle.clearLines();
         double oldX = turtle.getX();
         double oldY = turtle.getY();
