@@ -24,7 +24,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage){
-        CommandParser test = new CommandParser( "fd 10 fd");
+        CommandParser test = new CommandParser( "make lol 50");
     }
 
     public static void main (String[] args) {
