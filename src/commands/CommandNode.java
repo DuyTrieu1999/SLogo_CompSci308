@@ -1,12 +1,14 @@
 package commands;
 
+import model.Turtle;
+
 import java.util.*;
 import model.Turtle;
 
-public class CommandNode {
+public abstract class CommandNode {
 
     private int numChildren;
-    private int numParameters;
+    public int numParameters;
     private List<CommandNode> children;
     private List<String> extraParameters;
     private Turtle turtle;
@@ -17,7 +19,7 @@ public class CommandNode {
         extraParameters = new ArrayList<>();
         turtle = t;
     }
-
+    
     public int getNumParameters(){
         return numParameters;
     }
@@ -26,5 +28,5 @@ public class CommandNode {
         extraParameters = list;
     }
 
-
+    abstract double run(Scanner args, Turtle turtle);
 }

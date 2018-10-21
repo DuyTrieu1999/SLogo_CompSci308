@@ -61,6 +61,7 @@ public class Turtle implements TurtleInterface {
             orientation -= 360.0;
         }
     }
+    public void setOrientation(double newOrientation){ orientation = newOrientation;}
 
     public boolean getVisibility(){
         return visibility;

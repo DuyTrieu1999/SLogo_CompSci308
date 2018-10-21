@@ -1,12 +1,16 @@
 package commands;
 
+import model.Turtle;
+
 import java.util.Scanner;
 
-public class Tan implements Command {
+public class Tan extends CommandNode {
+    public int numParameters = 1;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Tan");
+    public double run(Scanner args, Turtle turtle){
+        double degrees = Double.parseDouble(args.next());
+        return Math.toDegrees(Math.tan(Math.toRadians(degrees)));
     }
 
 }

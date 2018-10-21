@@ -1,12 +1,20 @@
 package commands;
 
+import model.Turtle;
+
 import java.util.Scanner;
 
-public class Or implements Command {
+public class Or extends CommandNode {
+    public int numParameters = 2;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Or");
+    public double run(Scanner args, Turtle turtle){
+        double num1 = Double.parseDouble(args.next());
+        double num2 = Double.parseDouble(args.next());
+        if(num1 != 0 || num2 != 0){
+            return 1;
+        }
+        return 0;
     }
 
 }

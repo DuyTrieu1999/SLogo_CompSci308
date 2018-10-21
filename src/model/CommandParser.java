@@ -1,7 +1,7 @@
 package model;
 
-import commands.Command;
 import commands.CommandInitializer;
+import commands.CommandNode;
 
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -25,10 +25,10 @@ public class CommandParser {
             parse(command);
     }
 
-    public static void parse(String oneCommand){
+    public void parse(String oneCommand){
         CommandInitializer myCommands = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
-        Map<String, Command> commandMap = myCommands.createCommandMap();
+        Map<String, CommandNode> commandMap = myCommands.createCommandMap(myTurtle);
         Scanner commandScanner = new Scanner(oneCommand);
-        commandMap.get(commandScanner.next()).run(commandScanner);
+        commandMap.get(commandScanner.next());
     }
 }

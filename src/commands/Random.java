@@ -1,12 +1,16 @@
 package commands;
 
+import model.Turtle;
+
 import java.util.Scanner;
 
-public class Random implements Command {
+public class Random extends CommandNode {
+    public int numParameters = 1;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Random");
+    public double run(Scanner args, Turtle turtle){
+        double max = Double.parseDouble(args.next());
+        return Math.random()*max;
     }
 
 }

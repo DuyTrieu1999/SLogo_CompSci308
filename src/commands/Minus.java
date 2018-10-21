@@ -1,12 +1,16 @@
 package commands;
 
+import model.Turtle;
+
 import java.util.Scanner;
 
-public class Minus implements Command {
+public class Minus extends CommandNode {
+    public int numParameters = 1;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Pen up");
+    public double run(Scanner args, Turtle turtle){
+        double x = Double.parseDouble(args.next());
+        return x*-1;
     }
 
 }

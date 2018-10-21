@@ -1,12 +1,18 @@
 package commands;
 
+import model.Turtle;
+
 import java.util.Scanner;
 
-public class SetHeading implements Command {
+public class SetHeading extends CommandNode {
+    public int numParameters = 1;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Set heading");
+    public double run(Scanner args, Turtle turtle){
+        double oldOrientation = turtle.getOrientation();
+        double newOrientation = Double.parseDouble(args.next());
+        turtle.setOrientation(newOrientation);
+        return Math.abs(oldOrientation - newOrientation);
     }
 
 }

@@ -1,12 +1,15 @@
 package commands;
 
+import model.Turtle;
+
 import java.util.Scanner;
 
-public class xCor implements Command {
+public class xCor extends CommandNode {
+    public int numParameters = 0;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("x cor");
+    public double run(Scanner args, Turtle turtle){
+        return turtle.getX();
     }
 
 }

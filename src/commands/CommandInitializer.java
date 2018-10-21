@@ -1,19 +1,21 @@
 package commands;
 
+import model.Turtle;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 public class CommandInitializer {
 
-    private Map<String, Command> commandMap = new HashMap<>();
+    private Map<String, CommandNode> commandMap = new HashMap<>();
     private ResourceBundle resources;
 
     public CommandInitializer(ResourceBundle myResources){
         resources = myResources;
     }
 
-    public Map<String, Command> createCommandMap(){
+    public Map<String, CommandNode> createCommandMap(Turtle t){
 
         commandMap.put(resources.getString("Forward").split("\\|")[0], new Forward());
         commandMap.put(resources.getString("Forward").split("\\|")[1], new Forward());
