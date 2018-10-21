@@ -32,7 +32,7 @@ public class SLogoView implements SLogoViewAPI {
     private static final double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private static final double SECOND_DELAY = 100.0/ FRAMES_PER_SECOND;
     private static final Paint BACKGROUND = Color.WHITE;
-    private static final String RESOURCE_PACKAGE = "resources/text/view";
+    private static final String RESOURCE_PACKAGE = "/text/view";
     private static final String STYLESHEET = "default.css";
 
     private Scene myScene;

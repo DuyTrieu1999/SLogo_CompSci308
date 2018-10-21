@@ -17,13 +17,13 @@ public class Parser {
         }
         int count = 0;
         while (count<list.size()){
-            CommandNode node;
-            //Somehow initilise the node with the string name;
-            List<String> parameters = new ArrayList<String>();
-            for (int i = count + 1; i <= count + node.getNumParameters();i++){
-                parameters.add(list.get(i));
-            }
-            node.setExtraParameters(parameters);
+//            CommandNode node;
+//            //Somehow initilise the node with the string name;
+//            List<String> parameters = new ArrayList<String>();
+//            for (int i = count + 1; i <= count + node.getNumParameters();i++){
+//                parameters.add(list.get(i));
+//            }
+//            node.setExtraParameters(parameters);
         }
     }
 

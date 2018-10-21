@@ -15,7 +15,7 @@ public class CommandParser {
     public CommandParser(Turtle t, CommandList cl, VariableMap vm){
         myCommandList = cl;
         myVarMap = vm;
-        myTurtle = t;
+        //myTurtle = t;
     }
 
     public void parseWholeString(String allCommands){

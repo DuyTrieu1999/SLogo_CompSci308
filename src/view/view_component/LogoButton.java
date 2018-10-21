@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import java.util.ResourceBundle;
 
 public class LogoButton extends Button {
-    public static final String RESOURCE_PACKAGE = "resources/text/view";
+    public static final String RESOURCE_PACKAGE = "/text/view";
     private ResourceBundle myResources;
 
     public LogoButton (String buttonName, EventHandler<ActionEvent> event) {
