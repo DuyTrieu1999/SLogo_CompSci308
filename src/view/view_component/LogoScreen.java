@@ -34,8 +34,7 @@ public class LogoScreen extends VBox {
     }
     public void setUpTurtle () {
         myTurtle = new TurtleDriver(this, 0, new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE)));
-
-        myPane.getChildren().add(myTurtle.getTurtleImage());
+        myBackGround.getChildren().add(myTurtle.getTurtleImage());
     }
     public void updateTurtle () {
         LinkedList<Point2D> destinations = myTurtle.getMyDestination().getMyFutureDestination();

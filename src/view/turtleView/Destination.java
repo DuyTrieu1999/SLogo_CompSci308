@@ -3,7 +3,6 @@ package view.turtleView;
 import javafx.geometry.Point2D;
 
 import java.util.LinkedList;
-import java.util.Queue;
 
 public class Destination {
     private Point2D myDestination;

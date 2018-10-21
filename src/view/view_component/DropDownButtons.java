@@ -17,6 +17,7 @@ public class DropDownButtons extends VBox {
     public static final String RESOURCE_PACKAGE = "resources/text/view";
     private static final String PATH_TO_LANGUAGES = "resources/languages/";
     private ResourceBundle myResources;
+    private ResourceBundle myLanguages;
     private ChoiceBox<String> langCB;
     private TextFlow historyTab;
 
@@ -57,6 +58,7 @@ public class DropDownButtons extends VBox {
     private void getChoice(ChoiceBox<String> cb) {
         String name = cb.getValue();
         String filePath = PATH_TO_LANGUAGES + name;
+        myLanguages = ResourceBundle.getBundle(filePath);
     }
     private TitledPane addControls () {
         TitledPane control = new TitledPane();

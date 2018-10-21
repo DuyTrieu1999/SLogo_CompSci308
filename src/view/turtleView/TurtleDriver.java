@@ -66,6 +66,8 @@ public class TurtleDriver {
         myImage.setY(location.getY());
         System.out.println("bla: " + myImage.getX());
         System.out.println("bla: " + myImage.getY());
+        System.out.println("width: " + myScreen.getMyPane().getLayoutX()/2);
+        System.out.println("height: " + myScreen.getMyPane().getLayoutY()/2);
         setCenter(location);
     }
 
