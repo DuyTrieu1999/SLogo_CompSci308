@@ -98,6 +98,7 @@ public class CommandParser {
             for(String s:thisLine){
                 System.out.print(s + " ");
             }
+            System.out.println();
         }
     }
 

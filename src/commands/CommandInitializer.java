@@ -81,7 +81,7 @@ public class CommandInitializer {
         commandMap.put(resources.getString("NotEqual").split("\\|")[1], new NotEqual());
         commandMap.put(resources.getString("And"), new And());
         commandMap.put(resources.getString("Or"), new Or());
-        commandMap.put(resources.getString("Not"), new NotEqual());
+        commandMap.put(resources.getString("Not"), new Not());
 
         commandMap.put(resources.getString("MakeVariable").split("\\|")[0], new Make());
         commandMap.put(resources.getString("MakeVariable").split("\\|")[1], new Make());

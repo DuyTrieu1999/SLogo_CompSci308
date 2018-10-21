@@ -10,7 +10,7 @@ public class Tan extends CommandNode {
     @Override
     public double run(List<String> parameters, Turtle turtle){
         double degrees = Double.parseDouble(parameters.get(0));
-        return Math.toDegrees(Math.tan(Math.toRadians(degrees)));
+        return Math.tan(Math.toRadians(degrees));
     }
 
     public int getNumParameters(){
