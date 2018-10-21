@@ -7,7 +7,7 @@ import java.util.Queue;
 
 public class Destination {
     private Point2D myDestination;
-    private Queue<Point2D> myFutureDestination;
+    private LinkedList<Point2D> myFutureDestination;
 
     public Destination () {
         myDestination = new Point2D(0,0);
@@ -25,5 +25,8 @@ public class Destination {
     }
     public Point2D getDestinationInList() {
         return myFutureDestination.poll();
+    }
+    public LinkedList<Point2D> getMyFutureDestination() {
+        return myFutureDestination;
     }
 }

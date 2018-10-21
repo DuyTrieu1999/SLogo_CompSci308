@@ -3,6 +3,7 @@ package view;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -56,6 +57,7 @@ public class SLogoView implements SLogoViewAPI {
         myBP.setRight(scriptView);
         myBP.setCenter(logoView);
         myRoot.getChildren().add(myBP);
+        testing();
         return myScene;
     }
     private void initVariable () {
@@ -68,8 +70,17 @@ public class SLogoView implements SLogoViewAPI {
                 Integer.parseInt(myResources.getString("Scene_Height")), BACKGROUND);
         myScene.getStylesheets().add(STYLESHEET);
     }
+    private void testing() {
+        TurtleDriver turtle = logoScreen.getMyTurtle();
+        logoScreen.updateMovement(new Point2D(turtle.getX() + 100, turtle.getY() + 100));
+        logoScreen.updateMovement(new Point2D(turtle.getX() + 150, turtle.getY() + 50));
+        System.out.println(turtle.getMyDestination().getMyFutureDestination());
+        System.out.println(turtle.getLocation());
+    }
     private void step (double elapsedTime) {
         logoScreen.updateTurtle();
+        TurtleDriver turtle = logoScreen.getMyTurtle();
+        System.out.println("Location: " + turtle.getLocation());
     }
     private VBox addButton () {
         dropDownButtons = new DropDownButtons();
