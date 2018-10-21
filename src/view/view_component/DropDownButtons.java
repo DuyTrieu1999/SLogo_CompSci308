@@ -26,17 +26,6 @@ public class DropDownButtons extends VBox {
     public static final int DROPDOWN_WIDTH = 200;
     public static final String RESOURCE_PACKAGE = "text/view";
     public static final String PATH_TO_LANGUAGES = "languages/";
-    public static final ArrayList<String> COLORS = new ArrayList<>(List.of(
-            "White",
-            "Red",
-            "Orange",
-            "Yellow",
-            "Green",
-            "Blue",
-            "Purple",
-            "Pink",
-            "Brown",
-            "Black"));
     private ResourceBundle myResources;
     private ResourceBundle myLanguages;
     private ChoiceBox<String> langCB;
@@ -63,8 +52,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds heading to the control panel dropdown menu
+     * @return HBox containing Label for header
      */
     private HBox addControls() {
         HBox controlHeader = new HBox();
@@ -77,8 +66,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds background tab containing controls for background settings
+     * @return TitledPane containing background controls
      */
     private TitledPane addBackgroundTab() {
         TitledPane backgroundTab = new TitledPane();
@@ -90,19 +79,24 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * creates a VBox containing the background controls (color)
+     * @return VBox containing pre-defined ColorBox
      */
     private VBox backgroundSettings() {
         VBox backgroundControls = new VBox();
-        VBox colorChoices = colorBox();
+        ColorBox colorChoices = new ColorBox();
+        colorChoices.makeBox();
+        colorChoices.setOnAction(e -> {
+            String newBackColor = colorChoices.getColor();
+            System.out.println("Background: " + newBackColor);
+        });
         backgroundControls.getChildren().add(colorChoices);
         return backgroundControls;
     }
 
     /**
-     *
-     * @return
+     * adds pen tab containing controls for pen settings
+     * @return TitledPane containing pen controls
      */
     private TitledPane addPenTab() {
         TitledPane penTab = new TitledPane();
@@ -114,19 +108,24 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * creates a VBox containing the pen controls (color)
+     * @return VBox containing pre-defined ColorBox
      */
     private VBox penSettings() {
         VBox penControls = new VBox();
-        VBox colorChoices = colorBox();
+        ColorBox colorChoices = new ColorBox();
+        colorChoices.makeBox();
+        colorChoices.setOnAction(e -> {
+            String newPenColor = colorChoices.getColor();
+            System.out.println("Pen: " + newPenColor);
+        });
         penControls.getChildren().add(colorChoices);
         return penControls;
     }
 
     /**
-     *
-     * @return
+     * adds turtle tab containing controls for turtle settings
+     * @return TitledPane containing turtle controls
      */
     private TitledPane addTurtleTab() {
         TitledPane turtleSetting = new TitledPane();
@@ -138,8 +137,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * creates a VBox containing the turtle controls (image)
+     * @return VBox containing pre-defined imageChooser
      */
     private VBox turtleSettings() {
         VBox turtleControls = new VBox();
@@ -149,8 +148,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds history tab containing the user's input command history
+     * @return TitledPane containing the command history
      */
     private TitledPane addHistoryTab() {
         TitledPane history = new TitledPane();
@@ -191,8 +190,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds variables tab containing the variables available to the user
+     * @return TitledPane containing available variables
      */
     private TitledPane addVariablesTab() {
         TitledPane variables = new TitledPane();
@@ -217,8 +216,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds user-defined commands tab containing the user's pre-defined commands
+     * @return TitledPane containing the user-defined commands
      */
     private TitledPane addUserCommandTab() {
         TitledPane userCommands = new TitledPane();
@@ -242,8 +241,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds languages tab containing controls for the languages understood for commands
+     * @return TitledPane containing language controls
      */
     private TitledPane addLanguageTab() {
         TitledPane languageTab = new TitledPane();
@@ -255,8 +254,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * creates a VBox containing the language controls (command language)
+     * @return VBox containing ChoiceBox
      */
     private VBox languageSettings() {
         VBox langControls = new VBox();
@@ -291,8 +290,8 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
+     * adds help tab containing a link that directs the user to a command reference page
+     * @return TitledPane containing reference link
      */
     private TitledPane addHelpTab() {
         TitledPane helpTab = new TitledPane();
@@ -301,19 +300,6 @@ public class DropDownButtons extends VBox {
         helpTab.setContent(helpBox);
         helpTab.setExpanded(false);
         return helpTab;
-    }
-
-    /**
-     *
-     * @return
-     */
-    private VBox colorBox() {
-        VBox controls = new VBox();
-        Label colors = new Label(myResources.getString("Color"));
-        ChoiceBox<String> colorChoices = new ChoiceBox<>();
-        colorChoices.getItems().addAll(COLORS);
-        controls.getChildren().addAll(colors, colorChoices);
-        return controls;
     }
 
     /**
