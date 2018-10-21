@@ -5,6 +5,7 @@ import model.Turtle;
 import java.util.List;
 
 public class Towards extends CommandNode {
+    public int numParameters = 2;
 
     @Override
     public double run(List<String> parameters, Turtle turtle){

@@ -41,63 +41,60 @@ public class CommandParser {
         CommandInitializer commandInitializer = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
         //create the mapping of commands to commandnodes
         Map<String, CommandNode> commandNodeMap = commandInitializer.createCommandMap(t);
-        //only do it for the first line for now
-        List<String> firstLine = list.get(0);
-        //while the list is not all numbers, keep looping
-        while(!checkAllNumbers(firstLine)){
-            //loop through the elements one by one
-            for(int j=0;j<firstLine.size();j++){
-                //default to this is a number
-                boolean isNumber = true;
-                try{
-                    Double.parseDouble(firstLine.get(j));
-                }
-                catch(NumberFormatException e){
-                    //if it detects it is not a number, it will return false
-                    isNumber = false;
-                }
+        for(List<String> thisLine:list){
+            //while the list is not all numbers, keep looping
+            while(!checkAllNumbers(thisLine)){
+                //loop through the elements one by one
+                for(int j=0;j<thisLine.size();j++){
+                    //default to this is a number
+                    boolean isNumber = true;
+                    try{
+                        Double.parseDouble(thisLine.get(j));
+                    }
+                    catch(NumberFormatException e){
+                        //if it detects it is not a number, it will return false
+                        isNumber = false;
+                    }
 
-                //if not a number
-                if(!isNumber) {
-                    //create the associated command
-                    CommandNode thisCommandNode = commandNodeMap.get(firstLine.get(j));
-                    //get the number of parameters for this command
-                    int numParameters = thisCommandNode.getNumParameters();
-                    //initialize to command can be parsed
-                    boolean canParseCommand = true;
-                    //create a list of parameters for later use
-                    List<String> parameters = new ArrayList<>();
-                    for(int i=1; i<numParameters+1; i++){
-                        //check every parameter ahead for numparameters and see if they are all numbers
-                        try{
-                            Double.parseDouble(firstLine.get(i+j));
-                            //add the parameter for later use
-                            parameters.add(firstLine.get(i+j));
+                    //if not a number
+                    if(!isNumber) {
+                        //create the associated command
+                        CommandNode thisCommandNode = commandNodeMap.get(thisLine.get(j));
+                        //get the number of parameters for this command
+                        int numParameters = thisCommandNode.getNumParameters();
+                        //initialize to command can be parsed
+                        boolean canParseCommand = true;
+                        //create a list of parameters for later use
+                        List<String> parameters = new ArrayList<>();
+                        for(int i=1; i<numParameters+1; i++){
+                            //check every parameter ahead for numparameters and see if they are all numbers
+                            try{
+                                Double.parseDouble(thisLine.get(i+j));
+                                //add the parameter for later use
+                                parameters.add(thisLine.get(i+j));
+                            }
+                            catch(NumberFormatException e){
+                                //if there are not all numbers, break
+                                canParseCommand = false;
+                                break;
+                            }
                         }
-                        catch(NumberFormatException e){
-                            //if there are not all numbers, break
-                            canParseCommand = false;
+                        //if we can parse the command
+                        if(canParseCommand){
+                            //get the return value from the commandnode
+                            double returnValue = thisCommandNode.run(parameters, t);
+                            //replace the current item in the list with the return value (this will be the command)
+                            thisLine.set(j, Double.toString(returnValue));
+                            //delete the parameters
+                            for(int k=0;k<numParameters;k++){
+                                thisLine.remove(j+1);
+                            }
+                            //restart from the beginning
                             break;
                         }
                     }
-                    //if we can parse the command
-                    if(canParseCommand){
-                        //get the return value from the commandnode
-                        double returnValue = thisCommandNode.run(parameters, t);
-                        //replace the current item in the list with the return value (this will be the command)
-                        firstLine.set(j, Double.toString(returnValue));
-                        //delete the parameters
-                        for(int k=0;k<numParameters;k++){
-                            firstLine.remove(j+1);
-                        }
-                        //restart from the beginning
-                        break;
-                    }
                 }
             }
-        }
-        for(String s:firstLine){
-            System.out.print(s + " ");
         }
     }
 
