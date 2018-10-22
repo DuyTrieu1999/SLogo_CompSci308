@@ -1,6 +1,7 @@
 package commands;
 
 import model.Turtle;
+import model.VariableMap;
 
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +10,7 @@ public class GoTo extends CommandNode {
     public int numParameters = 2;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
         double newX = Double.parseDouble(parameters.get(0));
         double newY = Double.parseDouble(parameters.get(1));
         double oldX = turtle.getX();

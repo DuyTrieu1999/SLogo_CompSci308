@@ -4,6 +4,7 @@ import model.Turtle;
 
 import java.util.*;
 import model.Turtle;
+import model.VariableMap;
 
 public abstract class CommandNode {
 
@@ -30,5 +31,5 @@ public abstract class CommandNode {
         extraParameters = list;
     }
 
-    public abstract double run(List<String> parameters, Turtle turtle);
+    public abstract double run(List<String> parameters, Turtle turtle, VariableMap varMap);
 }

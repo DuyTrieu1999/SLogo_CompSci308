@@ -4,26 +4,25 @@ import java.util.*;
 
 public class VariableMap {
 
-    private Map<String, Integer> varMap;
+    private Map<String, Double> varMap;
 
     public VariableMap(){
-        varMap = new HashMap<String, Integer>();
+        varMap = new HashMap<String, Double>();
     }
 
-    public void addVariable(String str, int i){
-        varMap.put(str,i);
+    public void addVariable(String str, double d){
+        varMap.put(str,d);
     }
 
-    public Map<String, Integer> getVariables(){
+    public Map<String, Double> getVariables(){
         return varMap;
     }
 
-    public int getVariable(String str){
+    public double getVariable(String str){
         return varMap.get(str);
     }
 
     public void clearVariables(){
-        varMap = new HashMap<String, Integer>();
-        varMap = new HashMap<String, Integer>();
+        varMap = new HashMap<String, Double>();
     }
 }
