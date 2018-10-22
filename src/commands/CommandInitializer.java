@@ -13,7 +13,6 @@ public class CommandInitializer {
 
     public CommandInitializer(ResourceBundle language){
         resources = language;
-        System.out.println(language);
     }
 
     public Map<String, CommandNode> createCommandMap(Turtle t){

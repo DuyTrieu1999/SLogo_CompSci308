@@ -1,9 +1,7 @@
 package controller;
 
 import model.CommandList;
-import model.CommandListInterface;
 import view.SLogoView;
-import view.SLogoViewAPI;
 import view.turtleView.TurtleDriver;
 
 import java.util.ResourceBundle;
@@ -94,7 +92,7 @@ public class Controller {
         myCommand.setMessage(message);
     }
     Consumer<String> setMessageConsumer = e -> {myCommand.setMessage(e);};
-    public void setMessageConsumer (String t) {
+    public void setMessConsumer (String t) {
         setMessageConsumer.accept(t);
     }
 }
