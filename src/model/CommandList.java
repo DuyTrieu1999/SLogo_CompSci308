@@ -1,32 +1,37 @@
 package model;
 
-import java.util.*;
+
+import commands.CommandInitializer;
+import controller.Controller;
+
+import java.util.ResourceBundle;
 
 /**
  * @Author Yunhao Qing
+ * @Author Duy Trieu
  */
 
 public class CommandList implements CommandListInterface{
-    private List<String> commands;
+    private CommandParser myParser;
+    private Controller myController;
 
-    public CommandList(){
-        commands = new ArrayList<>();
+    public CommandList(Controller controller) {
+        myController = controller;
+        myParser = new CommandParser();
     }
 
-    public void addCommand(String str){
-        commands.add(str);
+    public void parse(String text) {
+        myParser.parse(text);
     }
 
-    public List<String> getCommands(){
-        return commands;
+    public void setMessage (String message) {
+
     }
 
-    public String getCommand () {
-        return commands.get(commands.size()-1);
+    public void setLanguage (ResourceBundle language) {
+        myParser.setLanguage(language);
     }
 
-    public void clearCommands(){
-        commands = new ArrayList<>();
-    }
+
 }
 

@@ -2,11 +2,24 @@ package model;
 
 import commands.CommandInitializer;
 import commands.CommandNode;
-import javafx.scene.paint.Color;
 
 import java.util.*;
 
 public class CommandParser {
+    // private List<CommandNode> commandList;
+    // private String language = "English";
+
+    // public CommandParser(){
+
+    // }
+
+    // public void parse (String string) {
+    //     System.out.println(string);
+    // }
+
+    // public void setLanguage(ResourceBundle language) {
+    //     CommandInitializer commandInitializer = new CommandInitializer(language);
+
     public CommandParser(String str){
         List<List<String>> list = parseToList(str);
         Turtle t = new Turtle(0, 0, Color.WHITE);

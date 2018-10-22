@@ -1,39 +1,273 @@
 package view.view_component;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TitledPane;
+import controller.Controller;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.util.ResourceBundle;
 
-
+/**
+ * DropDownButtons
+ *
+ * @author brookekeene
+ */
 public class DropDownButtons extends VBox {
-    public static final String RESOURCE_PACKAGE = "resources/text/view";
-    private static final String PATH_TO_LANGUAGES = "resources/languages/";
+    public static final int DROPDOWN_WIDTH = 200;
+    public static final String RESOURCE_PACKAGE = "text/view";
+    public static final String PATH_TO_LANGUAGES = "languages/";
     private ResourceBundle myResources;
+    private ResourceBundle myLanguages;
     private ChoiceBox<String> langCB;
     private TextFlow historyTab;
+    private TextFlow variablesTab;
+    private TextFlow userTab;
+    private LogoScreen myDisplay;
+    private Controller myController;
 
-    public DropDownButtons() {
+    /**
+     * Constructors
+     */
+    public DropDownButtons(LogoScreen ls, Controller controller) {
+        myDisplay = ls;
+        myController = controller;
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         this.setId("dropdown-menu");
+
         this.getChildren().add(addControls());
-        this.getChildren().add(addDisplay());
-        this.getChildren().add(addTurtleSetting());
-        this.getChildren().add(addVariables());
-        this.getChildren().add(addUserCommand());
-        this.getChildren().add(addLanguage());
+        this.getChildren().add(addBackgroundTab());
+        this.getChildren().add(addPenTab());
+        this.getChildren().add(addTurtleTab());
         this.getChildren().add(addHistoryTab());
+        this.getChildren().add(addVariablesTab());
+        this.getChildren().add(addUserCommandTab());
+        this.getChildren().add(addLanguageTab());
+        this.getChildren().add(addHelpTab());
     }
-    private ChoiceBox addLanguage () {
-        langCB = new ChoiceBox<>();
-        langCB.setPrefWidth(Integer.parseInt(myResources.getString("Dropdown_Width")));
+
+    /**
+     * adds heading to the control panel dropdown menu
+     * @return HBox containing Label for header
+     */
+    private HBox addControls() {
+        HBox controlHeader = new HBox();
+        controlHeader.setPadding(new Insets(Integer.parseInt(myResources.getString("Padding"))));
+        controlHeader.setAlignment(Pos.CENTER_LEFT);
+        Label header = new Label();
+        header.setText(myResources.getString("Control"));
+        controlHeader.getChildren().add(header);
+        return controlHeader;
+    }
+
+    /**
+     * adds background tab containing controls for background settings
+     * @return TitledPane containing background controls
+     */
+    private TitledPane addBackgroundTab() {
+        TitledPane backgroundTab = new TitledPane();
+        VBox backBox = backgroundSettings();
+        backgroundTab.setText(myResources.getString("Background"));
+        backgroundTab.setContent(backBox);
+        backgroundTab.setExpanded(false);
+        return backgroundTab;
+    }
+
+    /**
+     * creates a VBox containing the background controls (color)
+     * @return VBox containing pre-defined ColorBox
+     */
+    private VBox backgroundSettings() {
+        VBox backgroundControls = new VBox();
+        Label color = new Label(myResources.getString("Color"));
+        ColorBox colorChoices = new ColorBox();
+        colorChoices.makeBox();
+        colorChoices.setOnAction(e -> {
+            String newBackColor = colorChoices.getColor();
+            myDisplay.setBackGroundColor(Color.valueOf(newBackColor));
+        });
+        backgroundControls.getChildren().addAll(color, colorChoices);
+        return backgroundControls;
+    }
+
+    /**
+     * adds pen tab containing controls for pen settings
+     * @return TitledPane containing pen controls
+     */
+    private TitledPane addPenTab() {
+        TitledPane penTab = new TitledPane();
+        VBox penBox = penSettings();
+        penTab.setText(myResources.getString("Pen"));
+        penTab.setContent(penBox);
+        penTab.setExpanded(false);
+        return penTab;
+    }
+
+    /**
+     * creates a VBox containing the pen controls (color)
+     * @return VBox containing pre-defined ColorBox
+     */
+    private VBox penSettings() {
+        VBox penControls = new VBox();
+        Label color = new Label(myResources.getString("Color"));
+        ColorBox colorChoices = new ColorBox();
+        colorChoices.makeBox();
+        colorChoices.setOnAction(e -> {
+            String newPenColor = colorChoices.getColor();
+            myDisplay.getMyTurtle().setMyPenColor(Color.valueOf(newPenColor));
+            System.out.println("Pen: " + newPenColor);
+        });
+        penControls.getChildren().addAll(color, colorChoices);
+        return penControls;
+    }
+
+    /**
+     * adds turtle tab containing controls for turtle settings
+     * @return TitledPane containing turtle controls
+     */
+    private TitledPane addTurtleTab() {
+        TitledPane turtleSetting = new TitledPane();
+        VBox turtleBox = turtleSettings();
+        turtleSetting.setText(myResources.getString("Turtle"));
+        turtleSetting.setContent(turtleBox);
+        turtleSetting.setExpanded(false);
+        return turtleSetting;
+    }
+
+    /**
+     * creates a VBox containing the turtle controls (image)
+     * @return VBox containing pre-defined imageChooser
+     */
+    private VBox turtleSettings() {
+        VBox turtleControls = new VBox();
+        VBox imageBox = imageChooser();
+        turtleControls.getChildren().add(imageBox);
+        return turtleControls;
+    }
+
+    /**
+     * adds history tab containing the user's input command history
+     * @return TitledPane containing the command history
+     */
+    private TitledPane addHistoryTab() {
+        TitledPane history = new TitledPane();
+        VBox historyBox = displayHistory();
+        history.setText(myResources.getString("History"));
+        history.setContent(historyBox);
+        history.setExpanded(false);
+        return history;
+    }
+
+    /**
+     *
+     * @return
+     */
+    private VBox displayHistory() {
+        VBox history = new VBox();
+        historyTab = new TextFlow();
+        historyTab.setTextAlignment(TextAlignment.JUSTIFY);
+        historyTab.setLineSpacing(5.0);
+        history.getChildren().add(historyTab);
+        return history;
+    }
+
+    /**
+     *
+     * @param text
+     */
+    public void editHistoryTab(Text text) {
+        historyTab.getChildren().add(text);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public TextFlow getHistoryTab() {
+        return historyTab;
+    }
+
+    /**
+     * adds variables tab containing the variables available to the user
+     * @return TitledPane containing available variables
+     */
+    private TitledPane addVariablesTab() {
+        TitledPane variables = new TitledPane();
+        VBox varBox = displayVariable();
+        variables.setText(myResources.getString("Variables"));
+        variables.setContent(varBox);
+        variables.setExpanded(false);
+        return variables;
+    }
+
+    /**
+     *
+     * @return
+     */
+    private VBox displayVariable() {
+        VBox variables = new VBox();
+        variablesTab = new TextFlow();
+        variablesTab.setTextAlignment(TextAlignment.JUSTIFY);
+        variablesTab.setLineSpacing(5.0);
+        variables.getChildren().addAll(variablesTab);
+        return variables;
+    }
+
+    /**
+     * adds user-defined commands tab containing the user's pre-defined commands
+     * @return TitledPane containing the user-defined commands
+     */
+    private TitledPane addUserCommandTab() {
+        TitledPane userCommands = new TitledPane();
+        VBox userBox = displayUserCommands();
+        userCommands.setText(myResources.getString("UserCommands"));
+        userCommands.setContent(userBox);
+        userCommands.setExpanded(false);
+        return userCommands;
+    }
+
+    /**
+     *
+     * @return
+     */
+    private VBox displayUserCommands() {
+        VBox commands = new VBox();
+        userTab = new TextFlow();
+        userTab.setTextAlignment(TextAlignment.JUSTIFY);
+        userTab.setLineSpacing(5.0);
+        return commands;
+    }
+
+    /**
+     * adds languages tab containing controls for the languages understood for commands
+     * @return TitledPane containing language controls
+     */
+    private TitledPane addLanguageTab() {
+        TitledPane languageTab = new TitledPane();
+        VBox languageBox = languageSettings();
+        languageTab.setText(myResources.getString("Language"));
+        languageTab.setContent(languageBox);
+        languageTab.setExpanded(false);
+        return languageTab;
+    }
+
+    /**
+     * creates a VBox containing the language controls (command language)
+     * @return VBox containing ChoiceBox
+     */
+    private VBox languageSettings() {
+        VBox langControls = new VBox();
+        Label langChoice = new Label(myResources.getString("LanguageChoice"));
+
+        langCB = new ChoiceBox<>(); //TODO: use reflection
+        langCB.setPrefWidth(DROPDOWN_WIDTH);
         langCB.getItems().add(myResources.getString("Chinese"));
         langCB.getItems().add(myResources.getString("English"));
         langCB.getItems().add(myResources.getString("French"));
@@ -42,104 +276,58 @@ public class DropDownButtons extends VBox {
         langCB.getItems().add(myResources.getString("Portuguese"));
         langCB.getItems().add(myResources.getString("Russian"));
         langCB.getItems().add(myResources.getString("Spanish"));
-//        List<String> result = new ArrayList<>();
-//        List<File> options = Arrays.asList(new File(PATH_TO_LANGUAGES).listFiles());
-//        System.out.println(options);
-//        Collections.sort(options);
-//        for (File file : options) {
-//            result.add(file.getName().split("\\.")[0]);
-//            langCB.getItems().add(file.getName().split("\\.")[0]);
-//        }
-        langCB.setValue("English");
-        langCB.setOnAction(e -> getChoice(langCB));
-        return langCB;
-    }
-    private void getChoice(ChoiceBox<String> cb) {
-        String name = cb.getValue();
-        String filePath = PATH_TO_LANGUAGES + name;
-    }
-    private TitledPane addControls () {
-        TitledPane control = new TitledPane();
-        VBox controlBox = new VBox();
-        controlBox.getChildren().add(new Button("bla"));
-        controlBox.getChildren().add(new Button("bla"));
-        control.setText("Controls");
-        control.setContent(controlBox);
-        control.setExpanded(false);
-        return control;
-    }
-    private TitledPane addDisplay () {
-        TitledPane display = new TitledPane();
-        HBox displayBox = displayControl();
-        display.setText("Display");
-        display.setContent(displayBox);
-        display.setExpanded(false);
-        return display;
-    }
-    private HBox displayControl () {
-        HBox controlTab = new HBox();
-        RadioButton blueButton = new RadioButton("Blue");
-        RadioButton blackButton = new RadioButton("Black");
-        RadioButton redButton = new RadioButton("Red");
-        controlTab.getChildren().addAll(blackButton, blueButton, redButton);
-        return controlTab;
-    }
-    private TitledPane addTurtleSetting () {
-        TitledPane turtleSetting = new TitledPane();
-        HBox turtleBox = displayTurtle();
-        turtleSetting.setText("Turtle Setting");
-        turtleSetting.setContent(turtleBox);
-        turtleSetting.setExpanded(false);
-        return turtleSetting;
-    }
-    private HBox displayTurtle () {
-        HBox turtleTab = new HBox();
 
-        return turtleTab;
+        langCB.setValue("English");
+        langCB.setOnAction(e -> getChoice());
+
+        langControls.getChildren().addAll(langChoice, langCB);
+        return langControls;
     }
-    private TitledPane addVariables () {
-        TitledPane variable = new TitledPane();
-        HBox varBox = displayVariable();
-        variable.setText("Variables");
-        variable.setContent(varBox);
-        variable.setExpanded(false);
-        return variable;
+
+    public void getChoice() {
+        String name = langCB.getValue();
+        String filePath = PATH_TO_LANGUAGES + name;
+        myLanguages = ResourceBundle.getBundle(filePath);
+        System.out.println(myLanguages);
+        myController.setLanguageConsumer(myLanguages);
     }
-    private HBox displayVariable () {
-        HBox variableTab = new HBox();
-        RadioButton bluePen = new RadioButton("Blue");
-        RadioButton blackPen = new RadioButton("Black");
-        variableTab.getChildren().addAll(blackPen, bluePen);
-        return variableTab;
+
+    /**
+     * adds help tab containing a link that directs the user to a command reference page
+     * @return TitledPane containing reference link
+     */
+    private TitledPane addHelpTab() {
+        TitledPane helpTab = new TitledPane();
+        HBox helpBox = new HBox();
+        helpTab.setText(myResources.getString("Help"));
+        helpTab.setContent(helpBox);
+        helpTab.setExpanded(false);
+        return helpTab;
     }
-    private TitledPane addUserCommand () {
-        TitledPane userCommand = new TitledPane();
-        VBox userBox = displayUserCommand();
-        userCommand.setText("User Commands");
-        userCommand.setContent(userBox);
-        userCommand.setExpanded(false);
-        return userCommand;
-    }
-    private VBox displayUserCommand () {
-        VBox userCommandTab = new VBox();
-        return userCommandTab;
-    }
-    private TitledPane addHistoryTab () {
-        TitledPane history = new TitledPane();
-        VBox historyBox = historyWindow();
-        history.setText("History");
-        history.setContent(historyBox);
-        history.setExpanded(false);
-        return history;
-    }
-    private VBox historyWindow () {
-        VBox history = new VBox();
-        historyTab = new TextFlow();
-        historyTab.setTextAlignment(TextAlignment.JUSTIFY);
-        historyTab.setLineSpacing(5.0);
-        Text text = new Text("Now this is a text node");
-        history.getChildren().add(text);
-        history.getChildren().add(historyTab);
-        return history;
+
+    /**
+     * creates FileChooser and button associated with it
+     */
+    private VBox imageChooser() {
+        VBox imageControls = new VBox();
+        Label files = new Label(myResources.getString("ImageChoice"));
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(myResources.getString("File"));
+
+        Button fileBtn = new Button(myResources.getString("File"));
+        Label fileName = new Label("File Path");
+//        fileName.setId("fileName");
+
+        fileBtn.setOnAction(value -> {
+            File file = fileChooser.showOpenDialog(getScene().getWindow());
+            //TODO: error check
+            // saves File if no exceptions and File is not null
+            if(file.toString().contains(".png") || file.toString().contains(".jpeg")) { //When got the input as XML file.
+                File myFile = file;
+            }
+        });
+
+        imageControls.getChildren().addAll(files, fileName, fileBtn);
+        return imageControls;
     }
 }

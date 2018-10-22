@@ -7,10 +7,10 @@ import javafx.scene.paint.Color;
  */
 
 public interface TurtleInterface {
-        double getX();
-        double getY();
-        double getOrientation();
-        boolean getVisibility();
-        Color getPenColor();
-        boolean getPenVisibility();
+        public double getX();
+        public double getY();
+        public double getOrientation();
+        public boolean getVisibility();
+        public Color getPenColor();
+        public boolean getPenVisibility();
 }

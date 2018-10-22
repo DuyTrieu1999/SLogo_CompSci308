@@ -33,6 +33,6 @@ public class ScriptEditor extends VBox {
      * clears the text from the TextArea
      */
     public void clearEditor() {
-        myScriptEditor.setText("");
+        myScriptEditor.clear();
     }
 }

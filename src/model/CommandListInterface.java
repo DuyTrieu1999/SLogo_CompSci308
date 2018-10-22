@@ -7,6 +7,10 @@ import java.util.*;
  */
 
 public interface CommandListInterface {
-    String getCommand();
-    List<String> getCommands();
+
+    public void parse(String text);
+
+    public void setMessage (String message);
+
+    public void setLanguage (ResourceBundle language);
 }

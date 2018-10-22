@@ -11,8 +11,9 @@ public class CommandInitializer {
     private Map<String, CommandNode> commandMap = new HashMap<>();
     private ResourceBundle resources;
 
-    public CommandInitializer(ResourceBundle myResources){
-        resources = myResources;
+    public CommandInitializer(ResourceBundle language){
+        resources = language;
+        System.out.println(language);
     }
 
     public Map<String, CommandNode> createCommandMap(Turtle t){

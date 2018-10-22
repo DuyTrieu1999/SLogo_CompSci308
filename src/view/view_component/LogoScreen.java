@@ -5,53 +5,61 @@ import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import view.TurtleView.TurtleDriver;
+import javafx.scene.shape.Rectangle;
+import view.turtleView.TurtleDriver;
 
 import java.util.ResourceBundle;
 
 public class LogoScreen extends VBox {
-    public static final String DEFAULT_IMAGE = "turtle.png";
-    public static final String IMAGE_PATH = "slogo_team08/resources/images/";
-    public static final String RESOURCE_PACKAGE = "resources/text/view";
+    private static final String DEFAULT_IMAGE = "turtle.png";
+    private static final String IMAGE_PATH = "slogo_team08/resources/images/";
+    private static final String RESOURCE_PACKAGE = "/text/view";
     private ResourceBundle myResources;
     private StackPane myPane;
     private Pane myBackGround;
-    private TurtleDriver turtleManager;
+    private TurtleDriver myTurtle;
 
     public LogoScreen (Color backgroundColor) {
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         this.setId("main-screen");
         myBackGround = new Pane();
         myPane = new StackPane();
-        turtleManager = new TurtleDriver(0, new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE)));
         setMyBackGround(Integer.parseInt(myResources.getString("Canvas_Width")),
                 Integer.parseInt(myResources.getString("Canvas_Height")));
-        setUpTurtle();
-        setBackGroundColor(backgroundColor);
+        myTurtle = new TurtleDriver(this, 0, new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE)));
+        setUpTurtle(myTurtle);
+        this.setBackGroundColor(backgroundColor);
         myPane.setPrefWidth(Integer.parseInt(myResources.getString("Canvas_Width")));
         myPane.setPrefHeight(Integer.parseInt(myResources.getString("Canvas_Height")));
         this.getChildren().add(myPane);
     }
-    public void setUpTurtle () {
-        myPane.getChildren().add(turtleManager.getTurtleImage());
+    public void setUpTurtle (TurtleDriver turtle) {
+        turtle.getTurtleImage().setLayoutX(200);
+        turtle.getTurtleImage().setLayoutY(200);
+        myBackGround.getChildren().add(myTurtle.getTurtleImage());
     }
-    public void updateTurtle () {
-        Point2D turtlePos = new Point2D(turtleManager.getX(), turtleManager.getY());
-        if (isInBounds(turtlePos)) {
 
-        }
+    public void updateTurtle () {
+        myTurtle.updateMove();
     }
+
     public void setMyBackGround (int width, int height) {
         myBackGround = new Pane();
-        myBackGround.setMaxSize(width, height);
+        myBackGround.setPrefSize(width, height);
+        Rectangle clipBoundaries = new Rectangle();
+        clipBoundaries.widthProperty().bind(myBackGround.widthProperty());
+        clipBoundaries.heightProperty().bind(myBackGround.heightProperty());
+        myBackGround.setClip(clipBoundaries);
         myPane.getChildren().add(myBackGround);
     }
+
     public void setBackGroundColor (Color backGroundColor) {
         BackgroundFill primaryLayer = new BackgroundFill(backGroundColor, CornerRadii.EMPTY, Insets.EMPTY);
         Background background = new Background(primaryLayer);
         myBackGround.setBackground(background);
     }
-    public Color getColor () {
+
+    public Color getBackGroundColor () {
         return (Color) myBackGround.getBackground().getFills().get(0).getFill();
     }
     protected boolean isInBounds(Point2D point) {
@@ -61,8 +69,11 @@ public class LogoScreen extends VBox {
     public void clear () {
         this.getChildren().clear();
     }
-    public StackPane getMyPane () {
-        return myPane;
+    public Pane getMyPane () {
+        return myBackGround;
+    }
+    public TurtleDriver getMyTurtle () {
+        return myTurtle;
     }
 }
 
