@@ -1,5 +1,6 @@
 package view.view_component;
 
+import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -30,12 +31,14 @@ public class DropDownButtons extends VBox {
     private TextFlow variablesTab;
     private TextFlow userTab;
     private LogoScreen myDisplay;
+    private Controller myController;
 
     /**
      * Constructors
      */
-    public DropDownButtons(LogoScreen ls) {
+    public DropDownButtons(LogoScreen ls, Controller controller) {
         myDisplay = ls;
+        myController = controller;
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         this.setId("dropdown-menu");
 
@@ -275,20 +278,18 @@ public class DropDownButtons extends VBox {
         langCB.getItems().add(myResources.getString("Spanish"));
 
         langCB.setValue("English");
-        langCB.setOnAction(e -> getChoice(langCB));
+        langCB.setOnAction(e -> getChoice());
 
         langControls.getChildren().addAll(langChoice, langCB);
         return langControls;
     }
 
-    /**
-     *
-     * @param cb
-     */
-    private void getChoice(ChoiceBox<String> cb) {
-        String name = cb.getValue();
+    public void getChoice() {
+        String name = langCB.getValue();
         String filePath = PATH_TO_LANGUAGES + name;
         myLanguages = ResourceBundle.getBundle(filePath);
+        System.out.println(myLanguages);
+        myController.setLanguageConsumer(myLanguages);
     }
 
     /**

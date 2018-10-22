@@ -10,11 +10,10 @@ public class CommandInitializer {
 
     private Map<String, CommandNode> commandMap = new HashMap<>();
     private ResourceBundle resources;
-    private static final String RESOURCE_PACKAGE = "/languages/";
 
-    public CommandInitializer(String language){
-        resources = ResourceBundle.getBundle(RESOURCE_PACKAGE + language);
-
+    public CommandInitializer(ResourceBundle language){
+        resources = language;
+        System.out.println(language);
     }
 
     public Map<String, CommandNode> createCommandMap(Turtle t){

@@ -6,7 +6,9 @@ import view.SLogoView;
 import view.SLogoViewAPI;
 import view.turtleView.TurtleDriver;
 
-import java.util.List;
+import java.util.ResourceBundle;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * Controller
@@ -15,81 +17,51 @@ import java.util.List;
  *
  * @author duytrieu
  */
-public class Controller implements SLogoViewAPI, CommandListInterface {
+public class Controller {
     private SLogoView myView;
     private CommandList myCommand;
 
     public Controller (SLogoView view) {
         myView = view;
-        myCommand = new CommandList();
+        myCommand = new CommandList(this);
     }
     public SLogoView getView () {
         return myView;
     }
-    /**
-     * clearConsole
-     *
-     * from SLogoAPI
-     */
+
     public void clearConsole() {
         myView.clearConsole();
     }
-    /**
-     * clearDisplay
-     *
-     * from SLogoAPI
-     */
+
     public void clearDisplay() {
         myView.clearDisplay();
     }
-    /**
-     * showMessage
-     *
-     * from SLogoAPI
-     */
+
     public void showMessage(String text) {
         myView.showMessage(text);
     }
-    /**
-     * clearHistory
-     *
-     * from SLogoAPI
-     */
+
     public void clearHistory() {
         myView.clearHistory();
     }
-    /**
-     * getTurtle
-     *
-     * from SLogoAPI
-     */
-    public TurtleDriver getTurtle() {
-        return myView.getTurtle();
+
+
+
+    Supplier<TurtleDriver> turtleDriverSupplier = () -> {return myView.getTurtle();};
+    public TurtleDriver setTurtleSuplier () {
+        return turtleDriverSupplier.get();
     }
-    /**
-     * getCommands
-     *
-     * from CommandListInterface
-     */
-    public void parse(String text) {
-        myCommand.parse(text);
+
+    Consumer<String> parseConsumer = e -> {myCommand.parse(e);};
+    public void setParseConsumer (String t) {
+        parseConsumer.accept(t);
     }
-    /**
-     * setLanguage
-     *
-     * from CommandListInterface
-     */
-    public void setLanguage (String language) {
-        myCommand.setLanguage(language);
+
+    Consumer<ResourceBundle> languageConsumer = e -> {myCommand.setLanguage(e);};
+    public void setLanguageConsumer (ResourceBundle t) {
+        languageConsumer.accept(t);
     }
-    /**
-     * getLanguage
-     *
-     * from CommandListInterface
-     */
-    public String getLanguage() {
-        return myCommand.getLanguage();
-    }
+
     /**
      * setMessage
      *

@@ -78,17 +78,13 @@ public class SLogoView implements SLogoViewAPI {
         turtle.updateMovement(new Point2D(turtle.getTurtleImage().getX() + 100, turtle.getTurtleImage().getY()));
         turtle.updateMovement(new Point2D(turtle.getX() + 100, turtle.getY() + 100));
         turtle.updateMovement(new Point2D(turtle.getTurtleImage().getX(), turtle.getTurtleImage().getY() + 100));
-        System.out.println(turtle.getMyDestination().getMyFutureDestination());
-        System.out.println(turtle.getLocation());
-        System.out.println("width: " + logoScreen.getMyPane().getPrefWidth());
     }
     private void step (double elapsedTime) {
         logoScreen.updateTurtle();
         TurtleDriver turtle = logoScreen.getMyTurtle();
-        System.out.println("Location: " + turtle.getLocation());
     }
     private VBox addButton () {
-        dropDownButtons = new DropDownButtons(logoScreen); //TODO: Pass in elements to change (Pen, TurtleDriver)?
+        dropDownButtons = new DropDownButtons(logoScreen, myController); //TODO: Pass in elements to change (Pen, TurtleDriver)?
         VBox buttonPane = new VBox();
         buttonPane.getChildren().add(dropDownButtons);
         return buttonPane;
@@ -145,6 +141,11 @@ public class SLogoView implements SLogoViewAPI {
         return null;
     }
 
+
+    public void setLanguage (String language) {
+
+    }
+
     private void stopButtonHandler () {
         animation.pause();;
     }
@@ -158,7 +159,7 @@ public class SLogoView implements SLogoViewAPI {
      */
     public void runScript () {
         String command = scriptView.getUserInput();
-        myController.parse(command);
+        myController.setParseConsumer(command);
     }
 
     /**

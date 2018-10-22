@@ -1,5 +1,6 @@
 package model;
 
+import commands.CommandInitializer;
 import commands.CommandNode;
 
 import java.util.*;
@@ -11,16 +12,13 @@ public class CommandParser {
     public CommandParser(){
 
     }
-    public String getLanguage () {
-        return language;
-    }
 
     public void parse (String string) {
         System.out.println(string);
     }
 
-    public void setLanguage (String string) {
-        language = string;
+    public void setLanguage(ResourceBundle language) {
+        CommandInitializer commandInitializer = new CommandInitializer(language);
     }
 
     private boolean checkAllNumbers(List<String> thisList){

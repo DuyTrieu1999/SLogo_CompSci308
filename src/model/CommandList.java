@@ -1,6 +1,10 @@
 package model;
 
-import java.util.*;
+
+import commands.CommandInitializer;
+import controller.Controller;
+
+import java.util.ResourceBundle;
 
 /**
  * @Author Yunhao Qing
@@ -9,8 +13,10 @@ import java.util.*;
 
 public class CommandList implements CommandListInterface{
     private CommandParser myParser;
+    private Controller myController;
 
-    public CommandList() {
+    public CommandList(Controller controller) {
+        myController = controller;
         myParser = new CommandParser();
     }
 
@@ -18,16 +24,12 @@ public class CommandList implements CommandListInterface{
         myParser.parse(text);
     }
 
-    public void setLanguage (String language) {
-        myParser.setLanguage(language);
-    }
-
-    public String getLanguage() {
-        return myParser.getLanguage();
-    }
-
     public void setMessage (String message) {
 
+    }
+
+    public void setLanguage (ResourceBundle language) {
+        myParser.setLanguage(language);
     }
 
 
