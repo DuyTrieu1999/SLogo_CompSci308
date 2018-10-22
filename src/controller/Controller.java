@@ -28,35 +28,58 @@ public class Controller {
     public SLogoView getView () {
         return myView;
     }
-
-    public void clearConsole() {
+    /**
+     * ViewAPI
+     * clearConsole
+     */
+    Thread clearConsoleThread = new Thread(() -> myView.clearConsole());
+    public void setClearConsoleRunnable () {
         myView.clearConsole();
     }
-
-    public void clearDisplay() {
+    /**
+     * ViewAPI
+     * clearDisplay
+     */
+    Thread clearDisplayThread = new Thread(() -> myView.clearDisplay());
+    public void setClearDisplayRunnable () {
         myView.clearDisplay();
     }
-
-    public void showMessage(String text) {
-        myView.showMessage(text);
+    /**
+     * ViewAPI
+     * showMessage
+     */
+    Consumer<String> getMessageConsumer = e -> {myView.showMessage(e);};
+    public void getMessageConsumer (String text) {
+        getMessageConsumer.accept(text);
     }
-
-    public void clearHistory() {
-        myView.clearHistory();
+    /**
+     * ViewAPI
+     * clearHistory
+     */
+    Thread clearHistoryThread = new Thread(() -> myView.clearHistory());
+    public void setClearHistoryRunnable () {
+        clearHistoryThread.run();
     }
-
-
-
+    /**
+     * ViewAPI
+     * getTurtle
+     */
     Supplier<TurtleDriver> turtleDriverSupplier = () -> {return myView.getTurtle();};
     public TurtleDriver setTurtleSuplier () {
         return turtleDriverSupplier.get();
     }
-
+    /**
+     * ModelAPI
+     * parse
+     */
     Consumer<String> parseConsumer = e -> {myCommand.parse(e);};
     public void setParseConsumer (String t) {
         parseConsumer.accept(t);
     }
-
+    /**
+     * ModelAPI
+     * setLanguage
+     */
     Consumer<ResourceBundle> languageConsumer = e -> {myCommand.setLanguage(e);};
     public void setLanguageConsumer (ResourceBundle t) {
         languageConsumer.accept(t);
@@ -69,5 +92,9 @@ public class Controller {
      */
     public void setMessage (String message) {
         myCommand.setMessage(message);
+    }
+    Consumer<String> setMessageConsumer = e -> {myCommand.setMessage(e);};
+    public void setMessageConsumer (String t) {
+        setMessageConsumer.accept(t);
     }
 }
