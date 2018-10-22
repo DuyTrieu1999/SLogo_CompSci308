@@ -288,7 +288,7 @@ public class DropDownButtons extends VBox {
         String name = langCB.getValue();
         String filePath = PATH_TO_LANGUAGES + name;
         myLanguages = ResourceBundle.getBundle(filePath);
-        System.out.println(myLanguages);
+        //System.out.println(myLanguages);
         myController.setLanguageConsumer(myLanguages);
     }
 

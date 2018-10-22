@@ -13,10 +13,10 @@ public class CommandInitializer {
 
     public CommandInitializer(ResourceBundle language){
         resources = language;
-        System.out.println(language);
+        //System.out.println(language);
     }
 
-    public Map<String, CommandNode> createCommandMap(Turtle t){
+    public Map<String, CommandNode> createCommandMap(){
 
         commandMap.put(resources.getString("Forward").split("\\|")[0], new Forward());
         commandMap.put(resources.getString("Forward").split("\\|")[1], new Forward());
