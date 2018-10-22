@@ -1,14 +1,23 @@
 package view.view_component;
 
+import javafx.application.Application;
+import javafx.application.HostServices;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
+import model.Main;
 
 import java.util.ResourceBundle;
 
@@ -259,42 +268,16 @@ public class DropDownButtons extends VBox {
      * @return VBox containing ChoiceBox
      */
     private VBox languageSettings() {
-        VBox langControls = new VBox();
+        VBox languageControls = new VBox();
         Label langChoice = new Label(myResources.getString("LanguageChoice"));
-
-        langCB = new ChoiceBox<>(); //TODO: use reflection
-        langCB.setPrefWidth(DROPDOWN_WIDTH);
-        langCB.getItems().add(myResources.getString("Chinese"));
-        langCB.getItems().add(myResources.getString("English"));
-        langCB.getItems().add(myResources.getString("French"));
-        langCB.getItems().add(myResources.getString("German"));
-        langCB.getItems().add(myResources.getString("Italian"));
-        langCB.getItems().add(myResources.getString("Portuguese"));
-        langCB.getItems().add(myResources.getString("Russian"));
-        langCB.getItems().add(myResources.getString("Spanish"));
-//        List<String> result = new ArrayList<>();
-//        List<File> options = Arrays.asList(new File(PATH_TO_LANGUAGES).listFiles());
-//        System.out.println(options);
-//        Collections.sort(options);
-//        for (File file : options) {
-//            result.add(file.getName().split("\\.")[0]);
-//            langCB.getItems().add(file.getName().split("\\.")[0]);
-//        }
-        langCB.setValue("English");
-        langCB.setOnAction(e -> getChoice(langCB));
-
-        langControls.getChildren().addAll(langChoice, langCB);
-        return langControls;
-    }
-
-    /**
-     *
-     * @param cb
-     */
-    private void getChoice(ChoiceBox<String> cb) {
-        String name = cb.getValue();
-        String filePath = PATH_TO_LANGUAGES + name;
-        myLanguages = ResourceBundle.getBundle(filePath);
+        LanguageBox languageCB = new LanguageBox();
+        languageCB.makeBox();
+        languageCB.setOnAction(e -> {
+            String newLanguage = languageCB.getChoice();
+            System.out.println(newLanguage); // TODO: add language functionality
+        });
+        languageControls.getChildren().addAll(langChoice, languageCB);
+        return languageControls;
     }
 
     /**
@@ -304,6 +287,21 @@ public class DropDownButtons extends VBox {
     private TitledPane addHelpTab() {
         TitledPane helpTab = new TitledPane();
         HBox helpBox = new HBox();
+        Hyperlink helpLink = new Hyperlink("Basic Logo Commands");
+        helpLink.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("link clicked");
+                Application app = new Application() {
+                    @Override
+                    public void start(Stage primaryStage) throws Exception {
+
+                    }
+                };
+                app.getHostServices().showDocument("https://www2.cs.duke.edu/courses/compsci308/fall18/assign/03_slogo/commands.php#gsc.tab=0");
+            }
+        });
+        helpBox.getChildren().addAll(helpLink);
         helpTab.setText(myResources.getString("Help"));
         helpTab.setContent(helpBox);
         helpTab.setExpanded(false);
