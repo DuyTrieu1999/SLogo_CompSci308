@@ -44,6 +44,7 @@ public class Turtle implements TurtleInterface {
         double newX = xPos + distance * Math.cos(Math.toRadians(orientation));
         double newY = yPos + distance * Math.sin(Math.toRadians(orientation));
         moveTo(newX,newY);
+        System.out.println("The turtle is now at " + xPos + " " + yPos);
     }
 
     public void moveTo(double newX, double newY){

@@ -11,7 +11,12 @@ public class VariableMap {
     }
 
     public void addVariable(String str, double d){
-        varMap.put(str,d);
+        if(contains(str)){
+            varMap.replace(str, d);
+        }
+        else {
+            varMap.put(str, d);
+        }
     }
 
     public Map<String, Double> getVariables(){

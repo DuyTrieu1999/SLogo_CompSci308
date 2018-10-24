@@ -7,7 +7,7 @@ import model.VariableMap;
 import java.util.HashMap;
 import java.util.List;
 
-public class SetPenColor extends CommandNode {
+public class PenColor extends CommandNode {
     public int numParameters = 1;
     private HashMap<String, Color> colorMap = new HashMap<>();
 
