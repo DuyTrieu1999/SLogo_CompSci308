@@ -1,20 +1,20 @@
 package commands;
 
-import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 import model.Turtle;
 import model.VariableMap;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class SetPenColor extends CommandNode {
+public class SetShape extends CommandNode {
     public int numParameters = 1;
-    private HashMap<String, Color> colorMap = new HashMap<>();
+    private HashMap<String, Shape> shapeMap = new HashMap<>();
 
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
-        turtle.setPenColor(colorMap.get(parameters.get(0)));
-        return Double.parseDouble(parameters.get(0));
+        //turtle.setShape(shapeMap.get(parameters.get(0)));
+        return 0;
     }
 
     public int getNumParameters(){

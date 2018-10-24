@@ -3,18 +3,16 @@ package commands;
 import model.Turtle;
 import model.VariableMap;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class SetBackground extends CommandNode {
-    public int numParameters = 2;
+    public int numParameters = 1;
+    private HashMap<String, Integer> backgroundMap = new HashMap<>();
 
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
-        double num1 = Double.parseDouble(parameters.get(0));
-        double num2 = Double.parseDouble(parameters.get(1));
-        if(num1 == num2){
-            return 1;
-        }
+        //turtle.setBackground(backgroundMap.get(parameters.get(0)));
         return 0;
     }
 

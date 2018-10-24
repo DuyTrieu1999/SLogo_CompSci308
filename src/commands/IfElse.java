@@ -1,21 +1,29 @@
 package commands;
 
+import model.CommandParser;
 import model.Turtle;
 import model.VariableMap;
 
 import java.util.List;
 
 public class IfElse extends CommandNode {
-    public int numParameters = 2;
+    public int numParameters = 3;
+    private double output = 0;
 
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
-        double num1 = Double.parseDouble(parameters.get(0));
-        double num2 = Double.parseDouble(parameters.get(1));
-        if(num1 == num2){
-            return 1;
+        int expression = (int)Double.parseDouble(parameters.get(0));
+        if(expression != 0){
+            CommandParser parser = new CommandParser(parameters.get(1), turtle);
+            String[] lastLine = parser.getOutput().split("\\s+");
+            output = Double.parseDouble(lastLine[lastLine.length-1]);
         }
-        return 0;
+        else {
+            CommandParser parser = new CommandParser(parameters.get(2), turtle);
+            String[] lastLine = parser.getOutput().split("\\s+");
+            output = Double.parseDouble(lastLine[lastLine.length-1]);
+        }
+        return output;
     }
 
     public int getNumParameters(){
