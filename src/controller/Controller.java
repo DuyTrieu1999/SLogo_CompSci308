@@ -27,8 +27,12 @@ public class Controller {
     public SLogoView getView () {
         return myView;
     }
-
-    public Turtle getTurtle () { return myCommand.getMyParser().getMyTurtle(); }
+    /**
+     * ModelAPI
+     * return turtle
+     */
+    Supplier<Turtle> turtleSupplier = () -> {return myCommand.getMyParser().getMyTurtle();};
+    public Turtle setTurtleSupplier () { return turtleSupplier.get(); }
     /**
      * ViewAPI
      * clearConsole
@@ -60,14 +64,6 @@ public class Controller {
     Thread clearHistoryThread = new Thread(() -> myView.clearHistory());
     public void setClearHistoryRunnable () {
         clearHistoryThread.run();
-    }
-    /**
-     * ViewAPI
-     * getTurtle
-     */
-    Supplier<TurtleDriver> turtleDriverSupplier = () -> {return myView.getTurtle();};
-    public TurtleDriver setTurtleSuplier () {
-        return turtleDriverSupplier.get();
     }
     /**
      * ModelAPI
