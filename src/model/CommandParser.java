@@ -60,13 +60,16 @@ public class CommandParser {
                     if(temp.get(i).equals("[")){
                         //start of enclosed string at i
                         int beginList = i;
+                        List<String> sub = new ArrayList<String>();
+                        sub.add(temp.get(i));
                         i++;
                         String thisList = "";
-                        while(!temp.get(i).equals("]")){
+                        while(!isBalance(sub)){
+                            sub.add(temp.get(i));
                             thisList += temp.get(i) + " ";
                             i++;
                         }
-                        thisList = thisList.substring(0, thisList.length()-1);
+                        thisList = thisList.substring(0, thisList.length()-3);
                         int endList = i;
                         temp.remove(endList);
                         temp.remove(beginList);
