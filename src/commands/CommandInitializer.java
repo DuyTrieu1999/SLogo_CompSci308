@@ -13,6 +13,7 @@ public class CommandInitializer {
 
     public CommandInitializer(ResourceBundle language){
         resources = language;
+        createCommandMap();
         //System.out.println(language);
     }
 
@@ -101,5 +102,17 @@ public class CommandInitializer {
         commandMap.put(resources.getString("GetPenColor").split("\\|")[1], new GetPenColor());
 
         return commandMap;
+    }
+
+    public void addCommand(String commandName, String vars, String commands){
+        commandMap.put(commandName, new GenericCommand(vars, commands));
+    }
+
+    public CommandNode getCommandNode(String key){
+        return commandMap.get(key);
+    }
+
+    public boolean containsKey(String key){
+        return commandMap.containsKey(key);
     }
 }

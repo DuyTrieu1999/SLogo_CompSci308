@@ -1,11 +1,14 @@
 package model;
 
+import commands.CommandInitializer;
 import commands.CommandNode;
 import commands.Forward;
 import javafx.application.Application;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import view.SLogoView;
+
+import java.util.ResourceBundle;
 
 /**
  *
@@ -27,8 +30,10 @@ public class Main extends Application{
     @Override
     public void start(Stage stage){
         Turtle t = new Turtle(0, 0, Color.WHITE);
-        CommandParser test = new CommandParser();
-        test.parse("ifelse fd 20 [ fd 50 ] [ bk 50 ]");
+        CommandInitializer c = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
+        VariableMap v = new VariableMap();
+        CommandParser test = new CommandParser(v, c, t);
+        test.parse("to butt [ :x ] [ forward :x forward 20 ]\nbutt 50");
         System.out.println(test.getOutput());
     }
     */

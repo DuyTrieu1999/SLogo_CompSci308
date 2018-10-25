@@ -9,7 +9,7 @@ public class Cos extends CommandNode {
     public int numParameters = 1;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         double degrees = Double.parseDouble(parameters.get(0));
         return Math.cos(Math.toRadians(degrees));
     }

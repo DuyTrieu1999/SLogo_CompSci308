@@ -9,8 +9,7 @@ public class Pi extends CommandNode {
     public int numParameters = 0;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
-        return Math.PI;
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){return Math.PI;
     }
 
     public int getNumParameters(){
