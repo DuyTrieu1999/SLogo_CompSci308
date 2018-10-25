@@ -12,7 +12,7 @@ import view.SLogoView;
  */
 public class Main extends Application{
 
-
+    /*
     @Override
     public void start (Stage stage) {
         SLogoView ui = new SLogoView();
@@ -20,16 +20,16 @@ public class Main extends Application{
         stage.setScene(ui.sceneInit());
         stage.show();
     }
+    */
 
-//<<<<<<< HEAD
-//=======
-//    @Override
-//    public void start(Stage stage){
-//        CommandParser test = new CommandParser( "not 0 not 1");
-//    }
-//>>>>>>> fbccf1b931b19e9ec441db16ad773cd8a36cf03c
-//
-//    public static void main (String[] args) {
-//        launch(args);
-//    }
+
+    @Override
+    public void start(Stage stage){
+        CommandParser test = new CommandParser( "sum make lol 50 20\nforward lol");
+    }
+
+    public static void main (String[] args) {
+        launch(args);
+    }
+
 }

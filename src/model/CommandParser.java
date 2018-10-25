@@ -2,60 +2,41 @@ package model;
 
 import commands.CommandInitializer;
 import commands.CommandNode;
+import commands.CommandNodeTry;
+import commands.Node;
+import javafx.scene.paint.Color;
 
 import java.util.*;
 
 public class CommandParser {
     // private List<CommandNode> commandList;
-    // private String language = "English";
+    private String language = "English";
 
-    // public CommandParser(){
+     public CommandParser(){
 
-    // }
+     }
 
-    // public void parse (String string) {
-    //     System.out.println(string);
-    // }
+     public void parse (String string) {
+         System.out.println(string);
+    }
 
-    // public void setLanguage(ResourceBundle language) {
-    //     CommandInitializer commandInitializer = new CommandInitializer(language);
+    private List<CommandNode> commandList;
+    //make a variablemap
+    private VariableMap varMap = new VariableMap();
+    //make a turtle for testing purposes
+    private Turtle t = new Turtle(0, 0, Color.WHITE);
+    private ResourceBundle resources = ResourceBundle.getBundle("languages/English");
+    //start the command initializer with the language
+    private CommandInitializer commandInitializer;
+    //create the mapping of commands to commandnodes
+    private Map<String, CommandNode> commandNodeMap = commandInitializer.createCommandMap();
+
 
     public CommandParser(String str){
         List<List<String>> list = parseToList(str);
-        Turtle t = new Turtle(0, 0, Color.WHITE);
-        t.setOrientation(90);
-        CommandInitializer commandInitializer = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
-        Map<String, CommandNode> commandNodeMap = commandInitializer.createCommandMap(t);
-        for(List<String> thisLine:list)
-            parseLine(thisLine, commandNodeMap, t);
     }
-
-    private void parseLine(List<String> thisLine,Map<String, CommandNode> commandNodeMap, Turtle t){
-        while(!allNumeric(thisLine)){
-            for(int j = 0;j < thisLine.size(); j++){
-                if(!isNumeric(thisLine.get(j))) {
-                    CommandNode thisCommandNode = commandNodeMap.get(thisLine.get(j));
-                    int numParameters = thisCommandNode.getNumParameters();
-                    boolean parsable = true;
-                    List<String> parameters = new ArrayList<>();
-                    for(int i = 1; i<numParameters+1; i++){
-                        if (isNumeric(thisLine.get(i+j)))
-                            parameters.add(thisLine.get(i+j));
-                        else{
-                            parsable = false;
-                            break;
-                        }
-                    }
-                    if(parsable){
-                        double returnValue = thisCommandNode.run(parameters, t);
-                        thisLine.set(j, Double.toString(returnValue));
-                        for(int k=0;k<numParameters;k++)
-                            thisLine.remove(j+1);
-                        break;
-                    }
-                }
-            }
-        }
+    public void setLanguage(ResourceBundle language) {
+        CommandInitializer commandInitializer = new CommandInitializer(language);
     }
 
     private List<List<String>> parseToList(String str){
@@ -78,8 +59,202 @@ public class CommandParser {
             }
             list.add(temp);
             count++;
+
         }
+
+        for(List<String> line:list){
+            parseLine(line);
+            System.out.println();
+        }
+
         return list;
+
+        /*
+        //make a variablemap
+        VariableMap varMap = new VariableMap();
+        //make a turtle for testing purposes
+        Turtle t = new Turtle(0, 0, Color.WHITE);
+        t.setOrientation(90);
+        //start the command initializer with the language
+        CommandInitializer commandInitializer = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
+        //create the mapping of commands to commandnodes
+        Map<String, CommandNode> commandNodeMap = commandInitializer.createCommandMap(t);
+        for(List<String> thisLine:list){
+            //while the list is not all numbers, keep looping
+            while(!checkAllNumbers(thisLine)){
+                //loop through the elements one by one
+                for(int j=0;j<thisLine.size();j++){
+                    //default to this is a number
+                    boolean isNumber = true;
+                    try{
+                        Double.parseDouble(thisLine.get(j));
+                    }
+                    catch(NumberFormatException e){
+                        //if it detects it is not a number, it will return false
+                        isNumber = false;
+                    }
+
+                    //if not a number
+                    if(!isNumber) {
+                        //create the associated command
+                        CommandNode thisCommandNode = commandNodeMap.get(thisLine.get(j));
+                        //get the number of parameters for this command
+                        int numParameters = thisCommandNode.getNumParameters();
+                        //initialize to command can be parsed
+                        boolean canParseCommand = true;
+                        //create a list of parameters for later use
+                        List<String> parameters = new ArrayList<>();
+                        for(int i=1; i<numParameters+1; i++){
+                            //check every parameter ahead for numparameters and see if they are all numbers
+                            try{
+                                Double.parseDouble(thisLine.get(i+j));
+                                //add the parameter for later use
+                                parameters.add(thisLine.get(i+j));
+                            }
+                            catch(NumberFormatException e){
+                                //if there are not all numbers, break
+                                canParseCommand = false;
+                                break;
+                            }
+                        }
+                        //if we can parse the command
+                        if(canParseCommand){
+                            //get the return value from the commandnode
+                            double returnValue = thisCommandNode.run(parameters, t, varMap);
+                            //replace the current item in the list with the return value (this will be the command)
+                            thisLine.set(j, Double.toString(returnValue));
+                            //delete the parameters
+                            for(int k=0;k<numParameters;k++){
+                                thisLine.remove(j+1);
+                            }
+                            //restart from the beginning
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        */
+    }
+
+
+    private void parseLine(List<String> thisLine){
+
+        ArrayList<CommandNodeTry> rootNodes = new ArrayList<>();
+        //any parent must be a command
+        CommandNodeTry parent = null;
+        for(String s:thisLine){
+            //for each space separated value
+            if(isCommand(s)){
+                //command
+                List<String> thisValue = new ArrayList<>();
+                thisValue.add(s);
+                CommandNodeTry thisCommandNode = new CommandNodeTry(parent, thisValue);
+                if(parent == null){
+                    //this is the root node
+                    rootNodes.add(thisCommandNode);
+                }
+                else {
+                    parent.addChild(thisCommandNode);
+                }
+                //if not fulfilled, this is the new parent
+                parent = thisCommandNode;
+            }
+            else {
+                if(isNumeric(s)){
+                    List<String> thisValue = new ArrayList<>();
+                    thisValue.add(s);
+                    Node thisNode = new Node(parent, thisValue);
+                    //the parent of a number must be a command
+                    parent.addChild(thisNode);
+                }
+                else if(isList(s)){
+                    //is a list
+                    //a list should be passed in simply as a string minus the brackets, separated by spaces
+                    //todo
+                    List<String> thisValue = new ArrayList<>();
+                    thisValue.addAll(Arrays.asList(s.split("\\s+")));
+                    Node thisNode = new Node(parent, thisValue);
+                    //the parent of a list must be a command
+                    parent.addChild(thisNode);
+                }
+                else {
+                    //variable
+                    //only time it is not defined is if the preceding command is make
+                    if(parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[0]) == 0
+                    || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[1]) == 0){
+                        //this is a make command so simply add it as a child
+                        List<String> thisValue = new ArrayList<>();
+                        thisValue.add(s);
+                        Node thisNode = new Node(parent, thisValue);
+                        //the parent of a number must be a command
+                        parent.addChild(thisNode);
+                    }
+                    else {
+                        //not a make command
+                        if(varMap.contains(s)){
+                            double variableValue = varMap.getVariable(s);
+                            List<String> thisValue = new ArrayList<>();
+                            thisValue.add(Double.toString(variableValue));
+                            Node thisNode = new Node(parent, thisValue);
+                            //the parent of a number must be a command
+                            parent.addChild(thisNode);
+                        }
+                        else {
+                            //error
+                            System.out.println("Invalid variable!");
+                        }
+                    }
+                }
+
+                //check if this node fulfills the parent
+                if(parent != null){
+                    while(parent != null && parent.fulfilled()){
+                        //simplify expression
+                        //go up one level and evaluate parent
+                        //change parent from CommandNode to Node and set value
+                        //since parents must be commands, we know the parent is a command
+                        CommandNode parentCommandNode = commandNodeMap.get(parent.getCommandName());
+                        //merge the lists of all child nodes into one list
+                        double returnValue = parentCommandNode.run(mergeParameters(parent), t, varMap);
+                        CommandNodeTry parentOfParent = parent.getParent();
+                        if(parentOfParent != null){
+                            parentOfParent.getChildren().remove(parent);
+                            List<String> returnValueList = new ArrayList<>();
+                            returnValueList.add(Double.toString(returnValue));
+                            parentOfParent.getChildren().add(new Node(parentOfParent, returnValueList));
+                        }
+                        else {
+                            System.out.print(returnValue + " ");
+                        }
+                        parent = parentOfParent;
+                    }
+                }
+            }
+        }
+    }
+
+    public List<String> mergeParameters(CommandNodeTry parent){
+        //todo
+        List<String> mergedParameters = new ArrayList<>();
+        for(Node n:parent.getChildren()){
+            mergedParameters.addAll(n.getParameters());
+        }
+        return mergedParameters;
+    }
+
+
+    public boolean isCommand(String s){
+        //todo
+        return commandNodeMap.containsKey(s);
+    }
+
+    public boolean isList(String s){
+        //todo
+        if(s.split("\\s+").length > 1){
+            return true;
+        }
+        return false;
     }
 
     private boolean allNumeric(List<String> thisList){

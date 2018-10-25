@@ -25,4 +25,8 @@ public class VariableMap {
     public void clearVariables(){
         varMap = new HashMap<String, Double>();
     }
+
+    public boolean contains (String key){
+        return varMap.containsKey(key);
+    }
 }
