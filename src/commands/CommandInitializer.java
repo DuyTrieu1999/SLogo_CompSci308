@@ -85,7 +85,7 @@ public class CommandInitializer {
 
         commandMap.put(resources.getString("MakeVariable").split("\\|")[0], new Make());
         commandMap.put(resources.getString("MakeVariable").split("\\|")[1], new Make());
-        commandMap.put(resources.getString("Repeat"), new Remainder());
+        commandMap.put(resources.getString("Repeat"), new Repeat());
         commandMap.put(resources.getString("DoTimes"), new DoTimes());
         commandMap.put(resources.getString("For"), new For());
         commandMap.put(resources.getString("If"), new If());

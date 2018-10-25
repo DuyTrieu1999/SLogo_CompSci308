@@ -3,6 +3,7 @@ package model;
 import commands.CommandNode;
 import commands.Forward;
 import javafx.application.Application;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import view.SLogoView;
 
@@ -25,7 +26,10 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage){
-        CommandParser test = new CommandParser( "sum make lol 50 20\nforward lol");
+        Turtle t = new Turtle(0, 0, Color.WHITE);
+        CommandParser test = new CommandParser();
+        test.parse("ifelse fd 20 [ fd 50 ] [ bk 50 ]");
+        System.out.println(test.getOutput());
     }
 
     public static void main (String[] args) {

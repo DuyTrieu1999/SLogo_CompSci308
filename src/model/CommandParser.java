@@ -11,61 +11,100 @@ import java.util.*;
 public class CommandParser {
     // private List<CommandNode> commandList;
     private String language = "English";
-
-     public CommandParser(){
-
-     }
-
-     public void parse (String string) {
-         System.out.println(string);
-    }
-
+    private String output = "";
     private List<CommandNode> commandList;
     //make a variablemap
     private VariableMap varMap = new VariableMap();
-    //make a turtle for testing purposes
-    private Turtle t = new Turtle(0, 0, Color.WHITE);
     private ResourceBundle resources = ResourceBundle.getBundle("languages/English");
     //start the command initializer with the language
-    private CommandInitializer commandInitializer;
+    private CommandInitializer commandInitializer = new CommandInitializer(resources);
     //create the mapping of commands to commandnodes
     private Map<String, CommandNode> commandNodeMap = commandInitializer.createCommandMap();
+    //private Map<Integer, Turtle> turtleMap = new HashMap<>();
+    //private int currentTurtle = 0;
+    private Turtle t = new Turtle(0, 0, Color.WHITE);
 
-
-    public CommandParser(String str){
-        List<List<String>> list = parseToList(str);
+    public CommandParser(){
     }
+
+    public void parse (String str) {
+        parseToList(str);
+    }
+
     public void setLanguage(ResourceBundle language) {
         CommandInitializer commandInitializer = new CommandInitializer(language);
     }
 
     private List<List<String>> parseToList(String str){
+        //split by newline
         List<String> lines = Arrays.asList(str.split("\\r?\\n"));
         List<String> cleanLines = new ArrayList<>();
+        //trim and ignore comments
         for (String line : lines){
             if (!line.trim().isEmpty() && !(line.charAt(0)=='#'))
                 cleanLines.add(line);
         }
+        //lines now contains the cleaned up lines
         lines  = cleanLines;
         List<List<String>> list = new ArrayList<>();
         int count = 0;
+        //loop for every line parsed
         while (count < lines.size()){
             String line = lines.get(count);
+            //create a temp arraylist that splits by space
             List<String> temp = new ArrayList<>(Arrays.asList(line.split("\\s+")));
+            //System.out.println("Temp is of length " + temp.size());
+            while(temp.contains("[")){
+                for(int i=0;i<temp.size();i++){
+                    if(temp.get(i).equals("[")){
+                        //start of enclosed string at i
+                        int beginList = i;
+                        i++;
+                        String thisList = "";
+                        while(!temp.get(i).equals("]")){
+                            thisList += temp.get(i) + " ";
+                            i++;
+                        }
+                        thisList = thisList.substring(0, thisList.length()-1);
+                        int endList = i;
+                        temp.remove(endList);
+                        temp.remove(beginList);
+                        for(int j=0;j<(endList-beginList-1);j++){
+                            temp.remove(beginList);
+                        }
+                        temp.add(beginList, thisList);
+                        break;
+                    }
+                }
+            }
+
+            /*
             while (!isBalance(temp)){
+                //if there is no open and end bracket on the same line
                 count++;
                 String newline = lines.get(count);
                 temp.addAll(Arrays.asList(newline.split("\\s+")));
             }
+            */
             list.add(temp);
             count++;
 
         }
 
-        for(List<String> line:list){
-            parseLine(line);
+        /*
+        for(List<String> thisList:list){
+            for(String s:thisList){
+                System.out.print(s + " break ");
+            }
             System.out.println();
         }
+        */
+
+
+        for(List<String> line:list){
+            output = output + parseLine(line) + "\n";
+        }
+
 
         return list;
 
@@ -137,9 +176,13 @@ public class CommandParser {
         */
     }
 
+    public String getOutput(){
+        return output;
+    }
 
-    private void parseLine(List<String> thisLine){
 
+    private String parseLine(List<String> thisLine){
+        String output = "";
         ArrayList<CommandNodeTry> rootNodes = new ArrayList<>();
         //any parent must be a command
         CommandNodeTry parent = null;
@@ -173,7 +216,7 @@ public class CommandParser {
                     //a list should be passed in simply as a string minus the brackets, separated by spaces
                     //todo
                     List<String> thisValue = new ArrayList<>();
-                    thisValue.addAll(Arrays.asList(s.split("\\s+")));
+                    thisValue.add(s);
                     Node thisNode = new Node(parent, thisValue);
                     //the parent of a list must be a command
                     parent.addChild(thisNode);
@@ -182,7 +225,7 @@ public class CommandParser {
                     //variable
                     //only time it is not defined is if the preceding command is make
                     if(parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[0]) == 0
-                    || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[1]) == 0){
+                            || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[1]) == 0){
                         //this is a make command so simply add it as a child
                         List<String> thisValue = new ArrayList<>();
                         thisValue.add(s);
@@ -225,13 +268,14 @@ public class CommandParser {
                             parentOfParent.getChildren().add(new Node(parentOfParent, returnValueList));
                         }
                         else {
-                            System.out.print(returnValue + " ");
+                            output = output + returnValue + " ";
                         }
                         parent = parentOfParent;
                     }
                 }
             }
         }
+        return output;
     }
 
     public List<String> mergeParameters(CommandNodeTry parent){
