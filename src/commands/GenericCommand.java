@@ -37,4 +37,12 @@ public class GenericCommand extends CommandNode {
         return numParameters;
     }
 
+    public String[] getVariables(){
+        return variables;
+    }
+
+    public String getCommand(){
+        return thisCommand;
+    }
+
 }
