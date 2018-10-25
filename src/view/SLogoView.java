@@ -14,9 +14,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
+import model.CommandList;
 import view.turtleView.TurtleDriver;
 import view.view_component.*;
 
+import java.util.Queue;
 import java.util.ResourceBundle;
 
 /**
@@ -46,10 +48,12 @@ public class SLogoView implements SLogoViewAPI {
     private Console consoleView;
     private ResourceBundle myResources;
     private Controller myController;
+    private CommandList myHistory;
 
     public Scene sceneInit () {
         myController = new Controller(this);
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
+        myHistory = new CommandList(myController);
         initVariable();
         VBox scriptView = addScriptView();
         VBox logoView = addLogoView();
@@ -84,7 +88,7 @@ public class SLogoView implements SLogoViewAPI {
         TurtleDriver turtle = logoScreen.getMyTurtle();
     }
     private VBox addButton () {
-        dropDownButtons = new DropDownButtons(logoScreen, myController); //TODO: Pass in elements to change (Pen, TurtleDriver)?
+        dropDownButtons = new DropDownButtons(logoScreen, myController);
         VBox buttonPane = new VBox();
         buttonPane.getChildren().add(dropDownButtons);
         return buttonPane;
@@ -116,10 +120,6 @@ public class SLogoView implements SLogoViewAPI {
         buttonBox.setAlignment(Pos.CENTER);
         return logoBox;
     }
-    private void startButtonHandler () {
-        animation.setCycleCount(Timeline.INDEFINITE);
-        animation.playFromStart();
-    }
 
     public void clearConsole() {
         this.clearScript();
@@ -146,6 +146,11 @@ public class SLogoView implements SLogoViewAPI {
 
     }
 
+    private void startButtonHandler () {
+        animation.setCycleCount(Timeline.INDEFINITE);
+        animation.playFromStart();
+    }
+
     private void stopButtonHandler () {
         animation.pause();;
     }
@@ -160,6 +165,8 @@ public class SLogoView implements SLogoViewAPI {
     public void runScript () {
         String command = scriptView.getUserInput();
         myController.setParseConsumer(command);
+        System.out.println(command);
+        myHistory.addCommand(command);
     }
 
     /**
@@ -173,6 +180,11 @@ public class SLogoView implements SLogoViewAPI {
 
     }
     private void saveScript () {
-
+        //TODO: Print history
+        Queue<String> myQueue = myHistory.getHistory();
+        while(myQueue.peek() != null) {
+            String h = myQueue.poll();
+            System.out.println(h);
+        }
     }
 }
