@@ -3,6 +3,7 @@ package view.turtleView;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import model.Turtle;
 import view.view_component.LogoScreen;
 
 public class Pen {
@@ -11,20 +12,19 @@ public class Pen {
     private double myThickness;
     private int penIndex;
     private boolean isDown;
+    private Turtle turtle;
 
-    public Pen (LogoScreen screen, Color color, double thickness, int index, boolean down) {
-        isDown = down;
-        myScreen = screen;
-        myColor = color;
-        myThickness = thickness;
-        penIndex = index;
+    public Pen (LogoScreen screen, int index, Turtle turtle) {
+        this.isDown = turtle.getPenVisibility();
+        this.myScreen = screen;
+        this.myColor = turtle.getPenColor();
+        this.myThickness = turtle.getPenWidth();
+        this.penIndex = index;
+        this.turtle = turtle;
     }
 
-    protected void drawLine (Point2D start, Point2D finish) {
-        Line line = new Line(start.getX(), start.getY(), finish.getX(), finish.getY());
-        line.setStroke(myColor);
-        line.setStrokeWidth(myThickness);
-        myScreen.getMyPane().getChildren().add(line);
+    protected void drawLine (Line line) {
+        myScreen.addElement(line);
     }
 
     protected Color getColor() {
@@ -47,7 +47,7 @@ public class Pen {
         myThickness = width;
     }
 
-    protected boolean isDown () { return isDown; }
+    public boolean isDown () { return isDown; }
 
     protected void setDown (boolean down) { isDown = down; }
 }

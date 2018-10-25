@@ -4,24 +4,25 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import model.Turtle;
 import view.view_component.LogoScreen;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * TurtleDriver
  *
  * @author brookekeene
+ * @author Duy Trieu
  */
 public class TurtleDriver {
 
-    private TurtleManager turtleManager;
     private Turtle myTurtle;
     private LogoScreen myScreen;
     private Pen myPen;
     private Graphic myGraphic;
-    private int turtleID; // when multiple turtles arise
+    private int turtleID;
     private double orientation;
 
 
@@ -33,12 +34,10 @@ public class TurtleDriver {
         myTurtle = turtle;
         myScreen = screen;
         turtleID = id;
-        myPen = new Pen(myScreen, Color.BLACK, 1, 1, true);
+        myPen = new Pen(myScreen, id, turtle);
         myGraphic = new Graphic(id, image);
-    }
-
-    public Graphic getTurtleImage() {
-        return myGraphic;
+        myGraphic.getView().setX(turtle.getX());
+        myGraphic.getView().setY(turtle.getY());
     }
 
     public Point2D getLocation () { return new Point2D(myTurtle.getX(), myTurtle.getY()); }
@@ -47,21 +46,26 @@ public class TurtleDriver {
         myGraphic = new Graphic(turtleID, im);
     }
 
-    private void setLocation(Point2D curr, Point2D next) {
-        if (myPen.isDown()) {
-            myPen.drawLine(curr, next);
-        }
+    public Turtle getMyTurtle () {
+        return myTurtle;
+    }
+
+    private void setLocation(Point2D next) {
         this.setPoint(next);
     }
+    public Pen getPen() {return myPen;}
     public void updateMove() {
-        Point2D myLocation = new Point2D(getX(), getY());
-        setLocation(myLocation, getLocation());
+        List<Line> lineList = myTurtle.getLines();
+        for (Line line: lineList) {
+            myPen.drawLine(line);
+        }
+        setLocation(getLocation());
         setRotation(myTurtle.getOrientation());
     }
 
     public void setPoint (Point2D point) {
-        getView().setX(point.getX());
-        getView().setY(point.getY());
+        myGraphic.getView().setX(point.getX());
+        myGraphic.getView().setY(point.getY());
     }
 
     public double getX() { return myGraphic.getView().getX(); }

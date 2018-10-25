@@ -99,7 +99,7 @@ public class Turtle implements TurtleInterface {
         penVisibility = visibility;
     }
 
-    private void addLine(Line line) {
+    public void addLine(Line line) {
         if (getPenVisibility()){
             line.setStroke(penColor);
             line.setStrokeWidth(penWidth);
@@ -108,7 +108,7 @@ public class Turtle implements TurtleInterface {
     }
 
     public void clearLines() {
-        lines = new ArrayList<Line>();
+        lines = new ArrayList<>();
     }
 
 }

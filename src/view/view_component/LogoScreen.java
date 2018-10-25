@@ -3,6 +3,7 @@ package view.view_component;
 import controller.Controller;
 import javafx.geometry.Point2D;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -29,17 +30,17 @@ public class LogoScreen extends VBox {
                 Integer.parseInt(myResources.getString("Canvas_Height")));
         myTurtle = new TurtleDriver
                 (this, 0, new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE)), controller.setTurtleSupplier());
-        setUpTurtle(myTurtle);
+        addElement(myTurtle.getView());
         this.setBackGroundColor(backgroundColor);
         myPane.setPrefWidth(Integer.parseInt(myResources.getString("Canvas_Width")));
         myPane.setPrefHeight(Integer.parseInt(myResources.getString("Canvas_Height")));
         this.getChildren().add(myPane);
     }
-    public void setUpTurtle (TurtleDriver turtle) {
-        turtle.getView().setLayoutX(200);
-        turtle.getView().setLayoutY(200);
-        myBackGround.getChildren().add(myTurtle.getView());
-        System.out.println("ba");
+
+    public void addElement (Node element) {
+        element.setLayoutX(250);
+        element.setLayoutY(250);
+        myBackGround.getChildren().add(element);
     }
 
     public void updateTurtle () {
@@ -49,6 +50,7 @@ public class LogoScreen extends VBox {
     public void setMyBackGround (int width, int height) {
         myBackGround = new Pane();
         myBackGround.setPrefSize(width, height);
+        myBackGround.setScaleY(-1.0);
         Rectangle clipBoundaries = new Rectangle();
         clipBoundaries.widthProperty().bind(myBackGround.widthProperty());
         clipBoundaries.heightProperty().bind(myBackGround.heightProperty());
@@ -71,6 +73,7 @@ public class LogoScreen extends VBox {
     }
     public void clear () {
         this.getChildren().clear();
+        addElement(myTurtle.getView());
     }
     public Pane getMyPane () {
         return myBackGround;

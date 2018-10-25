@@ -15,6 +15,7 @@ public class Graphic {
     public Graphic (int id, Image image) {
         this.turtleID = id;
         this.turtleView = new ImageView(image);
+        this.turtleView.setScaleY(-1);
         this.turtleView.setFitWidth(100);
         this.turtleView.setFitHeight(100);
     }
@@ -40,10 +41,10 @@ public class Graphic {
     protected void setVisible(boolean visible) {
         turtleView.setVisible(visible);
     }
-    public void setCenter (Point2D center) {
-        turtleView.setX(center.getX() - turtleView.getBoundsInLocal().getWidth() / 2);
-        turtleView.setY(center.getY() - turtleView.getBoundsInLocal().getHeight() / 2);
-    }
+//    public void setCenter (Point2D center) {
+//        turtleView.setX(center.getX() - turtleView.getBoundsInLocal().getWidth() / 2);
+//        turtleView.setY(center.getY() - turtleView.getBoundsInLocal().getHeight() / 2);
+//    }
     public void setRotation (double degrees) {
         RotateTransition rotate = new RotateTransition(Duration.millis(TURN_TIME_MS));
         rotate.setToAngle((degrees + 90) % 360);
