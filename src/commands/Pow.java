@@ -9,7 +9,7 @@ public class Pow extends CommandNode {
     public int numParameters = 2;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         double base = Double.parseDouble(parameters.get(0));
         double power = Double.parseDouble(parameters.get(1));
         return Math.pow(base, power);

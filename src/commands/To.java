@@ -6,16 +6,16 @@ import model.VariableMap;
 import java.util.List;
 
 public class To extends CommandNode {
-    public int numParameters = 2;
+    public int numParameters = 3;
+    private double output = 1;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
-        double num1 = Double.parseDouble(parameters.get(0));
-        double num2 = Double.parseDouble(parameters.get(1));
-        if(num1 == num2){
-            return 1;
-        }
-        return 0;
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
+        //add the variable to the map
+        commands.addCommand(parameters.get(0).toLowerCase(), parameters.get(1), parameters.get(2));
+        //System.out.println(parameters.get(0) + "\n" + parameters.get(1) + "\n" + parameters.get(2));
+        //System.out.println("Added the command " + parameters.get(0));
+        return output;
     }
 
     public int getNumParameters(){

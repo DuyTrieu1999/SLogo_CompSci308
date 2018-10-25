@@ -9,7 +9,7 @@ public class SetHeading extends CommandNode {
     public int numParameters = 1;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         double oldOrientation = turtle.getOrientation();
         double newOrientation = Double.parseDouble(parameters.get(0));
         turtle.setOrientation(newOrientation);

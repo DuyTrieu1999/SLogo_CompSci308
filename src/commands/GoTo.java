@@ -10,7 +10,7 @@ public class GoTo extends CommandNode {
     public int numParameters = 2;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         double newX = Double.parseDouble(parameters.get(0));
         double newY = Double.parseDouble(parameters.get(1));
         double oldX = turtle.getX();

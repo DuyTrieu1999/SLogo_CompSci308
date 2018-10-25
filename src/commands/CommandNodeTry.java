@@ -27,13 +27,10 @@ public class CommandNodeTry extends Node {
         return parent == null;
     }
 
-    public boolean fulfilled(){
+    public boolean fulfilled(CommandInitializer commandInitializer){
         //TODO
-        //start the command initializer with the language
-        CommandInitializer commandInitializer = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
         //create the mapping of commands to commandnodes
-        Map<String, CommandNode> commandNodeMap = commandInitializer.createCommandMap();
-        int numParameters = commandNodeMap.get(CommandName).getNumParameters();
+        int numParameters = commandInitializer.getCommandNode(CommandName).getNumParameters();
         return numParameters==children.size();
     }
 

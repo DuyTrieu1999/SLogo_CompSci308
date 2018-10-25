@@ -9,7 +9,7 @@ public class PenDown extends CommandNode {
     public int numParameters = 0;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         turtle.setPenVisibility(true);
         return 1;
     }

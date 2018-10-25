@@ -11,7 +11,7 @@ public class SetBackground extends CommandNode {
     private HashMap<String, Integer> backgroundMap = new HashMap<>();
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         //turtle.setBackground(backgroundMap.get(parameters.get(0)));
         return 0;
     }
