@@ -31,7 +31,7 @@ public class TurtleDriver {
      */
 
     public TurtleDriver(LogoScreen screen, int id, Image image) {
-        myTurtle = new Turtle(0, 0);
+        myTurtle = new Turtle(0, 0, Color.WHITE);
         myScreen = screen;
         turtleID = id;
         myPen = new Pen(myScreen, Color.BLACK, 1, 1, true);
@@ -50,18 +50,23 @@ public class TurtleDriver {
     }
 
     public void setLocation(Point2D curr, Point2D next) {
-        myGraphic.getView().setX(next.getX());
-        myGraphic.getView().setY(next.getY());
+        getView().setX(next.getX());
+        getView().setY(next.getY());
         myPen.drawLine(curr, next);
     }
     public void updateMove() {
-        Point2D curr = new Point2D(myGraphic.getView().getX(), myGraphic.getView().getY());
-        Point2D next = new Point2D(myTurtle.getX(), myTurtle.getY());
-        setLocation(curr, next);
+        setPoint(new Point2D(getView().getX(), getView().getY()));
+        while (myDestination.getDestinationInList() != null) {
+           setLocation(myLocation, myDestination.getDestinationInList());
+           setPoint(myDestination.getDestinationInList());
+        }
     }
     public void updateMovement(Point2D destination) {
         myDestination.addFutureDestination(destination);
     }
+
+    public Destination getDestination () { return this.myDestination; }
+
     public void setPoint (Point2D point) {
         myLocation = point;
     }

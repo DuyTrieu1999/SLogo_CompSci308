@@ -37,6 +37,7 @@ public class LogoScreen extends VBox {
         turtle.getView().setLayoutX(200);
         turtle.getView().setLayoutY(200);
         myBackGround.getChildren().add(myTurtle.getView());
+        System.out.println("ba");
     }
 
     public void updateTurtle () {

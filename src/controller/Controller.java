@@ -1,6 +1,7 @@
 package controller;
 
 import model.CommandList;
+import model.Turtle;
 import view.SLogoView;
 import view.turtleView.TurtleDriver;
 
@@ -26,6 +27,8 @@ public class Controller {
     public SLogoView getView () {
         return myView;
     }
+
+    public Turtle getTurtle () { return myCommand.getMyParser().getMyTurtle(); }
     /**
      * ViewAPI
      * clearConsole

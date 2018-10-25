@@ -74,6 +74,7 @@ public class SLogoView implements SLogoViewAPI {
     private void step (double elapsedTime) {
         logoScreen.updateTurtle();
         TurtleDriver turtle = logoScreen.getMyTurtle();
+        System.out.println(turtle.getLocation());
     }
     private VBox addButton () {
         dropDownButtons = new DropDownButtons(logoScreen, myController); //TODO: Pass in elements to change (Pen, TurtleDriver)?
@@ -152,6 +153,9 @@ public class SLogoView implements SLogoViewAPI {
     public void runScript () {
         String command = scriptView.getUserInput();
         myController.setParseConsumer(command);
+        TurtleDriver turtle = logoScreen.getMyTurtle();
+        turtle.getMyDestination().addFutureDestination(new Point2D(myController.getTurtle().getX(), myController.getTurtle().getY()));
+        System.out.println(turtle.getMyDestination().getDestinationInList());
     }
 
     /**

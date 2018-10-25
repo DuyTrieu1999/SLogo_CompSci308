@@ -4,6 +4,7 @@ import commands.CommandInitializer;
 import commands.CommandNode;
 import commands.CommandNodeTry;
 import commands.Node;
+import javafx.scene.paint.Color;
 
 import java.util.*;
 
@@ -27,7 +28,10 @@ public class CommandParser {
         t = turt;
     }
 
+    public Turtle getMyTurtle () { return t;}
+
     public void parse (String str) {
+        System.out.println(str);
         parseToList(str);
     }
 
@@ -226,11 +230,7 @@ public class CommandParser {
                     //variable
                     //only time it is not defined is if the preceding command is make
                     if(parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[0]) == 0
-<<<<<<< HEAD
                             || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[1]) == 0 || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeUserInstruction")) == 0){
-=======
-                    || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[1]) == 0 || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeUserInstruction")) == 0){
->>>>>>> 3b1afdf5fbe842f9d4d47d181cf62f892d590c84
                         //this is a make command so simply add it as a child
                         List<String> thisValue = new ArrayList<>();
                         thisValue.add(s);
@@ -294,9 +294,9 @@ public class CommandParser {
     }
 
 
-    public boolean isCommand(String string){
+    public boolean isCommand(String s){
         //todo
-        return commandInitializer.containsKey(string);
+        return commandInitializer.containsKey(s);
     }
 
     public boolean isList(String s){

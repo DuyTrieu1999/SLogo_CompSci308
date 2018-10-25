@@ -32,6 +32,8 @@ public class CommandList implements CommandListInterface{
 
     }
 
+    public CommandParser getMyParser () { return this.myParser; }
+
     public void setLanguage (ResourceBundle language) {
         myParser.setLanguage(language);
     }
