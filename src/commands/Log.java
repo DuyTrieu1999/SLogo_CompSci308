@@ -1,12 +1,21 @@
 package commands;
 
-import java.util.Scanner;
+import model.Turtle;
+import model.VariableMap;
 
-public class Log implements Command {
+import java.util.List;
+
+public class Log extends CommandNode {
+    public int numParameters = 1;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Log");
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+        double num = Double.parseDouble(parameters.get(0));
+        return Math.log(num);
+    }
+
+    public int getNumParameters(){
+        return numParameters;
     }
 
 }

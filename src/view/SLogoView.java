@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
@@ -12,7 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 import view.turtleView.TurtleDriver;
 import view.view_component.*;
@@ -32,7 +32,7 @@ public class SLogoView implements SLogoViewAPI {
     private static final double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private static final double SECOND_DELAY = 100.0/ FRAMES_PER_SECOND;
     private static final Paint BACKGROUND = Color.WHITE;
-    private static final String RESOURCE_PACKAGE = "text/view";
+    private static final String RESOURCE_PACKAGE = "/text/view";
     private static final String STYLESHEET = "default.css";
 
     private Scene myScene;
@@ -45,8 +45,10 @@ public class SLogoView implements SLogoViewAPI {
     private ScriptEditor scriptView;
     private Console consoleView;
     private ResourceBundle myResources;
+    private Controller myController;
 
     public Scene sceneInit () {
+        myController = new Controller(this);
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         initVariable();
         VBox scriptView = addScriptView();
@@ -72,18 +74,17 @@ public class SLogoView implements SLogoViewAPI {
     }
     private void testing() {
         TurtleDriver turtle = logoScreen.getMyTurtle();
-        logoScreen.updateMovement(new Point2D(turtle.getX() + 100, turtle.getY() + 100));
-        logoScreen.updateMovement(new Point2D(turtle.getX() + 150, turtle.getY() + 50));
-        System.out.println(turtle.getMyDestination().getMyFutureDestination());
-        System.out.println(turtle.getLocation());
+        turtle.updateMovement(new Point2D(turtle.getTurtleImage().getX(), turtle.getTurtleImage().getY()));
+        turtle.updateMovement(new Point2D(turtle.getTurtleImage().getX() + 100, turtle.getTurtleImage().getY()));
+        turtle.updateMovement(new Point2D(turtle.getX() + 100, turtle.getY() + 100));
+        turtle.updateMovement(new Point2D(turtle.getTurtleImage().getX(), turtle.getTurtleImage().getY() + 100));
     }
     private void step (double elapsedTime) {
         logoScreen.updateTurtle();
         TurtleDriver turtle = logoScreen.getMyTurtle();
-        System.out.println("Location: " + turtle.getLocation());
     }
     private VBox addButton () {
-        dropDownButtons = new DropDownButtons(logoScreen);
+        dropDownButtons = new DropDownButtons(logoScreen, myController); //TODO: Pass in elements to change (Pen, TurtleDriver)?
         VBox buttonPane = new VBox();
         buttonPane.getChildren().add(dropDownButtons);
         return buttonPane;
@@ -128,16 +129,8 @@ public class SLogoView implements SLogoViewAPI {
         logoScreen.clear();
     }
 
-    public void resetSetting() {
-
-    }
-
-    public void resetTurtle() {
-
-    }
-
     public void clearHistory() {
-
+        scriptView.clearEditor();
     }
 
     public void showMessage(String text) {
@@ -146,6 +139,11 @@ public class SLogoView implements SLogoViewAPI {
 
     public TurtleDriver getTurtle() {
         return null;
+    }
+
+
+    public void setLanguage (String language) {
+
     }
 
     private void stopButtonHandler () {
@@ -161,8 +159,7 @@ public class SLogoView implements SLogoViewAPI {
      */
     public void runScript () {
         String command = scriptView.getUserInput();
-        consoleView.addText(new Text(command));
-        dropDownButtons.editHistoryTab(new Text(command));
+        myController.setParseConsumer(command);
     }
 
     /**
@@ -173,9 +170,9 @@ public class SLogoView implements SLogoViewAPI {
         scriptView.clearEditor();
     }
     private void loadScript () {
-        return;
+
     }
     private void saveScript () {
-        return;
+
     }
 }

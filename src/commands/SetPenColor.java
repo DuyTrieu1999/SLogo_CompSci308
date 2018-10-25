@@ -1,12 +1,24 @@
 package commands;
 
-import java.util.Scanner;
+import javafx.scene.paint.Color;
+import model.Turtle;
+import model.VariableMap;
 
-public class SetPenColor implements Command {
+import java.util.HashMap;
+import java.util.List;
+
+public class SetPenColor extends CommandNode {
+    public int numParameters = 1;
+    private HashMap<String, Color> colorMap = new HashMap<>();
 
     @Override
-    public void run(Scanner args){
-        System.out.println("To");
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+        turtle.setPenColor(colorMap.get(parameters.get(0)));
+        return Double.parseDouble(parameters.get(0));
+    }
+
+    public int getNumParameters(){
+        return numParameters;
     }
 
 }

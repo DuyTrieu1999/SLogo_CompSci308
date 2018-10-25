@@ -1,15 +1,22 @@
 package commands;
 
-import java.util.*;
 import model.Turtle;
 
-public class CommandNode {
+import java.util.*;
+import model.Turtle;
+import model.VariableMap;
+
+public abstract class CommandNode {
 
     private int numChildren;
-    private int numParameters;
+    public int numParameters;
     private List<CommandNode> children;
     private List<String> extraParameters;
     private Turtle turtle;
+
+    public CommandNode(){
+
+    }
 
     public CommandNode(Turtle t){
         numChildren = 0;
@@ -17,14 +24,12 @@ public class CommandNode {
         extraParameters = new ArrayList<>();
         turtle = t;
     }
-
-    public int getNumParameters(){
-        return numParameters;
-    }
+    
+    public abstract int getNumParameters();
 
     public void setExtraParameters(List<String> list){
         extraParameters = list;
     }
 
-
+    public abstract double run(List<String> parameters, Turtle turtle, VariableMap varMap);
 }

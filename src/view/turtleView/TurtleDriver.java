@@ -7,6 +7,8 @@ import javafx.scene.paint.Color;
 import model.Turtle;
 import view.view_component.LogoScreen;
 
+import java.util.LinkedList;
+
 /**
  * TurtleDriver
  *
@@ -20,9 +22,7 @@ public class TurtleDriver {
     private Pen myPen;
     private Destination myDestination;
     private int turtleID; // when multiple turtles arise
-    public static double initX = 250;
-    public static double initY = 275;
-    private Point2D location;
+    private Point2D myLocation;
     private double orientation;
 
 
@@ -33,12 +33,12 @@ public class TurtleDriver {
     public TurtleDriver(LogoScreen screen, int id, Image image) {
         myScreen = screen;
         turtleID = id;
+       // myLocation = new Point2D(myScreen.getMyPane().getPrefWidth()/2, myScreen.getMyPane().getPrefHeight()/2);
         myPen = new Pen(myScreen, Color.BLACK, 1, 1);
         myDestination = new Destination();
         myImage = new ImageView(image);
-        myImage.setX(initX);
-        myImage.setY(initY);
-        location = new Point2D(myImage.getX(), myImage.getY());
+//        myImage.setX(myLocation.getX());
+//        myImage.setY(myLocation.getY());
         myImage.setFitWidth(100);
         myImage.setFitHeight(100);
 //        orientation = myTurtle.getOrientation();
@@ -48,33 +48,38 @@ public class TurtleDriver {
         return myImage;
     }
 
-    public Point2D getLocation () { return location; }
+    public Point2D getLocation () { return new Point2D(myImage.getX(), myImage.getX()); }
 
     public void setTurtleImage(Image im) {
         myImage.setImage(null);
         myImage = new ImageView(im);
     }
 
-    public void setDestination(Point2D destination) {
-        double distX = destination.getX() - this.getX();
-        double distY = destination.getY() - this.getY();
-        myDestination.setMyDestination(destination);
+    public void setLocation(Point2D curr, Point2D next) {
+        myImage.setX(next.getX());
+        myImage.setY(next.getY());
+        setCenter(next);
+        myPen.drawLine(curr, next);
     }
-    public void setLocation(Point2D location) {
-        System.out.println(location.getX());
-        System.out.println(location.getY());
-        myImage.setX(location.getX());
-        myImage.setY(location.getY());
-        System.out.println("bla: " + myImage.getX());
-        System.out.println("bla: " + myImage.getY());
-        System.out.println("width: " + myScreen.getMyPane().getLayoutX()/2);
-        System.out.println("height: " + myScreen.getMyPane().getLayoutY()/2);
-        setCenter(location);
+    public void updateMove() {
+        LinkedList<Point2D> destinations = myDestination.getMyFutureDestination();
+        int stepsToDestination = destinations.size();
+        int i = 0;
+        if (i < stepsToDestination) {
+            this.setLocation(destinations.get(i), destinations.get(i+1));
+            i++;
+        }
+    }
+    public void updateMovement(Point2D destination) {
+        myDestination.addFutureDestination(destination);
+    }
+    public void setPoint (Point2D point) {
+        myLocation = point;
     }
 
-    public double getX() { return location.getX(); }
+    public double getX() { return myImage.getX(); }
 
-    public double getY() { return location.getY(); }
+    public double getY() { return myImage.getY(); }
 
     public double getHeading() { return orientation; }
 

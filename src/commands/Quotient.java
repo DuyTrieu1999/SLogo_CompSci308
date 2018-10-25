@@ -1,12 +1,22 @@
 package commands;
 
-import java.util.Scanner;
+import model.Turtle;
+import model.VariableMap;
 
-public class Quotient implements Command {
+import java.util.List;
+
+public class Quotient extends CommandNode {
+    public int numParameters = 2;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Quotient");
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+        double x = Double.parseDouble(parameters.get(0));
+        double y = Double.parseDouble(parameters.get(1));
+        return x/y;
+    }
+
+    public int getNumParameters(){
+        return numParameters;
     }
 
 }

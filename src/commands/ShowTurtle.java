@@ -1,12 +1,21 @@
 package commands;
 
-import java.util.Scanner;
+import model.Turtle;
+import model.VariableMap;
 
-public class ShowTurtle implements Command {
+import java.util.List;
+
+public class ShowTurtle extends CommandNode {
+    public int numParameters = 0;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Show turtle");
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+        turtle.setVisibility(true);
+        return 1;
+    }
+
+    public int getNumParameters(){
+        return numParameters;
     }
 
 }

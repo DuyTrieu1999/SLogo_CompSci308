@@ -5,13 +5,13 @@ import model.VariableMap;
 
 import java.util.List;
 
-public class Atan extends CommandNode {
+public class SetPenSize extends CommandNode {
     public int numParameters = 1;
 
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
-        double degrees = Double.parseDouble(parameters.get(0));
-        return Math.atan(Math.toRadians(degrees));
+        turtle.setPenWidth(Double.parseDouble(parameters.get(0)));
+        return Double.parseDouble(parameters.get(0));
     }
 
     public int getNumParameters(){

@@ -1,12 +1,19 @@
 package commands;
 
-import java.util.Scanner;
+import model.Turtle;
+import model.VariableMap;
 
-public class yCor implements Command {
+import java.util.List;
+
+public class yCor extends CommandNode {
+    public int numParameters = 0;
 
     @Override
-    public void run(Scanner args){
-        System.out.println("Y cor");
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){return turtle.getY();
+    }
+
+    public int getNumParameters(){
+        return numParameters;
     }
 
 }

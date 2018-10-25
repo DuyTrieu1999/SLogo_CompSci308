@@ -7,4 +7,5 @@ module slogo_team08 {
 
     exports model;
     exports view;
+    exports controller;
 }

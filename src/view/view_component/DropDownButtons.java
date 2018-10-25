@@ -3,6 +3,7 @@ package view.view_component;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ChoiceBox;
@@ -36,12 +37,14 @@ public class DropDownButtons extends VBox {
     private TextFlow variablesTab;
     private TextFlow userTab;
     private LogoScreen myDisplay;
+    private Controller myController;
 
     /**
      * Constructors
      */
-    public DropDownButtons(LogoScreen ls) {
+    public DropDownButtons(LogoScreen ls, Controller controller) {
         myDisplay = ls;
+        myController = controller;
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         this.setId("dropdown-menu");
 
