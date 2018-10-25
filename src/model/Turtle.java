@@ -21,14 +21,14 @@ public class Turtle implements TurtleInterface {
 
     private List<Line> lines;
 
-    public Turtle(double initialX, double initialY, Color color) {
+    public Turtle(double initialX, double initialY) {
         xPos = initialX;
         yPos = initialY;
 
         orientation = 90.0;
         visibility = true;
 
-        penColor = color;
+        //penColor = color;
         penWidth = 1.0;
 
         lines = new ArrayList<>();
@@ -44,7 +44,7 @@ public class Turtle implements TurtleInterface {
         double newX = xPos + distance * Math.cos(Math.toRadians(orientation));
         double newY = yPos + distance * Math.sin(Math.toRadians(orientation));
         moveTo(newX,newY);
-        //System.out.println("The turtle is now at " + xPos + " " + yPos);
+        System.out.println("The turtle is now at " + xPos + " " + yPos);
     }
 
     public void moveTo(double newX, double newY){

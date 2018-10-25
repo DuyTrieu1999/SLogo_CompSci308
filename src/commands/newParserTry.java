@@ -9,7 +9,7 @@ import java.util.*;
 public class newParserTry {
     public newParserTry(String str){
         List<List<String>> list = parseToList(str);
-        Turtle t = new Turtle(0, 0, Color.WHITE);
+        Turtle t = new Turtle(0, 0);
         t.setOrientation(90);
         CommandInitializer commandInitializer = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
         Map<String, CommandNode> commandNodeMap = commandInitializer.createCommandMap();

@@ -59,7 +59,6 @@ public class SLogoView implements SLogoViewAPI {
         myBP.setRight(scriptView);
         myBP.setCenter(logoView);
         myRoot.getChildren().add(myBP);
-        testing();
         return myScene;
     }
     private void initVariable () {
@@ -71,13 +70,6 @@ public class SLogoView implements SLogoViewAPI {
         myScene = new Scene(myRoot, Integer.parseInt(myResources.getString("Scene_Width")),
                 Integer.parseInt(myResources.getString("Scene_Height")), BACKGROUND);
         myScene.getStylesheets().add(STYLESHEET);
-    }
-    private void testing() {
-        TurtleDriver turtle = logoScreen.getMyTurtle();
-        turtle.updateMovement(new Point2D(turtle.getTurtleImage().getX(), turtle.getTurtleImage().getY()));
-        turtle.updateMovement(new Point2D(turtle.getTurtleImage().getX() + 100, turtle.getTurtleImage().getY()));
-        turtle.updateMovement(new Point2D(turtle.getX() + 100, turtle.getY() + 100));
-        turtle.updateMovement(new Point2D(turtle.getTurtleImage().getX(), turtle.getTurtleImage().getY() + 100));
     }
     private void step (double elapsedTime) {
         logoScreen.updateTurtle();

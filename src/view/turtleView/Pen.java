@@ -10,8 +10,10 @@ public class Pen {
     private Color myColor;
     private double myThickness;
     private int penIndex;
+    private boolean isDown;
 
-    public Pen (LogoScreen screen, Color color, double thickness, int index) {
+    public Pen (LogoScreen screen, Color color, double thickness, int index, boolean down) {
+        isDown = down;
         myScreen = screen;
         myColor = color;
         myThickness = thickness;
@@ -44,4 +46,8 @@ public class Pen {
     protected void setThickness(double width) {
         myThickness = width;
     }
+
+    protected boolean isDown () { return isDown; }
+
+    protected void setDown (boolean down) { isDown = down; }
 }
