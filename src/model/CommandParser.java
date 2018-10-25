@@ -12,33 +12,27 @@ public class CommandParser {
     // private List<CommandNode> commandList;
     private String language = "English";
     private String output = "";
-
-     public CommandParser(){
-     }
-
-     public void parse (String string) {
-         System.out.println(string);
-    }
-
-    public void setLanguage(ResourceBundle language) {
-        CommandInitializer commandInitializer = new CommandInitializer(language);
-    }
-
     private List<CommandNode> commandList;
     //make a variablemap
     private VariableMap varMap = new VariableMap();
-    //make a turtle for testing purposes
-    private Turtle t;
     private ResourceBundle resources = ResourceBundle.getBundle("languages/English");
     //start the command initializer with the language
     private CommandInitializer commandInitializer = new CommandInitializer(resources);
     //create the mapping of commands to commandnodes
     private Map<String, CommandNode> commandNodeMap = commandInitializer.createCommandMap();
+    //private Map<Integer, Turtle> turtleMap = new HashMap<>();
+    //private int currentTurtle = 0;
+    private Turtle t = new Turtle(0, 0, Color.WHITE);
 
+     public CommandParser(){
+     }
 
-    public CommandParser(String str, Turtle turtle){
-        t = turtle;
-        List<List<String>> list = parseToList(str);
+     public void parse (String str) {
+         parseToList(str);
+     }
+
+    public void setLanguage(ResourceBundle language) {
+        CommandInitializer commandInitializer = new CommandInitializer(language);
     }
 
     private List<List<String>> parseToList(String str){

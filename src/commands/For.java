@@ -19,7 +19,8 @@ public class For extends CommandNode {
         int increment = Integer.parseInt(forParameters[3]);
         for(int i=start;i<=end;i+=increment){
             varMap.addVariable(forVar, i);
-            CommandParser parser = new CommandParser(parameters.get(1), turtle);
+            CommandParser parser = new CommandParser();
+            parser.parse(parameters.get(1));
             if(i == end){
                 String[] lastLine = parser.getOutput().split("\\s+");
                 output = Double.parseDouble(lastLine[lastLine.length-1]);
