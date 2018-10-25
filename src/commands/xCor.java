@@ -9,8 +9,7 @@ public class xCor extends CommandNode {
     public int numParameters = 0;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
-        return turtle.getX();
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){return turtle.getX();
     }
 
     public int getNumParameters(){

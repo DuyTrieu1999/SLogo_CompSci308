@@ -11,13 +11,13 @@ public class DoTimes extends CommandNode {
     private double output = 0;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         String[] doTimesParameters = parameters.get(0).split("\\s+");
         String doTimesVar = doTimesParameters[0];
         double numTimes = Double.parseDouble(doTimesParameters[1]);
         for(int i=1;i<=numTimes;i++){
             varMap.addVariable(doTimesVar, i);
-            CommandParser parser = new CommandParser();
+            CommandParser parser = new CommandParser(varMap, commands, turtle);
             parser.parse(parameters.get(1));
             if(i == numTimes){
                 String[] lastLine = parser.getOutput().split("\\s+");

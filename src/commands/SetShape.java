@@ -12,7 +12,7 @@ public class SetShape extends CommandNode {
     private HashMap<String, Shape> shapeMap = new HashMap<>();
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         //turtle.setShape(shapeMap.get(parameters.get(0)));
         return 0;
     }

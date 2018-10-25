@@ -31,5 +31,5 @@ public abstract class CommandNode {
         extraParameters = list;
     }
 
-    public abstract double run(List<String> parameters, Turtle turtle, VariableMap varMap);
+    public abstract double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands);
 }

@@ -14,17 +14,18 @@ public class CommandParser {
     private String output = "";
     private List<CommandNode> commandList;
     //make a variablemap
-    private VariableMap varMap = new VariableMap();
+    private VariableMap varMap;
     private ResourceBundle resources = ResourceBundle.getBundle("languages/English");
     //start the command initializer with the language
-    private CommandInitializer commandInitializer = new CommandInitializer(resources);
-    //create the mapping of commands to commandnodes
-    private Map<String, CommandNode> commandNodeMap = commandInitializer.createCommandMap();
+    private CommandInitializer commandInitializer;
     //private Map<Integer, Turtle> turtleMap = new HashMap<>();
     //private int currentTurtle = 0;
-    private Turtle t = new Turtle(0, 0, Color.WHITE);
+    private Turtle t;
 
-     public CommandParser(){
+     public CommandParser(VariableMap vars, CommandInitializer command, Turtle turt){
+         varMap = vars;
+         commandInitializer = command;
+         t = turt;
      }
 
      public void parse (String str) {
@@ -33,7 +34,6 @@ public class CommandParser {
 
     public void setLanguage(ResourceBundle language) {
         commandInitializer = new CommandInitializer(language);
-        commandNodeMap = commandInitializer.createCommandMap();
     }
 
     private List<List<String>> parseToList(String str){
@@ -191,6 +191,7 @@ public class CommandParser {
             //for each space separated value
             if(isCommand(s)){
                 //command
+                //System.out.println(s + " is a command!");
                 List<String> thisValue = new ArrayList<>();
                 thisValue.add(s);
                 CommandNodeTry thisCommandNode = new CommandNodeTry(parent, thisValue);
@@ -226,7 +227,7 @@ public class CommandParser {
                     //variable
                     //only time it is not defined is if the preceding command is make
                     if(parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[0]) == 0
-                    || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[1]) == 0){
+                    || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[1]) == 0 || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeUserInstruction")) == 0){
                         //this is a make command so simply add it as a child
                         List<String> thisValue = new ArrayList<>();
                         thisValue.add(s);
@@ -246,21 +247,22 @@ public class CommandParser {
                         }
                         else {
                             //error
-                            System.out.println("Invalid variable!");
+                            System.out.println(s + " is an invalid variable!");
                         }
                     }
                 }
 
                 //check if this node fulfills the parent
                 if(parent != null){
-                    while(parent != null && parent.fulfilled()){
+                    //System.out.println(parent.getCommandName());
+                    while(parent != null && parent.fulfilled(commandInitializer)){
                         //simplify expression
                         //go up one level and evaluate parent
                         //change parent from CommandNode to Node and set value
                         //since parents must be commands, we know the parent is a command
-                        CommandNode parentCommandNode = commandNodeMap.get(parent.getCommandName());
+                        CommandNode parentCommandNode = commandInitializer.getCommandNode(parent.getCommandName());
                         //merge the lists of all child nodes into one list
-                        double returnValue = parentCommandNode.run(mergeParameters(parent), t, varMap);
+                        double returnValue = parentCommandNode.run(mergeParameters(parent), t, varMap, commandInitializer);
                         CommandNodeTry parentOfParent = parent.getParent();
                         if(parentOfParent != null){
                             parentOfParent.getChildren().remove(parent);
@@ -291,7 +293,7 @@ public class CommandParser {
 
     public boolean isCommand(String s){
         //todo
-        return commandNodeMap.containsKey(s);
+        return commandInitializer.containsKey(s);
     }
 
     public boolean isList(String s){

@@ -3,6 +3,7 @@ package model;
 
 import commands.CommandInitializer;
 import controller.Controller;
+import javafx.scene.paint.Color;
 
 import java.util.ResourceBundle;
 
@@ -17,7 +18,10 @@ public class CommandList implements CommandListInterface{
 
     public CommandList(Controller controller) {
         myController = controller;
-        myParser = new CommandParser();
+        Turtle t = new Turtle(0, 0, Color.WHITE);
+        CommandInitializer c = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
+        VariableMap v = new VariableMap();
+        myParser = new CommandParser(v, c, t);
     }
 
     public void parse(String text) {

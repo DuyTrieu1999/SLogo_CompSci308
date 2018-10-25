@@ -11,7 +11,7 @@ public class For extends CommandNode {
     private double output = 0;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         String[] forParameters = parameters.get(0).split("\\s+");
         String forVar = forParameters[0];
         int start = (int)Double.parseDouble(forParameters[1]);
@@ -19,7 +19,7 @@ public class For extends CommandNode {
         int increment = Integer.parseInt(forParameters[3]);
         for(int i=start;i<=end;i+=increment){
             varMap.addVariable(forVar, i);
-            CommandParser parser = new CommandParser();
+            CommandParser parser = new CommandParser(varMap, commands, turtle);
             parser.parse(parameters.get(1));
             if(i == end){
                 String[] lastLine = parser.getOutput().split("\\s+");

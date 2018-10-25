@@ -12,7 +12,7 @@ public class PenColor extends CommandNode {
     private HashMap<String, Color> colorMap = new HashMap<>();
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         turtle.setPenColor(colorMap.get(parameters.get(0)));
         return Double.parseDouble(parameters.get(0));
     }

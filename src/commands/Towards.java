@@ -9,7 +9,7 @@ public class Towards extends CommandNode {
     public int numParameters = 2;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         double oldOrientation = turtle.getOrientation();
         double x = Double.parseDouble(parameters.get(0));
         double y = Double.parseDouble(parameters.get(1));
