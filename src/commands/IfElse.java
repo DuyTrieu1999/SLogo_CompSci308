@@ -13,13 +13,14 @@ public class IfElse extends CommandNode {
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
         int expression = (int)Double.parseDouble(parameters.get(0));
+        CommandParser parser = new CommandParser();
         if(expression != 0){
-            CommandParser parser = new CommandParser(parameters.get(1), turtle);
+            parser.parse(parameters.get(1));
             String[] lastLine = parser.getOutput().split("\\s+");
             output = Double.parseDouble(lastLine[lastLine.length-1]);
         }
         else {
-            CommandParser parser = new CommandParser(parameters.get(2), turtle);
+            parser.parse(parameters.get(2));
             String[] lastLine = parser.getOutput().split("\\s+");
             output = Double.parseDouble(lastLine[lastLine.length-1]);
         }

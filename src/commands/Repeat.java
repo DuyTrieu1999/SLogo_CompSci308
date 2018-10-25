@@ -19,7 +19,8 @@ public class Repeat extends CommandNode {
         for(int i=1;i<numTimes+1;i++){
             varMap.addVariable("repcount", i);
             //do all the commands
-            CommandParser parser = new CommandParser(parameters.get(1), turtle);
+            CommandParser parser = new CommandParser();
+            parser.parse(parameters.get(1));
             if(i == numTimes){
                 String[] lastLine = parser.getOutput().split("\\s+");
                 output = Double.parseDouble(lastLine[lastLine.length-1]);
