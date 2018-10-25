@@ -32,7 +32,8 @@ public class CommandParser {
      }
 
     public void setLanguage(ResourceBundle language) {
-        CommandInitializer commandInitializer = new CommandInitializer(language);
+        commandInitializer = new CommandInitializer(language);
+        commandNodeMap = commandInitializer.createCommandMap();
     }
 
     private List<List<String>> parseToList(String str){
