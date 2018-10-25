@@ -165,8 +165,9 @@ public class SLogoView implements SLogoViewAPI {
     public void runScript () {
         String command = scriptView.getUserInput();
         myController.setParseConsumer(command);
-        System.out.println(command);
+        //TODO: if
         myHistory.addCommand(command);
+        dropDownButtons.editHistoryTab(command);
     }
 
     /**

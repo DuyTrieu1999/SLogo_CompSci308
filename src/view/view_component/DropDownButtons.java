@@ -6,10 +6,7 @@ import javafx.event.EventHandler;
 import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -30,6 +27,7 @@ public class DropDownButtons extends VBox {
     public static final int DROPDOWN_WIDTH = 200;
     public static final String RESOURCE_PACKAGE = "text/view";
     public static final String PATH_TO_LANGUAGES = "languages/";
+    public static final String HELP_DOCUMENT = "https://www2.cs.duke.edu/courses/compsci308/fall18/assign/03_slogo/commands.php#gsc.tab=0";//"commands.html";
     private ResourceBundle myResources;
     private ResourceBundle myLanguages;
     private ChoiceBox<String> langCB;
@@ -46,8 +44,14 @@ public class DropDownButtons extends VBox {
         myDisplay = ls;
         myController = controller;
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
-        this.setId("dropdown-menu");
 
+        historyTab = new TextFlow();
+        historyTab.setMaxWidth(DROPDOWN_WIDTH);
+        historyTab.setTextAlignment(TextAlignment.JUSTIFY);
+        historyTab.setLineSpacing(5.0);
+
+        this.setId("dropdown-menu");
+        //TODO: make this a separate method?
         this.getChildren().add(addControls());
         this.getChildren().add(addBackgroundTab());
         this.getChildren().add(addPenTab());
@@ -178,18 +182,19 @@ public class DropDownButtons extends VBox {
      */
     private VBox displayHistory() {
         VBox history = new VBox();
-        historyTab = new TextFlow();
-        historyTab.setTextAlignment(TextAlignment.JUSTIFY);
-        historyTab.setLineSpacing(5.0);
-        history.getChildren().add(historyTab);
+        ScrollPane scroller = new ScrollPane();
+        scroller.setMaxHeight(DROPDOWN_WIDTH);
+        scroller.setContent(historyTab);
+        history.getChildren().add(scroller);
         return history;
     }
 
     /**
      *
-     * @param text
+     * @param command
      */
-    public void editHistoryTab(Text text) {
+    public void editHistoryTab(String command) {
+        Text text = new Text(command + "\n");
         historyTab.getChildren().add(text);
     }
 
@@ -301,7 +306,7 @@ public class DropDownButtons extends VBox {
 
                     }
                 };
-                app.getHostServices().showDocument("https://www2.cs.duke.edu/courses/compsci308/fall18/assign/03_slogo/commands.php#gsc.tab=0");
+                app.getHostServices().showDocument(HELP_DOCUMENT);
             }
         });
         helpBox.getChildren().addAll(helpLink);
