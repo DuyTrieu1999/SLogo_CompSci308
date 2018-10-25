@@ -1,7 +1,6 @@
 package view.view_component;
 
 import javafx.application.Application;
-import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
