@@ -27,7 +27,7 @@ public class DropDownButtons extends VBox {
     public static final int DROPDOWN_WIDTH = 200;
     public static final String RESOURCE_PACKAGE = "text/view";
     public static final String PATH_TO_LANGUAGES = "languages/";
-    public static final String HELP_DOCUMENT = "https://www2.cs.duke.edu/courses/compsci308/fall18/assign/03_slogo/commands.php#gsc.tab=0";//"commands.html";
+    public static final String HELP_DOCUMENT = "commands.html";
     private ResourceBundle myResources;
     private ResourceBundle myLanguages;
     private ChoiceBox<String> langCB;
@@ -295,18 +295,12 @@ public class DropDownButtons extends VBox {
     private TitledPane addHelpTab() {
         TitledPane helpTab = new TitledPane();
         HBox helpBox = new HBox();
-        Hyperlink helpLink = new Hyperlink("Basic Logo Commands");
+        Hyperlink helpLink = new Hyperlink(myResources.getString("HelpBasic"));
         helpLink.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("link clicked");
-                Application app = new Application() {
-                    @Override
-                    public void start(Stage primaryStage) throws Exception {
-
-                    }
-                };
-                app.getHostServices().showDocument(HELP_DOCUMENT);
+                PopupWindow helpWindow = new PopupWindow(myResources.getString("HelpBasic"), HELP_DOCUMENT);
+                helpWindow.display();
             }
         });
         helpBox.getChildren().addAll(helpLink);

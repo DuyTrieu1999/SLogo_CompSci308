@@ -181,11 +181,11 @@ public class SLogoView implements SLogoViewAPI {
 
     }
     private void saveScript () {
-        //TODO: Print history
-        Queue<String> myQueue = myHistory.getHistory();
-        while(myQueue.peek() != null) {
-            String h = myQueue.poll();
-            System.out.println(h);
-        }
+//        //TODO: Print history
+//        Queue<String> myQueue = myHistory.getHistory();
+//        while(myQueue.peek() != null) {
+//            String h = myQueue.poll();
+//            System.out.println(h);
+//        }
     }
 }
