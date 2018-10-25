@@ -276,7 +276,8 @@ public class DropDownButtons extends VBox {
         languageCB.makeBox();
         languageCB.setOnAction(e -> {
             String newLanguage = languageCB.getChoice();
-            System.out.println(newLanguage); // TODO: add language functionality
+            ResourceBundle newLangResources = ResourceBundle.getBundle(PATH_TO_LANGUAGES + newLanguage);
+            myController.setLanguageConsumer(newLangResources);
         });
         languageControls.getChildren().addAll(langChoice, languageCB);
         return languageControls;

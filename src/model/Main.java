@@ -13,7 +13,7 @@ import view.SLogoView;
  */
 public class Main extends Application{
 
-    /*
+
     @Override
     public void start (Stage stage) {
         SLogoView ui = new SLogoView();
@@ -21,9 +21,9 @@ public class Main extends Application{
         stage.setScene(ui.sceneInit());
         stage.show();
     }
-    */
 
 
+    /*
     @Override
     public void start(Stage stage){
         Turtle t = new Turtle(0, 0, Color.WHITE);
@@ -31,6 +31,7 @@ public class Main extends Application{
         test.parse("ifelse fd 20 [ fd 50 ] [ bk 50 ]");
         System.out.println(test.getOutput());
     }
+    */
 
     public static void main (String[] args) {
         launch(args);
