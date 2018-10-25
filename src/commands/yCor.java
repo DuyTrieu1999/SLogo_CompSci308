@@ -9,7 +9,7 @@ public class yCor extends CommandNode {
     public int numParameters = 0;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){return turtle.getY();
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){return turtle.getY();
     }
 
     public int getNumParameters(){

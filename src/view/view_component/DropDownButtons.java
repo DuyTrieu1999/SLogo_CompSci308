@@ -1,18 +1,24 @@
 package view.view_component;
 
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
-import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import model.Main;
 
-import java.io.File;
 import java.util.ResourceBundle;
 
 /**
@@ -143,11 +149,12 @@ public class DropDownButtons extends VBox {
 
     /**
      * creates a VBox containing the turtle controls (image)
-     * @return VBox containing pre-defined imageChooser
+     * @return VBox containing pre-defined ImageChooser
      */
     private VBox turtleSettings() {
         VBox turtleControls = new VBox();
-        VBox imageBox = imageChooser();
+        ImageChooser imageBox = new ImageChooser(myDisplay);
+        imageBox.makeChooser();
         turtleControls.getChildren().add(imageBox);
         return turtleControls;
     }
@@ -263,9 +270,8 @@ public class DropDownButtons extends VBox {
      * @return VBox containing ChoiceBox
      */
     private VBox languageSettings() {
-        VBox langControls = new VBox();
+        VBox languageControls = new VBox();
         Label langChoice = new Label(myResources.getString("LanguageChoice"));
-
         langCB = new ChoiceBox<>(); //TODO: use reflection
         langCB.setPrefWidth(DROPDOWN_WIDTH);
         langCB.getItems().add(myResources.getString("Chinese"));
@@ -280,8 +286,8 @@ public class DropDownButtons extends VBox {
         langCB.setValue("English");
         langCB.setOnAction(e -> getChoice());
 
-        langControls.getChildren().addAll(langChoice, langCB);
-        return langControls;
+        languageControls.getChildren().addAll(langChoice, langCB);
+        return languageControls;
     }
 
     public void getChoice() {
@@ -298,35 +304,24 @@ public class DropDownButtons extends VBox {
     private TitledPane addHelpTab() {
         TitledPane helpTab = new TitledPane();
         HBox helpBox = new HBox();
+        Hyperlink helpLink = new Hyperlink("Basic Logo Commands");
+        helpLink.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("link clicked");
+                Application app = new Application() {
+                    @Override
+                    public void start(Stage primaryStage) throws Exception {
+
+                    }
+                };
+                app.getHostServices().showDocument("https://www2.cs.duke.edu/courses/compsci308/fall18/assign/03_slogo/commands.php#gsc.tab=0");
+            }
+        });
+        helpBox.getChildren().addAll(helpLink);
         helpTab.setText(myResources.getString("Help"));
         helpTab.setContent(helpBox);
         helpTab.setExpanded(false);
         return helpTab;
-    }
-
-    /**
-     * creates FileChooser and button associated with it
-     */
-    private VBox imageChooser() {
-        VBox imageControls = new VBox();
-        Label files = new Label(myResources.getString("ImageChoice"));
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(myResources.getString("File"));
-
-        Button fileBtn = new Button(myResources.getString("File"));
-        Label fileName = new Label("File Path");
-//        fileName.setId("fileName");
-
-        fileBtn.setOnAction(value -> {
-            File file = fileChooser.showOpenDialog(getScene().getWindow());
-            //TODO: error check
-            // saves File if no exceptions and File is not null
-            if(file.toString().contains(".png") || file.toString().contains(".jpeg")) { //When got the input as XML file.
-                File myFile = file;
-            }
-        });
-
-        imageControls.getChildren().addAll(files, fileName, fileBtn);
-        return imageControls;
     }
 }

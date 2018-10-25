@@ -9,7 +9,7 @@ public class PenStatus extends CommandNode {
     public int numParameters = 0;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         if(turtle.getPenVisibility() == true){
             return 1;
         }

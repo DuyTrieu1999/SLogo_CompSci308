@@ -11,9 +11,9 @@ public class IfElse extends CommandNode {
     private double output = 0;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         int expression = (int)Double.parseDouble(parameters.get(0));
-        CommandParser parser = new CommandParser();
+        CommandParser parser = new CommandParser(varMap, commands, turtle);
         if(expression != 0){
             parser.parse(parameters.get(1));
             String[] lastLine = parser.getOutput().split("\\s+");

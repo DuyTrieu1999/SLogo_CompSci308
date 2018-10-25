@@ -10,7 +10,7 @@ public class Greater extends CommandNode {
     public int numParameters = 2;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         double num1 = Double.parseDouble(parameters.get(0));
         double num2 = Double.parseDouble(parameters.get(1));
         if(num1 > num2){

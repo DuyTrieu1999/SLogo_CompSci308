@@ -9,7 +9,7 @@ public class SetPenSize extends CommandNode {
     public int numParameters = 1;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         turtle.setPenWidth(Double.parseDouble(parameters.get(0)));
         return Double.parseDouble(parameters.get(0));
     }

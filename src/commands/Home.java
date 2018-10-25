@@ -9,7 +9,7 @@ public class Home extends CommandNode {
     public int numParameters = 0;
 
     @Override
-    public double run(List<String> parameters, Turtle turtle, VariableMap varMap){
+    public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         double oldX = turtle.getX();
         double oldY = turtle.getY();
         turtle.moveTo(0, 0);

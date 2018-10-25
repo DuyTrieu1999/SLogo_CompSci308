@@ -21,14 +21,14 @@ public class Turtle implements TurtleInterface {
 
     private List<Line> lines;
 
-    public Turtle(double initialX, double initialY) {
+    public Turtle(double initialX, double initialY, Color color) {
         xPos = initialX;
         yPos = initialY;
 
         orientation = 90.0;
         visibility = true;
 
-        //penColor = color;
+        penColor = color;
         penWidth = 1.0;
 
         lines = new ArrayList<>();
