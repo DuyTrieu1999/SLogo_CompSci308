@@ -51,6 +51,7 @@ public class TurtleDriver {
     public Point2D getLocation () { return new Point2D(myImage.getX(), myImage.getX()); }
 
     public void setTurtleImage(Image im) {
+        myImage.setImage(null);
         myImage = new ImageView(im);
     }
 
