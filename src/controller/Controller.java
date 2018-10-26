@@ -1,10 +1,8 @@
 package controller;
 
 import model.CommandList;
-import model.CommandListInterface;
+import model.Turtle;
 import view.SLogoView;
-import view.SLogoViewAPI;
-import view.turtleView.TurtleDriver;
 
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
@@ -28,6 +26,15 @@ public class Controller {
     public SLogoView getView () {
         return myView;
     }
+
+    Supplier<SLogoView> SLogoSupplier = () -> {return myView;};
+    public SLogoView setSLogoSupplier () { return SLogoSupplier.get(); }
+    /**
+     * ModelAPI
+     * return turtle
+     */
+    Supplier<Turtle> turtleSupplier = () -> {return myCommand.getMyParser().getMyTurtle();};
+    public Turtle setTurtleSupplier () { return turtleSupplier.get(); }
     /**
      * ViewAPI
      * clearConsole
@@ -61,14 +68,6 @@ public class Controller {
         clearHistoryThread.run();
     }
     /**
-     * ViewAPI
-     * getTurtle
-     */
-    Supplier<TurtleDriver> turtleDriverSupplier = () -> {return myView.getTurtle();};
-    public TurtleDriver setTurtleSuplier () {
-        return turtleDriverSupplier.get();
-    }
-    /**
      * ModelAPI
      * parse
      */
@@ -94,7 +93,7 @@ public class Controller {
         myCommand.setMessage(message);
     }
     Consumer<String> setMessageConsumer = e -> {myCommand.setMessage(e);};
-    public void setMessageConsumer (String t) {
+    public void setMessConsumer (String t) {
         setMessageConsumer.accept(t);
     }
 }

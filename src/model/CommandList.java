@@ -5,16 +5,19 @@ import commands.CommandInitializer;
 import controller.Controller;
 import javafx.scene.paint.Color;
 
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * @Author Yunhao Qing
  * @Author Duy Trieu
+ * @Author Brooke Keene
  */
 
 public class CommandList implements CommandListInterface{
     private CommandParser myParser;
     private Controller myController;
+    private Queue<String> myHistory;
 
     public CommandList(Controller controller) {
         myController = controller;
@@ -22,6 +25,15 @@ public class CommandList implements CommandListInterface{
         CommandInitializer c = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
         VariableMap v = new VariableMap();
         myParser = new CommandParser(v, c, t);
+        myHistory = new LinkedList<>();
+    }
+
+    public void addCommand (String newCommand) {
+        myHistory.add(newCommand);
+    }
+
+    public Queue<String> getHistory() {
+        return myHistory;
     }
 
     public void parse(String text) {
@@ -30,6 +42,10 @@ public class CommandList implements CommandListInterface{
 
     public void setMessage (String message) {
 
+    }
+
+    public CommandParser getMyParser() {
+        return myParser;
     }
 
     public void setLanguage (ResourceBundle language) {
