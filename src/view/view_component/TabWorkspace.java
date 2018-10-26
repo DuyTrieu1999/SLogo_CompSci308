@@ -17,9 +17,9 @@ public class TabWorkspace extends HBox {
         this.controller = controller;
         LogoButton button = createButton();
         AnchorPane pane = new AnchorPane(tabPane, button);
-        AnchorPane.setTopAnchor(button, 5.0);
+        AnchorPane.setTopAnchor(button, 8.0);
         AnchorPane.setRightAnchor(button, 5.0);
-        AnchorPane.setTopAnchor(tabPane, 1.0);
+        AnchorPane.setTopAnchor(tabPane, 6.0);
         AnchorPane.setRightAnchor(tabPane, 1.0);
         AnchorPane.setLeftAnchor(tabPane, 1.0);
         AnchorPane.setBottomAnchor(tabPane, 1.0);

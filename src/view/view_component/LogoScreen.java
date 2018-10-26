@@ -38,8 +38,8 @@ public class LogoScreen extends VBox {
     }
 
     public void addElement (Node element) {
-        element.setLayoutX(250);
-        element.setLayoutY(250);
+        element.setLayoutX(200);
+        element.setLayoutY(200);
         myBackGround.getChildren().add(element);
     }
 
