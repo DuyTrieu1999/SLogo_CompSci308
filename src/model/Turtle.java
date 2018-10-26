@@ -46,6 +46,7 @@ public class Turtle implements TurtleInterface {
         moveTo(newX,newY);
         System.out.println("The turtle is now at " + xPos + " " + yPos);
         System.out.println("orientation is: " + orientation);
+        System.out.println(lines.isEmpty());
     }
 
     public void moveTo(double newX, double newY){

@@ -1,10 +1,8 @@
 package controller;
 
-import commands.Log;
 import model.CommandList;
 import model.Turtle;
 import view.SLogoView;
-import view.view_component.LogoScreen;
 
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
@@ -29,8 +27,8 @@ public class Controller {
         return myView;
     }
 
-    Supplier<LogoScreen> logoScreenSupplier = () -> {return myView.getLogoScreen();};
-    public LogoScreen setLogoScreenSupplier () { return logoScreenSupplier.get(); }
+    Supplier<SLogoView> SLogoSupplier = () -> {return myView;};
+    public SLogoView setSLogoSupplier () { return SLogoSupplier.get(); }
     /**
      * ModelAPI
      * return turtle

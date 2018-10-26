@@ -5,13 +5,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import view.turtleView.TurtleDriver;
@@ -27,16 +24,12 @@ import java.util.ResourceBundle;
  * @author duytrieu
  * @author brookekeene
  */
-public class SLogoView implements SLogoViewAPI {
+public class SLogoView extends HBox implements SLogoViewAPI {
     private static final double FRAMES_PER_SECOND = 1;
     private static final double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private static final double SECOND_DELAY = 100.0/ FRAMES_PER_SECOND;
-    private static final Paint BACKGROUND = Color.WHITE;
     private static final String RESOURCE_PACKAGE = "/text/view";
-    private static final String STYLESHEET = "default.css";
 
-    private Scene myScene;
-    private Group myRoot;
     private Timeline animation = new Timeline();
     private KeyFrame frame;
     private BorderPane myBP;
@@ -47,8 +40,15 @@ public class SLogoView implements SLogoViewAPI {
     private ResourceBundle myResources;
     private Controller myController;
 
-    public Scene sceneInit () {
+    public SLogoView() {
         myController = new Controller(this);
+        sceneInit();
+    }
+    public Controller getMyController () {
+        return myController;
+    }
+
+    public void sceneInit () {
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         logoScreen = new LogoScreen(Color.WHITE, myController);
         initVariable();
@@ -59,24 +59,19 @@ public class SLogoView implements SLogoViewAPI {
         myBP.setLeft(addButton());
         myBP.setRight(scriptView);
         myBP.setCenter(logoView);
-        myRoot.getChildren().add(myBP);
-        return myScene;
+        this.getChildren().add(myBP);
     }
     private void initVariable () {
         frame  = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> this.step(SECOND_DELAY));
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(frame);
-        myRoot = new Group();
-        myScene = new Scene(myRoot, Integer.parseInt(myResources.getString("Scene_Width")),
-                Integer.parseInt(myResources.getString("Scene_Height")), BACKGROUND);
-        myScene.getStylesheets().add(STYLESHEET);
     }
     private void step (double elapsedTime) {
         logoScreen.updateTurtle();
     }
     private VBox addButton () {
-        dropDownButtons = new DropDownButtons(logoScreen, myController); //TODO: Pass in elements to change (Pen, TurtleDriver)?
+        dropDownButtons = new DropDownButtons(logoScreen, myController);
         VBox buttonPane = new VBox();
         buttonPane.getChildren().add(dropDownButtons);
         return buttonPane;
@@ -99,11 +94,10 @@ public class SLogoView implements SLogoViewAPI {
     private VBox addLogoView () {
         VBox logoBox = new VBox();
         HBox buttonBox = new HBox();
-        TabWorkspace workspace = new TabWorkspace(myController);
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Play"), event -> startButtonHandler()));
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Stop"), event -> stopButtonHandler()));
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Step"), event -> stepButtonHandler()));
-        logoBox.getChildren().add(workspace);
+        logoBox.getChildren().add(logoScreen);
         logoBox.getChildren().add(buttonBox);
         buttonBox.setAlignment(Pos.CENTER);
         return logoBox;
@@ -154,8 +148,6 @@ public class SLogoView implements SLogoViewAPI {
     public void runScript () {
         String command = scriptView.getUserInput();
         myController.setParseConsumer(command);
-        TurtleDriver turtle = logoScreen.getMyTurtle();
-        System.out.println(turtle.getMyTurtle().getLines());
     }
 
     /**

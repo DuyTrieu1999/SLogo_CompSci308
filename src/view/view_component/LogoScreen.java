@@ -67,10 +67,6 @@ public class LogoScreen extends VBox {
     public Color getBackGroundColor () {
         return (Color) myBackGround.getBackground().getFills().get(0).getFill();
     }
-    protected boolean isInBounds(Point2D point) {
-        return (point.getX() >= (-myBackGround.getWidth() / 2.0) && point.getX() <= (myBackGround.getWidth() / 2.0)
-                && point.getY() >= (-myBackGround.getHeight() / 2.0) && point.getY() <= (myBackGround.getHeight() / 2.0));
-    }
     public void clear () {
         this.getChildren().clear();
         addElement(myTurtle.getView());
