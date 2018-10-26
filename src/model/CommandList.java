@@ -5,24 +5,35 @@ import commands.CommandInitializer;
 import controller.Controller;
 import javafx.scene.paint.Color;
 
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * @Author Yunhao Qing
  * @Author Duy Trieu
+ * @Author Brooke Keene
  */
 
 public class CommandList implements CommandListInterface{
     private CommandParser myParser;
     private Controller myController;
-    private Turtle turtle;
+    private Queue<String> myHistory;
 
     public CommandList(Controller controller) {
         myController = controller;
-        turtle = new Turtle(0, 0, Color.BLACK);
+        Turtle t = new Turtle(0, 0, Color.WHITE);
         CommandInitializer c = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
         VariableMap v = new VariableMap();
-        myParser = new CommandParser(v, c, turtle);
+        myParser = new CommandParser(v, c, t);
+        myHistory = new LinkedList<>();
+    }
+
+    public void addCommand (String newCommand) {
+        myHistory.add(newCommand);
+    }
+
+    public Queue<String> getHistory() {
+        return myHistory;
     }
 
     public void parse(String text) {
@@ -33,9 +44,9 @@ public class CommandList implements CommandListInterface{
 
     }
 
-    public CommandParser getMyParser () { return this.myParser; }
-
-    public Turtle getTurtle () { return turtle; }
+    public CommandParser getMyParser() {
+        return myParser;
+    }
 
     public void setLanguage (ResourceBundle language) {
         myParser.setLanguage(language);

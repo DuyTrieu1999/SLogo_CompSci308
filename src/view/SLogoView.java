@@ -11,9 +11,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import model.CommandList;
 import view.turtleView.TurtleDriver;
 import view.view_component.*;
 
+import java.util.Queue;
 import java.util.ResourceBundle;
 
 /**
@@ -39,6 +41,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     private Console consoleView;
     private ResourceBundle myResources;
     private Controller myController;
+    private CommandList myHistory;
 
     public SLogoView() {
         myController = new Controller(this);
@@ -51,6 +54,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     public void sceneInit () {
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         logoScreen = new LogoScreen(Color.WHITE, myController);
+        myHistory = new CommandList(myController);
         initVariable();
         VBox scriptView = addScriptView();
         VBox logoView = addLogoView();
@@ -102,10 +106,6 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         buttonBox.setAlignment(Pos.CENTER);
         return logoBox;
     }
-    private void startButtonHandler () {
-        animation.setCycleCount(Timeline.INDEFINITE);
-        animation.playFromStart();
-    }
 
     public void clearConsole() {
         this.clearScript();
@@ -134,6 +134,11 @@ public class SLogoView extends HBox implements SLogoViewAPI {
 
     }
 
+    private void startButtonHandler () {
+        animation.setCycleCount(Timeline.INDEFINITE);
+        animation.playFromStart();
+    }
+
     private void stopButtonHandler () {
         animation.pause();;
     }
@@ -148,6 +153,9 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     public void runScript () {
         String command = scriptView.getUserInput();
         myController.setParseConsumer(command);
+        //TODO: if
+        myHistory.addCommand(command);
+        dropDownButtons.editHistoryTab(command);
     }
 
     /**
@@ -161,6 +169,11 @@ public class SLogoView extends HBox implements SLogoViewAPI {
 
     }
     private void saveScript () {
-
+//        //TODO: Print history
+//        Queue<String> myQueue = myHistory.getHistory();
+//        while(myQueue.peek() != null) {
+//            String h = myQueue.poll();
+//            System.out.println(h);
+//        }
     }
 }
