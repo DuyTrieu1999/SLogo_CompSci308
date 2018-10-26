@@ -30,10 +30,18 @@ public class TurtleManager {
     }
 
     protected void setInitialTurtles () {
-        for (int i=1; i <= initialTurtles; i++) {
-            TurtleDriver turtle = new TurtleDriver(screen, i, turtleImage, turtleModel);
-            turtleMap.put(i, turtle);
-            screen.addElement(turtle.getView());
-        }
+
+    }
+    protected TurtleDriver getTurtleByID (int id) {
+        return turtleMap.get(id);
+    }
+    protected TurtleDriver getCurrentTurtle () {
+        return currentTurtle;
+    }
+    private void createInitTurtle (int id) {
+        TurtleDriver turtle = new TurtleDriver(screen, id, turtleImage, turtleModel);
+        turtleMap.put(id, turtle);
+        screen.addElement(turtle.getView());
+        currentTurtle = turtle;
     }
 }

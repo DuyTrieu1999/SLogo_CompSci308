@@ -4,7 +4,6 @@ import controller.Controller;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -13,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import view.turtleView.TurtleDriver;
 import view.view_component.*;
@@ -50,6 +50,7 @@ public class SLogoView implements SLogoViewAPI {
     public Scene sceneInit () {
         myController = new Controller(this);
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
+        logoScreen = new LogoScreen(Color.WHITE, myController);
         initVariable();
         VBox scriptView = addScriptView();
         VBox logoView = addLogoView();
@@ -98,11 +99,11 @@ public class SLogoView implements SLogoViewAPI {
     private VBox addLogoView () {
         VBox logoBox = new VBox();
         HBox buttonBox = new HBox();
-        logoScreen = new LogoScreen(Color.WHITE, myController);
+        TabWorkspace workspace = new TabWorkspace(myController);
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Play"), event -> startButtonHandler()));
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Stop"), event -> stopButtonHandler()));
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Step"), event -> stepButtonHandler()));
-        logoBox.getChildren().add(logoScreen);
+        logoBox.getChildren().add(workspace);
         logoBox.getChildren().add(buttonBox);
         buttonBox.setAlignment(Pos.CENTER);
         return logoBox;
@@ -125,13 +126,15 @@ public class SLogoView implements SLogoViewAPI {
     }
 
     public void showMessage(String text) {
-
+        consoleView.addText(new Text(text));
     }
 
     public TurtleDriver getTurtle() {
         return null;
     }
-
+    public LogoScreen getLogoScreen () {
+        return logoScreen;
+    }
 
     public void setLanguage (String language) {
 
