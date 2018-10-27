@@ -17,7 +17,7 @@ public class Turtle implements TurtleInterface {
 
     private Color penColor;
     private double penWidth;
-    private boolean penVisibility;
+    private boolean penVisibility = true;
 
     private List<Line> lines;
 

@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 public class CommandInitializer {
 
     private Map<String, CommandNode> commandMap = new HashMap<>();
+    private Map<String, GenericCommand> userCommands = new HashMap<>();
     private ResourceBundle resources;
 
     public CommandInitializer(ResourceBundle language){
@@ -105,6 +106,7 @@ public class CommandInitializer {
 
     public void addCommand(String commandName, String vars, String commands){
         commandMap.put(commandName, new GenericCommand(vars, commands));
+        userCommands.put(commandName, new GenericCommand(vars, commands));
     }
 
     public CommandNode getCommandNode(String key){
@@ -113,5 +115,9 @@ public class CommandInitializer {
 
     public boolean containsKey(String key){
         return commandMap.containsKey(key);
+    }
+
+    public Map<String, GenericCommand> getUserCommands(){
+        return userCommands;
     }
 }
