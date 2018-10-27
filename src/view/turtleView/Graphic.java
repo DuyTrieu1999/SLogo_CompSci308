@@ -2,7 +2,6 @@ package view.turtleView;
 
 import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
-import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -11,6 +10,8 @@ public class Graphic {
     private ImageView turtleView;
     private int turtleID;
     private static final double TURN_TIME_MS = 250;
+    private static final double OPACITY_ACTIVE = 1.0;
+    private static final double OPACITY_INACTIVE = 0.4;
 
     public Graphic (int id, Image image) {
         this.turtleID = id;
@@ -41,14 +42,15 @@ public class Graphic {
     protected void setVisible(boolean visible) {
         turtleView.setVisible(visible);
     }
-//    public void setCenter (Point2D center) {
-//        turtleView.setX(center.getX() - turtleView.getBoundsInLocal().getWidth() / 2);
-//        turtleView.setY(center.getY() - turtleView.getBoundsInLocal().getHeight() / 2);
-//    }
+
     public void setRotation (double degrees) {
         RotateTransition rotate = new RotateTransition(Duration.millis(TURN_TIME_MS));
         rotate.setToAngle((degrees + 90) % 360);
         new SequentialTransition(turtleView, rotate).play();
     }
-
+    public void setImageInactive (boolean active) {
+        if (active)
+            turtleView.setOpacity(OPACITY_ACTIVE);
+        turtleView.setOpacity(OPACITY_INACTIVE);
+    }
 }

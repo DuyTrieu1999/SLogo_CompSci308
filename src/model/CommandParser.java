@@ -31,7 +31,6 @@ public class CommandParser {
     public Turtle getMyTurtle () { return t;}
 
     public void parse (String str) {
-        System.out.println(str);
         parseToList(str);
     }
 

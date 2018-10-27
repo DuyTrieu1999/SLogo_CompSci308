@@ -46,7 +46,6 @@ public class Turtle implements TurtleInterface {
         moveTo(newX,newY);
         System.out.println("The turtle is now at " + xPos + " " + yPos);
         System.out.println("orientation is: " + orientation);
-        System.out.println(lines.isEmpty());
     }
 
     public void moveTo(double newX, double newY){
@@ -106,7 +105,6 @@ public class Turtle implements TurtleInterface {
             line.setStrokeWidth(penWidth);
             lines.add(line);
         }
-        System.out.println("Lines now containes " + lines.size() + " lines!");
     }
 
     public void clearLines() {

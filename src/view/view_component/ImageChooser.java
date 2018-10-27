@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import view.turtleView.TurtleDriver;
 
 import java.io.File;
 import java.util.ResourceBundle;
@@ -40,7 +41,10 @@ public class ImageChooser extends VBox{
                 myFile = file;
                 fileName.setText(myFile.toString());
                 Image fileImage = new Image(myFile.toURI().toString());
-                myDisplay.getMyTurtle().setTurtleImage(fileImage);
+                //myDisplay.getMyTurtle().setTurtleImage(fileImage);
+                for (TurtleDriver turtle: myDisplay.getMyTurtle()) {
+                    turtle.setTurtleImage(fileImage);
+                }
             }
         });
 
