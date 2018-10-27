@@ -1,7 +1,6 @@
 package view.view_component;
 
 import controller.Controller;
-import javafx.geometry.Point2D;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -21,7 +20,6 @@ public class LogoScreen extends VBox {
     private ResourceBundle myResources;
     private StackPane myPane;
     private Pane myBackGround;
-    private TurtleDriver myTurtle;
     private TurtleManager turtleManager;
     private Controller myController;
 
@@ -35,12 +33,9 @@ public class LogoScreen extends VBox {
         myPane = new StackPane();
         setMyBackGround(Integer.parseInt(myResources.getString("Canvas_Width")),
                 Integer.parseInt(myResources.getString("Canvas_Height")));
-//        myTurtle = new TurtleDriver
-//                (this, 0, new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE)), controller.setTurtleSupplier());
-        //addTurtle(myTurtle);
-
         Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
         turtleManager = new TurtleManager(numberOfTurtle, turtleImage, this);
+        System.out.println(turtleManager.getActiveTurtle());
         this.setBackGroundColor(backgroundColor);
         myPane.setPrefWidth(Integer.parseInt(myResources.getString("Canvas_Width")));
         myPane.setPrefHeight(Integer.parseInt(myResources.getString("Canvas_Height")));
