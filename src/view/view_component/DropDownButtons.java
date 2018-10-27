@@ -164,7 +164,7 @@ public class DropDownButtons extends VBox {
         chooserBtn.setOnAction(value -> {
             File file = imageBox.getFileChooser().showOpenDialog(getScene().getWindow());
             //TODO: error check
-            if(file.toString().contains(".png")) {
+            if(file.toString().contains(".png") || file.toString().contains(".jpeg")) {
                 imageBox.setFileName(file.toString());
                 Image myImage = new Image(file.toURI().toString());
                 myDisplay.getMyTurtle().setTurtleImage(myImage);
