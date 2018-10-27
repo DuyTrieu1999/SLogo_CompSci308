@@ -7,6 +7,7 @@ import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -16,6 +17,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import model.Main;
 
+import java.io.File;
 import java.util.ResourceBundle;
 
 /**
@@ -157,8 +159,17 @@ public class DropDownButtons extends VBox {
      */
     private VBox turtleSettings() {
         VBox turtleControls = new VBox();
-        ImageChooser imageBox = new ImageChooser(myDisplay);
-        imageBox.makeChooser();
+        ImageChooser imageBox = new ImageChooser();
+        Button chooserBtn = imageBox.getButton();
+        chooserBtn.setOnAction(value -> {
+            File file = imageBox.getFileChooser().showOpenDialog(getScene().getWindow());
+            //TODO: error check
+            if(file.toString().contains(".png")) {
+                imageBox.setFileName(file.toString());
+                Image myImage = new Image(file.toURI().toString());
+                myDisplay.getMyTurtle().setTurtleImage(myImage);
+            }
+        });
         turtleControls.getChildren().add(imageBox);
         return turtleControls;
     }
