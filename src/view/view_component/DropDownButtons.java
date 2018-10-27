@@ -16,6 +16,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import model.Main;
+import view.turtleView.TurtleDriver;
 
 import java.io.File;
 import java.util.ResourceBundle;
@@ -133,8 +134,10 @@ public class DropDownButtons extends VBox {
         colorChoices.makeBox();
         colorChoices.setOnAction(e -> {
             String newPenColor = colorChoices.getColor();
-            myDisplay.getMyTurtle().setMyPenColor(Color.valueOf(newPenColor));
-            System.out.println("Pen: " + newPenColor);
+//            myDisplay.getMyTurtle().setMyPenColor(Color.valueOf(newPenColor));
+            for (TurtleDriver turtle: myDisplay.getMyTurtle()) {
+                turtle.setMyPenColor(Color.valueOf(newPenColor));
+            }
         });
         penControls.getChildren().addAll(color, colorChoices);
         return penControls;
@@ -289,6 +292,13 @@ public class DropDownButtons extends VBox {
         });
         languageControls.getChildren().addAll(langChoice, languageCB);
         return languageControls;
+    }
+
+    public void getChoice() {
+        String name = langCB.getValue();
+        String filePath = PATH_TO_LANGUAGES + name;
+        myLanguages = ResourceBundle.getBundle(filePath);
+        myController.setLanguageConsumer(myLanguages);
     }
 
     /**

@@ -44,6 +44,10 @@ public class CommandList implements CommandListInterface{
 
     }
 
+    public CommandParser getMyParser() {
+        return myParser;
+    }
+
     public void setLanguage (ResourceBundle language) {
         myParser.setLanguage(language);
     }

@@ -22,15 +22,17 @@ public class CommandParser {
     //private int currentTurtle = 0;
     private Turtle t;
 
-     public CommandParser(VariableMap vars, CommandInitializer command, Turtle turt){
-         varMap = vars;
-         commandInitializer = command;
-         t = turt;
-     }
+    public CommandParser(VariableMap vars, CommandInitializer command, Turtle turt){
+        varMap = vars;
+        commandInitializer = command;
+        t = turt;
+    }
 
-     public void parse (String str) {
-         parseToList(str);
-     }
+    public Turtle getMyTurtle () { return t;}
+
+    public void parse (String str) {
+        parseToList(str);
+    }
 
     public void setLanguage(ResourceBundle language) {
         commandInitializer = new CommandInitializer(language);
@@ -227,7 +229,7 @@ public class CommandParser {
                     //variable
                     //only time it is not defined is if the preceding command is make
                     if(parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[0]) == 0
-                    || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[1]) == 0 || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeUserInstruction")) == 0){
+                            || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[1]) == 0 || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeUserInstruction")) == 0){
                         //this is a make command so simply add it as a child
                         List<String> thisValue = new ArrayList<>();
                         thisValue.add(s);

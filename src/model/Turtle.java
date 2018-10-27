@@ -17,7 +17,7 @@ public class Turtle implements TurtleInterface {
 
     private Color penColor;
     private double penWidth;
-    private boolean penVisibility;
+    private boolean penVisibility = true;
 
     private List<Line> lines;
 
@@ -44,7 +44,8 @@ public class Turtle implements TurtleInterface {
         double newX = xPos + distance * Math.cos(Math.toRadians(orientation));
         double newY = yPos + distance * Math.sin(Math.toRadians(orientation));
         moveTo(newX,newY);
-        //System.out.println("The turtle is now at " + xPos + " " + yPos);
+        System.out.println("The turtle is now at " + xPos + " " + yPos);
+        System.out.println("orientation is: " + orientation);
     }
 
     public void moveTo(double newX, double newY){
@@ -98,7 +99,7 @@ public class Turtle implements TurtleInterface {
         penVisibility = visibility;
     }
 
-    private void addLine(Line line) {
+    public void addLine(Line line) {
         if (getPenVisibility()){
             line.setStroke(penColor);
             line.setStrokeWidth(penWidth);
@@ -107,7 +108,7 @@ public class Turtle implements TurtleInterface {
     }
 
     public void clearLines() {
-        lines = new ArrayList<Line>();
+        lines = new ArrayList<>();
     }
 
 }

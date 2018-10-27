@@ -7,6 +7,8 @@
 }
 
 #main-screen {
+    -fx-pref-width: 500;
+    -fx-pref-height: 500;
     -fx-border-style: solid inside;
     -fx-border-width: 2;
     -fx-border-radius: 5;
@@ -16,7 +18,7 @@
 
 #console-screen {
     -fx-pref-width: 250;
-    -fx-pref-height: 300;
+    -fx-pref-height: 250;
     -fx-border-insets: 5;
     -fx-border-style: solid inside;
     -fx-border-width: 2;
