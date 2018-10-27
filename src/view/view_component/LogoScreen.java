@@ -83,8 +83,10 @@ public class LogoScreen extends VBox {
         return (Color) myBackGround.getBackground().getFills().get(0).getFill();
     }
     public void clear () {
-        this.getChildren().clear();
-        turtleManager.clearTurtle();
+        if (myController.setTurtleSupplier().getLines().size() == 0) {
+            this.getChildren().clear();
+            turtleManager.clearTurtle();
+        }
     }
     public Pane getMyPane () {
         return myBackGround;

@@ -1,22 +1,21 @@
 package view.view_component;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
-import model.Main;
 import view.turtleView.TurtleDriver;
 
+import java.io.File;
 import java.util.ResourceBundle;
 
 /**
@@ -132,7 +131,6 @@ public class DropDownButtons extends VBox {
         colorChoices.makeBox();
         colorChoices.setOnAction(e -> {
             String newPenColor = colorChoices.getColor();
-//            myDisplay.getMyTurtle().setMyPenColor(Color.valueOf(newPenColor));
             for (TurtleDriver turtle: myDisplay.getMyTurtle()) {
                 turtle.setMyPenColor(Color.valueOf(newPenColor));
             }
@@ -160,11 +158,23 @@ public class DropDownButtons extends VBox {
      */
     private VBox turtleSettings() {
         VBox turtleControls = new VBox();
-        ImageChooser imageBox = new ImageChooser(myDisplay);
-        imageBox.makeChooser();
+        ImageChooser imageBox = new ImageChooser();
+        Button chooserBtn = imageBox.getButton();
+        chooserBtn.setOnAction(value -> {
+            File file = imageBox.getFileChooser().showOpenDialog(getScene().getWindow());
+            //TODO: error check
+            if(file.toString().contains(".png") || file.toString().contains(".jpeg")) {
+                imageBox.setFileName(file.toString());
+                Image myImage = new Image(file.toURI().toString());
+                for (TurtleDriver turtle: myDisplay.getMyTurtle()) {
+                    turtle.getView().setImage(myImage);
+                }
+            }
+        });
         turtleControls.getChildren().add(imageBox);
         return turtleControls;
     }
+
 
     /**
      * adds history tab containing the user's input command history
