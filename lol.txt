@@ -1,0 +1,5 @@
+Variables
+poop 50.0
+lol 40.0
+Commands
+to poopy [ :hi ] [ fd hi bk 50 ]

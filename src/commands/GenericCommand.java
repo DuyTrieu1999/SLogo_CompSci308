@@ -37,8 +37,13 @@ public class GenericCommand extends CommandNode {
         return numParameters;
     }
 
-    public String[] getVariables(){
-        return variables;
+    public String getVariables(){
+        String output = "";
+        for(String s:variables){
+            output += s + " ";
+        }
+        output = output.substring(0, output.length()-1);
+        return output;
     }
 
     public String getCommand(){
