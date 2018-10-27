@@ -1,7 +1,10 @@
 package model.xml;
 
 import commands.CommandInitializer;
+import commands.GenericCommand;
 import model.VariableMap;
+
+import java.util.Map;
 
 public class Saver {
     VariableMap variables;
@@ -13,6 +16,14 @@ public class Saver {
     }
 
     public void save(){
+        String output = "Variables\n";
+        for(Map.Entry<String, Double> entry:variables.getVariables().entrySet()){
+            output += entry.getKey() + " " + entry.getValue() + "\n";
+        }
+        output += "Commands\n";
+        for(Map.Entry<String, GenericCommand> entry:commands.getUserCommands().entrySet()){
+            //output += entry.getKey() + " " + entry
+        }
         /*
         return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<data media=\"SLogo\">\n" +
