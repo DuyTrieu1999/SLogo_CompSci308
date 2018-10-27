@@ -25,4 +25,5 @@ Hours Spent:
 
 ### Resources Used
 
-test
+### Known Bugs
+* When you have multiple windows, the control panel will expand beyond the bottom of the screen
