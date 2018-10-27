@@ -17,7 +17,7 @@ public class Turtle implements TurtleInterface {
 
     private Color penColor;
     private double penWidth;
-    private boolean penVisibility;
+    private boolean penVisibility = true;
 
     private List<Line> lines;
 
@@ -106,6 +106,7 @@ public class Turtle implements TurtleInterface {
             line.setStrokeWidth(penWidth);
             lines.add(line);
         }
+        System.out.println("Lines now containes " + lines.size() + " lines!");
     }
 
     public void clearLines() {
