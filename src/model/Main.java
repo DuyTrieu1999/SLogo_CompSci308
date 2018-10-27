@@ -4,6 +4,7 @@ import commands.CommandInitializer;
 import javafx.application.Application;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import view.view_component.TabWorkspace;
 
 import java.io.File;
 import java.util.ResourceBundle;
@@ -14,7 +15,7 @@ import java.util.ResourceBundle;
  */
 public class Main extends Application{
 
-/*
+
     @Override
     public void start (Stage stage) {
         TabWorkspace twsp = new TabWorkspace();
@@ -22,7 +23,7 @@ public class Main extends Application{
         stage.setScene(twsp.getMyScene());
         stage.show();
     }
-    */
+    /*
 
     @Override
     public void start(Stage stage){
@@ -36,6 +37,7 @@ public class Main extends Application{
         s.save();
 
     }
+    */
 
 
 
