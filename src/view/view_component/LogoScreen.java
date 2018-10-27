@@ -9,7 +9,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import view.turtleView.TurtleDriver;
+import view.turtleView.TurtleManager;
 
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LogoScreen extends VBox {
@@ -20,21 +22,32 @@ public class LogoScreen extends VBox {
     private StackPane myPane;
     private Pane myBackGround;
     private TurtleDriver myTurtle;
+    private TurtleManager turtleManager;
+    private Controller myController;
+
+    private int numberOfTurtle = 3;
 
     public LogoScreen (Color backgroundColor, Controller controller) {
+        myController = controller;
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         this.setId("main-screen");
         myBackGround = new Pane();
         myPane = new StackPane();
         setMyBackGround(Integer.parseInt(myResources.getString("Canvas_Width")),
                 Integer.parseInt(myResources.getString("Canvas_Height")));
-        myTurtle = new TurtleDriver
-                (this, 0, new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE)), controller.setTurtleSupplier());
-        addTurtle(myTurtle);
+//        myTurtle = new TurtleDriver
+//                (this, 0, new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE)), controller.setTurtleSupplier());
+        //addTurtle(myTurtle);
+
+        Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
+        turtleManager = new TurtleManager(numberOfTurtle, turtleImage, this);
         this.setBackGroundColor(backgroundColor);
         myPane.setPrefWidth(Integer.parseInt(myResources.getString("Canvas_Width")));
         myPane.setPrefHeight(Integer.parseInt(myResources.getString("Canvas_Height")));
         this.getChildren().add(myPane);
+    }
+    public Controller getController () {
+        return myController;
     }
 
     public void addElement (Node element) {
@@ -49,7 +62,9 @@ public class LogoScreen extends VBox {
     }
 
     public void updateTurtle () {
-        myTurtle.updateMove();
+        for (TurtleDriver turtle: turtleManager.getActiveTurtle()) {
+            turtle.updateMove();
+        }
     }
 
     public void setMyBackGround (int width, int height) {
@@ -74,13 +89,13 @@ public class LogoScreen extends VBox {
     }
     public void clear () {
         this.getChildren().clear();
-        addElement(myTurtle.getView());
+        turtleManager.clearTurtle();
     }
     public Pane getMyPane () {
         return myBackGround;
     }
-    public TurtleDriver getMyTurtle () {
-        return myTurtle;
+    public ArrayList<TurtleDriver> getMyTurtle () {
+        return turtleManager.getActiveTurtle();
     }
 }
 

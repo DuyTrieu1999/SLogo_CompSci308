@@ -23,7 +23,10 @@ public class Pen {
     }
 
     protected void drawLine (Line line) {
-        myScreen.addElement(line);
+        Line newLine = new Line(line.getStartX(),line.getStartY(), line.getEndX(), line.getEndY());
+        newLine.setStroke(myColor);
+        newLine.setStrokeWidth(myThickness);
+        myScreen.addElement(newLine);
     }
 
     protected Color getColor() {

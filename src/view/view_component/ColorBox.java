@@ -16,7 +16,6 @@ import java.util.ResourceBundle;
 public class ColorBox extends ChoiceBox<String> {
     public static final String RESOURCE_PACKAGE = "text/view";
     public static final ArrayList<String> COLORS = new ArrayList<>(List.of(
-            "White",
             "Red",
             "Orange",
             "Yellow",
