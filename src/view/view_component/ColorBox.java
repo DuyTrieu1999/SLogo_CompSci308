@@ -4,9 +4,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * ColorBox
@@ -16,6 +14,7 @@ import java.util.ResourceBundle;
 public class ColorBox extends ChoiceBox<String> {
     public static final String RESOURCE_PACKAGE = "text/view";
     public static final ArrayList<String> COLORS = new ArrayList<>(List.of(
+            "White",
             "Red",
             "Orange",
             "Yellow",
