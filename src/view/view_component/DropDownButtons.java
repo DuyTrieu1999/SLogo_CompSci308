@@ -1,6 +1,5 @@
 package view.view_component;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import controller.Controller;
@@ -14,8 +13,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
-import model.Main;
 import view.turtleView.TurtleDriver;
 
 import java.io.File;
@@ -28,12 +25,11 @@ import java.util.ResourceBundle;
  */
 public class DropDownButtons extends VBox {
     public static final int DROPDOWN_WIDTH = 200;
+    public static final int POSSIBLE_COLORS = 10;
     public static final String RESOURCE_PACKAGE = "text/view";
     public static final String PATH_TO_LANGUAGES = "languages/";
     public static final String HELP_DOCUMENT = "commands.html";
     private ResourceBundle myResources;
-    private ResourceBundle myLanguages;
-    private ChoiceBox<String> langCB;
     private TextFlow historyTab;
     private TextFlow variablesTab;
     private TextFlow userTab;
@@ -49,9 +45,12 @@ public class DropDownButtons extends VBox {
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
 
         historyTab = new TextFlow();
+        variablesTab = new TextFlow();
+        userTab = new TextFlow();
+
         historyTab.setMaxWidth(DROPDOWN_WIDTH);
-        historyTab.setTextAlignment(TextAlignment.JUSTIFY);
-        historyTab.setLineSpacing(5.0);
+        variablesTab.setMaxWidth(DROPDOWN_WIDTH);
+        userTab.setMaxWidth(DROPDOWN_WIDTH);
 
         this.setId("dropdown-menu");
         //TODO: make this a separate method?
@@ -98,18 +97,16 @@ public class DropDownButtons extends VBox {
      * @return VBox containing pre-defined ColorBox
      */
     private VBox backgroundSettings() {
-        VBox backgroundControls = new VBox();
-        Label color = new Label(myResources.getString("Color"));
         ColorBox colorChoices = new ColorBox();
-        colorChoices.makeBox();
+        VBox backgroundControls = colorChoices.makeBox();
         colorChoices.setOnAction(e -> {
             String newBackColor = colorChoices.getColor();
             myDisplay.setBackGroundColor(Color.valueOf(newBackColor));
         });
-        backgroundControls.getChildren().addAll(color, colorChoices);
         return backgroundControls;
     }
 
+    //TODO: get current state from TurtleManager
     /**
      * adds pen tab containing controls for pen settings
      * @return TitledPane containing pen controls
@@ -128,20 +125,18 @@ public class DropDownButtons extends VBox {
      * @return VBox containing pre-defined ColorBox
      */
     private VBox penSettings() {
-        VBox penControls = new VBox();
-        Label color = new Label(myResources.getString("Color"));
         ColorBox colorChoices = new ColorBox();
-        colorChoices.makeBox();
+        VBox penControls = colorChoices.makeBox();
         colorChoices.setOnAction(e -> {
             String newPenColor = colorChoices.getColor();
             for (TurtleDriver turtle: myDisplay.getMyTurtle()) {
                 turtle.setMyPenColor(Color.valueOf(newPenColor));
             }
         });
-        penControls.getChildren().addAll(color, colorChoices);
         return penControls;
     }
 
+    //TODO: get current state from TurtleManager
     /**
      * adds turtle tab containing controls for turtle settings
      * @return TitledPane containing turtle controls
@@ -232,10 +227,10 @@ public class DropDownButtons extends VBox {
      */
     private VBox displayVariable() {
         VBox variables = new VBox();
-        variablesTab = new TextFlow();
-        variablesTab.setTextAlignment(TextAlignment.JUSTIFY);
-        variablesTab.setLineSpacing(5.0);
-        variables.getChildren().addAll(variablesTab);
+        ScrollPane scroller = new ScrollPane();
+        scroller.setMaxHeight(DROPDOWN_WIDTH);
+        scroller.setContent(variablesTab);
+        variables.getChildren().add(scroller);
         return variables;
     }
 
@@ -295,20 +290,27 @@ public class DropDownButtons extends VBox {
         return languageControls;
     }
 
-    public void getChoice() {
-        String name = langCB.getValue();
-        String filePath = PATH_TO_LANGUAGES + name;
-        myLanguages = ResourceBundle.getBundle(filePath);
-        myController.setLanguageConsumer(myLanguages);
-    }
-
     /**
      * adds help tab containing a link that directs the user to a command reference page
      * @return TitledPane containing reference link
      */
     private TitledPane addHelpTab() {
         TitledPane helpTab = new TitledPane();
-        HBox helpBox = new HBox();
+        VBox helpBox = new VBox();
+        Hyperlink helpLink = this.linkHelp();
+        VBox colorHelp = this.makeKey();
+        helpBox.getChildren().addAll(helpLink, colorHelp);
+        helpTab.setText(myResources.getString("Help"));
+        helpTab.setContent(helpBox);
+        helpTab.setExpanded(false);
+        return helpTab;
+    }
+
+    /**
+     * creates Hyperlink to help documentation
+     * @return
+     */
+    private Hyperlink linkHelp() {
         Hyperlink helpLink = new Hyperlink(myResources.getString("HelpBasic"));
         helpLink.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -317,10 +319,22 @@ public class DropDownButtons extends VBox {
                 helpWindow.display();
             }
         });
-        helpBox.getChildren().addAll(helpLink);
-        helpTab.setText(myResources.getString("Help"));
-        helpTab.setContent(helpBox);
-        helpTab.setExpanded(false);
-        return helpTab;
+        return helpLink;
+    }
+
+    /**
+     * creates color key
+     * @return
+     */
+    private VBox makeKey() {
+        VBox key = new VBox();
+        Label colorLbl = new Label(myResources.getString("ColorKey"));
+        TextFlow colors = new TextFlow();
+        for(int i = 0; i < POSSIBLE_COLORS; i++) {
+            Text color = new Text(i + " = " + myResources.getString(Integer.toString(i)) + "\n");
+            colors.getChildren().add(color);
+        }
+        key.getChildren().addAll(colorLbl, colors);
+        return key;
     }
 }
