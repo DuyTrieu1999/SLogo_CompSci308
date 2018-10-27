@@ -30,7 +30,7 @@ public class LogoScreen extends VBox {
                 Integer.parseInt(myResources.getString("Canvas_Height")));
         myTurtle = new TurtleDriver
                 (this, 0, new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE)), controller.setTurtleSupplier());
-        addElement(myTurtle.getView());
+        addTurtle(myTurtle);
         this.setBackGroundColor(backgroundColor);
         myPane.setPrefWidth(Integer.parseInt(myResources.getString("Canvas_Width")));
         myPane.setPrefHeight(Integer.parseInt(myResources.getString("Canvas_Height")));
@@ -38,9 +38,14 @@ public class LogoScreen extends VBox {
     }
 
     public void addElement (Node element) {
-        element.setLayoutX(200);
-        element.setLayoutY(200);
+        element.setLayoutX(250);
+        element.setLayoutY(250);
         myBackGround.getChildren().add(element);
+    }
+    public void addTurtle (TurtleDriver turtle) {
+        turtle.getView().setLayoutX(200);
+        turtle.getView().setLayoutY(200);
+        myBackGround.getChildren().add(turtle.getView());
     }
 
     public void updateTurtle () {

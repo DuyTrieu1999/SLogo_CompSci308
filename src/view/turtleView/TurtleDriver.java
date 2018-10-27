@@ -57,7 +57,8 @@ public class TurtleDriver {
     public void updateMove() {
         List<Line> lineList = myTurtle.getLines();
         for (Line line: lineList) {
-            myPen.drawLine(line);
+            Line newLine = new Line(line.getStartX(),line.getStartY(), line.getEndX(), line.getEndY());
+            myPen.drawLine(newLine);
         }
         setLocation(getLocation());
         setRotation(myTurtle.getOrientation());
