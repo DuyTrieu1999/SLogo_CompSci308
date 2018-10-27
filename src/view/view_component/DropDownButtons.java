@@ -134,7 +134,6 @@ public class DropDownButtons extends VBox {
         colorChoices.makeBox();
         colorChoices.setOnAction(e -> {
             String newPenColor = colorChoices.getColor();
-//            myDisplay.getMyTurtle().setMyPenColor(Color.valueOf(newPenColor));
             for (TurtleDriver turtle: myDisplay.getMyTurtle()) {
                 turtle.setMyPenColor(Color.valueOf(newPenColor));
             }
@@ -170,7 +169,9 @@ public class DropDownButtons extends VBox {
             if(file.toString().contains(".png") || file.toString().contains(".jpeg")) {
                 imageBox.setFileName(file.toString());
                 Image myImage = new Image(file.toURI().toString());
-                myDisplay.getMyTurtle().setTurtleImage(myImage);
+                for (TurtleDriver turtle: myDisplay.getMyTurtle()) {
+                    turtle.getView().setImage(myImage);
+                }
             }
         });
         turtleControls.getChildren().add(imageBox);
