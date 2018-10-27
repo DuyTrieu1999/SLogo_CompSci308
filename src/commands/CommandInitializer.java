@@ -14,7 +14,6 @@ public class CommandInitializer {
     public CommandInitializer(ResourceBundle language){
         resources = language;
         createCommandMap();
-        //System.out.println(language);
     }
 
     public Map<String, CommandNode> createCommandMap(){

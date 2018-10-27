@@ -106,6 +106,7 @@ public class Turtle implements TurtleInterface {
             line.setStrokeWidth(penWidth);
             lines.add(line);
         }
+        System.out.println("Lines now containes " + lines.size() + " lines!");
     }
 
     public void clearLines() {

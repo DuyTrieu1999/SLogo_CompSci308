@@ -32,9 +32,12 @@ public class Main extends Application{
 //    @Override
 //    public void start(Stage stage){
 //        Turtle t = new Turtle(0, 0, Color.WHITE);
-//        //TabWorkspace tbws = new TabWorkspace();
-//        Controller controller = new Controller();
-//        System.out.println(controller.setTurtleSupplier());
+//        CommandInitializer c = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
+//        VariableMap v = new VariableMap();
+//        CommandParser test = new CommandParser(v, c, t);
+//        test.parse("to butt [ :x ] [ forward :x forward 20 ]\nbutt 50");
+//        System.out.println(test.getMyTurtle().getLines());
+//
 //    }
 
 
