@@ -210,14 +210,6 @@ public class DropDownButtons extends VBox {
     }
 
     /**
-     *
-     * @return
-     */
-    public TextFlow getHistoryTab() {
-        return historyTab;
-    }
-
-    /**
      * adds variables tab containing the variables available to the user
      * @return TitledPane containing available variables
      */
