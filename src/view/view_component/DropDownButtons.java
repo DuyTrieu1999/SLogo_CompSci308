@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import view.turtleView.TurtleDriver;
+import view.turtleView.TurtleInfo;
 
 import java.io.File;
 import java.util.ArrayList;

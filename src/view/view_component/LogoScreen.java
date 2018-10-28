@@ -27,10 +27,10 @@ public class LogoScreen extends VBox {
     private static Pane myBackGround;
     private TurtleManager turtleManager;
     private Controller myController;
+    private int numberOfTurtle;
 
-    private int numberOfTurtle = 3;
-
-    public LogoScreen (Color backgroundColor, Controller controller) {
+    public LogoScreen (Color backgroundColor, Controller controller, int numberOfTurtle) {
+        this.numberOfTurtle = numberOfTurtle;
         myController = controller;
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         this.setId("main-screen");
@@ -82,16 +82,10 @@ public class LogoScreen extends VBox {
         Background background = new Background(primaryLayer);
         myBackGround.setBackground(background);
     }
-
-    public Color getBackGroundColor () {
-        return (Color) myBackGround.getBackground().getFills().get(0).getFill();
-    }
     public void clear () {
-        this.getChildren().clear();
         turtleManager.clearTurtle();
-    }
-    public Pane getMyPane () {
-        return myBackGround;
+//        Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
+//        turtleManager = new TurtleManager(numberOfTurtle, turtleImage, this);
     }
     public ArrayList<TurtleDriver> getMyTurtle () {
         return turtleManager.getActiveTurtle();

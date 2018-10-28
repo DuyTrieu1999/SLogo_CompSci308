@@ -13,7 +13,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import model.CommandList;
-import view.turtleView.TurtleDriver;
 import view.view_component.*;
 
 import java.util.ResourceBundle;
@@ -42,6 +41,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     private ResourceBundle myResources;
     private Controller myController;
     private CommandList myHistory;
+    private int numOfTurtle = 3;
 
     public SLogoView() {
         myController = new Controller(this);
@@ -53,7 +53,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
 
     public void sceneInit () {
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
-        logoScreen = new LogoScreen(Color.WHITE, myController);
+        logoScreen = new LogoScreen(Color.WHITE, myController, numOfTurtle);
         myHistory = new CommandList(myController);
         initVariable();
         VBox scriptView = addScriptView();
@@ -103,6 +103,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Play"), event -> startButtonHandler()));
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Stop"), event -> stopButtonHandler()));
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Step"), event -> stepButtonHandler()));
+        buttonBox.getChildren().add(new LogoButton(myResources.getString("Add"), event -> addTurtle()));
         logoBox.getChildren().add(logoScreen);
         logoBox.getChildren().add(buttonBox);
         buttonBox.setAlignment(Pos.CENTER);
@@ -125,17 +126,6 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         consoleView.addText(new Text(text));
     }
 
-    public TurtleDriver getTurtle() {
-        return null;
-    }
-    public LogoScreen getLogoScreen () {
-        return logoScreen;
-    }
-
-    public void setLanguage (String language) {
-
-    }
-
     private void startButtonHandler () {
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.playFromStart();
@@ -148,6 +138,10 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         stopButtonHandler();
         logoScreen.updateTurtle();
     }
+    private void addTurtle () {
+        numOfTurtle ++;
+        clearDisplay();
+    }
 
     /**
      * processes the user input
@@ -155,7 +149,6 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     public void runScript () {
         String command = scriptView.getUserInput();
         myController.setParseConsumer(command);
-        //TODO: if
         myHistory.addCommand(command);
         dropDownButtons.editHistoryTab(command);
         myController.getMessageConsumer(myController.setOutputSupplier());

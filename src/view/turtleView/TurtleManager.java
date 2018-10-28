@@ -61,7 +61,7 @@ public class TurtleManager {
             turtle.setActive(false);
             turtle.getMyGraphic().setImageInactive(false);
         }
-        System.out.println(turtle.getView().getOpacity());
+        System.out.println(activeTurtle.size());
     }
     public ArrayList<TurtleDriver> getActiveTurtle () {
         return activeTurtle;
