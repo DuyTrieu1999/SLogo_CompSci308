@@ -26,42 +26,49 @@ import java.util.ResourceBundle;
  * @author brookekeene
  */
 public class DropDownButtons extends VBox {
-    public static final int DROPDOWN_WIDTH = 200;
+    public static final int DROPDOWN_WIDTH = 250;
+    public static final int DROPDOWN_HEIGHT = 550;
     public static final String RESOURCE_PACKAGE = "text/view";
     public static final String PATH_TO_LANGUAGES = "languages/";
     public static final String HELP_DOCUMENT = "commands.html";
     private ResourceBundle myResources;
-    private ResourceBundle myLanguages;
-    private ChoiceBox<String> langCB;
     private TextFlow historyTab;
     private TextFlow variablesTab;
     private TextFlow userTab;
+    private VBox paletteBox;
     private LogoScreen myDisplay;
     private Controller myController;
+    private Palette myPalette; //TODO: should this be added to controller?
 
     /**
      * Constructors
      */
     public DropDownButtons(LogoScreen ls, Controller controller) {
+        this.setMaxSize(DROPDOWN_WIDTH, DROPDOWN_HEIGHT);
         myDisplay = ls;
         myController = controller;
+        myPalette = new Palette();
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
 
         historyTab = new TextFlow();
+        variablesTab = new TextFlow();
+        userTab = new TextFlow();
+
         historyTab.setMaxWidth(DROPDOWN_WIDTH);
-        historyTab.setTextAlignment(TextAlignment.JUSTIFY);
-        historyTab.setLineSpacing(5.0);
+        variablesTab.setMaxWidth(DROPDOWN_WIDTH);
+        userTab.setMaxWidth(DROPDOWN_WIDTH);
 
         this.setId("dropdown-menu");
         //TODO: make this a separate method?
         this.getChildren().add(addControls());
+        this.getChildren().add(addTurtleState());
         this.getChildren().add(addBackgroundTab());
         this.getChildren().add(addPenTab());
         this.getChildren().add(addTurtleTab());
-        this.getChildren().add(addTurtleState());
         this.getChildren().add(addHistoryTab());
         this.getChildren().add(addVariablesTab());
         this.getChildren().add(addUserCommandTab());
+        this.getChildren().add(addPaletteTab());
         this.getChildren().add(addLanguageTab());
         this.getChildren().add(addHelpTab());
     }
@@ -98,18 +105,16 @@ public class DropDownButtons extends VBox {
      * @return VBox containing pre-defined ColorBox
      */
     private VBox backgroundSettings() {
-        VBox backgroundControls = new VBox();
-        Label color = new Label(myResources.getString("Color"));
         ColorBox colorChoices = new ColorBox();
-        colorChoices.makeBox();
+        VBox backgroundControls = colorChoices.makeBox();
         colorChoices.setOnAction(e -> {
             String newBackColor = colorChoices.getColor();
             myDisplay.setBackGroundColor(Color.valueOf(newBackColor));
         });
-        backgroundControls.getChildren().addAll(color, colorChoices);
         return backgroundControls;
     }
 
+    //TODO: get current state from TurtleManager
     /**
      * adds pen tab containing controls for pen settings
      * @return TitledPane containing pen controls
@@ -128,20 +133,18 @@ public class DropDownButtons extends VBox {
      * @return VBox containing pre-defined ColorBox
      */
     private VBox penSettings() {
-        VBox penControls = new VBox();
-        Label color = new Label(myResources.getString("Color"));
         ColorBox colorChoices = new ColorBox();
-        colorChoices.makeBox();
+        VBox penControls = colorChoices.makeBox();
         colorChoices.setOnAction(e -> {
             String newPenColor = colorChoices.getColor();
             for (TurtleDriver turtle: myDisplay.getMyTurtle()) {
                 turtle.setMyPenColor(Color.valueOf(newPenColor));
             }
         });
-        penControls.getChildren().addAll(color, colorChoices);
         return penControls;
     }
 
+    //TODO: get current state from TurtleManager
     /**
      * adds turtle tab containing controls for turtle settings
      * @return TitledPane containing turtle controls
@@ -177,6 +180,8 @@ public class DropDownButtons extends VBox {
         turtleControls.getChildren().add(imageBox);
         return turtleControls;
     }
+
+    //TODO: update
     private TitledPane addTurtleState() {
         TitledPane turtleState = new TitledPane();
         VBox turtleStateBox = turtleState();
@@ -250,11 +255,20 @@ public class DropDownButtons extends VBox {
      */
     private VBox displayVariable() {
         VBox variables = new VBox();
-        variablesTab = new TextFlow();
-        variablesTab.setTextAlignment(TextAlignment.JUSTIFY);
-        variablesTab.setLineSpacing(5.0);
-        variables.getChildren().addAll(variablesTab);
+        ScrollPane scroller = new ScrollPane();
+        scroller.setMaxHeight(DROPDOWN_WIDTH);
+        scroller.setContent(variablesTab);
+        variables.getChildren().add(scroller);
         return variables;
+    }
+
+    /**
+     *
+     * @param variable
+     */
+    public void editVariableTab(String variable) {
+        Text text = new Text(variable + "\n");
+        variablesTab.getChildren().add(text);
     }
 
     /**
@@ -280,6 +294,31 @@ public class DropDownButtons extends VBox {
         userTab.setTextAlignment(TextAlignment.JUSTIFY);
         userTab.setLineSpacing(5.0);
         return commands;
+    }
+
+    //TODO: display new colors in palette
+    private TitledPane addPaletteTab() {
+        TitledPane paletteTab = new TitledPane();
+        this.paletteDefault();
+        paletteTab.setText(myResources.getString("Palette"));
+        paletteTab.setContent(paletteBox);
+        paletteTab.setExpanded(false);
+        return paletteTab;
+    }
+
+    private void paletteDefault() {
+        Label colorLbl = new Label(myResources.getString("ColorDefault"));
+        paletteBox.getChildren().add(colorLbl);
+        for (int i: myPalette.keySet()) {
+            Text temp = new Text(i + " = " + myPalette.getColorMap().get(i));
+            paletteBox.getChildren().add(temp);
+        }
+    }
+
+    public void editPalette(int index, int r, int g, int b) {
+        myPalette.addColor(index, r, g, b);
+        Text temp = new Text(index + " = " + myPalette.getColorMap().get(index));
+        paletteBox.getChildren().add(temp);
     }
 
     /**
@@ -313,20 +352,26 @@ public class DropDownButtons extends VBox {
         return languageControls;
     }
 
-    public void getChoice() {
-        String name = langCB.getValue();
-        String filePath = PATH_TO_LANGUAGES + name;
-        myLanguages = ResourceBundle.getBundle(filePath);
-        myController.setLanguageConsumer(myLanguages);
-    }
-
     /**
      * adds help tab containing a link that directs the user to a command reference page
      * @return TitledPane containing reference link
      */
     private TitledPane addHelpTab() {
         TitledPane helpTab = new TitledPane();
-        HBox helpBox = new HBox();
+        VBox helpBox = new VBox();
+        Hyperlink helpLink = this.linkHelp();
+        helpBox.getChildren().addAll(helpLink);
+        helpTab.setText(myResources.getString("Help"));
+        helpTab.setContent(helpBox);
+        helpTab.setExpanded(false);
+        return helpTab;
+    }
+
+    /**
+     * creates Hyperlink to help documentation
+     * @return
+     */
+    private Hyperlink linkHelp() {
         Hyperlink helpLink = new Hyperlink(myResources.getString("HelpBasic"));
         helpLink.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -335,10 +380,6 @@ public class DropDownButtons extends VBox {
                 helpWindow.display();
             }
         });
-        helpBox.getChildren().addAll(helpLink);
-        helpTab.setText(myResources.getString("Help"));
-        helpTab.setContent(helpBox);
-        helpTab.setExpanded(false);
-        return helpTab;
+        return helpLink;
     }
 }
