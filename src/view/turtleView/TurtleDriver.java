@@ -72,12 +72,19 @@ public class TurtleDriver {
         myGraphic.getView().setX(point.getX());
         myGraphic.getView().setY(point.getY());
     }
-
+    public int getTurtleID () {
+        return turtleID;
+    }
+    public double getOrientation () {
+        return myTurtle.getOrientation();
+    }
     public double getX() { return myGraphic.getView().getX(); }
 
     public double getY() { return myGraphic.getView().getY(); }
 
     public double getHeading() { return orientation; }
+
+    public Graphic getMyGraphic () { return myGraphic; }
 
     public void setHeading(double degree) { orientation = degree; }
 

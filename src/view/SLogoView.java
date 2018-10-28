@@ -16,7 +16,6 @@ import model.CommandList;
 import view.turtleView.TurtleDriver;
 import view.view_component.*;
 
-import java.util.Queue;
 import java.util.ResourceBundle;
 
 /**
@@ -75,10 +74,12 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     private void step (double elapsedTime) {
         logoScreen.updateTurtle();
     }
-    private ScrollPane addButton () {
+    private VBox addButton () {
         dropDownButtons = new DropDownButtons(logoScreen, myController);
-        ScrollPane buttonPane = new ScrollPane();
-        buttonPane.setContent(dropDownButtons);
+        VBox buttonPane = new VBox();
+        ScrollPane sp = new ScrollPane();
+        sp.setContent(dropDownButtons);
+        buttonPane.getChildren().add(sp);
         return buttonPane;
     }
     private VBox addScriptView () {
@@ -157,6 +158,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         //TODO: if
         myHistory.addCommand(command);
         dropDownButtons.editHistoryTab(command);
+        myController.getMessageConsumer(myController.setOutputSupplier());
     }
 
     /**
