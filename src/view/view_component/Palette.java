@@ -14,15 +14,22 @@ public class Palette extends HashMap<Integer, Color> {
     public static final String RESOURCE_PACKAGE = "text/view";
     private ResourceBundle myResources;
     private HashMap<Integer, String> myColors;
+    private int numDefault;
 
+    /**
+     * Constructor
+     */
     public Palette() {
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         myColors = new HashMap<>();
+        numDefault = Integer.parseInt(myResources.getString("NumColors"));
         this.addDefault();
     }
 
+    /**
+     * adds default colors from resource file to Palette
+     */
     private void addDefault() {
-        int numDefault = Integer.parseInt(myResources.getString("NumColors"));
         for(int i = 0; i < numDefault; i++) {
             String color = myResources.getString(Integer.toString(i));
             this.put(i, Color.valueOf(color));
@@ -30,13 +37,27 @@ public class Palette extends HashMap<Integer, Color> {
         }
     }
 
+    /**
+     * adds new color to Palette
+     * @param index
+     * @param red
+     * @param green
+     * @param blue
+     */
     public void addColor(int index, int red, int green, int blue) {
+        if(this.containsKey(index)) {
+            return;
+        }
         Color newColor = Color.rgb(red, green, blue);
         this.put(index, newColor);
         String color = red + " " + green + " " + blue;
         myColors.put(index, color);
     }
 
+    /**
+     * returns HashMap of indexes and colors as Strings
+     * @return
+     */
     public HashMap getColorMap() {
         return myColors;
     }
