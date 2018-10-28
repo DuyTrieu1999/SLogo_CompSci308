@@ -84,8 +84,6 @@ public class LogoScreen extends VBox {
     }
     public void clear () {
         turtleManager.clearTurtle();
-//        Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
-//        turtleManager = new TurtleManager(numberOfTurtle, turtleImage, this);
     }
     public ArrayList<TurtleDriver> getMyTurtle () {
         return turtleManager.getActiveTurtle();

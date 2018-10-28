@@ -25,6 +25,7 @@ public class TurtleDriver {
     private int turtleID;
     private double orientation;
     private boolean isActive;
+    private boolean visible;
 
     /**
      * Constructor
@@ -35,22 +36,16 @@ public class TurtleDriver {
         myScreen = screen;
         turtleID = id;
         isActive = true;
+        visible = turtle.getVisibility();
         myPen = new Pen(myScreen, id, turtle);
         myGraphic = new Graphic(id, image);
         myGraphic.getView().setX(turtle.getX());
         myGraphic.getView().setY(turtle.getY());
         myGraphic.setImageInactive(isActive);
+        myGraphic.setVisible(visible);
     }
 
     public Point2D getLocation () { return new Point2D(myTurtle.getX(), myTurtle.getY()); }
-
-    public void setTurtleImage(Image im) {
-        myGraphic = new Graphic(turtleID, im);
-    }
-
-    public Turtle getMyTurtle () {
-        return myTurtle;
-    }
 
     public boolean isActive () { return isActive; }
     public void setActive (boolean active) { isActive = active; }

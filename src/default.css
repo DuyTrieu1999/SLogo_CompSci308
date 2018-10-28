@@ -8,6 +8,7 @@
 
 #main-screen {
     -fx-pref-width: 500;
+    -fx-min-width: 500;
     -fx-pref-height: 500;
     -fx-border-style: solid inside;
     -fx-border-width: 2;
