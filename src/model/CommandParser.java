@@ -180,6 +180,7 @@ public class CommandParser {
     }
 
     public String getOutput(){
+        System.out.println(output);
         return output;
     }
 

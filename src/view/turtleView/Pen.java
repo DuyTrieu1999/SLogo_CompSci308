@@ -29,7 +29,7 @@ public class Pen {
         myScreen.addElement(newLine);
     }
 
-    protected Color getColor() {
+    public Color getColor() {
         return myColor;
     }
 
@@ -48,6 +48,8 @@ public class Pen {
     protected void setThickness(double width) {
         myThickness = width;
     }
+
+    public double getThickness () { return myThickness; }
 
     public boolean isDown () { return isDown; }
 

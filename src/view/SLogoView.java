@@ -5,6 +5,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -77,7 +78,9 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     private VBox addButton () {
         dropDownButtons = new DropDownButtons(logoScreen, myController);
         VBox buttonPane = new VBox();
-        buttonPane.getChildren().add(dropDownButtons);
+        ScrollPane sp = new ScrollPane();
+        sp.setContent(dropDownButtons);
+        buttonPane.getChildren().add(sp);
         return buttonPane;
     }
     private VBox addScriptView () {
@@ -156,6 +159,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         //TODO: if
         myHistory.addCommand(command);
         dropDownButtons.editHistoryTab(command);
+        myController.getMessageConsumer(myController.setOutputSupplier());
     }
 
     /**
