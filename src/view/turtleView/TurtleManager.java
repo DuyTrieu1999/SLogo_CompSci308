@@ -6,6 +6,10 @@ import view.view_component.LogoScreen;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @Author Duy Trieu
+ */
+
 public class TurtleManager {
     private HashMap<Integer, TurtleDriver> turtleMap;
     private int initialTurtles;
@@ -24,9 +28,6 @@ public class TurtleManager {
         return turtleMap;
     }
 
-    protected void setInitialTurtles () {
-
-    }
     protected TurtleDriver getTurtleByID (int id) {
         return turtleMap.get(id);
     }
@@ -60,7 +61,7 @@ public class TurtleManager {
             turtle.setActive(false);
             turtle.getMyGraphic().setImageInactive(false);
         }
-        System.out.println(activeTurtle);
+        System.out.println(turtle.getView().getOpacity());
     }
     public ArrayList<TurtleDriver> getActiveTurtle () {
         return activeTurtle;

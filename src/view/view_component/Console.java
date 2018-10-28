@@ -6,6 +6,10 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
+/**
+ * @Author Duy Trieu
+ */
+
 public class Console extends VBox {
     private TextFlow myConsole;
     public Console () {

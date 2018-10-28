@@ -13,9 +13,14 @@ import view.turtleView.TurtleManager;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * @Author Duy Trieu
+ */
+
 public class LogoScreen extends VBox {
     private static final String DEFAULT_IMAGE = "blackturtle.png";
-    private static final String IMAGE_PATH = "slogo_team08/resources/images/";
+    private static final int TURTLE_LAYOUT = 200;
+    private static final int LINE_LAYOUT = 250;
     private static final String RESOURCE_PACKAGE = "/text/view";
     private ResourceBundle myResources;
     private StackPane myPane;
@@ -45,13 +50,13 @@ public class LogoScreen extends VBox {
     }
 
     public void addElement (Node element) {
-        element.setLayoutX(250);
-        element.setLayoutY(250);
+        element.setLayoutX(LINE_LAYOUT);
+        element.setLayoutY(LINE_LAYOUT);
         myBackGround.getChildren().add(element);
     }
     public void addTurtle (TurtleDriver turtle) {
-        turtle.getView().setLayoutX(200);
-        turtle.getView().setLayoutY(200);
+        turtle.getView().setLayoutX(TURTLE_LAYOUT);
+        turtle.getView().setLayoutY(TURTLE_LAYOUT);
         myBackGround.getChildren().add(turtle.getView());
     }
 

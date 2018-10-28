@@ -16,7 +16,6 @@ import model.CommandList;
 import view.turtleView.TurtleDriver;
 import view.view_component.*;
 
-import java.util.Queue;
 import java.util.ResourceBundle;
 
 /**
@@ -75,7 +74,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     private void step (double elapsedTime) {
         logoScreen.updateTurtle();
     }
-    private ScrollPane addButton () {
+    private VBox addButton () {
         dropDownButtons = new DropDownButtons(logoScreen, myController);
         VBox buttonPane = new VBox();
         ScrollPane sp = new ScrollPane();
