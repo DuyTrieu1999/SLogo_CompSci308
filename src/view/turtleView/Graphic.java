@@ -56,6 +56,8 @@ public class Graphic {
         if (active) {
             turtleView.setOpacity(OPACITY_ACTIVE);
         }
-        turtleView.setOpacity(OPACITY_INACTIVE);
+        else {
+            turtleView.setOpacity(OPACITY_INACTIVE);
+        }
     }
 }

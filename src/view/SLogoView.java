@@ -74,7 +74,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     private void step (double elapsedTime) {
         logoScreen.updateTurtle();
     }
-    private ScrollPane addButton () {
+    private VBox addButton () {
         dropDownButtons = new DropDownButtons(logoScreen, myController);
         VBox buttonPane = new VBox();
         ScrollPane sp = new ScrollPane();
