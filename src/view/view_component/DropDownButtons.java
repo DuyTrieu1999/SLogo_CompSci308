@@ -262,6 +262,15 @@ public class DropDownButtons extends VBox {
     }
 
     /**
+     *
+     * @param variable
+     */
+    public void editVariableTab(String variable) {
+        Text text = new Text(variable + "\n");
+        variablesTab.getChildren().add(text);
+    }
+
+    /**
      * adds user-defined commands tab containing the user's pre-defined commands
      * @return TitledPane containing the user-defined commands
      */
