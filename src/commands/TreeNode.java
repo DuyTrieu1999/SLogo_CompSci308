@@ -2,16 +2,16 @@ package commands;
 
 import java.util.*;
 
-public class CommandNodeTry extends Node {
+public class TreeNode extends Node {
 
     private String type;
-    private CommandNodeTry parent;
+    private TreeNode parent;
     private List<String> list;
 
     private String CommandName;
     private List<Node> children = new ArrayList<>();
 
-    public CommandNodeTry(CommandNodeTry p, List<String> myList){
+    public TreeNode(TreeNode p, List<String> myList){
         parent = p;
         list = myList;
         type = "Command";
@@ -34,7 +34,7 @@ public class CommandNodeTry extends Node {
         return numParameters==children.size();
     }
 
-    public CommandNodeTry getParent(){
+    public TreeNode getParent(){
         return parent;
     }
 

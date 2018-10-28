@@ -54,7 +54,8 @@ public class CommandParser {
         int count1 = 0, count2 = 0;
         for (int i = 0; i < partList.size();i++){
             String s = partList.get(i);
-            if (!(isNumeric(s) || isPossibleCommand(s)|| isPossibleVariable(s) || s.equals("[") || s.equals("]"))){
+            //System.out.println("Currently checking " + s);
+            if (!(isNumeric(s) || isPossibleCommand(s)|| isPossibleVariable(s) || s.equals("[") || s.equals("]") || s.equals(" "))){
                 errorMessage = "Invalid input : Input contains index component at index " + i + " of the commands.";
             }
             else if (s.equals("[")) count1++;
@@ -71,7 +72,6 @@ public class CommandParser {
 
     private List<List<String>> parseToList(String str){
         List<String> lines = parseAndCheckList(str);
-        str = str.replace("\n", " ");
         List<List<String>> list = new ArrayList<>();
         int count = 0;
         while (count < lines.size()){
