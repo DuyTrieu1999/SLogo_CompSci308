@@ -306,12 +306,12 @@ public class DropDownButtons extends VBox {
     }
 
     private void paletteDefault() {
-        Label colorLbl = new Label(myResources.getString("ColorDefault"));
-        paletteBox.getChildren().add(colorLbl);
-        for (int i: myPalette.keySet()) {
-            Text temp = new Text(i + " = " + myPalette.getColorMap().get(i));
-            paletteBox.getChildren().add(temp);
-        }
+//        Label colorLbl = new Label(myResources.getString("ColorDefault"));
+//        paletteBox.getChildren().add(colorLbl);
+//        for (int i: myPalette.keySet()) {
+//            Text temp = new Text(i + " = " + myPalette.getColorMap().get(i));
+//            paletteBox.getChildren().add(temp);
+//        }
     }
 
     public void editPalette(int index, int r, int g, int b) {

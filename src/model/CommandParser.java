@@ -77,6 +77,7 @@ public class CommandParser {
 
     private List<List<String>> parseToList(String str){
         List<String> lines = parseAndCheckList(str);
+        str = str.replace("\n", " ");
         List<List<String>> list = new ArrayList<>();
         int count = 0;
         while (count < lines.size()){
@@ -158,6 +159,7 @@ public class CommandParser {
             }
             else {
                 if(isNumeric(s)){
+                    //System.out.println(s + " is a number!");
                     List<String> thisValue = new ArrayList<>();
                     thisValue.add(s);
                     Node thisNode = new Node(parent, thisValue);
@@ -165,6 +167,7 @@ public class CommandParser {
                     parent.addChild(thisNode);
                 }
                 else if(isList(s)){
+                    //System.out.println(s + " is a list!");
                     //is a list
                     //a list should be passed in simply as a string minus the brackets, separated by spaces
                     //todo
@@ -175,6 +178,7 @@ public class CommandParser {
                     parent.addChild(thisNode);
                 }
                 else {
+                    //System.out.println(s + " is a variable!");
                     //variable
                     //only time it is not defined is if the preceding command is make
                     if(parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[0]) == 0
