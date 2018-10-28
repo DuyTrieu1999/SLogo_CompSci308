@@ -4,16 +4,16 @@ import javafx.scene.paint.Color;
 import model.Turtle;
 import model.VariableMap;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class SetPenColor extends CommandNode {
     public int numParameters = 1;
-    private HashMap<String, Color> colorMap = new HashMap<>();
+    private ResourceBundle colors = ResourceBundle.getBundle("text/view");
 
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
-        turtle.setPenColor(colorMap.get(parameters.get(0)));
+        turtle.setPenColor(Color.valueOf(colors.getString(parameters.get(0))));
         return Double.parseDouble(parameters.get(0));
     }
 

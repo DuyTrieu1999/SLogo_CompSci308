@@ -254,30 +254,29 @@ public class CommandParser {
                         }
                     }
                 }
-
-                //check if this node fulfills the parent
-                if(parent != null){
-                    //System.out.println(parent.getCommandName());
-                    while(parent != null && parent.fulfilled(commandInitializer)){
-                        //simplify expression
-                        //go up one level and evaluate parent
-                        //change parent from CommandNode to Node and set value
-                        //since parents must be commands, we know the parent is a command
-                        CommandNode parentCommandNode = commandInitializer.getCommandNode(parent.getCommandName());
-                        //merge the lists of all child nodes into one list
-                        double returnValue = parentCommandNode.run(mergeParameters(parent), t, varMap, commandInitializer);
-                        CommandNodeTry parentOfParent = parent.getParent();
-                        if(parentOfParent != null){
-                            parentOfParent.getChildren().remove(parent);
-                            List<String> returnValueList = new ArrayList<>();
-                            returnValueList.add(Double.toString(returnValue));
-                            parentOfParent.getChildren().add(new Node(parentOfParent, returnValueList));
-                        }
-                        else {
-                            output = output + returnValue + " ";
-                        }
-                        parent = parentOfParent;
+            }
+            //check if this node fulfills the parent
+            if(parent != null){
+                //System.out.println(parent.getCommandName());
+                while(parent != null && parent.fulfilled(commandInitializer)){
+                    //simplify expression
+                    //go up one level and evaluate parent
+                    //change parent from CommandNode to Node and set value
+                    //since parents must be commands, we know the parent is a command
+                    CommandNode parentCommandNode = commandInitializer.getCommandNode(parent.getCommandName());
+                    //merge the lists of all child nodes into one list
+                    double returnValue = parentCommandNode.run(mergeParameters(parent), t, varMap, commandInitializer);
+                    CommandNodeTry parentOfParent = parent.getParent();
+                    if(parentOfParent != null){
+                        parentOfParent.getChildren().remove(parent);
+                        List<String> returnValueList = new ArrayList<>();
+                        returnValueList.add(Double.toString(returnValue));
+                        parentOfParent.getChildren().add(new Node(parentOfParent, returnValueList));
                     }
+                    else {
+                        output = output + returnValue + " ";
+                    }
+                    parent = parentOfParent;
                 }
             }
         }
