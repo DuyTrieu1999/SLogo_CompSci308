@@ -4,23 +4,17 @@ import commands.CommandInitializer;
 import commands.CommandNode;
 import commands.CommandNodeTry;
 import commands.Node;
-import javafx.scene.paint.Color;
 
 import java.util.*;
 
 public class CommandParser {
-    // private List<CommandNode> commandList;
     private String language = "English";
     private String output = "";
-    private List<CommandNode> commandList;
-    //make a variablemap
     private VariableMap varMap;
     private ResourceBundle resources = ResourceBundle.getBundle("languages/English");
-    //start the command initializer with the language
     private CommandInitializer commandInitializer;
-    //private Map<Integer, Turtle> turtleMap = new HashMap<>();
-    //private int currentTurtle = 0;
     private Turtle t;
+    private String errorMessage;
 
     public CommandParser(VariableMap vars, CommandInitializer command, Turtle turt){
         varMap = vars;
@@ -38,145 +32,99 @@ public class CommandParser {
         commandInitializer = new CommandInitializer(language);
     }
 
-    private List<List<String>> parseToList(String str){
-        //split by newline
+    public static boolean isNumeric(String str) {
+        return str.matches("-?[0-9]+\\.?[0-9]*");
+    }
+
+    public static boolean isPossibleVariable(String str){
+        return str.matches(":[a-zA-Z_]+");
+    }
+
+    public static boolean isPossibleCommand(String str){
+        return str.matches("[a-zA-Z_]+(\\?)?");
+    }
+
+
+    private List<String> parseAndCheckList(String str){
         List<String> lines = Arrays.asList(str.split("\\r?\\n"));
         List<String> cleanLines = new ArrayList<>();
-        //trim and ignore comments
         for (String line : lines){
-            if (!line.trim().isEmpty() && !(line.charAt(0)=='#'))
+            if (!line.trim().isEmpty() && !(line.charAt(0)=='#')){
                 cleanLines.add(line);
+            }
         }
-        //lines now contains the cleaned up lines
-        lines  = cleanLines;
+        List<String> partList = new ArrayList<>();
+        for (String s : cleanLines){
+            partList.addAll(Arrays.asList(s.split("\\s+")));
+        }
+        int count1 = 0, count2 = 0;
+        for (int i = 0; i < partList.size();i++){
+            String s = partList.get(i);
+            if (!(isNumeric(s) || isPossibleCommand(s)|| isPossibleVariable(s) || s.equals("[") || s.equals("]"))){
+                errorMessage = "Invalid input : Input contains index component at index" + i + "of the commands.";
+            }
+            else if (s.equals("[")) count1++;
+            else if (s.equals("]")) count2++;
+            if (count2 > count1){
+                errorMessage = "Invalid input : More ']' than '[' at index" + i + "of the commands.";
+            }
+        }
+        if (count1 > count2){
+            errorMessage = "Invalid input : More '[' than ']', brackets cannot match.";
+        }
+        return cleanLines;
+    }
+
+    private List<List<String>> parseToList(String str){
+        List<String> lines = parseAndCheckList(str);
         List<List<String>> list = new ArrayList<>();
         int count = 0;
-        //loop for every line parsed
         while (count < lines.size()){
             String line = lines.get(count);
-            //create a temp arraylist that splits by space
             List<String> temp = new ArrayList<>(Arrays.asList(line.split("\\s+")));
-            //System.out.println("Temp is of length " + temp.size());
-            while(temp.contains("[")){
-                for(int i=0;i<temp.size();i++){
-                    if(temp.get(i).equals("[")){
-                        //start of enclosed string at i
-                        int beginList = i;
-                        i++;
-                        String thisList = "";
-                        while(!temp.get(i).equals("]")){
-                            thisList += temp.get(i) + " ";
-                            i++;
-                        }
-                        thisList = thisList.substring(0, thisList.length()-1);
-                        int endList = i;
-                        temp.remove(endList);
-                        temp.remove(beginList);
-                        for(int j=0;j<(endList-beginList-1);j++){
-                            temp.remove(beginList);
-                        }
-                        temp.add(beginList, thisList);
-                        break;
-                    }
-                }
-            }
-
-            /*
             while (!isBalance(temp)){
-                //if there is no open and end bracket on the same line
                 count++;
                 String newline = lines.get(count);
                 temp.addAll(Arrays.asList(newline.split("\\s+")));
             }
-            */
             list.add(temp);
             count++;
-
         }
 
-        /*
-        for(List<String> thisList:list){
-            for(String s:thisList){
-                System.out.print(s + " break ");
+        for (int i = 0; i < list.size();i++){
+            List<String> temp = list.get(i);
+            List<String> sub = new ArrayList<>();
+            count = 0;
+            while (count < temp.size()){
+                if (!temp.get(count).equals("[") && !temp.get(count).equals("]")){
+                    sub.add(temp.get(count));
+                    count++;
+                }
+                else if (temp.get(count).equals("[")){
+                    List<String> record = new ArrayList<>();
+                    String recordStr = "";
+                    record.add("[");
+                    count++;
+                    while (!isBalance(record)){
+                        recordStr += temp.get(count) + " ";
+                        record.add(temp.get(count));
+                        count++;
+                    }
+                    recordStr = recordStr.substring(0,recordStr.length()-3);
+                    sub.add(recordStr);
+                }
             }
-            System.out.println();
+            list.set(i,sub);
         }
-        */
-
 
         for(List<String> line:list){
             output = output + parseLine(line) + "\n";
         }
-
-
         return list;
+    }
 
-        /*
-        //make a variablemap
-        VariableMap varMap = new VariableMap();
-        //make a turtle for testing purposes
-        Turtle t = new Turtle(0, 0, Color.WHITE);
-        t.setOrientation(90);
-        //start the command initializer with the language
-        CommandInitializer commandInitializer = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
-        //create the mapping of commands to commandnodes
-        Map<String, CommandNode> commandNodeMap = commandInitializer.createCommandMap(t);
-        for(List<String> thisLine:list){
-            //while the list is not all numbers, keep looping
-            while(!checkAllNumbers(thisLine)){
-                //loop through the elements one by one
-                for(int j=0;j<thisLine.size();j++){
-                    //default to this is a number
-                    boolean isNumber = true;
-                    try{
-                        Double.parseDouble(thisLine.get(j));
-                    }
-                    catch(NumberFormatException e){
-                        //if it detects it is not a number, it will return false
-                        isNumber = false;
-                    }
-
-                    //if not a number
-                    if(!isNumber) {
-                        //create the associated command
-                        CommandNode thisCommandNode = commandNodeMap.get(thisLine.get(j));
-                        //get the number of parameters for this command
-                        int numParameters = thisCommandNode.getNumParameters();
-                        //initialize to command can be parsed
-                        boolean canParseCommand = true;
-                        //create a list of parameters for later use
-                        List<String> parameters = new ArrayList<>();
-                        for(int i=1; i<numParameters+1; i++){
-                            //check every parameter ahead for numparameters and see if they are all numbers
-                            try{
-                                Double.parseDouble(thisLine.get(i+j));
-                                //add the parameter for later use
-                                parameters.add(thisLine.get(i+j));
-                            }
-                            catch(NumberFormatException e){
-                                //if there are not all numbers, break
-                                canParseCommand = false;
-                                break;
-                            }
-                        }
-                        //if we can parse the command
-                        if(canParseCommand){
-                            //get the return value from the commandnode
-                            double returnValue = thisCommandNode.run(parameters, t, varMap);
-                            //replace the current item in the list with the return value (this will be the command)
-                            thisLine.set(j, Double.toString(returnValue));
-                            //delete the parameters
-                            for(int k=0;k<numParameters;k++){
-                                thisLine.remove(j+1);
-                            }
-                            //restart from the beginning
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        */
+    public String returnError(){
+        return errorMessage;
     }
 
     public String getOutput(){
@@ -248,8 +196,7 @@ public class CommandParser {
                             parent.addChild(thisNode);
                         }
                         else {
-                            //error
-                            System.out.println(s + " is an invalid variable!");
+
                         }
                     }
                 }
@@ -293,27 +240,14 @@ public class CommandParser {
 
 
     public boolean isCommand(String s){
-        //todo
         return commandInitializer.containsKey(s);
     }
 
     public boolean isList(String s){
-        //todo
-        if(s.split("\\s+").length > 1){
-            return true;
-        }
-        return false;
+        return s.split("\\s+").length > 1;
+
     }
 
-    private boolean allNumeric(List<String> thisList){
-        for(String s:thisList)
-            if (!isNumeric(s)) return false;
-        return true;
-    }
-
-    public static boolean isNumeric(String strNum) {
-        return strNum.matches("-?\\d+(\\.\\d+)?");
-    }
 
     public boolean isBalance(List<String> strings){
         int count1 = 0,count2 = 0;

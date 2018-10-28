@@ -37,6 +37,7 @@ public class CommandList implements CommandListInterface{
     }
 
     public void parse(String text) {
+        myController.getMessageConsumer(myParser.returnError());
         myParser.parse(text);
     }
 
