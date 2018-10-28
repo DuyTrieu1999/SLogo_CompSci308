@@ -31,13 +31,13 @@ public class DropDownButtons extends VBox {
     public static final String PATH_TO_LANGUAGES = "languages/";
     public static final String HELP_DOCUMENT = "commands.html";
     private ResourceBundle myResources;
-
-    private int possibleColors;
     private TextFlow historyTab;
     private TextFlow variablesTab;
     private TextFlow userTab;
+    private VBox paletteBox;
     private LogoScreen myDisplay;
     private Controller myController;
+    private Palette myPalette; //TODO: should this be added to controller?
 
     /**
      * Constructors
@@ -46,9 +46,8 @@ public class DropDownButtons extends VBox {
         this.setMaxSize(DROPDOWN_WIDTH, DROPDOWN_HEIGHT);
         myDisplay = ls;
         myController = controller;
+        myPalette = new Palette();
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
-
-        possibleColors = Integer.parseInt(myResources.getString("NumColors"));
 
         historyTab = new TextFlow();
         variablesTab = new TextFlow();
@@ -61,13 +60,14 @@ public class DropDownButtons extends VBox {
         this.setId("dropdown-menu");
         //TODO: make this a separate method?
         this.getChildren().add(addControls());
+        this.getChildren().add(addTurtleState());
         this.getChildren().add(addBackgroundTab());
         this.getChildren().add(addPenTab());
         this.getChildren().add(addTurtleTab());
-        this.getChildren().add(addTurtleState());
         this.getChildren().add(addHistoryTab());
         this.getChildren().add(addVariablesTab());
         this.getChildren().add(addUserCommandTab());
+        this.getChildren().add(addPaletteTab());
         this.getChildren().add(addLanguageTab());
         this.getChildren().add(addHelpTab());
     }
@@ -179,6 +179,8 @@ public class DropDownButtons extends VBox {
         turtleControls.getChildren().add(imageBox);
         return turtleControls;
     }
+
+    //TODO: update
     private TitledPane addTurtleState() {
         TitledPane turtleState = new TitledPane();
         VBox turtleStateBox = turtleState();
@@ -284,6 +286,31 @@ public class DropDownButtons extends VBox {
         return commands;
     }
 
+    //TODO: display new colors in palette
+    private TitledPane addPaletteTab() {
+        TitledPane paletteTab = new TitledPane();
+        this.paletteDefault();
+        paletteTab.setText(myResources.getString("Palette"));
+        paletteTab.setContent(paletteBox);
+        paletteTab.setExpanded(false);
+        return paletteTab;
+    }
+
+    private void paletteDefault() {
+        Label colorLbl = new Label(myResources.getString("ColorDefault"));
+        paletteBox.getChildren().add(colorLbl);
+        for (int i: myPalette.keySet()) {
+            Text temp = new Text(i + " = " + myPalette.getColorMap().get(i));
+            paletteBox.getChildren().add(temp);
+        }
+    }
+
+    public void editPalette(int index, int r, int g, int b) {
+        myPalette.addColor(index, r, g, b);
+        Text temp = new Text(index + " = " + myPalette.getColorMap().get(index));
+        paletteBox.getChildren().add(temp);
+    }
+
     /**
      * adds languages tab containing controls for the languages understood for commands
      * @return TitledPane containing language controls
@@ -323,8 +350,7 @@ public class DropDownButtons extends VBox {
         TitledPane helpTab = new TitledPane();
         VBox helpBox = new VBox();
         Hyperlink helpLink = this.linkHelp();
-        VBox colorHelp = this.makeKey();
-        helpBox.getChildren().addAll(helpLink, colorHelp);
+        helpBox.getChildren().addAll(helpLink);
         helpTab.setText(myResources.getString("Help"));
         helpTab.setContent(helpBox);
         helpTab.setExpanded(false);
@@ -345,21 +371,5 @@ public class DropDownButtons extends VBox {
             }
         });
         return helpLink;
-    }
-
-    /**
-     * creates color key
-     * @return
-     */
-    private VBox makeKey() {
-        VBox key = new VBox();
-        Label colorLbl = new Label(myResources.getString("ColorKey"));
-        TextFlow colors = new TextFlow();
-        for(int i = 0; i < possibleColors; i++) {
-            Text color = new Text(i + " = " + myResources.getString(Integer.toString(i)) + "\n");
-            colors.getChildren().add(color);
-        }
-        key.getChildren().addAll(colorLbl, colors);
-        return key;
     }
 }
