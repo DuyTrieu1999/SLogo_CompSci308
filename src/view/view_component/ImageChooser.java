@@ -6,6 +6,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import java.util.ResourceBundle;
 
+/**
+ * ImageChooser
+ *
+ * creates a VBox containing a FileChooser
+ *
+ * @author brookekeene
+ */
 public class ImageChooser extends VBox{
     public static final int DROPDOWN_WIDTH = 200;
     public static final String DEFAULT_LABEL = "File Path";
@@ -15,29 +22,44 @@ public class ImageChooser extends VBox{
     private Label fileName;
     private FileChooser myFC;
 
+    /**
+     * Constructor
+     */
     public ImageChooser() {
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
 
         myFC = new FileChooser();
         myFC.setTitle(myResources.getString("File"));
-        Label chooser = new Label(myResources.getString("ImageChoice"));
+        Label chooserLbl = new Label(myResources.getString("ImageChoice"));
 
         fileBtn = new Button(myResources.getString("File"));
         fileName = new Label(DEFAULT_LABEL);
         fileName.setWrapText(true);
         fileName.setMaxWidth(DROPDOWN_WIDTH);
 
-        this.getChildren().addAll(chooser, fileName, fileBtn);
+        this.getChildren().addAll(chooserLbl, fileName, fileBtn);
     }
 
+    /**
+     *
+     * @return Button that opens the FileChooser
+     */
     public Button getButton() {
         return fileBtn;
     }
 
+    /**
+     *
+     * @return FileChooser object to select image
+     */
     public FileChooser getFileChooser() {
         return myFC;
     }
 
+    /**
+     * sets the Label to new file path
+     * @param newLabel
+     */
     public void setFileName(String newLabel) {
         fileName.setText(newLabel);
     }
