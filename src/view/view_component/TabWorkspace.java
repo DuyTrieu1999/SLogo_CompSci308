@@ -14,6 +14,10 @@ import view.SLogoView;
 
 import java.util.ResourceBundle;
 
+/**
+ * @Author Duy Trieu
+ */
+
 public class TabWorkspace {
     private static final Paint BACKGROUND = Color.WHITE;
     private static final String STYLESHEET = "default.css";

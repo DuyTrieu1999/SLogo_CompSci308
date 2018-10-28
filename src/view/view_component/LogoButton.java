@@ -8,6 +8,10 @@ import java.util.ResourceBundle;
 
 public class LogoButton extends Button {
 
+    /**
+     * @Author Duy Trieu
+     */
+
     public static final int BUTTON_GRID = 60;
 
     public LogoButton (String buttonName, EventHandler<ActionEvent> event) {
