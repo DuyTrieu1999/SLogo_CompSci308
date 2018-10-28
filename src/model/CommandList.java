@@ -19,13 +19,14 @@ public class CommandList implements CommandListInterface{
     private Controller myController;
     private Queue<String> myHistory;
     private VariableMap myVariables;
+    private CommandInitializer myInitializer;
 
     public CommandList(Controller controller) {
         myController = controller;
         Turtle t = new Turtle(0, 0, Color.BLACK);
-        CommandInitializer c = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
+        myInitializer = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
         myVariables = new VariableMap();
-        myParser = new CommandParser(myVariables, c, t);
+        myParser = new CommandParser(myVariables, myInitializer, t);
         myHistory = new LinkedList<>();
     }
 
@@ -56,6 +57,10 @@ public class CommandList implements CommandListInterface{
 
     public VariableMap getMyVariables() {
         return myVariables;
+    }
+
+    public CommandInitializer getMyInitializer() {
+        return myInitializer;
     }
 }
 
