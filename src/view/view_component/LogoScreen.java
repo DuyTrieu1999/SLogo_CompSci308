@@ -24,7 +24,7 @@ public class LogoScreen extends VBox {
     private static final String RESOURCE_PACKAGE = "/text/view";
     private ResourceBundle myResources;
     private StackPane myPane;
-    private Pane myBackGround;
+    private static Pane myBackGround;
     private TurtleManager turtleManager;
     private Controller myController;
 
@@ -77,7 +77,7 @@ public class LogoScreen extends VBox {
         myPane.getChildren().add(myBackGround);
     }
 
-    public void setBackGroundColor (Color backGroundColor) {
+    public static void setBackGroundColor (Color backGroundColor) {
         BackgroundFill primaryLayer = new BackgroundFill(backGroundColor, CornerRadii.EMPTY, Insets.EMPTY);
         Background background = new Background(primaryLayer);
         myBackGround.setBackground(background);

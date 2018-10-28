@@ -11,6 +11,7 @@ public class PenDown extends CommandNode {
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         turtle.setPenVisibility(true);
+        //System.out.println("Returning 1");
         return 1;
     }
 
