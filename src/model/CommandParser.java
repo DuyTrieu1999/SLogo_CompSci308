@@ -71,6 +71,7 @@ public class CommandParser {
 
     private List<List<String>> parseToList(String str){
         List<String> lines = parseAndCheckList(str);
+        str = str.replace("\n", " ");
         List<List<String>> list = new ArrayList<>();
         int count = 0;
         while (count < lines.size()){
