@@ -24,12 +24,14 @@ import java.util.ResourceBundle;
  * @author brookekeene
  */
 public class DropDownButtons extends VBox {
-    public static final int DROPDOWN_WIDTH = 200;
-    public static final int POSSIBLE_COLORS = 10;
+    public static final int DROPDOWN_WIDTH = 250;
+    public static final int DROPDOWN_HEIGHT = 550;
     public static final String RESOURCE_PACKAGE = "text/view";
     public static final String PATH_TO_LANGUAGES = "languages/";
     public static final String HELP_DOCUMENT = "commands.html";
     private ResourceBundle myResources;
+
+    private int possibleColors;
     private TextFlow historyTab;
     private TextFlow variablesTab;
     private TextFlow userTab;
@@ -40,9 +42,12 @@ public class DropDownButtons extends VBox {
      * Constructors
      */
     public DropDownButtons(LogoScreen ls, Controller controller) {
+        this.setMaxSize(DROPDOWN_WIDTH, DROPDOWN_HEIGHT);
         myDisplay = ls;
         myController = controller;
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
+
+        possibleColors = Integer.parseInt(myResources.getString("NumColors"));
 
         historyTab = new TextFlow();
         variablesTab = new TextFlow();
@@ -330,7 +335,7 @@ public class DropDownButtons extends VBox {
         VBox key = new VBox();
         Label colorLbl = new Label(myResources.getString("ColorKey"));
         TextFlow colors = new TextFlow();
-        for(int i = 0; i < POSSIBLE_COLORS; i++) {
+        for(int i = 0; i < possibleColors; i++) {
             Text color = new Text(i + " = " + myResources.getString(Integer.toString(i)) + "\n");
             colors.getChildren().add(color);
         }
