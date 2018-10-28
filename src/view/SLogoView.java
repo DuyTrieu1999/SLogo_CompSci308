@@ -16,7 +16,6 @@ import model.CommandList;
 import view.turtleView.TurtleDriver;
 import view.view_component.*;
 
-import java.util.Queue;
 import java.util.ResourceBundle;
 
 /**

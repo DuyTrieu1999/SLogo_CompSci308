@@ -2,9 +2,13 @@ package view.view_component;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import view.turtleView.TurtleDriver;
+
+/**
+ * @Author Duy Trieu
+ */
+
 
 public class TurtleInfo extends VBox {
     public TurtleInfo(TurtleDriver turtle) {

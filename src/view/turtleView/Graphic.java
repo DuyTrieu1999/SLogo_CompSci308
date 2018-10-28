@@ -6,6 +6,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+/**
+ * @Author Duy Trieu
+ */
+
 public class Graphic {
     private ImageView turtleView;
     private int turtleID;
