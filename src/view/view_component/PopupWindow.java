@@ -1,15 +1,10 @@
 package view.view_component;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.web.WebEngine;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.web.WebView;
-
-import java.io.IOException;
 import java.net.URL;
 
 /**

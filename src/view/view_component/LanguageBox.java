@@ -29,6 +29,7 @@ public class LanguageBox extends ChoiceBox<String> {
         this.getItems().add(myResources.getString("Portuguese"));
         this.getItems().add(myResources.getString("Russian"));
         this.getItems().add(myResources.getString("Spanish"));
+        this.getItems().add(myResources.getString("Urdu"));
 
         this.setValue(DEFAULT_LANGUAGE);
     }
