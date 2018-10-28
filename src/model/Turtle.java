@@ -104,6 +104,7 @@ public class Turtle implements TurtleInterface {
             line.setStroke(penColor);
             line.setStrokeWidth(penWidth);
             lines.add(line);
+            System.out.println(lines.size());
         }
     }
 

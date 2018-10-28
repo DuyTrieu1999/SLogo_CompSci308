@@ -1,7 +1,6 @@
 package view.turtleView;
 
 import javafx.scene.image.Image;
-import model.Turtle;
 import view.view_component.LogoScreen;
 
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ public class TurtleManager {
     private HashMap<Integer, TurtleDriver> turtleMap;
     private int initialTurtles;
     private LogoScreen screen;
-    private TurtleDriver currentTurtle;
     private Image turtleImage;
     private ArrayList<TurtleDriver> activeTurtle;
 
@@ -26,24 +24,17 @@ public class TurtleManager {
         return turtleMap;
     }
 
-    public void setCurrentTurtle(TurtleDriver turtle) {
-        currentTurtle = turtle;
-    }
-
     protected void setInitialTurtles () {
 
     }
     protected TurtleDriver getTurtleByID (int id) {
         return turtleMap.get(id);
     }
-    protected TurtleDriver getCurrentTurtle () {
-        return currentTurtle;
-    }
+
     private void createInitTurtle (int id) {
         TurtleDriver turtle = new TurtleDriver(screen, id, turtleImage, screen.getController().setTurtleSupplier());
         turtleMap.put(id, turtle);
         screen.addTurtle(turtle);
-        currentTurtle = turtle;
         activeTurtle.add(turtle);
         turtle.getView().setOnMouseClicked(e -> addActiveTurtle(turtle));
         turtle.setActive(true);
@@ -55,21 +46,21 @@ public class TurtleManager {
     }
     private void createListTurtle () {
         for (int i=1; i< initialTurtles+1; i++) {
-            setTurtleActive(i, true);
+            createInitTurtle(i);
         }
-    }
-    private void setTurtleActive (int id, boolean active) {
-        if (turtleMap.containsKey(id)) {
-            TurtleDriver turtle = turtleMap.get(id);
-
-        }
-        createInitTurtle(id);
     }
     private void addActiveTurtle (TurtleDriver turtle) {
-        if (turtle.isActive())
+        if (!turtle.isActive()) {
             activeTurtle.add(turtle);
-        else
+            turtle.setActive(true);
+            turtle.getMyGraphic().setImageInactive(true);
+        }
+        else {
             activeTurtle.remove(turtle);
+            turtle.setActive(false);
+            turtle.getMyGraphic().setImageInactive(false);
+        }
+        System.out.println(activeTurtle);
     }
     public ArrayList<TurtleDriver> getActiveTurtle () {
         return activeTurtle;

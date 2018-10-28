@@ -1,6 +1,5 @@
 package view.view_component;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import controller.Controller;
@@ -14,11 +13,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
-import model.Main;
 import view.turtleView.TurtleDriver;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -59,6 +57,7 @@ public class DropDownButtons extends VBox {
         this.getChildren().add(addBackgroundTab());
         this.getChildren().add(addPenTab());
         this.getChildren().add(addTurtleTab());
+        this.getChildren().add(addTurtleState());
         this.getChildren().add(addHistoryTab());
         this.getChildren().add(addVariablesTab());
         this.getChildren().add(addUserCommandTab());
@@ -177,6 +176,24 @@ public class DropDownButtons extends VBox {
         turtleControls.getChildren().add(imageBox);
         return turtleControls;
     }
+    private TitledPane addTurtleState() {
+        TitledPane turtleState = new TitledPane();
+        VBox turtleStateBox = turtleState();
+        turtleState.setText(myResources.getString("State"));
+        turtleState.setContent(turtleStateBox);
+        turtleState.setExpanded(false);
+        return turtleState;
+    }
+
+    private VBox turtleState() {
+        VBox turtleStateBox = new VBox();
+        ArrayList<TurtleDriver> myTurtles = myDisplay.getMyTurtle();
+        for (int i=0; i<myTurtles.size(); i++) {
+            turtleStateBox.getChildren().add(new TurtleInfo(myTurtles.get(i)));
+        }
+        return turtleStateBox;
+    }
+
 
     /**
      * adds history tab containing the user's input command history

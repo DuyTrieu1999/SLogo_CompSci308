@@ -37,14 +37,6 @@ public class Controller {
     public Turtle setTurtleSupplier () { return turtleSupplier.get(); }
     /**
      * ViewAPI
-     * clearConsole
-     */
-    Thread clearConsoleThread = new Thread(() -> myView.clearConsole());
-    public void setClearConsoleRunnable () {
-        myView.clearConsole();
-    }
-    /**
-     * ViewAPI
      * clearDisplay
      */
     Thread clearDisplayThread = new Thread(() -> myView.clearDisplay());
@@ -89,11 +81,11 @@ public class Controller {
      *
      * from CommandListInterface
      */
-    public void setMessage (String message) {
-        myCommand.setMessage(message);
-    }
     Consumer<String> setMessageConsumer = e -> {myCommand.setMessage(e);};
     public void setMessConsumer (String t) {
         setMessageConsumer.accept(t);
     }
+
+    Supplier<String> outputSupplier = () -> {return myCommand.getMyParser().getOutput();};
+    public String setOutputSupplier () { return outputSupplier.get(); }
 }

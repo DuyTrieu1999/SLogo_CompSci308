@@ -35,7 +35,6 @@ public class LogoScreen extends VBox {
                 Integer.parseInt(myResources.getString("Canvas_Height")));
         Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
         turtleManager = new TurtleManager(numberOfTurtle, turtleImage, this);
-        System.out.println(turtleManager.getActiveTurtle());
         this.setBackGroundColor(backgroundColor);
         myPane.setPrefWidth(Integer.parseInt(myResources.getString("Canvas_Width")));
         myPane.setPrefHeight(Integer.parseInt(myResources.getString("Canvas_Height")));
