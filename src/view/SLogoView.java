@@ -47,7 +47,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     private ResourceBundle myResources;
     private Controller myController;
     private CommandList myHistory;
-    private int numOfTurtle = 3;
+    private int numOfTurtle = 1;
     private VariableMap myVariables;
     private CommandInitializer myCommands;
 
