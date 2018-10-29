@@ -16,7 +16,7 @@ public class PenStatus extends CommandNode {
 
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
-        if(turtle.getPenVisibility() == true){
+        if(turtle.getPenVisibility()){
             return 1;
         }
         return 0;

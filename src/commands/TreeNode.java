@@ -11,28 +11,20 @@ import java.util.*;
 
 public class TreeNode extends Node {
 
-    private String type;
     private TreeNode parent;
-    private List<String> list;
 
     private String CommandName;
     private List<Node> children = new ArrayList<>();
 
     public TreeNode(TreeNode p, List<String> myList){
         parent = p;
-        list = myList;
-        type = "Command";
-        CommandName = list.get(0);
+        CommandName = myList.get(0);
     }
 
     public String getCommandName(){
         return CommandName;
     }
 
-
-    public boolean isRootNode(){
-        return parent == null;
-    }
 
     public boolean fulfilled(CommandInitializer commandInitializer){
         //TODO

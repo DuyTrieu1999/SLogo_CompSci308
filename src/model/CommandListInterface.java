@@ -13,5 +13,5 @@ public interface CommandListInterface {
 
     void setMessage (String message);
 
-    void setLanguage (ResourceBundle language);
+    void setLanguage(ResourceBundle language);
 }

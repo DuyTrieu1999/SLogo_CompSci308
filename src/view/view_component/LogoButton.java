@@ -4,15 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
-import java.util.ResourceBundle;
-
 public class LogoButton extends Button {
 
     /**
      * @Author Duy Trieu
      */
 
-    public static final int BUTTON_GRID = 60;
+    private static final int BUTTON_GRID = 60;
 
     public LogoButton (String buttonName, EventHandler<ActionEvent> event) {
         this.setText(buttonName);

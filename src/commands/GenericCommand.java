@@ -14,7 +14,6 @@ import java.util.List;
 
 public class GenericCommand extends CommandNode {
     public int numParameters;
-    private double output = 0;
     private String[] variables;
     private String thisCommand;
 
@@ -32,8 +31,7 @@ public class GenericCommand extends CommandNode {
         CommandParser parser = new CommandParser(varMap, commands, turtle);
         parser.parse(thisCommand);
         String[] parserOutput = parser.getOutput().split("\\s+");
-        output = Double.parseDouble(parserOutput[parserOutput.length-1]);
-        return output;
+        return Double.parseDouble(parserOutput[parserOutput.length - 1]);
     }
 
     public int getNumParameters(){
@@ -41,12 +39,12 @@ public class GenericCommand extends CommandNode {
     }
 
     public String getVariables(){
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for(String s:variables){
-            output += s + " ";
+            output.append(s).append(" ");
         }
-        output = output.substring(0, output.length()-1);
-        return output;
+        output = new StringBuilder(output.substring(0, output.length() - 1));
+        return output.toString();
     }
 
     public String getCommand(){

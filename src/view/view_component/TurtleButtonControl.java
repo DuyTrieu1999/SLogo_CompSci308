@@ -7,6 +7,11 @@ import javafx.scene.layout.VBox;
 
 import java.util.ResourceBundle;
 
+/**
+ * TurtleDriver
+ *
+ * @author Duy Trieu
+ */
 public class TurtleButtonControl extends HBox {
     private static final String RESOURCE_PACKAGE = "/text/view";
     private static final int INSET_PADDING = 70;

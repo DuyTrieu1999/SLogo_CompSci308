@@ -24,48 +24,33 @@ public class Controller {
     public Controller (SLogoView view) {
         myView = view;
         myCommand = new CommandList(this);
+        getMessageConsumer = e -> myView.showMessage(e);
     }
     public SLogoView getView () {
         return myView;
     }
 
-    Supplier<SLogoView> SLogoSupplier = () -> { return myView;};
-    public SLogoView setSLogoSupplier () { return SLogoSupplier.get(); }
     /**
      * ModelAPI
      * return turtle
      */
-    Supplier<Turtle> turtleSupplier = () -> {return myCommand.getMyParser().getMyTurtle();};
+    private Supplier<Turtle> turtleSupplier = () -> myCommand.getMyParser().getMyTurtle();
     public Turtle setTurtleSupplier () { return turtleSupplier.get(); }
-    /**
-     * ViewAPI
-     * clearDisplay
-     */
-    Thread clearDisplayThread = new Thread(() -> myView.clearDisplay());
-    public void setClearDisplayRunnable () {
-        myView.clearDisplay();
-    }
+
     /**
      * ViewAPI
      * showMessage
      */
-    Consumer<String> getMessageConsumer = e -> {myView.showMessage(e);};
+    private Consumer<String> getMessageConsumer;
     public void getMessageConsumer (String text) {
         getMessageConsumer.accept(text);
     }
-    /**
-     * ViewAPI
-     * clearHistory
-     */
-    Thread clearHistoryThread = new Thread(() -> myView.clearHistory());
-    public void setClearHistoryRunnable () {
-        clearHistoryThread.run();
-    }
+
     /**
      * ModelAPI
      * parse
      */
-    Consumer<String> parseConsumer = e -> {myCommand.parse(e);};
+    private Consumer<String> parseConsumer = e -> myCommand.parse(e);
     public void setParseConsumer (String t) {
         parseConsumer.accept(t);
     }
@@ -73,30 +58,20 @@ public class Controller {
      * ModelAPI
      * setLanguage
      */
-    Consumer<ResourceBundle> languageConsumer = e -> {myCommand.setLanguage(e);};
+    private Consumer<ResourceBundle> languageConsumer = e -> myCommand.setLanguage(e);
     public void setLanguageConsumer (ResourceBundle t) {
         languageConsumer.accept(t);
     }
 
-    /**
-     * setMessage
-     *
-     * from CommandListInterface
-     */
-    Consumer<String> setMessageConsumer = e -> {myCommand.setMessage(e);};
-    public void setMessConsumer (String t) {
-        setMessageConsumer.accept(t);
-    }
-
-    Supplier<String> outputSupplier = () -> {return myCommand.getMyParser().getOutput();};
+    private Supplier<String> outputSupplier = () -> myCommand.getMyParser().getOutput();
     public String setOutputSupplier () { return outputSupplier.get(); }
 
-    Supplier<VariableMap> variableSupplier = () -> {return myCommand.getMyVariables();};
+    private Supplier<VariableMap> variableSupplier = () -> myCommand.getMyVariables();
     public VariableMap getVariableSupplier() {
         return variableSupplier.get();
     }
 
-    Supplier<CommandInitializer> initializerSupplier = () -> {return myCommand.getMyCommands();};
+    private Supplier<CommandInitializer> initializerSupplier = () -> myCommand.getMyCommands();
     public CommandInitializer getInitializerSupplier() {
         return initializerSupplier.get();
     }

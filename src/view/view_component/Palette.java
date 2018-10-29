@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
  * @author brookekeene
  */
 public class Palette extends HashMap<Integer, Color> {
-    public static final String RESOURCE_PACKAGE = "text/view";
+    private static final String RESOURCE_PACKAGE = "text/view";
     private ResourceBundle myResources;
     private HashMap<Integer, String> myColors;
     private int numDefault;
@@ -58,7 +58,7 @@ public class Palette extends HashMap<Integer, Color> {
      * returns HashMap of indexes and colors as Strings
      * @return
      */
-    public HashMap getColorMap() {
+    HashMap getColorMap() {
         return myColors;
     }
 }

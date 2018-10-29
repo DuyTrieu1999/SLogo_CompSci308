@@ -20,7 +20,7 @@ public class CommandInitializer {
         createCommandMap();
     }
 
-    public Map<String, CommandNode> createCommandMap(){
+    private Map<String, CommandNode> createCommandMap(){
 
         commandMap.put(resources.getString("Forward").split("\\|")[0], new Forward());
         commandMap.put(resources.getString("Forward").split("\\|")[1], new Forward());
@@ -110,7 +110,7 @@ public class CommandInitializer {
         return commandMap;
     }
 
-    public void addCommand(String commandName, String vars, String commands){
+    void addCommand(String commandName, String vars, String commands){
         commandMap.put(commandName, new GenericCommand(vars, commands));
         userCommands.put(commandName, new GenericCommand(vars, commands));
     }
