@@ -13,11 +13,10 @@ import java.util.ResourceBundle;
  *
  * @author brookekeene
  */
-public class ImageChooser extends VBox{
-    public static final int DROPDOWN_WIDTH = 200;
-    public static final String DEFAULT_LABEL = "File Path";
-    public static final String RESOURCE_PACKAGE = "text/view";
-    private ResourceBundle myResources;
+class ImageChooser extends VBox{
+    private static final int DROPDOWN_WIDTH = 200;
+    private static final String DEFAULT_LABEL = "File Path";
+    private static final String RESOURCE_PACKAGE = "text/view";
     private Button fileBtn;
     private Label fileName;
     private FileChooser myFC;
@@ -25,8 +24,8 @@ public class ImageChooser extends VBox{
     /**
      * Constructor
      */
-    public ImageChooser() {
-        myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
+    ImageChooser() {
+        ResourceBundle myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
 
         myFC = new FileChooser();
         myFC.setTitle(myResources.getString("File"));
@@ -44,7 +43,7 @@ public class ImageChooser extends VBox{
      *
      * @return Button that opens the FileChooser
      */
-    public Button getButton() {
+    Button getButton() {
         return fileBtn;
     }
 
@@ -52,7 +51,7 @@ public class ImageChooser extends VBox{
      *
      * @return FileChooser object to select image
      */
-    public FileChooser getFileChooser() {
+    FileChooser getFileChooser() {
         return myFC;
     }
 
@@ -60,7 +59,7 @@ public class ImageChooser extends VBox{
      * sets the Label to new file path
      * @param newLabel
      */
-    public void setFileName(String newLabel) {
+    void setFileName(String newLabel) {
         fileName.setText(newLabel);
     }
 }

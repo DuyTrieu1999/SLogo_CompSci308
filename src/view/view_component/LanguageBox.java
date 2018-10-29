@@ -9,18 +9,18 @@ import java.util.ResourceBundle;
  *
  * @author brookekeene
  */
-public class LanguageBox extends ChoiceBox<String> {
-    public static final int DROPDOWN_WIDTH = 200;
-    public static final String DEFAULT_LANGUAGE = "English";
-    public static final String RESOURCE_PACKAGE = "text/view";
+class LanguageBox extends ChoiceBox<String> {
+    private static final int DROPDOWN_WIDTH = 200;
+    private static final String DEFAULT_LANGUAGE = "English";
+    private static final String RESOURCE_PACKAGE = "text/view";
     private ResourceBundle myResources;
 
-    public LanguageBox() {
+    LanguageBox() {
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         this.setPrefWidth(DROPDOWN_WIDTH);
     }
 
-    public void makeBox() { //TODO: use reflection
+    void makeBox() { //TODO: use reflection
         this.getItems().add(myResources.getString("Chinese"));
         this.getItems().add(myResources.getString("English"));
         this.getItems().add(myResources.getString("French"));
@@ -34,7 +34,7 @@ public class LanguageBox extends ChoiceBox<String> {
         this.setValue(DEFAULT_LANGUAGE);
     }
 
-    public String getChoice() {
+    String getChoice() {
         return this.getValue();
     }
 }

@@ -55,7 +55,7 @@ public class CommandParser {
 
 
     private List<String> parseAndCheckList(String str){
-        List<String> lines = Arrays.asList(str.split("\\r?\\n"));
+        String[] lines = str.split("\\r?\\n");
         List<String> cleanLines = new ArrayList<>();
         for (String line : lines){
             if (!line.trim().isEmpty() && !(line.charAt(0)=='#')){
@@ -97,34 +97,34 @@ public class CommandParser {
             }
             else if (lines.get(count).equals("[")){
                 List<String> record = new ArrayList<>();
-                String recordStr = "";
+                StringBuilder recordStr = new StringBuilder();
                 record.add("[");
                 count++;
                 while (!isBalance(record)){
-                    recordStr += lines.get(count) + " ";
+                    recordStr.append(lines.get(count)).append(" ");
                     record.add(lines.get(count));
                     count++;
                 }
-                recordStr = recordStr.substring(0,recordStr.length()-3);
-                sub.add(recordStr);
+                recordStr = new StringBuilder(recordStr.substring(0, recordStr.length() - 3));
+                sub.add(recordStr.toString());
             }
         }
         output = output + parseLine(sub) + "\n";
     }
 
 
-    public String returnError(){
+    String returnError(){
         return errorMessage;
     }
 
     public String getOutput(){
-        System.out.println(output);
+        //System.out.println(output);
         return output;
     }
 
 
     private String parseLine(List<String> thisLine){
-        String output = "";
+        StringBuilder output = new StringBuilder();
         ArrayList<TreeNode> rootNodes = new ArrayList<>();
         TreeNode parent = null;
         for(String s:thisLine){
@@ -141,33 +141,30 @@ public class CommandParser {
                 parent = thisCommandNode;
             }
             else if(isNumeric(s)){
-                List<String> thisValue = new ArrayList<>();
-                thisValue.add(s);
-                Node thisNode = new Node(parent, thisValue);
-                parent.addChild(thisNode);
+                addNode(parent, s);
             }
             else if(isList(s)){
-                List<String> thisValue = new ArrayList<>();
-                thisValue.add(s);
-                Node thisNode = new Node(parent, thisValue);
-                parent.addChild(thisNode);
-            }
-            else if(parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[0]) == 0
-                        || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[1]) == 0 || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeUserInstruction")) == 0){
-                List<String> thisValue = new ArrayList<>();
-                thisValue.add(s);
-                Node thisNode = new Node(parent, thisValue);
-                parent.addChild(thisNode);
-            }
-            else if(varMap.contains(s)){
-                double variableValue = varMap.getVariable(s);
-                List<String> thisValue = new ArrayList<>();
-                thisValue.add(Double.toString(variableValue));
-                Node thisNode = new Node(parent, thisValue);
-                parent.addChild(thisNode);
+                addNode(parent, s);
             }
             else {
-                errorMessage = "Invalid input : " + s + "not a valid variable";
+                assert parent != null;
+                if(parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[0]) == 0
+                            || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[1]) == 0 || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeUserInstruction")) == 0){
+                    List<String> thisValue = new ArrayList<>();
+                    thisValue.add(s);
+                    Node thisNode = new Node(parent, thisValue);
+                    parent.addChild(thisNode);
+                }
+                else if(varMap.contains(s)){
+                    double variableValue = varMap.getVariable(s);
+                    List<String> thisValue = new ArrayList<>();
+                    thisValue.add(Double.toString(variableValue));
+                    Node thisNode = new Node(parent, thisValue);
+                    parent.addChild(thisNode);
+                }
+                else {
+                    errorMessage = "Invalid input : " + s + "not a valid variable";
+                }
             }
             while(parent != null && parent.fulfilled(commandInitializer)){
                 CommandNode parentCommandNode = commandInitializer.getCommandNode(parent.getCommandName());
@@ -180,12 +177,20 @@ public class CommandParser {
                     parentOfParent.getChildren().add(new Node(parentOfParent, returnValueList));
                 }
                 else {
-                    output = output + returnValue + " ";
+                    output.append(returnValue).append(" ");
                 }
                 parent = parentOfParent;
             }
         }
-        return output;
+        return output.toString();
+    }
+
+    private void addNode(TreeNode parent, String s) {
+        List<String> thisValue = new ArrayList<>();
+        thisValue.add(s);
+        Node thisNode = new Node(parent, thisValue);
+        assert parent != null;
+        parent.addChild(thisNode);
     }
 
     private List<String> mergeParameters(TreeNode parent){

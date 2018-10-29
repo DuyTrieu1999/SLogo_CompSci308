@@ -38,10 +38,6 @@ public class CommandList implements CommandListInterface{
         myHistory.add(newCommand);
     }
 
-    public Queue<String> getHistory() {
-        return myHistory;
-    }
-
     public void parse(String text) {
         myController.getMessageConsumer(myParser.returnError());
         myParser.parse(text);

@@ -20,17 +20,14 @@ public class LogoScreen extends VBox {
     private static final int TURTLE_LAYOUT = 200;
     private static final int LINE_LAYOUT = 250;
     private static final String RESOURCE_PACKAGE = "/text/view";
-    private ResourceBundle myResources;
     private StackPane myPane;
     private static Pane myBackGround;
     private TurtleManager turtleManager;
     private Controller myController;
-    private int numberOfTurtle;
 
     public LogoScreen (Color backgroundColor, Controller controller, int numberOfTurtle) {
-        this.numberOfTurtle = numberOfTurtle;
         myController = controller;
-        myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
+        ResourceBundle myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         this.setId("main-screen");
         myBackGround = new Pane();
         myPane = new StackPane();
@@ -38,7 +35,7 @@ public class LogoScreen extends VBox {
                 Integer.parseInt(myResources.getString("Canvas_Height")));
         Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
         turtleManager = new TurtleManager(numberOfTurtle, turtleImage, this);
-        this.setBackGroundColor(backgroundColor);
+        setBackGroundColor(backgroundColor);
         myPane.setPrefWidth(Integer.parseInt(myResources.getString("Canvas_Width")));
         myPane.setPrefHeight(Integer.parseInt(myResources.getString("Canvas_Height")));
         this.getChildren().add(myPane);
@@ -62,7 +59,7 @@ public class LogoScreen extends VBox {
         turtleManager.getActiveTurtle().updateMove();
     }
 
-    public void setMyBackGround (int width, int height) {
+    private void setMyBackGround(int width, int height) {
         myBackGround = new Pane();
         myBackGround.setPrefSize(width, height);
         myBackGround.setScaleY(-1.0);
@@ -84,7 +81,7 @@ public class LogoScreen extends VBox {
             turtleManager.clearTurtle();
         }
     }
-    public TurtleDriver getMyTurtle () {
+    TurtleDriver getMyTurtle() {
         return turtleManager.getActiveTurtle();
     }
 }

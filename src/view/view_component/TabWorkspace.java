@@ -30,7 +30,6 @@ public class TabWorkspace {
     private Scene myScene;
     private TabPane tabPane;
     private int workspaces = 0;
-    private BorderPane bdPane;
     private ResourceBundle myResources;
 
     public TabWorkspace () {
@@ -41,7 +40,7 @@ public class TabWorkspace {
         myRoot = new Group();
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         this.tabPane = new TabPane();
-        bdPane = new BorderPane();
+        BorderPane bdPane = new BorderPane();
         LogoButton button = createButton();
         AnchorPane pane = new AnchorPane(tabPane, button);
         AnchorPane.setTopAnchor(button, TOP_ANCHOR);
@@ -60,8 +59,7 @@ public class TabWorkspace {
         myScene.getStylesheets().add(STYLESHEET);
     }
     private LogoButton createButton() {
-        LogoButton newButton = new LogoButton("New", event -> addTab());
-        return newButton;
+        return new LogoButton("New", event -> addTab());
     }
 
     private void addTab() {

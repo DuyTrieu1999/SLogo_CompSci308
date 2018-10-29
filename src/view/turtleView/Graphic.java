@@ -12,13 +12,11 @@ import javafx.util.Duration;
 
 public class Graphic {
     private ImageView turtleView;
-    private int turtleID;
     private static final double TURN_TIME_MS = 250;
     private static final double OPACITY_ACTIVE = 1.0;
     private static final double OPACITY_INACTIVE = 0.2;
 
-    public Graphic (int id, Image image) {
-        this.turtleID = id;
+    Graphic(Image image) {
         this.turtleView = new ImageView(image);
         this.turtleView.setScaleY(-1);
         this.turtleView.setFitWidth(100);
@@ -32,27 +30,20 @@ public class Graphic {
         turtleView.setImage(new Image(url));
     }
 
-    protected int getIndex() {
-        return turtleID;
-    }
-
-    protected void setIndex(int index) {
-        turtleID = index;
-    }
-    protected boolean isVisible() {
+    boolean isVisible() {
         return turtleView.isVisible();
     }
 
-    protected void setVisible(boolean visible) {
+    void setVisible(boolean visible) {
         turtleView.setVisible(visible);
     }
 
-    public void setRotation (double degrees) {
+    void setRotation(double degrees) {
         RotateTransition rotate = new RotateTransition(Duration.millis(TURN_TIME_MS));
         rotate.setToAngle((degrees - 90) % 360);
         new SequentialTransition(turtleView, rotate).play();
     }
-    public void setImageInactive (boolean active) {
+    void setImageInactive(boolean active) {
         if (active) {
             turtleView.setOpacity(OPACITY_ACTIVE);
         }

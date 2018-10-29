@@ -18,7 +18,7 @@ public class PopupWindow {
     private String myTitle;
     private String myContent;
 
-    public PopupWindow(String title, String file) {
+    PopupWindow(String title, String file) {
         myTitle = title;
         myContent = file;
     }
@@ -31,6 +31,7 @@ public class PopupWindow {
 
         WebView browser = new WebView();
         URL url = this.getClass().getClassLoader().getResource(myContent);
+        assert url != null;
         browser.getEngine().load(url.toExternalForm());
 
         Pane myPane = new Pane();

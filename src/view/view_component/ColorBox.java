@@ -15,8 +15,8 @@ import java.util.*;
  * @author brookekeene
  */
 public class ColorBox extends ChoiceBox<String> {
-    public static final String RESOURCE_PACKAGE = "text/view";
-    public static final ArrayList<String> COLORS = new ArrayList<>(List.of(
+    private static final String RESOURCE_PACKAGE = "text/view";
+    private static final ArrayList<String> COLORS = new ArrayList<>(List.of(
             "White",
             "Red",
             "Orange",
@@ -32,7 +32,7 @@ public class ColorBox extends ChoiceBox<String> {
     /**
      * Constructor
      */
-    public ColorBox() {
+    ColorBox() {
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         this.getItems().addAll(COLORS);
     }
@@ -41,7 +41,7 @@ public class ColorBox extends ChoiceBox<String> {
      * creates VBox that contains a Label and ColorBox itself
      * @return
      */
-    public VBox makeBox() {
+    VBox makeBox() {
         VBox colorControl = new VBox();
         Label colors = new Label(myResources.getString("ColorChoice"));
         colorControl.getChildren().addAll(colors, this);
@@ -53,7 +53,6 @@ public class ColorBox extends ChoiceBox<String> {
      * @return String represented the color chosen by user
      */
     public String getColor() {
-        String color = this.getValue();
-        return color;
+        return this.getValue();
     }
 }

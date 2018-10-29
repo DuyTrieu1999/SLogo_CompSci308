@@ -49,8 +49,6 @@ public class Turtle implements TurtleInterface {
         double newX = xPos + distance * Math.cos(Math.toRadians(orientation));
         double newY = yPos + distance * Math.sin(Math.toRadians(orientation));
         moveTo(newX,newY);
-        System.out.println("The turtle is now at " + xPos + " " + yPos);
-        System.out.println("orientation is: " + orientation);
     }
 
     public void moveTo(double newX, double newY){
@@ -104,7 +102,7 @@ public class Turtle implements TurtleInterface {
         penVisibility = visibility;
     }
 
-    public void addLine(Line line) {
+    private void addLine(Line line) {
         if (getPenVisibility()){
             line.setStroke(penColor);
             line.setStrokeWidth(penWidth);
