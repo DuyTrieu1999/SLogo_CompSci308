@@ -14,12 +14,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import model.CommandParser;
+import model.Turtle;
 import model.VariableMap;
 import view.turtleView.TurtleDriver;
 import view.turtleView.TurtleInfo;
 
 import java.io.File;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -235,8 +238,12 @@ public class DropDownButtons extends VBox {
      * @param command
      */
     public void editHistoryTab(String command) {
-        Text text = new Text(command + NEW_LINE);
+        Hyperlink text = new Hyperlink(command);
+        text.setOnAction(event -> {
+            myController.setParseConsumer(command);
+        });
         historyTab.getChildren().add(text);
+        historyTab.getChildren().add(new Text(NEW_LINE));
     }
 
     /**
@@ -271,8 +278,20 @@ public class DropDownButtons extends VBox {
     public void editVariableTab() {
         variablesTab.getChildren().clear();
         for(String key : myVarMap.getVariables().keySet()) {
-            Text text = new Text(key + EQUALS + myVarMap.getVariable(key) + NEW_LINE);
+            Hyperlink text = new Hyperlink(key + EQUALS + myVarMap.getVariable(key));
+            text.setOnAction(event -> {
+                TextInputDialog dialog = new TextInputDialog();
+                dialog.setTitle("Change Variable");
+                dialog.setHeaderText("Changing Variable Parameters");
+                dialog.setContentText("Enter the new value for the variable " + key);
+                Optional<String> result = dialog.showAndWait();
+                if(result.isPresent()){
+                    myController.getVariableSupplier().addVariable(key, Double.parseDouble(result.get()));
+                    editVariableTab();
+                }
+            });
             variablesTab.getChildren().add(text);
+            variablesTab.getChildren().add(new Text(NEW_LINE));
         }
     }
 
@@ -310,8 +329,19 @@ public class DropDownButtons extends VBox {
         CommandInitializer initializer = myController.getInitializerSupplier();
         Map<String, GenericCommand> userMap = initializer.getUserCommands();
         for(String key : userMap.keySet()) {
-            Text text = new Text(key);
+            Hyperlink text = new Hyperlink(key);
+            text.setOnAction(event -> {
+                TextInputDialog dialog = new TextInputDialog();
+                dialog.setTitle("Run User Command");
+                dialog.setHeaderText("User Command Parameters");
+                dialog.setContentText("Enter the parameters for the command " + key);
+                Optional<String> result = dialog.showAndWait();
+                if(result.isPresent()){
+                    myController.setParseConsumer(key + " " + result.get());
+                }
+            });
             userTab.getChildren().add(text);
+            userTab.getChildren().add(new Text(NEW_LINE));
         }
     }
 
