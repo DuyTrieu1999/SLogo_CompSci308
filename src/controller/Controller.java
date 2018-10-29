@@ -96,7 +96,7 @@ public class Controller {
         return variableSupplier.get();
     }
 
-    Supplier<CommandInitializer> initializerSupplier = () -> {return myCommand.getMyInitializer();};
+    Supplier<CommandInitializer> initializerSupplier = () -> {return myCommand.getMyCommands();};
     public CommandInitializer getInitializerSupplier() {
         return initializerSupplier.get();
     }
