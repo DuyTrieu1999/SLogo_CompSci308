@@ -30,14 +30,6 @@ public class Graphic {
         turtleView.setImage(new Image(url));
     }
 
-    boolean isVisible() {
-        return turtleView.isVisible();
-    }
-
-    void setVisible(boolean visible) {
-        turtleView.setVisible(visible);
-    }
-
     void setRotation(double degrees) {
         RotateTransition rotate = new RotateTransition(Duration.millis(TURN_TIME_MS));
         rotate.setToAngle((degrees - 90) % 360);

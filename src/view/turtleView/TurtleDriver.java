@@ -9,6 +9,7 @@ import model.Turtle;
 import view.view_component.LogoScreen;
 
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * TurtleDriver
@@ -60,6 +61,13 @@ public class TurtleDriver {
         }
         setLocation(getLocation());
         setRotation(myTurtle.getOrientation());
+    }
+
+    public void updateImage(){
+        if(myTurtle.getImageStatus()){
+            ResourceBundle resources = ResourceBundle.getBundle("text/view");
+            myGraphic.getView().setImage(new Image(resources.getString("Image" + myTurtle.getImageID())));
+        }
     }
 
     private void setPoint(Point2D point) {

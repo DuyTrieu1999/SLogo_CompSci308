@@ -18,10 +18,12 @@ public class Turtle implements TurtleInterface {
     private Color penColor;
     private double penWidth;
     private boolean penVisibility = true;
+    private boolean hasImageChanged = false;
 
     private List<Line> lines;
 
     private int id;
+    private int imageID;
 
     public Turtle(double initialX, double initialY, Color color, int id) {
         xPos = initialX;
@@ -36,9 +38,11 @@ public class Turtle implements TurtleInterface {
         lines = new ArrayList<>();
 
         this.id = id;
+        imageID = 1;
     }
 
     public int getID(){ return id;}
+    public int getImageID(){ return imageID;}
     public double getX(){
         return xPos;
     }
@@ -112,6 +116,15 @@ public class Turtle implements TurtleInterface {
 
     public void clearLines() {
         lines = new ArrayList<>();
+    }
+
+    public void changeImage(int id){
+        hasImageChanged = true;
+        imageID = id;
+    }
+
+    public boolean getImageStatus(){
+        return hasImageChanged;
     }
 
 }
