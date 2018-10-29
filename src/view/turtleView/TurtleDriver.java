@@ -93,4 +93,9 @@ public class TurtleDriver {
     private void setRotation(double degrees) {
         myGraphic.setRotation(degrees);
     }
+
+    public void setVisibility() {
+        boolean isVisible = myTurtle.getVisibility();
+        myGraphic.setVisible(isVisible);
+    }
 }

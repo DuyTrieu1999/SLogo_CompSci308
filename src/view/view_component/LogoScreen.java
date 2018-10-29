@@ -57,6 +57,7 @@ public class LogoScreen extends VBox {
 
     public void updateTurtle () {
         turtleManager.getActiveTurtle().updateMove();
+        turtleManager.getActiveTurtle().setVisibility();
     }
 
     private void setMyBackGround(int width, int height) {
