@@ -61,7 +61,9 @@ public class LogoScreen extends VBox {
     }
 
     public void updateTurtle () {
-        turtleManager.getActiveTurtle().updateMove();
+        for (TurtleDriver turtle: turtleManager.getActiveTurtle()) {
+            turtle.updateMove();
+        }
     }
 
     public void setMyBackGround (int width, int height) {
@@ -82,8 +84,10 @@ public class LogoScreen extends VBox {
     }
     public void clear () {
         turtleManager.clearTurtle();
+//        Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
+//        turtleManager = new TurtleManager(numberOfTurtle, turtleImage, this);
     }
-    public TurtleDriver getMyTurtle () {
+    public ArrayList<TurtleDriver> getMyTurtle () {
         return turtleManager.getActiveTurtle();
     }
 }
