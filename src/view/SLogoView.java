@@ -168,6 +168,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         dropDownButtons.editVariableTab();
         dropDownButtons.editUserCommandTab();
         myController.getMessageConsumer(myController.setOutputSupplier());
+        logoScreen.clear();
     }
 
     /**
