@@ -334,8 +334,6 @@ public class DropDownButtons extends VBox {
         }
     }
 
-    //TODO: display new colors in palette
-
     /**
      *
      * @return
@@ -358,6 +356,18 @@ public class DropDownButtons extends VBox {
         paletteBox.getChildren().add(colorLbl);
         for (int i: myPalette.keySet()) {
             Text temp = new Text(i + EQUALS + myPalette.getColorMap().get(i));
+            paletteBox.getChildren().add(temp);
+        }
+    }
+
+    /**
+     *
+     */
+    public void editPaletteTab() {
+        paletteBox.getChildren().clear();
+        Palette myPalette = myVarMap.getPalette();
+        for(int index: myPalette.keySet()) {
+            Text temp = new Text(index + EQUALS + myPalette.getColorMap().get(index));
             paletteBox.getChildren().add(temp);
         }
     }

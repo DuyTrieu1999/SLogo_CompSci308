@@ -163,7 +163,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     }
 
     private void updateGUI(String command) {
-        //dropDownButtons.editCurrentState();
+        dropDownButtons.editPaletteTab();
         dropDownButtons.editHistoryTab(command);
         dropDownButtons.editVariableTab();
         dropDownButtons.editUserCommandTab();
