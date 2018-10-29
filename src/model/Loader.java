@@ -12,7 +12,7 @@ public class Loader {
     VariableMap variables;
     CommandInitializer commands;
 
-    public Loader(File loadFrom, VariableMap variableMap, CommandInitializer commandInitializer){
+    public Loader(VariableMap variableMap, CommandInitializer commandInitializer, File loadFrom){
         file = loadFrom;
         variables = variableMap;
         commands = commandInitializer;
