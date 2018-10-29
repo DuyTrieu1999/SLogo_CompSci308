@@ -10,10 +10,10 @@ public class ClearScreen extends CommandNode {
 
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
-        turtle.clearLines();
         double oldX = turtle.getX();
         double oldY = turtle.getY();
         turtle.moveTo(0, 0);
+        turtle.clearLines();
         return Math.sqrt(Math.pow((oldY), 2)+Math.pow(oldX, 2));
     }
 
