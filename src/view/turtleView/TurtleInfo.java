@@ -1,9 +1,8 @@
-package view.view_component;
+package view.turtleView;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import view.turtleView.TurtleDriver;
 
 /**
  * @Author Duy Trieu
@@ -42,7 +41,7 @@ public class TurtleInfo extends VBox {
     }
     private void addPenColor (TurtleDriver turtle) {
         Label penColorText = new Label("Pen color: ");
-        TextField penColorVal = new TextField(String.valueOf(turtle.getPen().getColor()));
+        TextField penColorVal = new TextField(turtle.getPen().getColor().toString());
         VBox colorBox = new VBox();
         colorBox.getChildren().addAll(penColorText, penColorVal);
         this.getChildren().add(colorBox);

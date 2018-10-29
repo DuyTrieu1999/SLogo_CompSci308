@@ -29,7 +29,7 @@ public class Controller {
         return myView;
     }
 
-    Supplier<SLogoView> SLogoSupplier = () -> {return myView;};
+    Supplier<SLogoView> SLogoSupplier = () -> { return myView;};
     public SLogoView setSLogoSupplier () { return SLogoSupplier.get(); }
     /**
      * ModelAPI
