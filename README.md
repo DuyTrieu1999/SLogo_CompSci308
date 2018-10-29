@@ -26,4 +26,6 @@ Hours Spent:
 ### Resources Used
 
 ### Known Bugs
+* Need to press Play before running code in the text editor
+* Current turtle info doesn't always update consistently
 * When you have multiple windows, the control panel will expand beyond the bottom of the screen
