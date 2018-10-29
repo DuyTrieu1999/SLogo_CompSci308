@@ -25,7 +25,7 @@ Hours Spent: 150 hours
 
 * Brooke Keene : Front End Developer.
 
-* Duy Trieu : Front End Developer.
+* Duy Trieu : Front End Developer. I design the layout of the UI and the functionalities of the Screen, Script Editor, Console, and Dropdown. I also design the Controller class that connects the front end and the back end.
 
 * Yunhao Qing : Back End Developer. Word on general model such as Turtle and VariableMap, work on the parser and error checking.
 
