@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for yXor.
+ * @author Allen Qiu
+ */
+
+
 public class yCor extends CommandNode {
     public int numParameters = 0;
 
