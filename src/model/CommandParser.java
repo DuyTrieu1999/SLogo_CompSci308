@@ -46,7 +46,6 @@ public class CommandParser {
 
 
     private List<String> parseAndCheckList(String str){
-        boolean check = true;
         List<String> lines = Arrays.asList(str.split("\\r?\\n"));
         List<String> cleanLines = new ArrayList<>();
         for (String line : lines){
@@ -63,32 +62,27 @@ public class CommandParser {
             String s = partList.get(i);
             if (!(isNumeric(s) || isPossibleCommand(s)|| isPossibleVariable(s) || s.equals("[") || s.equals("]"))){
                 errorMessage = "Invalid input : Input contains index component at index" + i + "of the commands.";
-                check = false;
             }
             else if (s.equals("[")) count1++;
             else if (s.equals("]")) count2++;
             if (count2 > count1){
                 errorMessage = "Invalid input : More ']' than '[' at index" + i + "of the commands.";
-                check = false;
             }
         }
         if (count1 > count2){
             errorMessage = "Invalid input : More '[' than ']', brackets cannot match.";
-            check = false;
         }
-        if (check) return cleanLines;
-        else return new ArrayList<>();
+        return cleanLines;
     }
 
     private List<List<String>> parseToList(String str){
         List<String> lines = parseAndCheckList(str);
-        if (lines.size() == 0) return new ArrayList<>();
         List<List<String>> list = new ArrayList<>();
         int count = 0;
         while (count < lines.size()){
             String line = lines.get(count);
             List<String> temp = new ArrayList<>(Arrays.asList(line.split("\\s+")));
-            while (!isBalance(temp) && count < lines.size() - 1){
+            while (!isBalance(temp)){
                 count++;
                 String newline = lines.get(count);
                 temp.addAll(Arrays.asList(newline.split("\\s+")));
@@ -134,6 +128,7 @@ public class CommandParser {
     }
 
     public String getOutput(){
+        System.out.println(output);
         return output;
     }
 
@@ -141,25 +136,18 @@ public class CommandParser {
     private String parseLine(List<String> thisLine){
         String output = "";
         ArrayList<TreeNode> rootNodes = new ArrayList<>();
-        //any parent must be a command
         TreeNode parent = null;
         for(String s:thisLine){
-            //for each space separated value
-            if(isPossibleCommand(s)){
-                if (!isCommand(s)) errorMessage = "Invalid input : " + s + "is an invalid command.";
-                //command
-                //System.out.println(s + " is a command!");
+            if(isCommand(s)){
                 List<String> thisValue = new ArrayList<>();
                 thisValue.add(s);
                 TreeNode thisCommandNode = new TreeNode(parent, thisValue);
                 if(parent == null){
-                    //this is the root node
                     rootNodes.add(thisCommandNode);
                 }
                 else {
                     parent.addChild(thisCommandNode);
                 }
-                //if not fulfilled, this is the new parent
                 parent = thisCommandNode;
             }
             else {
@@ -171,9 +159,6 @@ public class CommandParser {
                     parent.addChild(thisNode);
                 }
                 else if(isList(s)){
-                    //is a list
-                    //a list should be passed in simply as a string minus the brackets, separated by spaces
-                    //todo
                     List<String> thisValue = new ArrayList<>();
                     thisValue.add(s);
                     Node thisNode = new Node(parent, thisValue);
@@ -181,19 +166,14 @@ public class CommandParser {
                     parent.addChild(thisNode);
                 }
                 else {
-                    //variable
-                    //only time it is not defined is if the preceding command is make
                     if(parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[0]) == 0
                             || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeVariable").split("\\|")[1]) == 0 || parent.getCommandName().compareToIgnoreCase(resources.getString("MakeUserInstruction")) == 0){
-                        //this is a make command so simply add it as a child
                         List<String> thisValue = new ArrayList<>();
                         thisValue.add(s);
                         Node thisNode = new Node(parent, thisValue);
-                        //the parent of a number must be a command
                         parent.addChild(thisNode);
                     }
                     else {
-                        //not a make command
                         if(varMap.contains(s)){
                             double variableValue = varMap.getVariable(s);
                             List<String> thisValue = new ArrayList<>();
@@ -203,21 +183,15 @@ public class CommandParser {
                             parent.addChild(thisNode);
                         }
                         else {
-                            errorMessage = "Invalid input : " + s + "is an invalid variable.";
+
                         }
                     }
                 }
             }
             //check if this node fulfills the parent
             if(parent != null){
-                //System.out.println(parent.getCommandName());
                 while(parent != null && parent.fulfilled(commandInitializer)){
-                    //simplify expression
-                    //go up one level and evaluate parent
-                    //change parent from CommandNode to Node and set value
-                    //since parents must be commands, we know the parent is a command
                     CommandNode parentCommandNode = commandInitializer.getCommandNode(parent.getCommandName());
-                    //merge the lists of all child nodes into one list
                     double returnValue = parentCommandNode.run(mergeParameters(parent), t, varMap, commandInitializer);
                     TreeNode parentOfParent = parent.getParent();
                     if(parentOfParent != null){
@@ -237,7 +211,6 @@ public class CommandParser {
     }
 
     public List<String> mergeParameters(TreeNode parent){
-        //todo
         List<String> mergedParameters = new ArrayList<>();
         for(Node n:parent.getChildren()){
             mergedParameters.addAll(n.getParameters());
@@ -246,17 +219,16 @@ public class CommandParser {
     }
 
 
-    public boolean isCommand(String s){
+    private boolean isCommand(String s){
         return commandInitializer.containsKey(s);
     }
 
-    public boolean isList(String s){
+    private boolean isList(String s){
         return s.split("\\s+").length > 1;
-
     }
 
 
-    public boolean isBalance(List<String> strings){
+    private boolean isBalance(List<String> strings){
         int count1 = 0,count2 = 0;
         for (String str : strings){
             if (str.equals("[")) count1++;
