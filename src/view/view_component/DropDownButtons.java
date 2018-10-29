@@ -276,6 +276,31 @@ public class DropDownButtons extends VBox {
         return commands;
     }
 
+    //TODO: display new colors in palette
+    private TitledPane addPaletteTab() {
+        TitledPane paletteTab = new TitledPane();
+        this.paletteDefault();
+        paletteTab.setText(myResources.getString("Palette"));
+        paletteTab.setContent(paletteBox);
+        paletteTab.setExpanded(false);
+        return paletteTab;
+    }
+
+    private void paletteDefault() {
+//        Label colorLbl = new Label(myResources.getString("ColorDefault"));
+//        paletteBox.getChildren().add(colorLbl);
+//        for (int i: myPalette.keySet()) {
+//            Text temp = new Text(i + " = " + myPalette.getColorMap().get(i));
+//            paletteBox.getChildren().add(temp);
+//        }
+    }
+
+    public void editPalette(int index, int r, int g, int b) {
+        myPalette.addColor(index, r, g, b);
+        Text temp = new Text(index + " = " + myPalette.getColorMap().get(index));
+        paletteBox.getChildren().add(temp);
+    }
+
     /**
      * adds languages tab containing controls for the languages understood for commands
      * @return TitledPane containing language controls

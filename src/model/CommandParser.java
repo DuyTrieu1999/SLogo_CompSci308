@@ -45,6 +45,24 @@ public class CommandParser {
         for (String line : lines){
             if (!line.trim().isEmpty() && !(line.charAt(0)=='#'))
                 cleanLines.add(line);
+            }
+        }
+        List<String> partList = new ArrayList<>();
+        for (String s : cleanLines){
+            partList.addAll(Arrays.asList(s.split("\\s+")));
+        }
+        int count1 = 0, count2 = 0;
+        for (int i = 0; i < partList.size();i++){
+            String s = partList.get(i);
+            //System.out.println("Currently checking " + s);
+            if (!(isNumeric(s) || isPossibleCommand(s)|| isPossibleVariable(s) || s.equals("[") || s.equals("]") || s.equals(" "))){
+                errorMessage = "Invalid input : Input contains index component at index " + i + " of the commands.";
+            }
+            else if (s.equals("[")) count1++;
+            else if (s.equals("]")) count2++;
+            if (count2 > count1){
+                errorMessage = "Invalid input : More ']' than '[' at index " + i + " of the commands.";
+            }
         }
         //lines now contains the cleaned up lines
         lines  = cleanLines;

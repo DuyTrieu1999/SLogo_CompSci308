@@ -21,7 +21,7 @@ public class CommandList implements CommandListInterface{
 
     public CommandList(Controller controller) {
         myController = controller;
-        Turtle t = new Turtle(0, 0, Color.BLACK);
+        Turtle t = new Turtle(0, 0, Color.BLACK, 0);
         CommandInitializer c = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
         VariableMap v = new VariableMap();
         myParser = new CommandParser(v, c, t);

@@ -139,7 +139,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         logoScreen.updateTurtle();
     }
     private void addTurtle () {
-        numOfTurtle ++;
+        numOfTurtle++;
         clearDisplay();
     }
 
