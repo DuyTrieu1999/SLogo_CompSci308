@@ -1,5 +1,6 @@
 package view;
 
+import commands.CommandInitializer;
 import controller.Controller;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -11,12 +12,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.CommandList;
+import model.Loader;
+import model.Saver;
 import model.VariableMap;
 import view.turtleView.TurtleDriver;
 import view.view_component.*;
 
+import java.io.File;
 import java.util.ResourceBundle;
 
 /**
@@ -45,6 +51,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     private CommandList myHistory;
     private int numOfTurtle = 3;
     private VariableMap myVariables;
+    private CommandInitializer myCommands;
 
     public SLogoView() {
         myController = new Controller(this);
@@ -59,6 +66,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         logoScreen = new LogoScreen(Color.WHITE, myController, numOfTurtle);
         myHistory = new CommandList(myController);
         myVariables = myHistory.getMyVariables();
+        myCommands = myHistory.getMyCommands();
         initVariable();
         VBox scriptView = addScriptView();
         VBox logoView = addLogoView();
@@ -80,8 +88,12 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     }
     private VBox addButton () {
         dropDownButtons = new DropDownButtons(logoScreen, myController);
+        dropDownButtons.makeTabs();
         VBox buttonPane = new VBox();
         ScrollPane sp = new ScrollPane();
+        int width = Integer.parseInt(myResources.getString("Scroller_Width"));
+        int height = Integer.parseInt(myResources.getString("Dropdown_Height"));
+        sp.setMaxSize(width, height);
         sp.setContent(dropDownButtons);
         buttonPane.getChildren().add(sp);
         return buttonPane;
@@ -155,6 +167,8 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         myController.setParseConsumer(command);
         myHistory.addCommand(command);
         dropDownButtons.editHistoryTab(command);
+        dropDownButtons.editVariableTab();
+        dropDownButtons.editUserCommandTab();
         myController.getMessageConsumer(myController.setOutputSupplier());
     }
 
@@ -166,6 +180,8 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         scriptView.clearEditor();
     }
     private void loadScript () {
+        Loader loader = new Loader(myVariables, myCommands, chooseFile());
+        loader.load();
 
     }
     private void saveScript () {
@@ -175,5 +191,19 @@ public class SLogoView extends HBox implements SLogoViewAPI {
 //            String h = myQueue.poll();
 //            System.out.println(h);
 //        }
+
+        Saver saver = new Saver(myVariables, myCommands, chooseFile());
+        saver.save();
+    }
+
+    private File chooseFile() {
+        FileChooser myFileChooser = new FileChooser();
+        myFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt"));
+        myFileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+        File chosen = null;
+        while(chosen == null){
+            chosen = myFileChooser.showOpenDialog(getScene().getWindow());
+        }
+        return chosen;
     }
 }

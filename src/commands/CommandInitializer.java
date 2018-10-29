@@ -98,8 +98,11 @@ public class CommandInitializer {
         commandMap.put(resources.getString("SetBackground").split("\\|")[1], new SetBackground());
         commandMap.put(resources.getString("SetPenColor").split("\\|")[0], new SetPenColor());
         commandMap.put(resources.getString("SetPenColor").split("\\|")[1], new SetPenColor());
+        commandMap.put(resources.getString("SetPenSize").split("\\|")[0], new SetPenSize());
+        commandMap.put(resources.getString("SetPenSize").split("\\|")[1], new SetPenSize());
         commandMap.put(resources.getString("GetPenColor").split("\\|")[0], new GetPenColor());
         commandMap.put(resources.getString("GetPenColor").split("\\|")[1], new GetPenColor());
+        commandMap.put(resources.getString("SetPalette"), new SetPalette());
 
         return commandMap;
     }
