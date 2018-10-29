@@ -4,6 +4,7 @@ import commands.CommandInitializer;
 import commands.CommandNode;
 import commands.CommandNodeTry;
 import commands.Node;
+import javafx.scene.paint.Color;
 
 import java.util.*;
 
@@ -45,24 +46,6 @@ public class CommandParser {
         for (String line : lines){
             if (!line.trim().isEmpty() && !(line.charAt(0)=='#'))
                 cleanLines.add(line);
-            }
-        }
-        List<String> partList = new ArrayList<>();
-        for (String s : cleanLines){
-            partList.addAll(Arrays.asList(s.split("\\s+")));
-        }
-        int count1 = 0, count2 = 0;
-        for (int i = 0; i < partList.size();i++){
-            String s = partList.get(i);
-            //System.out.println("Currently checking " + s);
-            if (!(isNumeric(s) || isPossibleCommand(s)|| isPossibleVariable(s) || s.equals("[") || s.equals("]") || s.equals(" "))){
-                errorMessage = "Invalid input : Input contains index component at index " + i + " of the commands.";
-            }
-            else if (s.equals("[")) count1++;
-            else if (s.equals("]")) count2++;
-            if (count2 > count1){
-                errorMessage = "Invalid input : More ']' than '[' at index " + i + " of the commands.";
-            }
         }
         //lines now contains the cleaned up lines
         lines  = cleanLines;
@@ -271,29 +254,30 @@ public class CommandParser {
                         }
                     }
                 }
-            }
-            //check if this node fulfills the parent
-            if(parent != null){
-                //System.out.println(parent.getCommandName());
-                while(parent != null && parent.fulfilled(commandInitializer)){
-                    //simplify expression
-                    //go up one level and evaluate parent
-                    //change parent from CommandNode to Node and set value
-                    //since parents must be commands, we know the parent is a command
-                    CommandNode parentCommandNode = commandInitializer.getCommandNode(parent.getCommandName());
-                    //merge the lists of all child nodes into one list
-                    double returnValue = parentCommandNode.run(mergeParameters(parent), t, varMap, commandInitializer);
-                    CommandNodeTry parentOfParent = parent.getParent();
-                    if(parentOfParent != null){
-                        parentOfParent.getChildren().remove(parent);
-                        List<String> returnValueList = new ArrayList<>();
-                        returnValueList.add(Double.toString(returnValue));
-                        parentOfParent.getChildren().add(new Node(parentOfParent, returnValueList));
+
+                //check if this node fulfills the parent
+                if(parent != null){
+                    //System.out.println(parent.getCommandName());
+                    while(parent != null && parent.fulfilled(commandInitializer)){
+                        //simplify expression
+                        //go up one level and evaluate parent
+                        //change parent from CommandNode to Node and set value
+                        //since parents must be commands, we know the parent is a command
+                        CommandNode parentCommandNode = commandInitializer.getCommandNode(parent.getCommandName());
+                        //merge the lists of all child nodes into one list
+                        double returnValue = parentCommandNode.run(mergeParameters(parent), t, varMap, commandInitializer);
+                        CommandNodeTry parentOfParent = parent.getParent();
+                        if(parentOfParent != null){
+                            parentOfParent.getChildren().remove(parent);
+                            List<String> returnValueList = new ArrayList<>();
+                            returnValueList.add(Double.toString(returnValue));
+                            parentOfParent.getChildren().add(new Node(parentOfParent, returnValueList));
+                        }
+                        else {
+                            output = output + returnValue + " ";
+                        }
+                        parent = parentOfParent;
                     }
-                    else {
-                        output = output + returnValue + " ";
-                    }
-                    parent = parentOfParent;
                 }
             }
         }
