@@ -19,7 +19,7 @@ public class Loader {
     }
 
     public void load(){
-        CommandParser parser = new CommandParser(variables, commands, new Turtle(0, 0, Color.BLACK));
+        CommandParser parser = new CommandParser(variables, commands, new Turtle(0, 0, Color.BLACK, 0));
         try {
             Scanner scanner = new Scanner(file);
             while(scanner.hasNextLine()){

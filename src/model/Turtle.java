@@ -21,7 +21,9 @@ public class Turtle implements TurtleInterface {
 
     private List<Line> lines;
 
-    public Turtle(double initialX, double initialY, Color color) {
+    private int id;
+
+    public Turtle(double initialX, double initialY, Color color, int id) {
         xPos = initialX;
         yPos = initialY;
 
@@ -32,8 +34,11 @@ public class Turtle implements TurtleInterface {
         penWidth = 1.0;
 
         lines = new ArrayList<>();
+
+        this.id = id;
     }
 
+    public int getID(){ return id;}
     public double getX(){
         return xPos;
     }
