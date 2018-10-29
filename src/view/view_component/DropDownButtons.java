@@ -1,5 +1,7 @@
 package view.view_component;
 
+import commands.CommandInitializer;
+import commands.GenericCommand;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import controller.Controller;
@@ -13,11 +15,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import model.VariableMap;
 import view.turtleView.TurtleDriver;
 import view.turtleView.TurtleInfo;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -26,11 +31,11 @@ import java.util.ResourceBundle;
  * @author brookekeene
  */
 public class DropDownButtons extends VBox {
-    public static final int DROPDOWN_WIDTH = 250;
-    public static final int DROPDOWN_HEIGHT = 550;
     public static final String RESOURCE_PACKAGE = "text/view";
     public static final String PATH_TO_LANGUAGES = "languages/";
     public static final String HELP_DOCUMENT = "commands.html";
+    public static final String NEW_LINE = "\n";
+    public static final String EQUALS = " = ";
     private ResourceBundle myResources;
     private TextFlow historyTab;
     private TextFlow variablesTab;
@@ -38,28 +43,35 @@ public class DropDownButtons extends VBox {
     private VBox paletteBox;
     private LogoScreen myDisplay;
     private Controller myController;
-    private Palette myPalette; //TODO: should this be added to controller?
+    private VariableMap myVarMap;
+    private int dropdownWidth;
+    private int dropdownHeight;
 
     /**
      * Constructors
      */
     public DropDownButtons(LogoScreen ls, Controller controller) {
-        this.setMaxSize(DROPDOWN_WIDTH, DROPDOWN_HEIGHT);
         myDisplay = ls;
         myController = controller;
-        myPalette = new Palette();
+        myVarMap = myController.getVariableSupplier();
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
+
+        dropdownWidth = Integer.parseInt(myResources.getString("Dropdown_Width"));
+        dropdownHeight = Integer.parseInt(myResources.getString("Dropdown_Height"));
 
         historyTab = new TextFlow();
         variablesTab = new TextFlow();
         userTab = new TextFlow();
+        paletteBox = new VBox();
 
-        historyTab.setMaxWidth(DROPDOWN_WIDTH);
-        variablesTab.setMaxWidth(DROPDOWN_WIDTH);
-        userTab.setMaxWidth(DROPDOWN_WIDTH);
+        historyTab.setMaxWidth(dropdownWidth);
+        variablesTab.setMaxWidth(dropdownWidth);
+        userTab.setMaxWidth(dropdownWidth);
 
         this.setId("dropdown-menu");
-        //TODO: make this a separate method?
+    }
+
+    public void makeTabs() {
         this.getChildren().add(addControls());
         this.getChildren().add(addTurtleState());
         this.getChildren().add(addBackgroundTab());
@@ -221,7 +233,7 @@ public class DropDownButtons extends VBox {
     private VBox displayHistory() {
         VBox history = new VBox();
         ScrollPane scroller = new ScrollPane();
-        scroller.setMaxHeight(DROPDOWN_WIDTH);
+        scroller.setMaxSize(dropdownWidth, dropdownHeight);
         scroller.setContent(historyTab);
         history.getChildren().add(scroller);
         return history;
@@ -232,7 +244,7 @@ public class DropDownButtons extends VBox {
      * @param command
      */
     public void editHistoryTab(String command) {
-        Text text = new Text(command + "\n");
+        Text text = new Text(command + NEW_LINE);
         historyTab.getChildren().add(text);
     }
 
@@ -256,7 +268,7 @@ public class DropDownButtons extends VBox {
     private VBox displayVariable() {
         VBox variables = new VBox();
         ScrollPane scroller = new ScrollPane();
-        scroller.setMaxHeight(DROPDOWN_WIDTH);
+        scroller.setMaxSize(dropdownWidth, dropdownHeight);
         scroller.setContent(variablesTab);
         variables.getChildren().add(scroller);
         return variables;
@@ -264,11 +276,13 @@ public class DropDownButtons extends VBox {
 
     /**
      *
-     * @param variable
      */
-    public void editVariableTab(String variable) {
-        Text text = new Text(variable + "\n");
-        variablesTab.getChildren().add(text);
+    public void editVariableTab() {
+        variablesTab.getChildren().clear();
+        for(String key : myVarMap.getVariables().keySet()) {
+            Text text = new Text(key + EQUALS + myVarMap.getVariable(key) + NEW_LINE);
+            variablesTab.getChildren().add(text);
+        }
     }
 
     /**
@@ -283,20 +297,39 @@ public class DropDownButtons extends VBox {
         userCommands.setExpanded(false);
         return userCommands;
     }
-
+    //TODO: command initializer --> get user commands (as a map)
     /**
      *
      * @return
      */
     private VBox displayUserCommands() {
         VBox commands = new VBox();
-        userTab = new TextFlow();
-        userTab.setTextAlignment(TextAlignment.JUSTIFY);
-        userTab.setLineSpacing(5.0);
+        ScrollPane scroller = new ScrollPane();
+        scroller.setMaxSize(dropdownWidth, dropdownHeight);
+        scroller.setContent(userTab);
+        commands.getChildren().add(scroller);
         return commands;
     }
 
+    /**
+     *
+     */
+    public void editUserCommandTab() {
+        userTab.getChildren().clear();
+        CommandInitializer initializer = myController.getInitializerSupplier();
+        Map<String, GenericCommand> userMap = initializer.getUserCommands();
+        for(String key : userMap.keySet()) {
+            Text text = new Text(key);
+            variablesTab.getChildren().add(text);
+        }
+    }
+
     //TODO: display new colors in palette
+
+    /**
+     *
+     * @return
+     */
     private TitledPane addPaletteTab() {
         TitledPane paletteTab = new TitledPane();
         this.paletteDefault();
@@ -306,18 +339,30 @@ public class DropDownButtons extends VBox {
         return paletteTab;
     }
 
+    /**
+     *
+     */
     private void paletteDefault() {
-//        Label colorLbl = new Label(myResources.getString("ColorDefault"));
-//        paletteBox.getChildren().add(colorLbl);
-//        for (int i: myPalette.keySet()) {
-//            Text temp = new Text(i + " = " + myPalette.getColorMap().get(i));
-//            paletteBox.getChildren().add(temp);
-//        }
+        Palette myPalette = myVarMap.getPalette();
+        Label colorLbl = new Label(myResources.getString("ColorDefault"));
+        paletteBox.getChildren().add(colorLbl);
+        for (int i: myPalette.keySet()) {
+            Text temp = new Text(i + EQUALS + myPalette.getColorMap().get(i));
+            paletteBox.getChildren().add(temp);
+        }
     }
 
+    /**
+     *
+     * @param index
+     * @param r
+     * @param g
+     * @param b
+     */
     public void editPalette(int index, int r, int g, int b) {
+        Palette myPalette = myVarMap.getPalette();
         myPalette.addColor(index, r, g, b);
-        Text temp = new Text(index + " = " + myPalette.getColorMap().get(index));
+        Text temp = new Text(index + EQUALS + myPalette.getColorMap().get(index));
         paletteBox.getChildren().add(temp);
     }
 

@@ -80,8 +80,12 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     }
     private VBox addButton () {
         dropDownButtons = new DropDownButtons(logoScreen, myController);
+        dropDownButtons.makeTabs();
         VBox buttonPane = new VBox();
         ScrollPane sp = new ScrollPane();
+        int width = Integer.parseInt(myResources.getString("Scroller_Width"));
+        int height = Integer.parseInt(myResources.getString("Dropdown_Height"));
+        sp.setMaxSize(width, height);
         sp.setContent(dropDownButtons);
         buttonPane.getChildren().add(sp);
         return buttonPane;
@@ -155,6 +159,8 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         myController.setParseConsumer(command);
         myHistory.addCommand(command);
         dropDownButtons.editHistoryTab(command);
+        dropDownButtons.editVariableTab();
+        dropDownButtons.editUserCommandTab();
         myController.getMessageConsumer(myController.setOutputSupplier());
     }
 

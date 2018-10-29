@@ -1,7 +1,9 @@
 package controller;
 
+import commands.CommandInitializer;
 import model.CommandList;
 import model.Turtle;
+import model.VariableMap;
 import view.SLogoView;
 
 import java.util.ResourceBundle;
@@ -88,4 +90,14 @@ public class Controller {
 
     Supplier<String> outputSupplier = () -> {return myCommand.getMyParser().getOutput();};
     public String setOutputSupplier () { return outputSupplier.get(); }
+
+    Supplier<VariableMap> variableSupplier = () -> {return myCommand.getMyVariables();};
+    public VariableMap getVariableSupplier() {
+        return variableSupplier.get();
+    }
+
+    Supplier<CommandInitializer> initializerSupplier = () -> {return myCommand.getMyInitializer();};
+    public CommandInitializer getInitializerSupplier() {
+        return initializerSupplier.get();
+    }
 }
