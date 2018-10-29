@@ -76,16 +76,10 @@ public class LogoScreen extends VBox {
         myBackGround.setBackground(background);
     }
     public void clear () {
-//        if (turtleManager.getActiveTurtle().getMyTurtle().getLines().size() == 1) {
-//            myBackGround.getChildren().clear();
-//            turtleManager.clearTurtle();
-//        }
         if (turtleManager.getActiveTurtle().getMyTurtle().getLines().size() == 0) {
             myBackGround.getChildren().clear();
             turtleManager.clearTurtle();
         }
-//        Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
-//        turtleManager = new TurtleManager(numberOfTurtle, turtleImage, this);
     }
     TurtleDriver getMyTurtle() {
         return turtleManager.getActiveTurtle();

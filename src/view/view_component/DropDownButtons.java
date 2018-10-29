@@ -27,12 +27,14 @@ import java.util.ResourceBundle;
  * @author brookekeene
  */
 public class DropDownButtons extends VBox {
-    private static final String RESOURCE_PACKAGE = "text/view";
-    private static final String PATH_TO_LANGUAGES = "languages/";
-    private static final String HELP_DOCUMENT = "commands.html";
-    private static final String NEW_LINE = "\n";
-    private static final String EQUALS = " = ";
+    public static final String RESOURCE_PACKAGE = "text/view";
+    public static final String PATH_TO_LANGUAGES = "languages/";
+    public static final String HELP_DOCUMENT = "commands.html";
+    public static final String NEW_LINE = "\n";
+    public static final String EQUALS = " = ";
+    private int dropdownWidth;
     private ResourceBundle myResources;
+    private TurtleInfo myInfo;
     private TextFlow historyTab;
     private TextFlow variablesTab;
     private TextFlow userTab;
@@ -40,20 +42,18 @@ public class DropDownButtons extends VBox {
     private LogoScreen myDisplay;
     private Controller myController;
     private VariableMap myVarMap;
-    private int dropdownWidth;
-    private int dropdownHeight;
 
     /**
      * Constructors
      */
     public DropDownButtons(LogoScreen ls, Controller controller) {
+        myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         myDisplay = ls;
         myController = controller;
         myVarMap = myController.getVariableSupplier();
-        myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
+        myInfo = new TurtleInfo(myDisplay.getMyTurtle());
 
         dropdownWidth = Integer.parseInt(myResources.getString("Dropdown_Width"));
-        dropdownHeight = Integer.parseInt(myResources.getString("Dropdown_Height"));
 
         historyTab = new TextFlow();
         variablesTab = new TextFlow();
@@ -93,6 +93,25 @@ public class DropDownButtons extends VBox {
         header.setText(myResources.getString("Control"));
         controlHeader.getChildren().add(header);
         return controlHeader;
+    }
+
+    private TitledPane addTurtleState() {
+        TitledPane turtleState = new TitledPane();
+        VBox turtleStateBox = turtleState();
+        turtleState.setText(myResources.getString("State"));
+        turtleState.setContent(turtleStateBox);
+        turtleState.setExpanded(false);
+        return turtleState;
+    }
+
+    private VBox turtleState() {
+        VBox turtleStateBox = new VBox();
+        turtleStateBox.getChildren().add(myInfo);
+        return turtleStateBox;
+    }
+
+    public void editCurrentState() {
+        myInfo.updateInfo();
     }
 
     /**
@@ -186,23 +205,6 @@ public class DropDownButtons extends VBox {
         return turtleControls;
     }
 
-    //TODO: update
-    private TitledPane addTurtleState() {
-        TitledPane turtleState = new TitledPane();
-        VBox turtleStateBox = turtleState();
-        turtleState.setText(myResources.getString("State"));
-        turtleState.setContent(turtleStateBox);
-        turtleState.setExpanded(false);
-        return turtleState;
-    }
-
-    private VBox turtleState() {
-        VBox turtleStateBox = new VBox();
-        TurtleDriver myTurtles = myDisplay.getMyTurtle();
-        turtleStateBox.getChildren().add(new TurtleInfo(myTurtles));
-        return turtleStateBox;
-    }
-
 
     /**
      * adds history tab containing the user's input command history
@@ -228,7 +230,7 @@ public class DropDownButtons extends VBox {
     private VBox getvBox(TextFlow historyTab) {
         VBox history = new VBox();
         ScrollPane scroller = new ScrollPane();
-        scroller.setMaxSize(dropdownWidth, dropdownHeight);
+        scroller.setMaxWidth(dropdownWidth);
         scroller.setContent(historyTab);
         history.getChildren().add(scroller);
         return history;
@@ -301,7 +303,7 @@ public class DropDownButtons extends VBox {
         userCommands.setExpanded(false);
         return userCommands;
     }
-    //TODO: command initializer --> get user commands (as a map)
+
     /**
      *
      * @return

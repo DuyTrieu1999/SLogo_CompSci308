@@ -45,7 +45,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     private ResourceBundle myResources;
     private Controller myController;
     private CommandList myHistory;
-    private int numOfTurtle = 1;
+    private int numOfTurtle = 3;
     private VariableMap myVariables;
     private CommandInitializer myCommands;
 
@@ -81,6 +81,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     }
     private void step() {
         logoScreen.updateTurtle();
+        dropDownButtons.editCurrentState();
     }
     private VBox addButton () {
         dropDownButtons = new DropDownButtons(logoScreen, myController);
@@ -116,9 +117,13 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Stop"), event -> stopButtonHandler()));
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Step"), event -> stepButtonHandler()));
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Add"), event -> addTurtle()));
-        logoBox.getChildren().add(logoScreen);
-        logoBox.getChildren().add(buttonBox);
-        buttonBox.setAlignment(Pos.CENTER);
+        HBox allignmentBox = new HBox();
+        allignmentBox.getChildren().add(buttonBox);
+        TurtleButtonControl turtleButtonControl = new TurtleButtonControl(myController);
+        allignmentBox.getChildren().add(turtleButtonControl);
+        logoBox.getChildren().addAll(logoScreen, allignmentBox);
+        buttonBox.setAlignment(Pos.TOP_LEFT);
+        turtleButtonControl.setAlignment(Pos.BASELINE_RIGHT);
         return logoBox;
     }
 
@@ -154,6 +159,11 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         String command = scriptView.getUserInput();
         myController.setParseConsumer(command);
         myHistory.addCommand(command);
+        updateGUI(command);
+    }
+
+    private void updateGUI(String command) {
+        //dropDownButtons.editCurrentState();
         dropDownButtons.editHistoryTab(command);
         dropDownButtons.editVariableTab();
         dropDownButtons.editUserCommandTab();
@@ -176,13 +186,6 @@ public class SLogoView extends HBox implements SLogoViewAPI {
 
     }
     private void saveScript () {
-//        //TODO: Print history
-//        Queue<String> myQueue = myHistory.getHistory();
-//        while(myQueue.peek() != null) {
-//            String h = myQueue.poll();
-//            System.out.println(h);
-//        }
-
         myVariables = myController.getVariableSupplier();
         myCommands = myController.getInitializerSupplier();
         Saver saver = new Saver(myVariables, myCommands, chooseFile());

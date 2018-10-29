@@ -22,6 +22,9 @@ public class TabWorkspace {
     private static final Paint BACKGROUND = Color.WHITE;
     private static final String STYLESHEET = "default.css";
     private static final String RESOURCE_PACKAGE = "/text/view";
+    private static final double TOP_ANCHOR = 8.0;
+    private static final double RIGHT_ANCHOR = 6.0;
+    private static final double LEFT_ANCHOR = 1.0;
 
     private Group myRoot;
     private Scene myScene;
@@ -40,12 +43,12 @@ public class TabWorkspace {
         BorderPane bdPane = new BorderPane();
         LogoButton button = createButton();
         AnchorPane pane = new AnchorPane(tabPane, button);
-        AnchorPane.setTopAnchor(button, 8.0);
-        AnchorPane.setRightAnchor(button, 5.0);
-        AnchorPane.setTopAnchor(tabPane, 6.0);
-        AnchorPane.setRightAnchor(tabPane, 1.0);
-        AnchorPane.setLeftAnchor(tabPane, 1.0);
-        AnchorPane.setBottomAnchor(tabPane, 1.0);
+        AnchorPane.setTopAnchor(button, TOP_ANCHOR);
+        AnchorPane.setRightAnchor(button, RIGHT_ANCHOR);
+        AnchorPane.setTopAnchor(tabPane, TOP_ANCHOR);
+        AnchorPane.setRightAnchor(tabPane, RIGHT_ANCHOR);
+        AnchorPane.setLeftAnchor(tabPane, LEFT_ANCHOR);
+        AnchorPane.setBottomAnchor(tabPane, LEFT_ANCHOR);
         bdPane.setCenter(pane);
         myRoot.getChildren().add(bdPane);
         sceneInit();

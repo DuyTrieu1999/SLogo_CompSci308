@@ -2,6 +2,13 @@ package commands;
 
 import java.util.*;
 
+/**
+ * A specific class for TreeNode.
+ * @author Allen Qiu
+ * @author Yunhao Qing
+ */
+
+
 public class TreeNode extends Node {
 
     private TreeNode parent;

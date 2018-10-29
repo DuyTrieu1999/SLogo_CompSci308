@@ -7,6 +7,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * @author Allen Qiu
+ */
+
 public class Loader {
     private File file;
     private VariableMap variables;

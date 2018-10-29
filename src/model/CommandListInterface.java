@@ -3,7 +3,8 @@ package model;
 import java.util.*;
 
 /**
- * @Author Yunhao Qing
+ * This interface is for the front end to interact with the commandlist.
+ * @author Yunhao Qing
  */
 
 public interface CommandListInterface {
