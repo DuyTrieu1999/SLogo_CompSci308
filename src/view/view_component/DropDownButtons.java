@@ -96,6 +96,27 @@ public class DropDownButtons extends VBox {
         return controlHeader;
     }
 
+    //TODO: update
+    private TitledPane addTurtleState() {
+        TitledPane turtleState = new TitledPane();
+        VBox turtleStateBox = turtleState();
+        turtleState.setText(myResources.getString("State"));
+        turtleState.setContent(turtleStateBox);
+        turtleState.setExpanded(false);
+        return turtleState;
+    }
+
+    private VBox turtleState() {
+        VBox turtleStateBox = new VBox();
+        TurtleDriver myTurtles = myDisplay.getMyTurtle();
+        turtleStateBox.getChildren().add(new TurtleInfo(myTurtles));
+        return turtleStateBox;
+    }
+
+    public void editCurrentState() {
+
+    }
+
     /**
      * adds background tab containing controls for background settings
      * @return TitledPane containing background controls
@@ -186,23 +207,6 @@ public class DropDownButtons extends VBox {
         return turtleControls;
     }
 
-    //TODO: update
-    private TitledPane addTurtleState() {
-        TitledPane turtleState = new TitledPane();
-        VBox turtleStateBox = turtleState();
-        turtleState.setText(myResources.getString("State"));
-        turtleState.setContent(turtleStateBox);
-        turtleState.setExpanded(false);
-        return turtleState;
-    }
-
-    private VBox turtleState() {
-        VBox turtleStateBox = new VBox();
-        TurtleDriver myTurtles = myDisplay.getMyTurtle();
-        turtleStateBox.getChildren().add(new TurtleInfo(myTurtles));
-        return turtleStateBox;
-    }
-
 
     /**
      * adds history tab containing the user's input command history
@@ -224,7 +228,7 @@ public class DropDownButtons extends VBox {
     private VBox displayHistory() {
         VBox history = new VBox();
         ScrollPane scroller = new ScrollPane();
-        scroller.setMaxSize(dropdownWidth, dropdownHeight);
+        scroller.setMaxWidth(dropdownWidth);
         scroller.setContent(historyTab);
         history.getChildren().add(scroller);
         return history;
@@ -259,7 +263,7 @@ public class DropDownButtons extends VBox {
     private VBox displayVariable() {
         VBox variables = new VBox();
         ScrollPane scroller = new ScrollPane();
-        scroller.setMaxSize(dropdownWidth, dropdownHeight);
+        scroller.setMaxWidth(dropdownWidth);
         scroller.setContent(variablesTab);
         variables.getChildren().add(scroller);
         return variables;
@@ -288,7 +292,7 @@ public class DropDownButtons extends VBox {
         userCommands.setExpanded(false);
         return userCommands;
     }
-    //TODO: command initializer --> get user commands (as a map)
+
     /**
      *
      * @return
@@ -296,7 +300,7 @@ public class DropDownButtons extends VBox {
     private VBox displayUserCommands() {
         VBox commands = new VBox();
         ScrollPane scroller = new ScrollPane();
-        scroller.setMaxSize(dropdownWidth, dropdownHeight);
+        scroller.setMaxWidth(dropdownWidth);
         scroller.setContent(userTab);
         commands.getChildren().add(scroller);
         return commands;
@@ -311,7 +315,7 @@ public class DropDownButtons extends VBox {
         Map<String, GenericCommand> userMap = initializer.getUserCommands();
         for(String key : userMap.keySet()) {
             Text text = new Text(key);
-            variablesTab.getChildren().add(text);
+            userTab.getChildren().add(text);
         }
     }
 

@@ -166,6 +166,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         String command = scriptView.getUserInput();
         myController.setParseConsumer(command);
         myHistory.addCommand(command);
+        // update GUI
         dropDownButtons.editHistoryTab(command);
         dropDownButtons.editVariableTab();
         dropDownButtons.editUserCommandTab();
