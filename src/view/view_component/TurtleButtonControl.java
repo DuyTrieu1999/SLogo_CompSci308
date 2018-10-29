@@ -1,6 +1,7 @@
 package view.view_component;
 
 import controller.Controller;
+import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -8,6 +9,8 @@ import java.util.ResourceBundle;
 
 public class TurtleButtonControl extends HBox {
     private static final String RESOURCE_PACKAGE = "/text/view";
+    private static final int INSET_PADDING = 70;
+    private static final int INSET_SIZE_PADDING = 10;
 
     private ResourceBundle myResources;
 
@@ -20,6 +23,7 @@ public class TurtleButtonControl extends HBox {
         VBox upDownBox = new VBox();
         upDownBox.getChildren().addAll(upButton, downButton);
         this.getChildren().addAll(leftButton, upDownBox, rightButton);
+        this.setPadding(new Insets(0, INSET_SIZE_PADDING, INSET_SIZE_PADDING, INSET_PADDING));
     }
     private void upFunction (Controller controller) {
         controller.setParseConsumer("fd 50");
