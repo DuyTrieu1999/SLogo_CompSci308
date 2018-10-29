@@ -11,9 +11,11 @@ import java.util.ResourceBundle;
 
 
 /**
- * @Author Yunhao Qing
- * @Author Duy Trieu
- * @Author Brooke Keene
+ * The CommandList Class records the part commands the user has typed in.
+ *
+ * @author Yunhao Qing
+ * @author Duy Trieu
+ * @author Brooke Keene
  */
 
 public class CommandList implements CommandListInterface{
