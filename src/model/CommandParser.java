@@ -46,6 +46,7 @@ public class CommandParser {
 
 
     private List<String> parseAndCheckList(String str){
+        boolean check = true;
         List<String> lines = Arrays.asList(str.split("\\r?\\n"));
         List<String> cleanLines = new ArrayList<>();
         for (String line : lines){
@@ -62,27 +63,32 @@ public class CommandParser {
             String s = partList.get(i);
             if (!(isNumeric(s) || isPossibleCommand(s)|| isPossibleVariable(s) || s.equals("[") || s.equals("]"))){
                 errorMessage = "Invalid input : Input contains index component at index" + i + "of the commands.";
+                check = false;
             }
             else if (s.equals("[")) count1++;
             else if (s.equals("]")) count2++;
             if (count2 > count1){
                 errorMessage = "Invalid input : More ']' than '[' at index" + i + "of the commands.";
+                check = false;
             }
         }
         if (count1 > count2){
             errorMessage = "Invalid input : More '[' than ']', brackets cannot match.";
+            check = false;
         }
-        return cleanLines;
+        if (check) return cleanLines;
+        else return new ArrayList<>();
     }
 
     private List<List<String>> parseToList(String str){
         List<String> lines = parseAndCheckList(str);
+        if (lines.size() == 0) return new ArrayList<>();
         List<List<String>> list = new ArrayList<>();
         int count = 0;
         while (count < lines.size()){
             String line = lines.get(count);
             List<String> temp = new ArrayList<>(Arrays.asList(line.split("\\s+")));
-            while (!isBalance(temp)){
+            while (!isBalance(temp) && count < lines.size() - 1){
                 count++;
                 String newline = lines.get(count);
                 temp.addAll(Arrays.asList(newline.split("\\s+")));
