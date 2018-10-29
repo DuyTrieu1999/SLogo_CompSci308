@@ -315,7 +315,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>setbackground, setbg</td>
+                            <td>setbackground <i>index</i>, setbg <i>index</i></td>
                             <td>0=white,
                                 1=red,
                                 2=orange,
@@ -325,11 +325,11 @@
                                 6=purple,
                                 7=pink,
                                 8=brown,
-                                9=black
+                                9=black, returns <i>index</i>
                             </td>
                         </tr>
                         <tr>
-                            <td>setpencolor, setpc</td>
+                            <td>setpencolor <i>index</i>, setpc <i>index</i></td>
                             <td>0=white,
                                 1=red,
                                 2=orange,
@@ -339,12 +339,37 @@
                                 6=purple,
                                 7=pink,
                                 8=brown,
-                                9=black
+                                9=black, returns <i>index</i>
                             </td>
+                        </tr>
+                        <tr>
+                            <td>setpensize <i>pixels</i></td>
+                            <td>Sets the current pen size to <i>pixels</i>, returns <i>pixels</i></td>
+                        </tr>
+                        <tr>
+                            <td>setshape <i>index</i>, setsh <i>index</i></td>
+                            <td>Sets the current shape to the shape represented by <i>index</i>, returns <i>index</i></td>
+                        </tr>
+                        <tr>
+                            <td>setpalette <i>index r g b</i></td>
+                            <td>Sets the color at <i>index</i> on the palette to the color represented by <i>r g b</i>, returns <i>index</i></td>
                         </tr>
                         <tr>
                             <td>pencolor, pc</td>
-                            <td></td>
+                            <td>0=white,
+                                1=red,
+                                2=orange,
+                                3=yellow,
+                                4=green,
+                                5=blue,
+                                6=purple,
+                                7=pink,
+                                8=brown,
+                                9=black, returns current pen color index</td>
+                        </tr>
+                        <tr>
+                            <td>shape, sh</td>
+                            <td>Returns the index of the current shape</td>
                         </tr>
                     </tbody>
                 </table>
