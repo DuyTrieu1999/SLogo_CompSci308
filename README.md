@@ -61,7 +61,7 @@ Hours Spent: 150 hours
 
 ### UI Layout of the project
 
-![UI View](SlogoUIDesign.png "IDE initial plan")
+![UI View](doc/SlogoUIDesign.png "IDE initial plan")
 
 ### How to use the program
 
