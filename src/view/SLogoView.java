@@ -83,6 +83,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     }
     private void step (double elapsedTime) {
         logoScreen.updateTurtle();
+        dropDownButtons.editCurrentState();
     }
     private VBox addButton () {
         dropDownButtons = new DropDownButtons(logoScreen, myController);
@@ -168,7 +169,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     }
 
     private void updateGUI(String command) {
-        dropDownButtons.editCurrentState();
+        //dropDownButtons.editCurrentState();
         dropDownButtons.editHistoryTab(command);
         dropDownButtons.editVariableTab();
         dropDownButtons.editUserCommandTab();
@@ -191,13 +192,6 @@ public class SLogoView extends HBox implements SLogoViewAPI {
 
     }
     private void saveScript () {
-//        //TODO: Print history
-//        Queue<String> myQueue = myHistory.getHistory();
-//        while(myQueue.peek() != null) {
-//            String h = myQueue.poll();
-//            System.out.println(h);
-//        }
-
         myVariables = myController.getVariableSupplier();
         myCommands = myController.getInitializerSupplier();
         Saver saver = new Saver(myVariables, myCommands, chooseFile());

@@ -33,7 +33,9 @@ public class DropDownButtons extends VBox {
     public static final String HELP_DOCUMENT = "commands.html";
     public static final String NEW_LINE = "\n";
     public static final String EQUALS = " = ";
+    private int dropdownWidth;
     private ResourceBundle myResources;
+    private TurtleInfo myInfo;
     private TextFlow historyTab;
     private TextFlow variablesTab;
     private TextFlow userTab;
@@ -41,20 +43,18 @@ public class DropDownButtons extends VBox {
     private LogoScreen myDisplay;
     private Controller myController;
     private VariableMap myVarMap;
-    private int dropdownWidth;
-    private int dropdownHeight;
 
     /**
      * Constructors
      */
     public DropDownButtons(LogoScreen ls, Controller controller) {
+        myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         myDisplay = ls;
         myController = controller;
         myVarMap = myController.getVariableSupplier();
-        myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
+        myInfo = new TurtleInfo(myDisplay.getMyTurtle());
 
         dropdownWidth = Integer.parseInt(myResources.getString("Dropdown_Width"));
-        dropdownHeight = Integer.parseInt(myResources.getString("Dropdown_Height"));
 
         historyTab = new TextFlow();
         variablesTab = new TextFlow();
@@ -96,7 +96,6 @@ public class DropDownButtons extends VBox {
         return controlHeader;
     }
 
-    //TODO: update
     private TitledPane addTurtleState() {
         TitledPane turtleState = new TitledPane();
         VBox turtleStateBox = turtleState();
@@ -108,13 +107,12 @@ public class DropDownButtons extends VBox {
 
     private VBox turtleState() {
         VBox turtleStateBox = new VBox();
-        TurtleDriver myTurtles = myDisplay.getMyTurtle();
-        turtleStateBox.getChildren().add(new TurtleInfo(myTurtles));
+        turtleStateBox.getChildren().add(myInfo);
         return turtleStateBox;
     }
 
     public void editCurrentState() {
-
+        myInfo.updateInfo();
     }
 
     /**
