@@ -13,8 +13,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import model.CommandList;
-import model.VariableMap;
-import view.turtleView.TurtleDriver;
 import view.view_component.*;
 
 import java.util.ResourceBundle;
@@ -44,7 +42,6 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     private Controller myController;
     private CommandList myHistory;
     private int numOfTurtle = 3;
-    private VariableMap myVariables;
 
     public SLogoView() {
         myController = new Controller(this);
@@ -58,7 +55,6 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         logoScreen = new LogoScreen(Color.WHITE, myController, numOfTurtle);
         myHistory = new CommandList(myController);
-        myVariables = myHistory.getMyVariables();
         initVariable();
         VBox scriptView = addScriptView();
         VBox logoView = addLogoView();
