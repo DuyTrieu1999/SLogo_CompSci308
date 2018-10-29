@@ -14,6 +14,7 @@ public class ClearScreen extends CommandNode {
         double oldY = turtle.getY();
         turtle.moveTo(0, 0);
         turtle.clearLines();
+        turtle.setOrientation(90);
         return Math.sqrt(Math.pow((oldY), 2)+Math.pow(oldX, 2));
     }
 
