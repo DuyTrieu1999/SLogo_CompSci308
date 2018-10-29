@@ -73,7 +73,7 @@ To run SLogo, simply type the commands in the script editor and press Run to exe
 * Error checking system is not thorough. Sometimes the system doesn't catch the error and print out in the console in IntellJ. However, the error does not crash or stop the program.
 
 ### Design decision
-* For the backend, we decide to use a tree for parsing commands instead of other data structures like Linkedlist or ArrayList. By using a tree, we can ...
+* For the backend, we decide to use a tree for parsing commands instead of other data structures like Linkedlist or ArrayList. By using a tree, we can execute a command when its parameters are fulfilled.
 * For the front end, we decide to create seperate classes for each components of the UI. This helps us to structure our code better and encapsulate many additional features when needed. 
 * We decide to create a Turtle class in the backend that is parsed through the Command Parser and return its x, y coordinates, and orientation accordingly. We then having a TurtleDriver class in the front end that receives the information from the backend and updates the ImageView, animation, and pen for the UI. This proves to be very easy and effective way of communicating the getting information for the turtle.
 * We decide to include a Controller class that connects the frontend and the backend. The Controller classes would return multiple objects to communicate between the frontend and the backend using lambdas. By doing this, everywhere we have a Controller object, we could access the information from both the frontend and the backend effectively and safely.
