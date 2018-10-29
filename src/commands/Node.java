@@ -9,7 +9,6 @@ import java.util.*;
 
 
 public class Node {
-    private String type;
     private TreeNode parent;
     private List<String> list;
 

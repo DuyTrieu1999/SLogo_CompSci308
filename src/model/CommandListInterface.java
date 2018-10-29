@@ -8,9 +8,9 @@ import java.util.*;
 
 public interface CommandListInterface {
 
-    public void parse(String text);
+    void parse(String text);
 
-    public void setMessage (String message);
+    void setMessage (String message);
 
-    public void setLanguage (ResourceBundle language);
+    void setLanguage(ResourceBundle language);
 }

@@ -19,7 +19,6 @@ import java.util.List;
 public class TurtleDriver {
 
     private Turtle myTurtle;
-    private LogoScreen myScreen;
     private Pen myPen;
     private Graphic myGraphic;
     private int turtleID;
@@ -30,35 +29,30 @@ public class TurtleDriver {
      * Constructor
      */
 
-    public TurtleDriver(LogoScreen screen, int id, Image image, Turtle turtle) {
+    TurtleDriver(LogoScreen screen, int id, Image image, Turtle turtle) {
         myTurtle = turtle;
-        myScreen = screen;
         turtleID = id;
         isActive = true;
-        myPen = new Pen(myScreen, id, turtle);
-        myGraphic = new Graphic(id, image);
+        myPen = new Pen(screen, id, turtle);
+        myGraphic = new Graphic(image);
         myGraphic.getView().setX(turtle.getX());
         myGraphic.getView().setY(turtle.getY());
-        myGraphic.setImageInactive(isActive);
+        myGraphic.setImageInactive(true);
     }
 
-    public Point2D getLocation () { return new Point2D(myTurtle.getX(), myTurtle.getY()); }
-
-    public void setTurtleImage(Image im) {
-        myGraphic = new Graphic(turtleID, im);
-    }
+    private Point2D getLocation() { return new Point2D(myTurtle.getX(), myTurtle.getY()); }
 
     public Turtle getMyTurtle () {
         return myTurtle;
     }
 
-    public boolean isActive () { return isActive; }
-    public void setActive (boolean active) { isActive = active; }
+    boolean isActive() { return isActive; }
+    void setActive (boolean active) { isActive = active; }
 
     private void setLocation(Point2D next) {
         this.setPoint(next);
     }
-    public Pen getPen() {return myPen;}
+    Pen getPen() {return myPen;}
     public void updateMove() {
         List<Line> lineList = myTurtle.getLines();
         for (Line line: lineList) {
@@ -68,14 +62,14 @@ public class TurtleDriver {
         setRotation(myTurtle.getOrientation());
     }
 
-    public void setPoint (Point2D point) {
+    private void setPoint(Point2D point) {
         myGraphic.getView().setX(point.getX());
         myGraphic.getView().setY(point.getY());
     }
-    public int getTurtleID () {
+    int getTurtleID() {
         return turtleID;
     }
-    public double getOrientation () {
+    double getOrientation() {
         return myTurtle.getOrientation();
     }
     public double getX() { return myGraphic.getView().getX(); }
@@ -84,7 +78,7 @@ public class TurtleDriver {
 
     public double getHeading() { return orientation; }
 
-    public Graphic getMyGraphic () { return myGraphic; }
+    Graphic getMyGraphic() { return myGraphic; }
 
     public void setHeading(double degree) { orientation = degree; }
 
@@ -92,19 +86,11 @@ public class TurtleDriver {
         myPen.setColor(c);
     }
 
-    public boolean isVisible() {
-        return myGraphic.isVisible();
-    }
-
-    public void setVisible(boolean visible) {
-        myGraphic.setVisible(visible);
-    }
-
     public ImageView getView() {
         return myGraphic.getView();
     }
 
-    public void setRotation (double degrees) {
+    private void setRotation(double degrees) {
         myGraphic.setRotation(degrees);
     }
 }

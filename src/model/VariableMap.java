@@ -1,6 +1,5 @@
 package model;
 
-import javafx.scene.paint.Color;
 import view.view_component.Palette;
 
 import java.util.*;
@@ -22,7 +21,7 @@ public class VariableMap {
      * Constructor
      */
     public VariableMap(){
-        varMap = new HashMap<String, Double>();
+        varMap = new HashMap<>();
         myPalette = new Palette();
     }
 
@@ -55,13 +54,6 @@ public class VariableMap {
      */
     public double getVariable(String str){
         return varMap.get(str);
-    }
-
-    /**
-     * clears variable map, varMap
-     */
-    public void clearVariables(){
-        varMap.clear();
     }
 
     /**

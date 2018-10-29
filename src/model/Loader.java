@@ -8,9 +8,9 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Loader {
-    File file;
-    VariableMap variables;
-    CommandInitializer commands;
+    private File file;
+    private VariableMap variables;
+    private CommandInitializer commands;
 
     public Loader(VariableMap variableMap, CommandInitializer commandInitializer, File loadFrom){
         file = loadFrom;

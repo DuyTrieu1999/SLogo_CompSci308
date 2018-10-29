@@ -22,14 +22,6 @@ public class TurtleManager {
         clearTurtle();
     }
 
-    public HashMap<Integer, TurtleDriver> getAllTurtles() {
-        return turtleMap;
-    }
-
-    protected TurtleDriver getTurtleByID (int id) {
-        return turtleMap.get(id);
-    }
-
     private void createInitTurtle (int id) {
         TurtleDriver turtle = new TurtleDriver(screen, id, turtleImage, screen.getController().setTurtleSupplier());
         turtleMap.put(id, turtle);

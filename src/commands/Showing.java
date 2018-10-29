@@ -15,7 +15,7 @@ public class Showing extends CommandNode {
 
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
-        if(turtle.getVisibility() == true){
+        if(turtle.getVisibility()){
             return 1;
         }
         return 0;

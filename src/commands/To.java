@@ -13,7 +13,6 @@ import java.util.List;
 
 public class To extends CommandNode {
     public int numParameters = 3;
-    private double output = 1;
 
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
@@ -21,7 +20,7 @@ public class To extends CommandNode {
         commands.addCommand(parameters.get(0).toLowerCase(), parameters.get(1), parameters.get(2));
         //System.out.println(parameters.get(0) + "\n" + parameters.get(1) + "\n" + parameters.get(2));
         //System.out.println("Added the command " + parameters.get(0));
-        return output;
+        return 1;
     }
 
     public int getNumParameters(){

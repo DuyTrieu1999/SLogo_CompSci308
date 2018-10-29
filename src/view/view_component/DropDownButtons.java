@@ -2,8 +2,6 @@ package view.view_component;
 
 import commands.CommandInitializer;
 import commands.GenericCommand;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,8 +12,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import model.CommandParser;
-import model.Turtle;
 import model.VariableMap;
 import view.turtleView.TurtleDriver;
 import view.turtleView.TurtleInfo;
@@ -31,11 +27,11 @@ import java.util.ResourceBundle;
  * @author brookekeene
  */
 public class DropDownButtons extends VBox {
-    public static final String RESOURCE_PACKAGE = "text/view";
-    public static final String PATH_TO_LANGUAGES = "languages/";
-    public static final String HELP_DOCUMENT = "commands.html";
-    public static final String NEW_LINE = "\n";
-    public static final String EQUALS = " = ";
+    private static final String RESOURCE_PACKAGE = "text/view";
+    private static final String PATH_TO_LANGUAGES = "languages/";
+    private static final String HELP_DOCUMENT = "commands.html";
+    private static final String NEW_LINE = "\n";
+    private static final String EQUALS = " = ";
     private ResourceBundle myResources;
     private TextFlow historyTab;
     private TextFlow variablesTab;
@@ -121,7 +117,7 @@ public class DropDownButtons extends VBox {
         VBox backgroundControls = colorChoices.makeBox();
         colorChoices.setOnAction(e -> {
             String newBackColor = colorChoices.getColor();
-            myDisplay.setBackGroundColor(Color.valueOf(newBackColor));
+            LogoScreen.setBackGroundColor(Color.valueOf(newBackColor));
         });
         return backgroundControls;
     }
@@ -226,6 +222,10 @@ public class DropDownButtons extends VBox {
      * @return
      */
     private VBox displayHistory() {
+        return getvBox(historyTab);
+    }
+
+    private VBox getvBox(TextFlow historyTab) {
         VBox history = new VBox();
         ScrollPane scroller = new ScrollPane();
         scroller.setMaxSize(dropdownWidth, dropdownHeight);
@@ -240,9 +240,7 @@ public class DropDownButtons extends VBox {
      */
     public void editHistoryTab(String command) {
         Hyperlink text = new Hyperlink(command);
-        text.setOnAction(event -> {
-            myController.setParseConsumer(command);
-        });
+        text.setOnAction(event -> myController.setParseConsumer(command));
         historyTab.getChildren().add(text);
         historyTab.getChildren().add(new Text(NEW_LINE));
     }
@@ -265,12 +263,7 @@ public class DropDownButtons extends VBox {
      * @return
      */
     private VBox displayVariable() {
-        VBox variables = new VBox();
-        ScrollPane scroller = new ScrollPane();
-        scroller.setMaxSize(dropdownWidth, dropdownHeight);
-        scroller.setContent(variablesTab);
-        variables.getChildren().add(scroller);
-        return variables;
+        return getvBox(variablesTab);
     }
 
     /**
@@ -314,12 +307,7 @@ public class DropDownButtons extends VBox {
      * @return
      */
     private VBox displayUserCommands() {
-        VBox commands = new VBox();
-        ScrollPane scroller = new ScrollPane();
-        scroller.setMaxSize(dropdownWidth, dropdownHeight);
-        scroller.setContent(userTab);
-        commands.getChildren().add(scroller);
-        return commands;
+        return getvBox(userTab);
     }
 
     /**
@@ -337,9 +325,7 @@ public class DropDownButtons extends VBox {
                 dialog.setHeaderText("User Command Parameters");
                 dialog.setContentText("Enter the parameters for the command " + key);
                 Optional<String> result = dialog.showAndWait();
-                if(result.isPresent()){
-                    myController.setParseConsumer(key + " " + result.get());
-                }
+                result.ifPresent(s -> myController.setParseConsumer(key + " " + s));
             });
             userTab.getChildren().add(text);
             userTab.getChildren().add(new Text(NEW_LINE));
@@ -372,20 +358,6 @@ public class DropDownButtons extends VBox {
             Text temp = new Text(i + EQUALS + myPalette.getColorMap().get(i));
             paletteBox.getChildren().add(temp);
         }
-    }
-
-    /**
-     *
-     * @param index
-     * @param r
-     * @param g
-     * @param b
-     */
-    public void editPalette(int index, int r, int g, int b) {
-        Palette myPalette = myVarMap.getPalette();
-        myPalette.addColor(index, r, g, b);
-        Text temp = new Text(index + EQUALS + myPalette.getColorMap().get(index));
-        paletteBox.getChildren().add(temp);
     }
 
     /**
@@ -440,12 +412,9 @@ public class DropDownButtons extends VBox {
      */
     private Hyperlink linkHelp() {
         Hyperlink helpLink = new Hyperlink(myResources.getString("HelpBasic"));
-        helpLink.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                PopupWindow helpWindow = new PopupWindow(myResources.getString("HelpBasic"), HELP_DOCUMENT);
-                helpWindow.display();
-            }
+        helpLink.setOnAction(event -> {
+            PopupWindow helpWindow = new PopupWindow(myResources.getString("HelpBasic"), HELP_DOCUMENT);
+            helpWindow.display();
         });
         return helpLink;
     }

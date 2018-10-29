@@ -16,7 +16,6 @@ import java.util.ResourceBundle;
 
 public class SetBackground extends CommandNode {
     public int numParameters = 1;
-    private HashMap<String, Integer> backgroundMap = new HashMap<>();
     private ResourceBundle colors = ResourceBundle.getBundle("text/view");
 
     @Override

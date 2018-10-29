@@ -38,8 +38,6 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     private static final String RESOURCE_PACKAGE = "/text/view";
 
     private Timeline animation = new Timeline();
-    private KeyFrame frame;
-    private BorderPane myBP;
     private LogoScreen logoScreen;
     private DropDownButtons dropDownButtons;
     private ScriptEditor scriptView;
@@ -59,7 +57,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         return myController;
     }
 
-    public void sceneInit () {
+    private void sceneInit() {
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         logoScreen = new LogoScreen(Color.WHITE, myController, numOfTurtle);
         myHistory = new CommandList(myController);
@@ -68,7 +66,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         initVariable();
         VBox scriptView = addScriptView();
         VBox logoView = addLogoView();
-        myBP = new BorderPane();
+        BorderPane myBP = new BorderPane();
         myBP.setPadding(new Insets(Integer.parseInt(myResources.getString("Padding"))));
         myBP.setLeft(addButton());
         myBP.setRight(scriptView);
@@ -76,12 +74,12 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         this.getChildren().add(myBP);
     }
     private void initVariable () {
-        frame  = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-                e -> this.step(SECOND_DELAY));
+        KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
+                e -> this.step());
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(frame);
     }
-    private void step (double elapsedTime) {
+    private void step() {
         logoScreen.updateTurtle();
     }
     private VBox addButton () {
@@ -124,16 +122,8 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         return logoBox;
     }
 
-    public void clearConsole() {
-        this.clearScript();
-    }
-
     public void clearDisplay() {
         logoScreen.clear();
-    }
-
-    public void clearHistory() {
-        scriptView.clearEditor();
     }
 
     public void showMessage(String text) {
@@ -146,7 +136,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     }
 
     private void stopButtonHandler () {
-        animation.pause();;
+        animation.pause();
     }
     private void stepButtonHandler () {
         stopButtonHandler();
@@ -160,7 +150,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     /**
      * processes the user input
      */
-    public void runScript () {
+    private void runScript() {
         String command = scriptView.getUserInput();
         myController.setParseConsumer(command);
         myHistory.addCommand(command);
@@ -174,7 +164,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     /**
      * clears the user input
      */
-    public void clearScript () {
+    private void clearScript() {
         consoleView.getConsole().getChildren().clear();
         scriptView.clearEditor();
     }
