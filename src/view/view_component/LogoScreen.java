@@ -9,8 +9,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import view.turtleView.TurtleDriver;
 import view.turtleView.TurtleManager;
-
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -81,10 +79,14 @@ public class LogoScreen extends VBox {
         myBackGround.setBackground(background);
     }
     public void clear () {
-        turtleManager.clearTurtle();
-        myBackGround.getChildren().clear();
-        Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
-        turtleManager = new TurtleManager(numberOfTurtle, turtleImage, this);
+//        if (turtleManager.getActiveTurtle().getMyTurtle().getLines().size() == 1) {
+//            myBackGround.getChildren().clear();
+//            turtleManager.clearTurtle();
+//        }
+        if (turtleManager.getActiveTurtle().getMyTurtle().getLines().size() == 0) {
+            myBackGround.getChildren().clear();
+            turtleManager.clearTurtle();
+        }
 //        Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
 //        turtleManager = new TurtleManager(numberOfTurtle, turtleImage, this);
     }

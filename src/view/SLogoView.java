@@ -13,13 +13,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.CommandList;
 import model.Loader;
 import model.Saver;
 import model.VariableMap;
-import view.turtleView.TurtleDriver;
 import view.view_component.*;
 
 import java.io.File;
@@ -49,7 +47,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     private ResourceBundle myResources;
     private Controller myController;
     private CommandList myHistory;
-    private int numOfTurtle = 3;
+    private int numOfTurtle = 1;
     private VariableMap myVariables;
     private CommandInitializer myCommands;
 
@@ -170,6 +168,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         dropDownButtons.editVariableTab();
         dropDownButtons.editUserCommandTab();
         myController.getMessageConsumer(myController.setOutputSupplier());
+        logoScreen.clear();
     }
 
     /**

@@ -2,8 +2,6 @@ package view.turtleView;
 
 import javafx.scene.image.Image;
 import view.view_component.LogoScreen;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
