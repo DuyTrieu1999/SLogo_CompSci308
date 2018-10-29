@@ -19,7 +19,7 @@ public class PenColor extends CommandNode {
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
         for(int i=0; i<10; i++){
-            System.out.println("Comparing " + turtle.getPenColor().toString() + " to  " + Color.valueOf(colors.getString(Integer.toString(i))).toString());
+            //System.out.println("Comparing " + turtle.getPenColor().toString() + " to  " + Color.valueOf(colors.getString(Integer.toString(i))).toString());
             if(turtle.getPenColor().equals(Color.valueOf(colors.getString(Integer.toString(i))))){
                 //this is it
                 return i;
