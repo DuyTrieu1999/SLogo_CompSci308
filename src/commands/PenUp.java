@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for PenUp.
+ * @author Allen Qiu
+ */
+
+
 public class PenUp extends CommandNode {
     public int numParameters = 0;
 

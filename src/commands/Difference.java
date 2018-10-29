@@ -5,6 +5,11 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Difference.
+ * @author Allen Qiu
+ */
+
 public class Difference extends CommandNode {
     public int numParameters = 2;
 

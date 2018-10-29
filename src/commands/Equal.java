@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+
+/**
+ * A specific class for Equal.
+ * @author Allen Qiu
+ */
+
 public class Equal extends CommandNode {
     public int numParameters = 2;
 

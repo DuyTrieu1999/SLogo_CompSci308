@@ -5,6 +5,11 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Back.
+ * @author Allen Qiu
+ */
+
 public class Back extends CommandNode {
     public int numParameters = 1;
 

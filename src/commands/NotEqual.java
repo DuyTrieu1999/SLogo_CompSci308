@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for NotEqual.
+ * @author Allen Qiu
+ */
+
+
 public class NotEqual extends CommandNode {
     public int numParameters = 2;
 

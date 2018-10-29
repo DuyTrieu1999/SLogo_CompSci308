@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for GetPenColor
+ * @author Allen Qiu
+ */
+
+
 public class GetPenColor extends CommandNode {
     public int numParameters = 2;
 

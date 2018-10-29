@@ -5,6 +5,11 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for SetPalette.
+ * @author Allen Qiu
+ */
+
 public class SetPalette extends CommandNode {
     public int numParameters = 4;
 

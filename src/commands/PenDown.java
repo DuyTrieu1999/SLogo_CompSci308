@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for PenDown.
+ * @author Allen Qiu
+ */
+
+
 public class PenDown extends CommandNode {
     public int numParameters = 0;
 

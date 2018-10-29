@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Product.
+ * @author Allen Qiu
+ */
+
+
 public class Product extends CommandNode {
     public int numParameters = 2;
 

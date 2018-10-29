@@ -5,6 +5,11 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Cos.
+ * @author Allen Qiu
+ */
+
 public class Cos extends CommandNode {
     public int numParameters = 1;
 

@@ -1,10 +1,13 @@
 package commands;
 
-import model.Turtle;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+
+/**
+ * A specific class for CommandInitializer.
+ * @author Allen Qiu
+ */
 
 public class CommandInitializer {
 

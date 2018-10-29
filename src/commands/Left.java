@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Left.
+ * @author Allen Qiu
+ */
+
+
 public class Left extends CommandNode {
     public int numParameters = 1;
 

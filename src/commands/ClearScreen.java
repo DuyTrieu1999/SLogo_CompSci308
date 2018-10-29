@@ -5,6 +5,10 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for ClearScreen.
+ * @author Allen Qiu
+ */
 public class ClearScreen extends CommandNode {
     public int numParameters = 0;
 

@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Make.
+ * @author Allen Qiu
+ */
+
+
 public class Make extends CommandNode {
     public int numParameters = 2;
 

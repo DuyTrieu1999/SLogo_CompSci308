@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Remainder.
+ * @author Allen Qiu
+ */
+
+
 public class Remainder extends CommandNode {
     public int numParameters = 2;
 

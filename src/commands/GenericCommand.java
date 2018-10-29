@@ -6,6 +6,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+
+/**
+ * A specific class for GenericCommand.
+ * @author Allen Qiu
+ */
+
 public class GenericCommand extends CommandNode {
     public int numParameters;
     private double output = 0;
@@ -20,11 +26,8 @@ public class GenericCommand extends CommandNode {
 
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
-        //System.out.println("Successfully called GenericCommand!");
-        //add variable to varmap
         for(int i=0;i<variables.length;i++){
             varMap.addVariable(variables[i], Double.parseDouble(parameters.get(i)));
-            //System.out.println("Added the variable " + variables[i]);
         }
         CommandParser parser = new CommandParser(varMap, commands, turtle);
         parser.parse(thisCommand);

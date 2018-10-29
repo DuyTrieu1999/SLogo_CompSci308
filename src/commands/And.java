@@ -2,8 +2,12 @@ package commands;
 
 import model.Turtle;
 import model.VariableMap;
-
 import java.util.List;
+
+/**
+ * A specific class for And.
+ * @author Allen Qiu
+ */
 
 public class And extends CommandNode {
     public int numParameters = 2;

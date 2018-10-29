@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Tan.
+ * @author Allen Qiu
+ */
+
+
 public class Tan extends CommandNode {
     public int numParameters = 1;
 
