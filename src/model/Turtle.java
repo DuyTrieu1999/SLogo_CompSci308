@@ -19,11 +19,9 @@ public class Turtle implements TurtleInterface {
     private double penWidth;
     private boolean penVisibility = true;
 
-    private int id;
-
     private List<Line> lines;
 
-    public Turtle(double initialX, double initialY, Color color, int thisID) {
+    public Turtle(double initialX, double initialY, Color color) {
         xPos = initialX;
         yPos = initialY;
 
@@ -32,8 +30,6 @@ public class Turtle implements TurtleInterface {
 
         penColor = color;
         penWidth = 1.0;
-
-        id = thisID;
 
         lines = new ArrayList<>();
     }

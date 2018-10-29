@@ -15,7 +15,7 @@ public class TurtleManager {
     private int initialTurtles;
     private LogoScreen screen;
     private Image turtleImage;
-    private ArrayList<TurtleDriver> activeTurtle;
+    private TurtleDriver activeTurtle;
 
     public TurtleManager (int initNumber, Image turtleImage, LogoScreen screen) {
         this.initialTurtles = initNumber;
@@ -36,13 +36,18 @@ public class TurtleManager {
         TurtleDriver turtle = new TurtleDriver(screen, id, turtleImage, screen.getController().setTurtleSupplier());
         turtleMap.put(id, turtle);
         screen.addTurtle(turtle);
-        activeTurtle.add(turtle);
+        activeTurtle = turtle;
+        for (TurtleDriver turtleDrive: turtleMap.values()) {
+            if (turtleDrive != turtle) {
+                turtleDrive.setActive(false);
+                turtleDrive.getMyGraphic().setImageInactive(false);
+            }
+        }
         turtle.getView().setOnMouseClicked(e -> addActiveTurtle(turtle));
         turtle.setActive(true);
     }
     public void clearTurtle() {
         turtleMap = new HashMap<>();
-        activeTurtle = new ArrayList<>();
         createListTurtle();
     }
     private void createListTurtle () {
@@ -52,18 +57,22 @@ public class TurtleManager {
     }
     private void addActiveTurtle (TurtleDriver turtle) {
         if (!turtle.isActive()) {
-            activeTurtle.add(turtle);
+            activeTurtle = turtle;
             turtle.setActive(true);
             turtle.getMyGraphic().setImageInactive(true);
+            for (TurtleDriver turtleDrive: turtleMap.values()) {
+                if (turtleDrive != turtle) {
+                    turtleDrive.setActive(false);
+                    turtleDrive.getMyGraphic().setImageInactive(false);
+                }
+            }
         }
         else {
-            activeTurtle.remove(turtle);
             turtle.setActive(false);
             turtle.getMyGraphic().setImageInactive(false);
         }
-        System.out.println(activeTurtle.size());
     }
-    public ArrayList<TurtleDriver> getActiveTurtle () {
+    public TurtleDriver getActiveTurtle () {
         return activeTurtle;
     }
 }

@@ -13,15 +13,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import model.VariableMap;
 import view.turtleView.TurtleDriver;
 import view.turtleView.TurtleInfo;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -149,9 +146,7 @@ public class DropDownButtons extends VBox {
         VBox penControls = colorChoices.makeBox();
         colorChoices.setOnAction(e -> {
             String newPenColor = colorChoices.getColor();
-            for (TurtleDriver turtle: myDisplay.getMyTurtle()) {
-                turtle.setMyPenColor(Color.valueOf(newPenColor));
-            }
+            myDisplay.getMyTurtle().setMyPenColor(Color.valueOf(newPenColor));
         });
         return penControls;
     }
@@ -184,9 +179,7 @@ public class DropDownButtons extends VBox {
             if(file.toString().contains(".png") || file.toString().contains(".jpeg")) {
                 imageBox.setFileName(file.toString());
                 Image myImage = new Image(file.toURI().toString());
-                for (TurtleDriver turtle: myDisplay.getMyTurtle()) {
-                    turtle.getView().setImage(myImage);
-                }
+                myDisplay.getMyTurtle().getView().setImage(myImage);
             }
         });
         turtleControls.getChildren().add(imageBox);
@@ -205,10 +198,8 @@ public class DropDownButtons extends VBox {
 
     private VBox turtleState() {
         VBox turtleStateBox = new VBox();
-        ArrayList<TurtleDriver> myTurtles = myDisplay.getMyTurtle();
-        for (int i=0; i<myTurtles.size(); i++) {
-            turtleStateBox.getChildren().add(new TurtleInfo(myTurtles.get(i)));
-        }
+        TurtleDriver myTurtles = myDisplay.getMyTurtle();
+        turtleStateBox.getChildren().add(new TurtleInfo(myTurtles));
         return turtleStateBox;
     }
 
