@@ -1,0 +1,2 @@
+make test 50.0
+to test2 [ :x ] [ fd :x ]

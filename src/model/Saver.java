@@ -23,16 +23,18 @@ public class Saver {
 
     public void save() {
         try{
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("testtttt.txt"));
             for(Map.Entry<String, Double> entry:variables.getVariables().entrySet()){
                 writer.write("make " + entry.getKey() + " " + entry.getValue());
                 writer.newLine();
+                System.out.print("Just wrote the variable" + entry.getKey());
             }
             for(Map.Entry<String, GenericCommand> entry:commands.getUserCommands().entrySet()){
                 writer.write("to " + entry.getKey() + " [ " + entry.getValue().getVariables() + " ] [ " + entry.getValue().getCommand() + " ]");
                 writer.newLine();
             }
             writer.close();
+            System.out.print("Done saving!");
         } catch (IOException e) {
             e.printStackTrace();
         }
