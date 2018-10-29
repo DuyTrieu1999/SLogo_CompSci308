@@ -169,6 +169,7 @@ public class DropDownButtons extends VBox {
         colorChoices.setOnAction(e -> {
             String newPenColor = colorChoices.getColor();
             myDisplay.getMyTurtle().setMyPenColor(Color.valueOf(newPenColor));
+            myDisplay.getMyTurtle().getMyTurtle().setPenColor(Color.valueOf(newPenColor));
         });
         return penControls;
     }
