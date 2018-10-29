@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for xCor.
+ * @author Allen Qiu
+ */
+
+
 public class xCor extends CommandNode {
     public int numParameters = 0;
 
