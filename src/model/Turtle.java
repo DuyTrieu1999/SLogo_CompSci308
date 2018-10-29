@@ -119,8 +119,12 @@ public class Turtle implements TurtleInterface {
     }
 
     public void changeImage(int id){
-        hasImageChanged = true;
+        setHasImageChanged(true);
         imageID = id;
+    }
+
+    public void setHasImageChanged(boolean val){
+        hasImageChanged = val;
     }
 
     public boolean getImageStatus(){

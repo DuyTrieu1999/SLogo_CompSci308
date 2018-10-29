@@ -67,6 +67,7 @@ public class TurtleDriver {
         if(myTurtle.getImageStatus()){
             ResourceBundle resources = ResourceBundle.getBundle("text/view");
             myGraphic.getView().setImage(new Image(resources.getString("Image" + myTurtle.getImageID())));
+            myTurtle.setHasImageChanged(false);
         }
     }
 
