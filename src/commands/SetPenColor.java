@@ -14,11 +14,10 @@ import java.util.ResourceBundle;
 
 public class SetPenColor extends CommandNode {
     public int numParameters = 1;
-    private ResourceBundle colors = ResourceBundle.getBundle("text/view");
 
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
-        turtle.setPenColor(Color.valueOf(colors.getString(parameters.get(0))));
+        turtle.setPenColor(varMap.getPalette().get(Integer.parseInt(parameters.get(0))));
         return Double.parseDouble(parameters.get(0));
     }
 

@@ -16,13 +16,10 @@ import java.util.ResourceBundle;
 
 public class SetBackground extends CommandNode {
     public int numParameters = 1;
-    private HashMap<String, Integer> backgroundMap = new HashMap<>();
-    private ResourceBundle colors = ResourceBundle.getBundle("text/view");
 
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
-        //turtle.setBackground(backgroundMap.get(parameters.get(0)));
-        view.view_component.LogoScreen.setBackGroundColor(Color.valueOf(colors.getString(parameters.get(0))));
+        view.view_component.LogoScreen.setBackGroundColor(varMap.getPalette().get(Integer.parseInt(parameters.get(0))));
         return 0;
     }
 
