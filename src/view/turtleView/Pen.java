@@ -5,6 +5,11 @@ import javafx.scene.shape.Line;
 import model.Turtle;
 import view.view_component.LogoScreen;
 
+/**
+ * TurtleDriver
+ *
+ * @author Duy Trieu
+ */
 public class Pen {
     private LogoScreen myScreen;
     private Color myColor;
