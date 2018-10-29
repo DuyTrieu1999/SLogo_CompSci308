@@ -59,7 +59,12 @@ Hours Spent: 150 hours
 * [Designing with Exceptions](https://www.javaworld.com/article/2076721/core-java/designing-with-exceptions.html)
 * [OO in one Sentence](https://media.pragprog.com/articles/may_04_oo1.pdf)
 
+### UI Layout of the project
+
+![UI View](SlogoUIDesign.png "IDE initial plan")
+
 ### How to use the program
+
 To run SLogo, simply type the commands in the script editor and press Run to execute the commands. Hit play to watch the turtle move around the screen. The dropdown button collumn in the left allows users to look into and change variables pertaining to the pen, turtle and history command.
 
 ### Known Bugs
