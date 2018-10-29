@@ -9,8 +9,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import view.turtleView.TurtleDriver;
 import view.turtleView.TurtleManager;
-
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -27,10 +25,8 @@ public class LogoScreen extends VBox {
     private static Pane myBackGround;
     private TurtleManager turtleManager;
     private Controller myController;
-    private int numberOfTurtle;
 
     public LogoScreen (Color backgroundColor, Controller controller, int numberOfTurtle) {
-        this.numberOfTurtle = numberOfTurtle;
         myController = controller;
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         this.setId("main-screen");
@@ -81,6 +77,11 @@ public class LogoScreen extends VBox {
         myBackGround.setBackground(background);
     }
     public void clear () {
+//        if (turtleManager.getActiveTurtle().getMyTurtle().getLines().size() == 1) {
+//            myBackGround.getChildren().clear();
+//            turtleManager.clearTurtle();
+//        }
+        myBackGround.getChildren().clear();
         turtleManager.clearTurtle();
     }
     public TurtleDriver getMyTurtle () {
