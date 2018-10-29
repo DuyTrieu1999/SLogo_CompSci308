@@ -8,19 +8,17 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * A specific class for SetShape.
+ * A specific class for GetShape.
  * @author Allen Qiu
  */
 
-public class SetShape extends CommandNode {
-    public int numParameters = 1;
+public class GetShape extends CommandNode {
+    public int numParameters = 0;
     private HashMap<String, Shape> shapeMap = new HashMap<>();
 
     @Override
     public double run(List<String> parameters, Turtle turtle, VariableMap varMap, CommandInitializer commands){
-        //turtle.setShape(shapeMap.get(parameters.get(0)));
-        turtle.changeImage(Integer.parseInt(parameters.get(0)));
-        return Double.parseDouble(parameters.get(0));
+        return turtle.getImageID();
     }
 
     public int getNumParameters(){
