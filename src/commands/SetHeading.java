@@ -5,6 +5,11 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for SetHeading.
+ * @author Allen Qiu
+ */
+
 public class SetHeading extends CommandNode {
     public int numParameters = 1;
 

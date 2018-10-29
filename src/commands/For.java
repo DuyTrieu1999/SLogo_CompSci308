@@ -6,6 +6,11 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for For.
+ * @author Allen Qiu
+ */
+
 public class For extends CommandNode {
     public int numParameters = 2;
     private double output = 0;

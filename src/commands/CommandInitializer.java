@@ -1,10 +1,13 @@
 package commands;
 
-import model.Turtle;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+
+/**
+ * A specific class for CommandInitializer.
+ * @author Allen Qiu
+ */
 
 public class CommandInitializer {
 
@@ -100,8 +103,8 @@ public class CommandInitializer {
         commandMap.put(resources.getString("SetPenColor").split("\\|")[1], new SetPenColor());
         commandMap.put(resources.getString("SetPenSize").split("\\|")[0], new SetPenSize());
         commandMap.put(resources.getString("SetPenSize").split("\\|")[1], new SetPenSize());
-        commandMap.put(resources.getString("GetPenColor").split("\\|")[0], new GetPenColor());
-        commandMap.put(resources.getString("GetPenColor").split("\\|")[1], new GetPenColor());
+        commandMap.put(resources.getString("GetPenColor").split("\\|")[0], new PenColor());
+        commandMap.put(resources.getString("GetPenColor").split("\\|")[1], new PenColor());
         commandMap.put(resources.getString("SetPalette"), new SetPalette());
 
         return commandMap;

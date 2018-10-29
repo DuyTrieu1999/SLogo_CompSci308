@@ -3,8 +3,12 @@ package commands;
 import model.CommandParser;
 import model.Turtle;
 import model.VariableMap;
-
 import java.util.List;
+
+/**
+ * A specific class for DoTimes.
+ * @author Allen Qiu
+ */
 
 public class DoTimes extends CommandNode {
     public int numParameters = 2;

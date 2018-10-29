@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Pi.
+ * @author Allen Qiu
+ */
+
+
 public class Pi extends CommandNode {
     public int numParameters = 0;
 

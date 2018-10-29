@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Forward.
+ * @author Allen Qiu
+ */
+
+
 public class Forward extends CommandNode {
     public int numParameters = 1;
 

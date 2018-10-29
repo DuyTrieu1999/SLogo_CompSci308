@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Pow.
+ * @author Allen Qiu
+ */
+
+
 public class Pow extends CommandNode {
     public int numParameters = 2;
 

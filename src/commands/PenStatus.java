@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for PenStatus.
+ * @author Allen Qiu
+ */
+
+
 public class PenStatus extends CommandNode {
     public int numParameters = 0;
 

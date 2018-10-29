@@ -5,6 +5,11 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for ShowTurtle.
+ * @author Allen Qiu
+ */
+
 public class ShowTurtle extends CommandNode {
     public int numParameters = 0;
 

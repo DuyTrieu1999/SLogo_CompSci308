@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for To.
+ * @author Allen Qiu
+ */
+
+
 public class To extends CommandNode {
     public int numParameters = 3;
     private double output = 1;

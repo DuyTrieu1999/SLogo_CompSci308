@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Heading.
+ * @author Allen Qiu
+ */
+
+
 public class Heading extends CommandNode {
     public int numParameters = 0;
 

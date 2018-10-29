@@ -8,6 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * A specific class for SetBackground.
+ * @author Allen Qiu
+ */
+
+
 public class SetBackground extends CommandNode {
     public int numParameters = 1;
     private HashMap<String, Integer> backgroundMap = new HashMap<>();

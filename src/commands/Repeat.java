@@ -6,6 +6,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Repeat.
+ * @author Allen Qiu
+ */
+
+
 public class Repeat extends CommandNode {
     public int numParameters = 2;
     private double output = 0;

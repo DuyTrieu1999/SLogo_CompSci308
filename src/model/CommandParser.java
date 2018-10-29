@@ -7,6 +7,13 @@ import commands.Node;
 
 import java.util.*;
 
+/**
+ * The CommandParser Class parse the commands and execute them.
+ *
+ * @author Yunhao Qing
+ * @author Allen Qiu
+ */
+
 public class CommandParser {
     private String output = "";
     private VariableMap varMap;

@@ -6,6 +6,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for IfElse.
+ * @author Allen Qiu
+ */
+
+
 public class IfElse extends CommandNode {
     public int numParameters = 3;
     private double output = 0;

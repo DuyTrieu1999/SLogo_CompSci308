@@ -5,6 +5,11 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for SetPenSize.
+ * @author Allen Qiu
+ */
+
 public class SetPenSize extends CommandNode {
     public int numParameters = 1;
 

@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Or.
+ * @author Allen Qiu
+ */
+
+
 public class Or extends CommandNode {
     public int numParameters = 2;
 

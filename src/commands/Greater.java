@@ -4,7 +4,11 @@ import model.Turtle;
 import model.VariableMap;
 
 import java.util.List;
-import java.util.Scanner;
+
+/**
+ * A specific class for Greater.
+ * @author Allen Qiu
+ */
 
 public class Greater extends CommandNode {
     public int numParameters = 2;

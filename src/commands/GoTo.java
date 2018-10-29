@@ -6,6 +6,12 @@ import model.VariableMap;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A specific class for GoTo.
+ * @author Allen Qiu
+ */
+
+
 public class GoTo extends CommandNode {
     public int numParameters = 2;
 

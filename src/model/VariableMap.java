@@ -6,13 +6,12 @@ import view.view_component.Palette;
 import java.util.*;
 
 /**
- * VariableMap
+ * This class contains map of user variables and Palette objects.
+ * We use this class to store variables and retrive variable values.
  *
- * contains map of user variables and Palette object
- *
- * @author
- * @author
- * @author brookekeene
+ * @author Yunhao Qing
+ * @author Allen Qiu
+ * @author Brooke Keene
  */
 public class VariableMap {
     private Map<String, Double> varMap;

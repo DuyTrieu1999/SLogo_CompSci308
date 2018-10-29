@@ -5,6 +5,11 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Showing.
+ * @author Allen Qiu
+ */
+
 public class Showing extends CommandNode {
     public int numParameters = 0;
 

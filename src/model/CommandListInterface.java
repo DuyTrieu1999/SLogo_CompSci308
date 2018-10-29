@@ -3,14 +3,15 @@ package model;
 import java.util.*;
 
 /**
- * @Author Yunhao Qing
+ * This interface is for the front end to interact with the commandlist.
+ * @author Yunhao Qing
  */
 
 public interface CommandListInterface {
 
-    public void parse(String text);
+    void parse(String text);
 
-    public void setMessage (String message);
+    void setMessage (String message);
 
-    public void setLanguage (ResourceBundle language);
+    void setLanguage (ResourceBundle language);
 }

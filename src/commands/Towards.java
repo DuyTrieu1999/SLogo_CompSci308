@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Towards.
+ * @author Allen Qiu
+ */
+
+
 public class Towards extends CommandNode {
     public int numParameters = 2;
 

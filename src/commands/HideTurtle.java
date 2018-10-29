@@ -5,6 +5,12 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for HideTurtle.
+ * @author Allen Qiu
+ */
+
+
 public class HideTurtle extends CommandNode {
     public int numParameters = 0;
 

@@ -5,6 +5,13 @@ import model.VariableMap;
 
 import java.util.List;
 
+/**
+ * A specific class for Sin.
+ * @author Allen Qiu
+ */
+
+
+
 public class Sin extends CommandNode {
     public int numParameters = 1;
 
