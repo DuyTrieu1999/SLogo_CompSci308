@@ -43,4 +43,9 @@ public class Graphic {
             turtleView.setOpacity(OPACITY_INACTIVE);
         }
     }
+
+    void setVisible(boolean visible) {
+        turtleView.setVisible(visible);
+    }
+
 }
