@@ -311,7 +311,7 @@ public class DropDownButtons extends VBox {
         Map<String, GenericCommand> userMap = initializer.getUserCommands();
         for(String key : userMap.keySet()) {
             Text text = new Text(key);
-            variablesTab.getChildren().add(text);
+            userTab.getChildren().add(text);
         }
     }
 
