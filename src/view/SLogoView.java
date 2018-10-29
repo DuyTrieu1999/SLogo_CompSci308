@@ -13,13 +13,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.CommandList;
 import model.Loader;
 import model.Saver;
 import model.VariableMap;
-import view.turtleView.TurtleDriver;
 import view.view_component.*;
 
 import java.io.File;
@@ -49,7 +47,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
     private ResourceBundle myResources;
     private Controller myController;
     private CommandList myHistory;
-    private int numOfTurtle = 3;
+    private int numOfTurtle = 1;
     private VariableMap myVariables;
     private CommandInitializer myCommands;
 
@@ -65,8 +63,8 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
         logoScreen = new LogoScreen(Color.WHITE, myController, numOfTurtle);
         myHistory = new CommandList(myController);
-        myVariables = myHistory.getMyVariables();
-        myCommands = myHistory.getMyCommands();
+        myVariables = myController.getVariableSupplier();
+        myCommands = myController.getInitializerSupplier();
         initVariable();
         VBox scriptView = addScriptView();
         VBox logoView = addLogoView();
@@ -175,6 +173,7 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         dropDownButtons.editVariableTab();
         dropDownButtons.editUserCommandTab();
         myController.getMessageConsumer(myController.setOutputSupplier());
+        logoScreen.clear();
     }
 
     /**
@@ -185,6 +184,8 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         scriptView.clearEditor();
     }
     private void loadScript () {
+        myVariables = myController.getVariableSupplier();
+        myCommands = myController.getInitializerSupplier();
         Loader loader = new Loader(myVariables, myCommands, chooseFile());
         loader.load();
 
@@ -197,6 +198,8 @@ public class SLogoView extends HBox implements SLogoViewAPI {
 //            System.out.println(h);
 //        }
 
+        myVariables = myController.getVariableSupplier();
+        myCommands = myController.getInitializerSupplier();
         Saver saver = new Saver(myVariables, myCommands, chooseFile());
         saver.save();
     }
