@@ -21,6 +21,7 @@ public class TurtleInfo extends VBox {
     private void addID (TurtleDriver turtle) {
         Label idText = new Label("ID: ");
         TextField idVal = new TextField(String.valueOf(turtle.getTurtleID()));
+        idVal.setDisable(true);
         VBox idBox = new VBox();
         idBox.getChildren().addAll(idText, idVal);
         this.getChildren().add(idBox);
@@ -28,6 +29,7 @@ public class TurtleInfo extends VBox {
     private void addPos (TurtleDriver turtle) {
         Label positionText = new Label("Position: ");
         TextField positionVal = new TextField("X: " + String.format("%.2f", turtle.getX()) + " " + "Y: " + String.format("%.2f", turtle.getY()));
+        positionVal.setDisable(true);
         VBox posBox = new VBox();
         posBox.getChildren().addAll(positionText, positionVal);
         this.getChildren().add(posBox);
@@ -35,6 +37,7 @@ public class TurtleInfo extends VBox {
     private void addHeading (TurtleDriver turtle) {
         Label headingText = new Label("Heading: ");
         TextField headingVal = new TextField(String.format("%.2f", turtle.getOrientation()));
+        headingVal.setDisable(true);
         VBox headingBox = new VBox();
         headingBox.getChildren().addAll(headingText, headingVal);
         this.getChildren().add(headingBox);
@@ -42,6 +45,7 @@ public class TurtleInfo extends VBox {
     private void addPenColor (TurtleDriver turtle) {
         Label penColorText = new Label("Pen color: ");
         TextField penColorVal = new TextField(turtle.getPen().getColor().toString());
+        penColorVal.setDisable(true);
         VBox colorBox = new VBox();
         colorBox.getChildren().addAll(penColorText, penColorVal);
         this.getChildren().add(colorBox);
@@ -49,6 +53,7 @@ public class TurtleInfo extends VBox {
     private void addPenThickness (TurtleDriver turtle) {
         Label penThicknessText = new Label("Pen thickness: ");
         TextField penThicknessVal = new TextField(String.format("%.2f", turtle.getPen().getThickness()));
+        penThicknessVal.setDisable(true);
         VBox thickBox = new VBox();
         thickBox.getChildren().addAll(penThicknessText, penThicknessVal);
         this.getChildren().add(thickBox);
@@ -56,6 +61,7 @@ public class TurtleInfo extends VBox {
     private void addPenUpDown (TurtleDriver turtle) {
         Label penUpDownText = new Label("Pen is up/down: ");
         TextField penUpDownVal = new TextField(String.valueOf(turtle.getPen().isDown()));
+        penUpDownVal.setDisable(true);
         VBox updownBox = new VBox();
         updownBox.getChildren().addAll(penUpDownText, penUpDownVal);
         this.getChildren().add(updownBox);

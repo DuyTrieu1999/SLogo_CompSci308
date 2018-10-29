@@ -120,7 +120,10 @@ public class SLogoView extends HBox implements SLogoViewAPI {
         buttonBox.getChildren().add(new LogoButton(myResources.getString("Add"), event -> addTurtle()));
         logoBox.getChildren().add(logoScreen);
         logoBox.getChildren().add(buttonBox);
+        TurtleButtonControl turtleButtonControl = new TurtleButtonControl(myController);
+        logoBox.getChildren().add(turtleButtonControl);
         buttonBox.setAlignment(Pos.CENTER);
+        turtleButtonControl.setAlignment(Pos.CENTER);
         return logoBox;
     }
 
