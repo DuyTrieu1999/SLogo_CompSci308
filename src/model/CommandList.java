@@ -59,13 +59,8 @@ public class CommandList implements CommandListInterface{
         return myVariables;
     }
 
-<<<<<<< HEAD
-    public CommandInitializer getMyInitializer() {
-        return myInitializer;
-=======
     public CommandInitializer getMyCommands(){
         return myCommands;
->>>>>>> asq3
     }
 }
 
