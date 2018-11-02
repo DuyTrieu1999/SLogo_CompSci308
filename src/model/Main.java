@@ -10,12 +10,16 @@ import java.io.File;
 import java.util.ResourceBundle;
 
 /**
- *
+ * The main class.
  * @author duytrieu
  */
 public class Main extends Application{
 
 
+    /**
+     * This method is run to start the whole GUI and game
+     * @param stage Stage
+     */
     @Override
     public void start (Stage stage) {
         TabWorkspace twsp = new TabWorkspace();
