@@ -22,38 +22,76 @@ public class CommandParser {
     private Turtle t;
     private String errorMessage;
 
+
+    /**
+     * Constructor
+     * @param vars variableMap
+     * @param command commandInitializer
+     * @param turt turtle
+     */
     public CommandParser(VariableMap vars, CommandInitializer command, Turtle turt){
         varMap = vars;
         commandInitializer = command;
         t = turt;
     }
 
+    /**
+     * @return t my turtle
+     */
     public Turtle getMyTurtle () {
         return t;
     }
 
+    /**
+     * Pass the string into parseToList
+     * @param str the string to be parsed
+     */
     public void parse (String str) {
         output = "";
         parseToList(str);
     }
 
+    /**
+     * Set up the language.
+     * @param language a specific language
+     */
     public void setLanguage(ResourceBundle language) {
         commandInitializer = new CommandInitializer(language);
     }
 
+    /**
+     * This method check whether a string is a number
+     * @param str the string to be checked
+     * @return boolean value
+     */
     private static boolean isNumeric(String str) {
         return str.matches("-?[0-9]+\\.?[0-9]*");
     }
 
+    /**
+     * This method check whether a string is a possible variable.
+     * @param str the string to be checked
+     * @return boolean value
+     */
     private static boolean isPossibleVariable(String str){
         return str.matches(":[a-zA-Z_]+");
     }
+
+    /**
+     * This method check whether a string is a possible command.
+     * @param str the string to be checked
+     * @return boolean value
+     */
 
     private static boolean isPossibleCommand(String str){
         return str.matches("[a-zA-Z_]+(\\?)?");
     }
 
-
+    /**
+     * Parse the input string and do a few types of error checking.
+     * @param str the input string
+     * @return a list of nicely-formatted string
+     */
     private List<String> parseAndCheckList(String str){
         String[] lines = str.split("\\r?\\n");
         List<String> cleanLines = new ArrayList<>();
@@ -86,6 +124,10 @@ public class CommandParser {
         return partList;
     }
 
+    /**
+     * Parse the string and execute actions.
+     * @param str the input string
+     */
     private void parseToList(String str){
         List<String> lines = parseAndCheckList(str);
         List<String> sub = new ArrayList<>();
@@ -113,16 +155,29 @@ public class CommandParser {
     }
 
 
-    String returnError(){
+    /**
+     * Return the error message.
+     * @return error message
+     */
+    public String returnError(){
         return errorMessage;
     }
 
+    /**
+     * return the calculated output
+     * @return the calculated output
+     */
     public String getOutput(){
         //System.out.println(output);
         return output;
     }
 
 
+    /**
+     * Parse the list of string
+     * @param thisLine list of string
+     * @return the string after this round of parsing
+     */
     private String parseLine(List<String> thisLine){
         StringBuilder output = new StringBuilder();
         ArrayList<TreeNode> rootNodes = new ArrayList<>();
@@ -185,6 +240,11 @@ public class CommandParser {
         return output.toString();
     }
 
+    /**
+     * Add a node to the parent node.
+     * @param parent parent node
+     * @param s child
+     */
     private void addNode(TreeNode parent, String s) {
         List<String> thisValue = new ArrayList<>();
         thisValue.add(s);
@@ -193,6 +253,11 @@ public class CommandParser {
         parent.addChild(thisNode);
     }
 
+    /**
+     * When condition fulfiled merge the parameters.
+     * @param parent the treenode
+     * @return the list after the merging
+     */
     private List<String> mergeParameters(TreeNode parent){
         List<String> mergedParameters = new ArrayList<>();
         for(Node n:parent.getChildren()){
@@ -202,15 +267,29 @@ public class CommandParser {
     }
 
 
-    private boolean isCommand(String s){
-        return commandInitializer.containsKey(s);
+    /**
+     * This method check whether a string is a command
+     * @param str the string to be checked
+     * @return boolean value
+     */
+    private boolean isCommand(String str){
+        return commandInitializer.containsKey(str);
     }
 
-    private boolean isList(String s){
-        return s.split("\\s+").length > 1;
+    /**
+     * This method check whether a string is a list
+     * @param str the string to be checked
+     * @return boolean value
+     */
+    private boolean isList(String str){
+        return str.split("\\s+").length > 1;
     }
 
-
+    /**
+     * This method check whether the "[" and "]" matches in the list
+     * @param strings a list of strings
+     * @return boolean value
+     */
     private boolean isBalance(List<String> strings){
         int count1 = 0,count2 = 0;
         for (String str : strings){
