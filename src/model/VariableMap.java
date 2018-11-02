@@ -6,7 +6,7 @@ import java.util.*;
 
 /**
  * This class contains map of user variables and Palette objects.
- * We use this class to store variables and retrive variable values.
+ * We use this class to store variables and retreive variable values.
  *
  * @author Yunhao Qing
  * @author Allen Qiu
@@ -26,8 +26,8 @@ public class VariableMap {
 
     /**
      * adds a new variable to the variable map, varMap
-     * @param str
-     * @param d
+     * @param str The name of variable
+     * @param d The value of variable
      */
     public void addVariable(String str, double d){
         if(contains(str)){
@@ -49,7 +49,7 @@ public class VariableMap {
     /**
      * returns the variable associated with key
      * @param str key to search for
-     * @return
+     * @return the valur of the key
      */
     public double getVariable(String str){
         return varMap.get(str);
@@ -57,8 +57,8 @@ public class VariableMap {
 
     /**
      * checks whether the variable map contains the key given
-     * @param key
-     * @return
+     * @param key The key to be checked
+     * @return boolean value
      */
     public boolean contains (String key){
         return varMap.containsKey(key);
@@ -66,7 +66,7 @@ public class VariableMap {
 
     /**
      * returns the Palette object, managed through VariableMap
-     * @return
+     * @return myPalette
      */
     public Palette getPalette() {
         return myPalette;
