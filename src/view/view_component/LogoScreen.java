@@ -83,7 +83,7 @@ public class LogoScreen extends VBox {
             turtleManager.clearTurtle();
         }
     }
-    TurtleDriver getMyTurtle() {
+    public TurtleDriver getMyTurtle() {
         return turtleManager.getActiveTurtle();
     }
 }

@@ -25,33 +25,6 @@ public class Main extends Application{
     }
 
 
-/*
-    @Override
-    public void start(Stage stage){
-        Turtle t = new Turtle(0, 0, Color.WHITE);
-        VariableMap variableMap = new VariableMap();
-        CommandInitializer commandInitializer = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
-        CommandParser parser = new CommandParser(variableMap, commandInitializer, t);
-        parser.parse("pendown");
-        parser.getOutput();
-
-    }
-*/
-
-
-
-//    @Override
-//    public void start(Stage stage){
-//        Turtle t = new Turtle(0, 0, Color.WHITE);
-//        CommandInitializer c = new CommandInitializer(ResourceBundle.getBundle("languages/English"));
-//        VariableMap v = new VariableMap();
-//        CommandParser test = new CommandParser(v, c, t);
-//        test.parse("to butt [ :x ] [ forward :x forward 20 ]\nbutt 50");
-//        System.out.println(test.getMyTurtle().getLines());
-//
-//    }
-
-
     public static void main (String[] args) {
         launch(args);
     }

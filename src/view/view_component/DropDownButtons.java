@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import model.VariableMap;
+import view.additional_code.TurtleView;
 import view.turtleView.TurtleDriver;
 import view.turtleView.TurtleInfo;
 
@@ -70,6 +71,7 @@ public class DropDownButtons extends VBox {
     public void makeTabs() {
         this.getChildren().add(addControls());
         this.getChildren().add(addTurtleState());
+        this.getChildren().add(addExtensionPane());
         this.getChildren().add(addBackgroundTab());
         this.getChildren().add(addPenTab());
         this.getChildren().add(addTurtleTab());
@@ -79,6 +81,20 @@ public class DropDownButtons extends VBox {
         this.getChildren().add(addPaletteTab());
         this.getChildren().add(addLanguageTab());
         this.getChildren().add(addHelpTab());
+    }
+    private TitledPane addExtensionPane () {
+        TitledPane pane = new TitledPane();
+        HBox turtleBox = addExtension();
+        pane.setContent(turtleBox);
+        pane.setExpanded(false);
+        pane.setText(myResources.getString("Extension"));
+        return pane;
+    }
+    private HBox addExtension() {
+        HBox turtleView = new HBox();
+        TurtleView newView = new TurtleView(myDisplay);
+        turtleView.getChildren().add(newView);
+        return turtleView;
     }
 
     /**

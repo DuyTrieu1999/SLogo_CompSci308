@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
  *
  * @author brookekeene
  */
-class ImageChooser extends VBox{
+public class ImageChooser extends VBox{
     private static final int DROPDOWN_WIDTH = 200;
     private static final String DEFAULT_LABEL = "File Path";
     private static final String RESOURCE_PACKAGE = "text/view";
@@ -24,7 +24,7 @@ class ImageChooser extends VBox{
     /**
      * Constructor
      */
-    ImageChooser() {
+    public ImageChooser() {
         ResourceBundle myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
 
         myFC = new FileChooser();
@@ -51,7 +51,7 @@ class ImageChooser extends VBox{
      *
      * @return FileChooser object to select image
      */
-    FileChooser getFileChooser() {
+    public FileChooser getFileChooser() {
         return myFC;
     }
 
@@ -59,7 +59,7 @@ class ImageChooser extends VBox{
      * sets the Label to new file path
      * @param newLabel
      */
-    void setFileName(String newLabel) {
+    public void setFileName(String newLabel) {
         fileName.setText(newLabel);
     }
 }
