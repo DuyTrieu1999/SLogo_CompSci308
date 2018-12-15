@@ -3,7 +3,8 @@ package model;
 import javafx.scene.paint.Color;
 
 /**
- * @Author Yunhao Qing
+ * This class is a turtle interface for the front end to use.
+ * @author Yunhao Qing
  */
 
 public interface TurtleInterface {

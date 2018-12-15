@@ -9,9 +9,21 @@ import java.util.*;
 
 public interface CommandListInterface {
 
+    /**
+     * This method parse the text and execute the actions.
+     * @param text the string to be parsed
+     */
     void parse(String text);
 
+    /**
+     * This method set up the language
+     * @param message the message
+     */
     void setMessage (String message);
 
+    /**
+     * This method is used to set the language.
+     * @param language
+     */
     void setLanguage(ResourceBundle language);
 }
